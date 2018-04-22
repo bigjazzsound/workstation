@@ -269,6 +269,12 @@ bashrc: |
   #aliases
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
+  alias sudo='sudo -E'
+  # if neovim is installed use it instead of vim
+  if [ -f $(which nvim) ]
+  then
+      alias vim='$(which nvim)'
+  fi
 
   # AWS CLI bash completion
   complete -C '/usr/local/bin/aws_completer' aws
