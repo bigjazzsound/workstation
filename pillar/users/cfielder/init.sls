@@ -202,7 +202,8 @@ bashrc: |
   shopt -s cmdhist
 
   # Record each line as it gets issued
-  PROMPT_COMMAND='history -a'
+  # PROMPT_COMMAND='history -a'
+  export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
   # Huge history. Doesn't appear to slow things down, so why not?
   HISTSIZE=500000
@@ -426,7 +427,7 @@ tmux: |
 
 i3: |
   set $mod Mod1
-  font Iosevka Term 8 
+  font Iosevka Term 8
   floating_modifier $mod
 
   # start a terminal
@@ -520,12 +521,12 @@ i3: |
   bindsym $mod+Shift+0 move container to workspace 10
 
   # use workspaces on different monitors
-  workspace "1" output DP-0.8 
-  workspace "2" output DP-0.8 
-  workspace "3" output DP-0.8 
-  workspace "4" output DP-0.8 
-  workspace "5" output DP-0.8 
-  workspace "6" output DP-2 
+  workspace "1" output DP-0.8
+  workspace "2" output DP-0.8
+  workspace "3" output DP-0.8
+  workspace "4" output DP-0.8
+  workspace "5" output DP-0.8
+  workspace "6" output DP-2
   workspace "7" output DP-2
   workspace "8" output DP-2
   workspace "9" output DP-2
