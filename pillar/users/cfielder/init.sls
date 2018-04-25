@@ -275,11 +275,13 @@ bashrc: |
   alias pbpaste='xsel --clipboard --output'
   alias sudo='sudo -E'
   # neovim all the things, if installed
-  if [ -f $(which nvim) ]
-  then
+  if [ -f $(which nvim) ]; then
       alias vim='$(which nvim)'
       export EDITOR=nvim
       export VISUAL=nvim
+  else
+      export EDITOR=vim
+      export VISUAL=vim
   fi
 
   # AWS CLI bash completion
