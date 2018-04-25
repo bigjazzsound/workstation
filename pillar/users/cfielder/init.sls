@@ -75,14 +75,19 @@ vimrc: |
   Plug 'w0rp/ale'
   Plug 'enricobacis/paste.vim'
   Plug 'google/yapf'
-  " Plug 'python-mode/python-mode'
+  Plug 'dracula/vim',{'as':'dracula'}
   call plug#end()
 
-  colorscheme nord
+  " Set colorscheme and fixes
+  set t_Co=256
+  set background=dark
+  color dracula
+  highlight Normal ctermbg=NONE
+  highlight nonText ctermbg=NONE
 
   " airline settings
   set laststatus=2
-  let g:airline_theme='nord'
+  let g:airline_theme='dracula'
   "let g:airline_powerline_fonts = 1
 
   " dispatch settings
@@ -260,20 +265,21 @@ bashrc: |
   alias ip='ip -c'
 
   # exported variables
-  export EDITOR=/usr/bin/vim
-  export VISUAL=/usr/bin/vim
   export TERM="screen-256color"
 
   export PS1="[\t] \u@\h [\w] \\$: \[$(tput sgr0)\]"
+  export PATH=$PATH:$HOME/.cargo/bin
 
   #aliases
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
   alias sudo='sudo -E'
-  # if neovim is installed use it instead of vim
+  # neovim all the things, if installed
   if [ -f $(which nvim) ]
   then
       alias vim='$(which nvim)'
+      export EDITOR=nvim
+      export VISUAL=nvim
   fi
 
   # AWS CLI bash completion
