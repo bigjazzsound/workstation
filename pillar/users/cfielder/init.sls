@@ -340,8 +340,10 @@ tmux: |
   bind -r j select-pane -D  # move down
   bind -r k select-pane -U  # move up
   bind -r l select-pane -R  # move right
-  bind > swap-pane -D       # swap current pane with the next one
-  bind < swap-pane -U       # swap current pane with the previous one
+  # bind > swap-pane -D       # swap current pane with the next one
+  # bind < swap-pane -U       # swap current pane with the previous one
+  bind-key -r < swap-window -t -1                                                                                                                                                                                               
+  bind-key -r > swap-window -t +1
 
   # pane resizing
   bind -r H resize-pane -L 2
