@@ -1,0 +1,23 @@
+neovim:
+  pkgrepo.managed:
+    - human_name: Neovim Repo
+    - name: deb http://ppa.launchpad.net/neovim-ppa/stable/ubuntu {{ grains['oscodename'] }} main
+    - file: /etc/apt/sources.list.d/neovim-ppa-ubuntu-stable.list
+  pkg.latest:
+    - refresh: True
+    - name: []
+
+vim-plug:
+  file.managed:
+    - name: /home/cfielder/.local/share/nvim/site/autoload/plug.vim
+    - source: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    - make_dirs: True
+    - skip_verify: True
+
+plug-update:
+  cmd.run:
+    - name: 'nvim +PlugUpdate +qall > /dev/null 2>&1'
+    - user: cfielder
+    - stateful: True
+    - require:
+      - pkg: neovim

@@ -1,20 +1,58 @@
 base:
-  pkg.installed:
+  pkg.latest:
     - pkgs:
+      - bash
+      - bash-completion
+      - vim
       - tmux
-      - neovim
       - htop
       - nmap
       - mpv
-      - python3-venv
       - chromium-browser
       - pavucontrol
       - redshift
       - git
-      - yadm
       - qbittorrent
-      - bash
-      - bash-completion
+      - build-essential
+      - curl
+      - docker.io
+      - docker-compose
+
+python:
+  pkg.latest:
+    - pkgs:
+      - python
+      - python-pip
+      - python-dev
+
+python3:
+  pkg.latest:
+    - pkgs:
+      - python3
+      - python3-venv
+      - python3-pip
+      - python3-dev
+
+pip_user_packages:
+  pip.installed:
+    - pkgs:
+      - neovim
+      - yapf
+    - user: cfielder
+    - require:
+      - pkg: python
+    - upgrade: True
+
+pip3_user_packages:
+  pip.installed:
+    - pkgs:
+      - neovim
+      - yapf
+    - user: cfielder
+    - bin_env: '/usr/bin/pip3'
+    - require:
+      - pkg: python3
+    - upgrade: True
 
 google-chrome-stable:
   pkgrepo.managed:
@@ -33,13 +71,3 @@ syncthing:
     - key_url: https://syncthing.net/release-key.txt
   pkg.installed:
     - fromrepo: deb https://apt.syncthing.net/ syncthing stable
-
-neovim:
-  pkgrepo.managed:
-    - human_name: Neovim Repo
-    - name: deb http://ppa.launchpad.net/neovim-ppa/stable/ubuntu xenial main
-    - file: /etc/apt/sources.list.d/neovim-ppa-ubuntu-stable-xenial.list
-    - keyid: 8231B6DD
-    - keyserver: keyserver.ubuntu.com
-  pkg.installed:
-    - fromrepo: deb http://ppa.launchpad.net/neovim-ppa/stable/ubuntu xenial main
