@@ -60,8 +60,9 @@ google-chrome-stable:
     - name: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
     - file: /etc/apt/sources.list.d/google-chrome.list
     - key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
-  pkg.installed:
-    - fromrepo: deb http://dl.google.com/linux/chrome/deb/ stable main
+  pkg.latest:
+    - refresh: True
+    - name: []
 
 syncthing:
   pkgrepo.managed:
@@ -69,5 +70,6 @@ syncthing:
     - name: deb https://apt.syncthing.net/ syncthing stable
     - file: /etc/apt/sources.list.d/syncthing.list
     - key_url: https://syncthing.net/release-key.txt
-  pkg.installed:
-    - fromrepo: deb https://apt.syncthing.net/ syncthing stable
+  pkg.latest:
+    - refresh: True
+    - name: []

@@ -50,7 +50,7 @@
     - group: {{ user }}
     - makedirs: True
 
-/home/{{ user }}/.config/alacritty/config:
+/home/{{ user }}/.config/alacritty/alacritty.yml:
   file.managed:
     - contents_pillar: alacritty
     - user: {{ user }}
@@ -67,6 +67,12 @@
 /home/{{ user }}/.profile:
   file.managed:
     - contents_pillar: profile
+    - user: {{ user }}
+    - group: {{ user }}
+    - makedirs: True
+
+/home/{{ user }}/.fonts:
+  file.directory:
     - user: {{ user }}
     - group: {{ user }}
     - makedirs: True

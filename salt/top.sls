@@ -2,3 +2,4 @@ base:
   '*':
     - cfielder
     - pkgs
+    - nvim
