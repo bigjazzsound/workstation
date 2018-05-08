@@ -54,22 +54,22 @@ pip3_user_packages:
       - pkg: python3
     - upgrade: True
 
-google-chrome-stable:
-  pkgrepo.managed:
-    - human_name: Google Chrome Repo
-    - name: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-    - file: /etc/apt/sources.list.d/google-chrome.list
-    - key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
-  pkg.latest:
-    - refresh: True
-    - name: []
+# google-chrome-stable:
+#   pkgrepo.managed:
+#     - human_name: Google Chrome Repo
+#     - name: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+#     - file: /etc/apt/sources.list.d/google-chrome.list
+#     - key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+#   pkg.latest:
+#     - refresh: True
+#     - name: []
 
-syncthing:
-  pkgrepo.managed:
-    - human_name: Syncthing Repo
-    - name: deb https://apt.syncthing.net/ syncthing stable
-    - file: /etc/apt/sources.list.d/syncthing.list
-    - key_url: https://syncthing.net/release-key.txt
-  pkg.latest:
-    - refresh: True
-    - name: []
+# syncthing:
+#   pkgrepo.managed:
+#     - human_name: Syncthing Repo
+#     - name: deb https://apt.syncthing.net/ syncthing stable
+#     - file: /etc/apt/sources.list.d/syncthing.list
+#     - key_url: https://syncthing.net/release-key.txt
+#   pkg.latest:
+#     - refresh: True
+#     - name: []

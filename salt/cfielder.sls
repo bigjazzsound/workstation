@@ -6,7 +6,7 @@
     - home: /home/{{ user }}
     - uid: 1000
     - gid: 1000
-    - groups: [docker, kvm, libvirtd, sudo]
+    # - groups: [docker, kvm, libvirtd, sudo]
 
 /home/{{ user }}/.bashrc:
   file.managed:
