@@ -1,3 +1,4 @@
+{% if grains['os_family'] == 'Debian' %}
 neovim:
   pkgrepo.managed:
     - human_name: Neovim Repo
@@ -7,6 +8,7 @@ neovim:
   pkg.latest:
     - refresh: True
     - name: []
+{% endif %}
 
 vim-plug:
   file.managed:
@@ -23,5 +25,3 @@ plug-update:
     - name: 'nvim +PlugUpdate +qall > /dev/null 2>&1'
     - user: cfielder
     - stateful: True
-    - require:
-      - pkg: neovim

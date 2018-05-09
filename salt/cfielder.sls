@@ -6,7 +6,17 @@
     - home: /home/{{ user }}
     - uid: 1000
     - gid: 1000
-    # - groups: [docker, kvm, libvirtd, sudo]
+    {% if grains['os_family'] == 'RedHat' %}
+    - groups: [libvirt, wheel]
+    {% endif %}
+    {% if grains['os_family'] == 'ubuntu' %}
+    - groups: [docker, libvirtd, sudo]
+    {% endif %}
+
+docker:
+  group.present:
+    - members:
+      - {{ user }}
 
 /home/{{ user }}/.bashrc:
   file.managed:
@@ -75,6 +85,19 @@
   file.directory:
     - user: {{ user }}
     - group: {{ user }}
+    - makedirs: True
+
+/usr/share/applications/Alacritty.desktop:
+  file.managed:
+    - contents_pillar: alacritty-desktop
+    - user: root
+    - group: root
+
+/usr/local/bin/alacritty:
+  file.symlink:
+    - target: /home/{{ user }}/.cargo/bin/alacritty
+    - user: root
+    - group: root
     - makedirs: True
 
 # /home/{{ user }}/.config/polybar/config

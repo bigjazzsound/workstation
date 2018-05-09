@@ -1078,3 +1078,12 @@ alacritty: |
     - { key: F10,      mods: Super,   chars: "\x1b[21;3~"                  }
     - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                  }
     - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                  }
+
+alacritty-desktop: |
+  [Desktop Entry]
+  Encoding=UTF-8
+  Name=Alacritty
+  Exec=sh -c "env WAYLAND_DISPLAY= alacritty"
+  Icon=utilities-terminal
+  Type=Application
+  Categories=Development;
