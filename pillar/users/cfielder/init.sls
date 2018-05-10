@@ -279,7 +279,7 @@ bashrc: |
   export TERM="screen-256color"
 
   export PS1="[\t] \u@\h [\w] \\$: \[$(tput sgr0)\]"
-  export PATH=$PATH:$HOME/.cargo/bin
+  export PATH=$PATH:$HOME/.cargo/bin:$(go env GOPATH)/bin
 
   #aliases
   alias pbcopy='xsel --clipboard --input'
@@ -299,6 +299,7 @@ bashrc: |
   complete -C '/usr/local/bin/aws_completer' aws
 
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+  [ -f ~/.bash.local ] && source ~/.bash.local
 
 tmux: |
   # use 256 colors

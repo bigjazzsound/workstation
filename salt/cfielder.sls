@@ -7,16 +7,14 @@
     - uid: 1000
     - gid: 1000
     {% if grains['os_family'] == 'RedHat' %}
-    - groups: [libvirt, wheel]
+    - groups: [libvirt, wheel, docker]
     {% endif %}
     {% if grains['os_family'] == 'ubuntu' %}
     - groups: [docker, libvirtd, sudo]
     {% endif %}
 
 docker:
-  group.present:
-    - members:
-      - {{ user }}
+  group.present
 
 /home/{{ user }}/.bashrc:
   file.managed:
@@ -99,6 +97,41 @@ docker:
     - user: root
     - group: root
     - makedirs: True
+
+/home/{{ user }}/.bash.local:
+  file.managed:
+    - user: {{ user }}
+    - group: {{ user }}
+    - replace: False
+
+go_dirs:
+  file.directory:
+    - names:
+      - /home/{{ user }}/go
+      - /home/{{ user }}/go/src
+      - /home/{{ user }}/go/bin
+      - /home/{{ user }}/go/pkg
+    - user: {{ user }}
+    - group: {{ user }}
+    - recurse:
+      - user
+      - group
+    - makedirs: True
+
+# go_subdirs:
+#   file.directory:
+#     - names:
+#       - /home/{{ user }}/go/src
+#       - /home/{{ user }}/go/bin
+#       - /home/{{ user }}/go/pkg
+#     - user: {{ user }}
+#     - group: {{ user }}
+#     - recurse:
+#       - user
+#       - group
+#     - makedirs: True
+#     - require: 
+#       - /home/{{ user }}/go
 
 # /home/{{ user }}/.config/polybar/config
 # /home/{{ user }}/.config/polybar/launch-polybar.sh
