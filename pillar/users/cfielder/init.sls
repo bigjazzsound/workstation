@@ -168,6 +168,12 @@ vimrc: |
           \ autoindent
           \ fileformat=unix
 
+  " settings for editing go files
+  autocmd FileType go setlocal commentstring=//\ %s
+
+  " settings for editing vimrc
+  autocmd Filetype vim setlocal commentstring=\"\ %s
+
 bashrc: |
   ## GENERAL OPTIONS ##
   # If not running interactively, don't do anything
