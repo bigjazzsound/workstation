@@ -84,6 +84,7 @@ vimrc: |
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'zchee/deoplete-jedi'
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
   call plug#end()
 
   " Set colorscheme and fixes
