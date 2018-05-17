@@ -12,16 +12,16 @@ neovim:
 
 vim-plug:
   file.managed:
-    - name: /home/cfielder/.local/share/nvim/site/autoload/plug.vim
+    - name: /home/bigjazzsound/.local/share/nvim/site/autoload/plug.vim
     - source: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     - makedirs: True
     - skip_verify: True
-    - user: cfielder
-    - group: cfielder
+    - user: bigjazzsound
+    - group: bigjazzsound
     - recurse: True
 
 plug-update:
   cmd.run:
     - name: 'nvim +PlugUpdate +qall > /dev/null 2>&1'
-    - user: cfielder
+    - user: bigjazzsound
     - stateful: True

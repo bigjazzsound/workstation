@@ -1,5 +1,5 @@
 base:
-  pkg.latest:
+  pkg.installed:
     - pkgs:
       - bash
       - bash-completion
@@ -14,7 +14,7 @@ base:
       - curl
       - docker-compose
       {% if grains['os_family'] == 'RedHat' %}
-      # - vim-enhanced
+      - vim-enhanced
       - chromium
       - docker
       - neovim
@@ -26,6 +26,11 @@ base:
       - docker.io
       {% endif %}
 
+update:
+  pkg.uptodate:
+    - name: "Update packages"
+    - refresh: True
+
 {% if 'svm' or 'vmx' in grains['cpu_flags'] and grains['os_family'] == 'RedHat' %}
 Virtualization:
   pkg.group_installed
@@ -33,13 +38,13 @@ Virtualization:
 
 {% if grains['os_family'] == 'RedHat' %}
 python:
-  pkg.latest:
+  pkg.installed:
     - pkgs:
       - python2
       - python2-pip
       - python2-devel
 python3:
-  pkg.latest:
+  pkg.installed:
     - pkgs:
       - python3
       - python3-pip
@@ -67,7 +72,7 @@ pip_user_packages:
     - pkgs:
       - neovim
       - yapf
-    - user: cfielder
+    - user: bigjazzsound
     - require:
       - pkg: python
     - upgrade: True
@@ -77,28 +82,8 @@ pip3_user_packages:
     - pkgs:
       - neovim
       - yapf
-    - user: cfielder
+    - user: bigjazzsound
     - bin_env: '/usr/bin/pip3'
     - require:
       - pkg: python3
     - upgrade: True
-
-# google-chrome-stable:
-#   pkgrepo.managed:
-#     - human_name: Google Chrome Repo
-#     - name: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-#     - file: /etc/apt/sources.list.d/google-chrome.list
-#     - key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
-#   pkg.latest:
-#     - refresh: True
-#     - name: []
-
-# syncthing:
-#   pkgrepo.managed:
-#     - human_name: Syncthing Repo
-#     - name: deb https://apt.syncthing.net/ syncthing stable
-#     - file: /etc/apt/sources.list.d/syncthing.list
-#     - key_url: https://syncthing.net/release-key.txt
-#   pkg.latest:
-#     - refresh: True
-#     - name: []

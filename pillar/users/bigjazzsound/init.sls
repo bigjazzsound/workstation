@@ -131,6 +131,9 @@ vimrc: |
 
   autocmd BufWritePost /etc/apache2/* !apache2ctl configtest
 
+  " settings for C makefiles
+  autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+
   " settings for editing Salt .sls files with yaml syntax hilighting
   autocmd BufNewFile,BufRead *.sls set filetype=yaml tabstop=2 softtabstop=2
 
@@ -286,7 +289,7 @@ bashrc: |
   export TERM="screen-256color"
 
   export PS1="[\t] \u@\h [\w] \\$: \[$(tput sgr0)\]"
-  export PATH=$PATH:$HOME/.cargo/bin:$(go env GOPATH)/bin
+  export PATH=$PATH:$(go env GOPATH)/bin
 
   #aliases
   alias pbcopy='xsel --clipboard --input'
