@@ -1,5 +1,10 @@
-{% set user='bigjazzsound' %}
+{% set user='cfielder' %}
+
+docker:
+  group.present
+
 {{ user }}:
+  group.present: []
   user.present:
     - fullname: Craig James Fielder
     - shell: /bin/bash
@@ -7,14 +12,13 @@
     - uid: 1000
     - gid: 1000
     {% if grains['os_family'] == 'RedHat' %}
-    - groups: [libvirt, wheel, docker]
+    - groups: [wheel]
+    - optional_groups: [libvirt, docker]
     {% endif %}
     {% if grains['os_family'] == 'ubuntu' %}
-    - groups: [docker, libvirtd, sudo]
+    - groups: [sudo]
+    - optional_groups: [docker, libvirtd]
     {% endif %}
-
-docker:
-  group.present
 
 /home/{{ user }}/.bashrc:
   file.managed:
@@ -117,21 +121,3 @@ go_dirs:
       - user
       - group
     - makedirs: True
-
-# go_subdirs:
-#   file.directory:
-#     - names:
-#       - /home/{{ user }}/go/src
-#       - /home/{{ user }}/go/bin
-#       - /home/{{ user }}/go/pkg
-#     - user: {{ user }}
-#     - group: {{ user }}
-#     - recurse:
-#       - user
-#       - group
-#     - makedirs: True
-#     - require: 
-#       - /home/{{ user }}/go
-
-# /home/{{ user }}/.config/polybar/config
-# /home/{{ user }}/.config/polybar/launch-polybar.sh

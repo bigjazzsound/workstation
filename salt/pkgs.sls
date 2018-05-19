@@ -72,7 +72,7 @@ pip_user_packages:
     - pkgs:
       - neovim
       - yapf
-    - user: bigjazzsound
+    - user: cfielder
     - require:
       - pkg: python
     - upgrade: True
@@ -82,7 +82,7 @@ pip3_user_packages:
     - pkgs:
       - neovim
       - yapf
-    - user: bigjazzsound
+    - user: cfielder
     - bin_env: '/usr/bin/pip3'
     - require:
       - pkg: python3

@@ -309,7 +309,7 @@ bashrc: |
   complete -C '/usr/local/bin/aws_completer' aws
 
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-  [ -f ~/.bash.local ] && source ~/.bash.local
+  [ -f ~/.bashrc.local ] && source ~/.bashrc.local
 
 tmux: |
   # use 256 colors

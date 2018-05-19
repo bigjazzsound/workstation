@@ -1,5 +1,5 @@
 base:
   '*':
-    - bigjazzsound
+    - cfielder
     - pkgs
     - nvim
