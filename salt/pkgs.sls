@@ -13,6 +13,7 @@ base:
       - qbittorrent
       - curl
       - docker-compose
+      - weechat
       {% if grains['os_family'] == 'RedHat' %}
       - vim-enhanced
       - chromium
