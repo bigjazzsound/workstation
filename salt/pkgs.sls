@@ -88,3 +88,18 @@ pip3_user_packages:
     - require:
       - pkg: python3
     - upgrade: True
+
+{% if grains['os_family'] == 'RedHat' %}
+google-chrome:
+  pkgrepo.managed:
+    - baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+    - gpgcheck: 1
+    - gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+    - enabled: True
+
+fedy:
+  pkgrepo.managed:
+    - baseurl: https://dl.folkswithhats.org/fedora/$releasever/ 
+    - gpgcheck: 0
+    - enabled: True
+{% endif %}
