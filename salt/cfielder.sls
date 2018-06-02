@@ -108,6 +108,18 @@ docker:
     - group: {{ user }}
     - replace: False
 
+/home/{{ user }}/.weechat:
+  file.directory:
+    - user: {{ user }}
+    - group: {{ user }}
+    - makedirs: True
+
+/home/{{ user }}/.weechat/weechat.conf:
+  file.managed:
+    - contents_pillar: weechat
+    - user: {{ user }}
+    - group: {{ user }}
+
 go_dirs:
   file.directory:
     - names:
