@@ -86,6 +86,7 @@ vimrc: |
   Plug 'zchee/deoplete-jedi'
   Plug 'zchee/deoplete-go', { 'do': 'make'}
   Plug 'sealeg/vim-kickstart'
+  Plug 'junegunn/goyo.vim'
   call plug#end()
 
   " Set colorscheme and fixes
