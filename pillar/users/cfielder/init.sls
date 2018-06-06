@@ -142,6 +142,9 @@ vimrc: |
   " settings for editing yml files
   autocmd BufNewFile,BufRead *.yml set filetype=yaml tabstop=2 softtabstop=2 shiftwidth=2 expandtab autoindent
 
+  " settings for editing md files
+  autocmd BufNewFile,BufRead *.md set filetype=markdown textwidth=0
+
   " settings for editing python .py files
   "autocmd FileType python let b:dispatch = 'python %'
   "autocmd BufNewFile,BufRead *.py
