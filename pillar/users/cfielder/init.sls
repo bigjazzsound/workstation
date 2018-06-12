@@ -1,6 +1,5 @@
 vimrc: |
   set nu
-  set spell spelllang=en_us
   set undofile
   "set paste
   syntax on

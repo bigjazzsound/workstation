@@ -1,0 +1,72 @@
+---
+- name: Manage users
+  hosts: localhost
+  become: True
+  tasks:
+    - name: Add cfielder
+      user:
+        name: cfielder
+        comment: Craig James Fielder
+        shell: /bin/bash
+        group: cfielder
+        groups:
+          - libvirt
+          - docker
+        append: yes
+        uid: 1000
+    - name: Make dirs
+      file:
+        path: /home/cfielder/{{ item }}
+        owner: cfielder
+        group: cfielder
+        mode: 0755
+        state: directory
+      with_items:
+        - .config/i3
+        - .config/nvim
+        - .config/terminator
+        - .config/alacritty
+        - .fonts
+        - .weechat
+        - go
+        - go/src
+        - go/bin
+        - go/pkg
+    - name: Install files
+      copy:
+        src: /srv/ansible/files/{{ item.key }}
+        dest: /home/cfielder/{{ item.value }}
+        owner: cfielder
+        group: cfielder
+      with_dict:
+        # filename: location
+        alacritty: .config/alacritty/alacritty.yml
+        bashrc: .bashrc
+        i3: .config/i3/config
+        profile: .profile
+        redshift: .config/redshift.conf
+        tmux: .tmux.conf
+        vimrc: .vimrc
+        weechat: .weechat/weechat.conf
+    - name: Create alacritty desktop shortcut
+      copy:
+        src: /srv/ansible/files/alacritty.desktop
+        dest: /usr/share/applications/Alacritty.desktop
+        owner: cfielder
+        group: cfielder
+    - name: Make nvim config symlink
+      file:
+        src: /home/cfielder/.vimrc
+        dest: /home/cfielder/.config/nvim/init.vim
+        owner: cfielder
+        group: cfielder
+        mode: 0644
+        state: link
+    - name: Make global alacritty symlink
+      file:
+        src: /home/cfielder/.cargo/bin/alacritty
+        dest: /usr/local/bin/alacritty
+        owner: cfielder
+        group: cfielder
+        mode: 0644
+        state: link
