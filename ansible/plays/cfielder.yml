@@ -68,5 +68,5 @@
         dest: /usr/local/bin/alacritty
         owner: cfielder
         group: cfielder
-        mode: 0644
+        mode: 0755
         state: link

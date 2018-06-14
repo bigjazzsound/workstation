@@ -6,6 +6,10 @@
     - name: update repo
       dnf: name="*" state=latest
       when: ansible_distribution == 'Fedora'
+      register: result
+
+    - debug: var=result
+      when: result.changed
 
     - name: install pkgs
       dnf:
