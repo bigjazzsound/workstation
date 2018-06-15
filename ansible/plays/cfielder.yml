@@ -3,6 +3,15 @@
   hosts: localhost
   become: True
   tasks:
+
+    - name: Add groups
+      group:
+        name: "{{ item }}"
+        state: present
+      with_items: 
+        - cfielder
+        - docker
+
     - name: Add cfielder
       user:
         name: cfielder
@@ -14,6 +23,7 @@
           - docker
         append: yes
         uid: 1000
+
     - name: Make dirs
       file:
         path: /home/cfielder/{{ item }}
@@ -32,6 +42,7 @@
         - go/src
         - go/bin
         - go/pkg
+
     - name: Install files
       copy:
         src: /srv/ansible/files/{{ item.key }}
@@ -48,12 +59,14 @@
         tmux: .tmux.conf
         vimrc: .vimrc
         weechat: .weechat/weechat.conf
+
     - name: Create alacritty desktop shortcut
       copy:
         src: /srv/ansible/files/alacritty.desktop
         dest: /usr/share/applications/Alacritty.desktop
         owner: cfielder
         group: cfielder
+
     - name: Make nvim config symlink
       file:
         src: /home/cfielder/.vimrc
@@ -62,6 +75,11 @@
         group: cfielder
         mode: 0644
         state: link
+
+    - name: Test for alacritty
+      stat: path=/home/cfielder/.cargo/bin/alacritty
+      register: alacritty_present
+
     - name: Make global alacritty symlink
       file:
         src: /home/cfielder/.cargo/bin/alacritty
@@ -70,3 +88,4 @@
         group: cfielder
         mode: 0755
         state: link
+      when: alacritty_present.stat.exists == True
