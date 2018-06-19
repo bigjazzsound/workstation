@@ -3,6 +3,26 @@
   hosts: localhost
   become: True
   tasks:
+
+    - name: Enable chrome repo
+      yum_repository:
+        name: google-chrome
+        description: Google Chrome Repository
+        baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+        gpgcheck: 1
+        gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+        enabled: True
+      when: ansible_distribution == 'Fedora'
+
+    - name: Enable fedy
+      yum_repository:
+        name: fedy
+        description: Fedy Repository
+        baseurl: https://dl.folkswithhats.org/fedora/$releasever/
+        gpgcheck: 0
+        enabled: True
+      when: ansible_distribution == 'Fedora'
+
     - name: update repo
       dnf: name="*" state=latest
       when: ansible_distribution == 'Fedora'
@@ -38,28 +58,10 @@
           - python3-devel
           - golang
           - neovim
+          - google-chrome-stable
         state: present
       when: ansible_distribution == 'Fedora'
       register: installed_packages
 
     - debug: var=installed_packages
       when: installed_packages.changed
-
-    - name: Enable chrome repo
-      yum_repository:
-        name: google-chrome
-        description: Google Chrome Repository
-        baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
-        gpgcheck: 1
-        gpgkey: https://dl.google.com/linux/linux_signing_key.pub
-        enabled: True
-      when: ansible_distribution == 'Fedora'
-
-    - name: Enable fedy
-      yum_repository:
-        name: fedy
-        description: Fedy Repository
-        baseurl: https://dl.folkswithhats.org/fedora/$releasever/
-        gpgcheck: 0
-        enabled: True
-      when: ansible_distribution == 'Fedora'
