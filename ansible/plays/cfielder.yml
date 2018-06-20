@@ -42,6 +42,7 @@
         - go/src
         - go/bin
         - go/pkg
+        - .local/share/konsole
 
     - name: Install files
       copy:
@@ -59,6 +60,8 @@
         tmux: .tmux.conf
         vimrc: .vimrc
         weechat: .weechat/weechat.conf
+        dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
+        konsole_profile: .local/share/konsole/dracula.profile
 
     - name: Create alacritty desktop shortcut
       copy:

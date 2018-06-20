@@ -23,37 +23,11 @@
         enabled: True
       when: ansible_distribution == 'Fedora'
 
-    - name: Add RPM Fusion Free
-      yum_repository:
-        name: rpmfusion-free
-        description: RPM Fusion for Fedora $releasever - Free
-        metalink: https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch
-        enabled: True
-        gpgcheck: True
-
-    - name: Add RPM Fusion Free Updates
-      yum_repository:
-        name: rpmfusion-free-updates
-        description: RPM Fusion for Fedora $releasever - Free - Updates
-        metalink: https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-$releasever&arch=$basearch
-        enabled: True
-        gpgcheck: True
-
-    - name: Add RPM Fusion Non-free
-      yum_repository:
-        name: rpmfusion-nonfree
-        description: RPM Fusion for Fedora $releasever - Nonfree
-        metalink: https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch
-        enabled: True
-        gpgcheck: True
-
-    - name: Add RPM Fusion Non-free Updates
-      yum_repository:
-        name: rpmfusion-nonfree-updates
-        description: RPM Fusion for Fedora $releasever - Nonfree - Updates
-        metalink: https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
-        enabled: True
-        gpgcheck: True
+    - name: Setup RPM Fusion Repos
+      dnf:
+        name:
+          - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
+          - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
 
     - name: update repo
       dnf: name="*" state=latest
