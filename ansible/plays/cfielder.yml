@@ -1,7 +1,6 @@
 ---
 - name: Manage users
   hosts: localhost
-  become: True
   tasks:
 
     - name: Add groups
@@ -11,6 +10,7 @@
       with_items: 
         - cfielder
         - docker
+      become: True
 
     - name: Add cfielder
       user:
@@ -23,6 +23,7 @@
           - docker
         append: yes
         uid: 1000
+      become: True
 
     - name: Make dirs
       file:
@@ -67,8 +68,7 @@
       copy:
         src: /srv/ansible/files/alacritty.desktop
         dest: /usr/share/applications/Alacritty.desktop
-        owner: cfielder
-        group: cfielder
+      become: True
 
     - name: Make nvim config symlink
       file:
@@ -87,8 +87,7 @@
       file:
         src: /home/cfielder/.cargo/bin/alacritty
         dest: /usr/local/bin/alacritty
-        owner: cfielder
-        group: cfielder
         mode: 0755
         state: link
       when: alacritty_present.stat.exists == True
+      become: True
