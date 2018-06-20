@@ -7,7 +7,7 @@
       group:
         name: "{{ item }}"
         state: present
-      with_items: 
+      with_items:
         - cfielder
         - docker
       become: True

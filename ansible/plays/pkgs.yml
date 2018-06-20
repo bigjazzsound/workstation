@@ -53,6 +53,7 @@
           - docker-compose
           - weechat
           - vim-enhanced
+          - xclip
           - chromium
           - docker
           - "@Virtualization"
