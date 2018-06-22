@@ -13,7 +13,7 @@
     - name: Create /home/images
       file:
         path: /home/images
-        mode 0770
+        mode: 0770
         owner: root
         group: libvirt
         state: directory
