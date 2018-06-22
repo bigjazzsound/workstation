@@ -29,6 +29,41 @@
           - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
           - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
 
+    - name: Enable Kubernetes
+      yum_repository:
+        name: kubernetes
+        file: kubernetes
+        description: Kubernetes
+        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+        enabled: True
+        gpgcheck: True
+        repo_gpgcheck: True
+        gpgkey:
+          - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+          - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      when: ansible_distribution == 'Fedora'
+
+    - name: Install Minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /usr/local/bin/minikube
+        checksum: sha256:dfe361f86288a4cedcdc3bffbbe5b4716c7ee19cbb82d70696b0f20596a15c65
+        mode: 0775
+
+    - name: Install docker-machine
+      get_url:
+        url: https://github.com/docker/machine/releases/download/v0.15.0/docker-machine-Linux-x86_64
+        dest: /usr/local/bin/docker-machine
+        checksum: sha256:44c5c62db13b6eb6a9d3e276c1181401c78327ff6303570936ba2cf5d137b7b5
+        mode: 0775
+
+    - name: Install docker-machine KVM driver
+      get_url:
+        url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
+        dest: /usr/local/bin/docker-machine-driver-kvm2
+        mode: 0775
+
+
     - name: update repo
       dnf: name="*" state=latest
       when: ansible_distribution == 'Fedora'
