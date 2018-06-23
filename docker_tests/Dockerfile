@@ -1,5 +1,5 @@
 FROM fedora:latest
 
-RUN dnf install -y ansible
+RUN dnf install -y sudo ansible
 
-ENTRYPOINT ["ansible-playbook", "/srv/ansible/plays/highstate.yml"]
+ENTRYPOINT ["ansible-playbook", "-vvv", "/srv/playbooks/main.yml"]
