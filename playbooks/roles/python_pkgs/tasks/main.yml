@@ -15,6 +15,7 @@
       - neovim
       - yapf
       - awscli
+      - youtube-dl
     executable: pip3
     extra_args: --user
     state: latest
