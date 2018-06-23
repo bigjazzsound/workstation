@@ -125,6 +125,10 @@ else
     export VISUAL=vim
 fi
 
+if [ -f $(which kubectl) ]; then
+    source <(kubectl completion bash)
+fi
+
 # AWS CLI bash completion
 complete -C "$HOME/.local/bin/aws_completer" aws
 
