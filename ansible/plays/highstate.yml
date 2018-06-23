@@ -1,6 +1,0 @@
----
-- name: Execute all the plays
-  hosts: localhost
-  become: True
-- import_playbook: pkgs.yml
-- import_playbook: cfielder.yml

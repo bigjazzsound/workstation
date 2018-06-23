@@ -109,7 +109,7 @@ alias ip='ip -c'
 export TERM="screen-256color"
 
 export PS1="[\t] \u@\h [\w] \\$: \[$(tput sgr0)\]"
-export PATH=$PATH:$(go env GOPATH)/bin
+export PATH=$PATH:$(go env GOPATH)/bin:.local/bin
 
 #aliases
 alias pbcopy='xsel --clipboard --input'
@@ -126,7 +126,7 @@ else
 fi
 
 # AWS CLI bash completion
-complete -C '/usr/local/bin/aws_completer' aws
+complete -C "$HOME/.local/bin/aws_completer" aws
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local

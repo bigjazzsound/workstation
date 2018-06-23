@@ -1,0 +1,114 @@
+---
+- name: Enable chrome repo
+  yum_repository:
+    name: google-chrome
+    description: Google Chrome Repository
+    baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+    gpgcheck: 1
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+    enabled: True
+  when: ansible_distribution == 'Fedora'
+
+- name: Enable fedy
+  yum_repository:
+    name: fedy
+    description: Fedy Repository
+    baseurl: https://dl.folkswithhats.org/fedora/$releasever/
+    gpgcheck: 0
+    enabled: True
+  when: ansible_distribution == 'Fedora'
+
+- name: Enable VSCode repo
+  yum_repository:
+    name: code
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: True
+    gpgcheck: True
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Setup RPM Fusion Repos
+  dnf:
+    name:
+      - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
+      - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
+
+- name: Enable Kubernetes
+  yum_repository:
+    name: kubernetes
+    file: kubernetes
+    description: Kubernetes
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    enabled: True
+    gpgcheck: True
+    repo_gpgcheck: True
+    gpgkey:
+      - https://packages.cloud.google.com/yum/doc/yum-key.gpg
+      - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+  when: ansible_distribution == 'Fedora'
+
+- name: Install Minikube
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    dest: /usr/local/bin/minikube
+    checksum: sha256:dfe361f86288a4cedcdc3bffbbe5b4716c7ee19cbb82d70696b0f20596a15c65
+    mode: 0775
+
+- name: Install docker-machine
+  get_url:
+    url: https://github.com/docker/machine/releases/download/v0.15.0/docker-machine-Linux-x86_64
+    dest: /usr/local/bin/docker-machine
+    checksum: sha256:44c5c62db13b6eb6a9d3e276c1181401c78327ff6303570936ba2cf5d137b7b5
+    mode: 0775
+
+- name: Install docker-machine KVM driver
+  get_url:
+    url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
+    dest: /usr/local/bin/docker-machine-driver-kvm2
+    mode: 0775
+
+- name: update repo
+  dnf: name="*" state=latest
+  when: ansible_distribution == 'Fedora'
+  register: repo_data
+
+- debug: var=repo_data
+  when: repo_data.changed
+
+- name: install pkgs
+  dnf:
+    name:
+      - bash
+      - bash-completion
+      - tmux
+      - htop
+      - nmap
+      - pavucontrol
+      - redshift
+      - git
+      - qbittorrent
+      - curl
+      - docker-compose
+      - weechat
+      - vim-enhanced
+      - xclip
+      - chromium
+      - docker
+      - "@Virtualization"
+      - python2
+      - python2-pip
+      - python2-devel
+      - python3
+      - python3-pip
+      - python3-devel
+      - python2-libselinux
+      - python3-libselinux
+      - golang
+      - neovim
+      - google-chrome-stable
+    state: present
+  when: ansible_distribution == 'Fedora'
+  register: installed_packages
+
+- debug: var=installed_packages
+  when: installed_packages.changed

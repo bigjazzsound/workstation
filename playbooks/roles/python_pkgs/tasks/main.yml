@@ -1,0 +1,22 @@
+---
+- name: Install pip2 packages
+  pip:
+    name:
+      - neovim
+      - yapf
+    extra_args: --user
+    state: latest
+  become: True
+  become_user: cfielder
+
+- name: Install pip3 packages
+  pip:
+    name:
+      - neovim
+      - yapf
+      - awscli
+    executable: pip3
+    extra_args: --user
+    state: latest
+  become: True
+  become_user: cfielder
