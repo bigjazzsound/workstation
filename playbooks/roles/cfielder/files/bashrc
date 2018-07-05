@@ -108,7 +108,7 @@ alias ip='ip -c'
 # exported variables
 export TERM="screen-256color"
 export AWS_PROFILE=cfielder
-export PS1="[\t] \u@\h [\w] \\$: \[$(tput sgr0)\]"
+export PS1="\[\033[1;36m\]\\$> \[$(tput sgr0)\]"
 export PATH=$PATH:$(go env GOPATH)/bin:$HOME/.local/bin
 
 #aliases
