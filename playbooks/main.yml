@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   roles:
+    - { role: system, become: True }
     - { role: pkgs, become: True }
     - cfielder
     - python_pkgs
