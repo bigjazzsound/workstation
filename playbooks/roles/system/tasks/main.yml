@@ -1,7 +1,7 @@
 ---
-- name: Set timezone to UTC
+- name: Set timezone to EST
   timezone:
-    name: UTC
+    name: America/New_York
 
 - name: Setup journald.conf file
   copy:
