@@ -8,10 +8,6 @@
     state: latest
   become: True
   become_user: cfielder
-  register: python2_pkgs_update
-
-- debug: var=python2_pkgs_update
-  when: python2_pkgs_update.changed
 
 - name: Install pip3 packages
   pip:
@@ -25,7 +21,3 @@
     state: latest
   become: True
   become_user: cfielder
-  register: python3_pkgs_update
-
-- debug: var=python3_pkgs_update
-  when: python3_pkgs_update.changed
