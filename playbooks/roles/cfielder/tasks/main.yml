@@ -24,8 +24,8 @@
     - docker
   become: True
 
-- name: Add cfielder
-  block:
+- block:
+  - name: Add cfielder
     user:
       name: cfielder
       comment: Craig James Fielder
@@ -39,8 +39,8 @@
   become: True
   when: ansible_distribution == 'Fedora'
 
-- name: Add cfielder
-  block:
+- block:
+  - name: Add cfielder
     user:
       name: cfielder
       comment: Craig James Fielder
