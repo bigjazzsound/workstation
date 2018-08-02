@@ -25,17 +25,34 @@
   become: True
 
 - name: Add cfielder
-  user:
-    name: cfielder
-    comment: Craig James Fielder
-    shell: /bin/bash
-    group: cfielder
-    groups:
-      - libvirt
-      - docker
-    append: yes
-    uid: 1000
+  block:
+    user:
+      name: cfielder
+      comment: Craig James Fielder
+      shell: /bin/bash
+      group: cfielder
+      groups:
+        - libvirt
+        - docker
+      append: yes
+      uid: 1000
   become: True
+  when: ansible_distribution == 'Fedora'
+
+- name: Add cfielder
+  block:
+    user:
+      name: cfielder
+      comment: Craig James Fielder
+      shell: /bin/bash
+      group: cfielder
+      groups:
+        - libvirtd
+        - docker
+      append: yes
+      uid: 1000
+  become: True
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Make dirs
   file:
