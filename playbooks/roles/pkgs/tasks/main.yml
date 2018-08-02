@@ -73,6 +73,7 @@
           - chromium
           - docker
           - "@Virtualization"
+          - libguestfs-tools-c
           - python2
           - python2-pip
           - python2-devel
