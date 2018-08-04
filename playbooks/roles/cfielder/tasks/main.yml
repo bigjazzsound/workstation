@@ -11,9 +11,20 @@
     path: /home/images
     mode: 0770
     owner: root
+    group: libvirtd
+    state: directory
+  become: True
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Create /home/images
+  file:
+    path: /home/images
+    mode: 0770
+    owner: root
     group: libvirt
     state: directory
   become: True
+  when: ansible_distribution == 'Fedora'
 
 - name: Add groups
   group:
