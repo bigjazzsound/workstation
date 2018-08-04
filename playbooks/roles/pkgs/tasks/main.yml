@@ -115,15 +115,18 @@
         - xclip
         - chromium-browser
         - docker.io
-        - python2
-        - python2-pip
-        - python2-dev
+        - python
+        - python-pip
+        - python-dev
         - python3
         - python3-pip
         - python3-dev
         - golang
         - neovim
-        - google-chrome-stable
+        - qemu-kvm
+        - libvirt-bin
+        - virtinst
+        - virt-viewer
     - name: Update and upgrade apt packages
       apt:
         update_cache: yes
@@ -131,11 +134,12 @@
         cache_valid_time: 86400
   when: ansible_distribution == 'Ubuntu'
 
+
 - name: Install Minikube
   get_url:
     url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     dest: /usr/local/bin/minikube
-    checksum: sha256:dfe361f86288a4cedcdc3bffbbe5b4716c7ee19cbb82d70696b0f20596a15c65
+    checksum: sha256:3c84872ffa5ddbce472062fb548f9b3a25af72587d35243e12f18d86aaa6a085
     mode: 0775
 
 - name: Install docker-machine
