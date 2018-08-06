@@ -62,6 +62,10 @@
         - docker
       append: yes
       uid: 1000
+  - name: Add libvirtd group
+    group:
+      name: libvirtd
+      state: present
   become: True
   when: ansible_distribution == 'Ubuntu'
 
