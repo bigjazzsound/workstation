@@ -1,58 +1,54 @@
----
 - name: Fedora package tasks
   block:
     - name: Enable chrome repo
       yum_repository:
         name: google-chrome
         description: Google Chrome Repository
-        baseurl: http://dl.google.com/linux/chrome/rpm/stable/$basearch
+        baseurl: 'http://dl.google.com/linux/chrome/rpm/stable/$basearch'
         gpgcheck: 1
-        gpgkey: https://dl.google.com/linux/linux_signing_key.pub
-        enabled: True
-
+        gpgkey: 'https://dl.google.com/linux/linux_signing_key.pub'
+        enabled: true
     - name: Enable fedy
       yum_repository:
         name: fedy
         description: Fedy Repository
-        baseurl: https://dl.folkswithhats.org/fedora/$releasever/
+        baseurl: 'https://dl.folkswithhats.org/fedora/$releasever/'
         gpgcheck: 0
-        enabled: True
-
+        enabled: true
     - name: Enable VSCode repo
       yum_repository:
         name: code
         description: Visual Studio Code
-        baseurl: https://packages.microsoft.com/yumrepos/vscode
-        enabled: True
-        gpgcheck: True
-        gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-
+        baseurl: 'https://packages.microsoft.com/yumrepos/vscode'
+        enabled: true
+        gpgcheck: true
+        gpgkey: 'https://packages.microsoft.com/keys/microsoft.asc'
     - name: Setup RPM Fusion Repos
       dnf:
         name:
-          - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
-          - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
-
+          - >-
+            https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{
+            ansible_distribution_version }}.noarch.rpm
+          - >-
+            https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{
+            ansible_distribution_version }}.noarch.rpm
     - name: Enable Kubernetes
       yum_repository:
         name: kubernetes
         file: kubernetes
         description: Kubernetes
-        baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-        enabled: True
-        gpgcheck: True
-        repo_gpgcheck: True
+        baseurl: 'https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64'
+        enabled: true
+        gpgcheck: true
+        repo_gpgcheck: true
         gpgkey:
-          - https://packages.cloud.google.com/yum/doc/yum-key.gpg
-          - https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-
+          - 'https://packages.cloud.google.com/yum/doc/yum-key.gpg'
+          - 'https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg'
     - name: update repo
       dnf: name="*" state=latest
       register: repo_data
-
     - debug: var=repo_data
       when: repo_data.changed
-
     - name: install pkgs
       dnf:
         name:
@@ -72,7 +68,7 @@
           - xclip
           - chromium
           - docker
-          - "@Virtualization"
+          - '@Virtualization'
           - libguestfs-tools-c
           - python2
           - python2-pip
@@ -87,16 +83,14 @@
           - google-chrome-stable
         state: present
       register: installed_packages
-
     - debug: var=installed_packages
       when: installed_packages.changed
   when: ansible_distribution == 'Fedora'
-
 - name: Ubuntu package tasks
   block:
     - name: Install apt packages
       apt:
-        pkg: "{{item}}"
+        pkg: '{{item}}'
         state: present
       with_items:
         - bash
@@ -127,30 +121,34 @@
         - libvirt-bin
         - virtinst
         - virt-viewer
-    - name: Update and upgrade apt packages
+    - name: Update apt repository
       apt:
         update_cache: yes
-        upgrade: yes
         cache_valid_time: 86400
+    - name: Upgrade packages
+      apt:
+        upgrade: yes
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
   when: ansible_distribution == 'Ubuntu'
-
-
 - name: Install Minikube
   get_url:
-    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    url: >-
+      https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     dest: /usr/local/bin/minikube
-    checksum: sha256:3c84872ffa5ddbce472062fb548f9b3a25af72587d35243e12f18d86aaa6a085
-    mode: 0775
-
+    checksum: 'sha256:3c84872ffa5ddbce472062fb548f9b3a25af72587d35243e12f18d86aaa6a085'
+    mode: 509
 - name: Install docker-machine
   get_url:
-    url: https://github.com/docker/machine/releases/download/v0.15.0/docker-machine-Linux-x86_64
+    url: >-
+      https://github.com/docker/machine/releases/download/v0.15.0/docker-machine-Linux-x86_64
     dest: /usr/local/bin/docker-machine
-    checksum: sha256:44c5c62db13b6eb6a9d3e276c1181401c78327ff6303570936ba2cf5d137b7b5
-    mode: 0775
-
+    checksum: 'sha256:44c5c62db13b6eb6a9d3e276c1181401c78327ff6303570936ba2cf5d137b7b5'
+    mode: 509
 - name: Install docker-machine KVM driver
   get_url:
-    url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
+    url: >-
+      https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
     dest: /usr/local/bin/docker-machine-driver-kvm2
-    mode: 0775
+    mode: 509
