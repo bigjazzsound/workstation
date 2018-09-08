@@ -90,23 +90,36 @@
   block:
     - name: Install wine key
       apt_key:
-        url: https://dl.winehq.org/wine-builds/Release.key
+        url: 'https://dl.winehq.org/wine-builds/Release.key'
+        state: present
+    - name: Install lutris key
+      apt_key:
+        url: 'http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key'
         state: present
     - name: Install nvidia driver repository
       apt_repository:
-        repo: ppa:graphics-drivers/ppa
-    # TODO fix repo and filename
-    # - name: Install wine repository
-    #   apt_repository:
-    #     repo: https://dl.winehq.org/wine-builds/ubuntu/
-    #     filename:
-    #     state: present
-    # TODO chrome placeholder
-    # - name: Install google chrome repository
-    # TODO ukuu repo
-    # - name: Install ukuu repository
-    #   apt_repository:
-    #     repo: ppa:teejee2008/ppa
+        repo: 'ppa:graphics-drivers/ppa'
+    - name: Install wine repository
+      apt_repository:
+        repo: >-
+          deb https://dl.winehq.org/wine-builds/ubuntu/
+          {{ansible_distribution_release}} main
+        filename: /etc/apt/sources.list.d/winehq
+        state: present
+    - name: Install lutris repository
+      apt_repository:
+        repo: >-
+          deb
+          http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/
+          ./
+        filename: /etc/apt/sources.list.d/lutris
+        state: present
+    - name: Install lutris repository
+      apt_repository:
+        repo: >-
+          deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
+        filename: /etc/apt/sources.list.d/lutris
+        state: present
     - name: Update apt repository
       apt:
         update_cache: yes
@@ -145,15 +158,16 @@
         - virtinst
         - virt-viewer
         - ttf-mscorefonts-installer
-        - libgnutls30:i386
-        - libldap-2.4-2:i386
-        - libgpg-error0:i386
-        - libsqlite3-0:i386
+        - 'libgnutls30:i386'
+        - 'libldap-2.4-2:i386'
+        - 'libgpg-error0:i386'
+        - 'libsqlite3-0:i386'
         - libvulkan1
-        - libvulkan1:i386
-        - nvidia-graphics-drivers-396
+        - 'libvulkan1:i386'
+        - nvidia-390
         - steam
-        # - google-chrome
+        - winetricks
+        - lutris
     - name: Install wine and recommended packages
       apt:
         name: '{{item}}'
@@ -161,9 +175,6 @@
         install_recommends: true
       with_items:
         - wine-staging
-        # TODO possibly move this to the previous block
-        # need to check the recommended install
-        - winetricks
     - name: Upgrade packages
       apt:
         upgrade: yes
