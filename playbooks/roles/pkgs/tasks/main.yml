@@ -99,6 +99,9 @@
     - name: Install nvidia driver repository
       apt_repository:
         repo: 'ppa:graphics-drivers/ppa'
+    - name: Install ukuu repository
+      apt_repository:
+        repo: 'ppa:teejee2008/ppa'
     - name: Install wine repository
       apt_repository:
         repo: >-
@@ -114,7 +117,7 @@
           ./
         filename: /etc/apt/sources.list.d/lutris
         state: present
-    - name: Install lutris repository
+    - name: Install vscode repository
       apt_repository:
         repo: >-
           deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
@@ -164,10 +167,11 @@
         - 'libsqlite3-0:i386'
         - libvulkan1
         - 'libvulkan1:i386'
-        - nvidia-390
+        - nvidia-driver-396
         - steam
         - winetricks
         - lutris
+        - ukuu
     - name: Install wine and recommended packages
       apt:
         name: '{{item}}'
