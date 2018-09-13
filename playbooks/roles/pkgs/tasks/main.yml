@@ -167,7 +167,7 @@
         - 'libsqlite3-0:i386'
         - libvulkan1
         - 'libvulkan1:i386'
-        - nvidia-driver-396
+        - nvidia-390
         - steam
         - winetricks
         - lutris
