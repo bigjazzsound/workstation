@@ -92,6 +92,10 @@
       apt_key:
         url: 'https://dl.winehq.org/wine-builds/Release.key'
         state: present
+    - name: Install Signal Desktop key
+      apt_key:
+        url: https://updates.signal.org/desktop/apt/keys.asc
+        state: present
     - name: Install lutris key
       apt_key:
         url: 'http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key'
@@ -108,6 +112,12 @@
           deb https://dl.winehq.org/wine-builds/ubuntu/
           {{ansible_distribution_release}} main
         filename: /etc/apt/sources.list.d/winehq
+        state: present
+    - name: Install Signal Desktop repo
+      apt_repository:
+        repo: >-
+          deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+        filename: /etc/apt/sources.list.d/signal
         state: present
     - name: Install lutris repository
       apt_repository:
@@ -172,6 +182,7 @@
         - winetricks
         - lutris
         - ukuu
+        - signal-desktop
     - name: Install wine and recommended packages
       apt:
         name: '{{item}}'
