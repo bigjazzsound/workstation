@@ -94,11 +94,12 @@
         state: present
     - name: Install Signal Desktop key
       apt_key:
-        url: https://updates.signal.org/desktop/apt/keys.asc
+        url: 'https://updates.signal.org/desktop/apt/keys.asc'
         state: present
     - name: Install lutris key
       apt_key:
-        url: 'http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key'
+        url: >-
+          http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key
         state: present
     - name: Install nvidia driver repository
       apt_repository:
@@ -115,8 +116,7 @@
         state: present
     - name: Install Signal Desktop repo
       apt_repository:
-        repo: >-
-          deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+        repo: 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main'
         filename: /etc/apt/sources.list.d/signal
         state: present
     - name: Install lutris repository
@@ -130,7 +130,8 @@
     - name: Install vscode repository
       apt_repository:
         repo: >-
-          deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
+          deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable
+          main
         filename: /etc/apt/sources.list.d/lutris
         state: present
     - name: Update apt repository
@@ -193,6 +194,9 @@
     - name: Upgrade packages
       apt:
         upgrade: yes
+      register: installed_packages
+    - debug: var=installed_packages
+      when: installed_packages.changed
     - name: Remove dependencies that are no longer required
       apt:
         autoremove: yes
