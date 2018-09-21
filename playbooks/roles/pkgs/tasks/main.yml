@@ -28,10 +28,10 @@
         name:
           - >-
             https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{
-            ansible_distribution_version }}.noarch.rpm
+            ansible_distribution_version}}.noarch.rpm
           - >-
             https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{
-            ansible_distribution_version }}.noarch.rpm
+            ansible_distribution_version}}.noarch.rpm
     - name: Enable Kubernetes
       yum_repository:
         name: kubernetes
@@ -45,45 +45,20 @@
           - 'https://packages.cloud.google.com/yum/doc/yum-key.gpg'
           - 'https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg'
     - name: update repo
-      dnf: name="*" state=latest
+      dnf:
+        name: "*"
+        state: latest
       register: repo_data
-    - debug: var=repo_data
+    - debug:
+        var: repo_data
       when: repo_data.changed
     - name: install pkgs
       dnf:
-        name:
-          - bash
-          - bash-completion
-          - tmux
-          - htop
-          - nmap
-          - pavucontrol
-          - redshift
-          - git
-          - qbittorrent
-          - curl
-          - docker-compose
-          - weechat
-          - vim-enhanced
-          - xclip
-          - chromium
-          - docker
-          - '@Virtualization'
-          - libguestfs-tools-c
-          - python2
-          - python2-pip
-          - python2-devel
-          - python3
-          - python3-pip
-          - python3-devel
-          - python2-libselinux
-          - python3-libselinux
-          - golang
-          - neovim
-          - google-chrome-stable
+        name: "{{all_pkgs}} + {{fedora_pkgs}}"
         state: present
       register: installed_packages
-    - debug: var=installed_packages
+    - debug:
+        var: installed_packages
       when: installed_packages.changed
   when: ansible_distribution == 'Fedora'
 - name: Ubuntu package tasks
@@ -142,48 +117,7 @@
       apt:
         name: '{{item}}'
         state: present
-      with_items:
-        - bash
-        - bash-completion
-        - tmux
-        - htop
-        - nmap
-        - pavucontrol
-        - redshift
-        - git
-        - qbittorrent
-        - curl
-        - docker-compose
-        - weechat
-        - vim
-        - xclip
-        - chromium-browser
-        - docker.io
-        - python
-        - python-pip
-        - python-dev
-        - python3
-        - python3-pip
-        - python3-dev
-        - golang
-        - neovim
-        - qemu-kvm
-        - libvirt-bin
-        - virtinst
-        - virt-viewer
-        - ttf-mscorefonts-installer
-        - 'libgnutls30:i386'
-        - 'libldap-2.4-2:i386'
-        - 'libgpg-error0:i386'
-        - 'libsqlite3-0:i386'
-        - libvulkan1
-        - 'libvulkan1:i386'
-        - nvidia-390
-        - steam
-        - winetricks
-        - lutris
-        - ukuu
-        - signal-desktop
+      with_items: "{{all_pkgs}} + {{ubuntu_pkgs}}"
     - name: Install wine and recommended packages
       apt:
         name: '{{item}}'
@@ -195,7 +129,8 @@
       apt:
         upgrade: yes
       register: installed_packages
-    - debug: var=installed_packages
+    - debug:
+        var: installed_packages
       when: installed_packages.changed
     - name: Remove dependencies that are no longer required
       apt:
