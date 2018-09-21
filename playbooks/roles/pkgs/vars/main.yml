@@ -1,2 +1,60 @@
 ---
 # vars file for pkgs
+all_pkgs:
+  - bash
+  - bash-completion
+  - tmux
+  - htop
+  - nmap
+  - pavucontrol
+  - redshift
+  - git
+  - qbittorrent
+  - curl
+  - docker-compose
+  - weechat
+  - xclip
+  - python3
+  - python3-pip
+  - golang
+  - neovim
+
+fedora_pkgs:
+  - vim-enhanced
+  - chromium
+  - docker
+  - '@Virtualization'
+  - libguestfs-tools-c
+  - python2
+  - python2-pip
+  - python2-devel
+  - python3-devel
+  - python2-libselinux
+  - python3-libselinux
+  - google-chrome-stable
+
+ubuntu_pkgs:
+  - vim
+  - chromium-browser
+  - docker.io
+  - python
+  - python-pip
+  - python-dev
+  - python3-dev
+  - qemu-kvm
+  - libvirt-bin
+  - virtinst
+  - virt-viewer
+  - ttf-mscorefonts-installer
+  - 'libgnutls30:i386'
+  - 'libldap-2.4-2:i386'
+  - 'libgpg-error0:i386'
+  - 'libsqlite3-0:i386'
+  - libvulkan1
+  - 'libvulkan1:i386'
+  - nvidia-390
+  - steam
+  - winetricks
+  - lutris
+  - ukuu
+  - signal-desktop
