@@ -153,6 +153,6 @@
 - name: Install docker-machine KVM driver
   get_url:
     url: >-
-      https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
+      https://github.com/kubernetes/minikube/releases/download/v0.28.2/docker-machine-driver-kvm2
     dest: /usr/local/bin/docker-machine-driver-kvm2
     mode: 509

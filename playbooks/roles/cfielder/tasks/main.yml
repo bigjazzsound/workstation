@@ -11,20 +11,9 @@
     path: /home/images
     mode: 0770
     owner: root
-    group: libvirtd
+    group: "{{ libvirt_group }}"
     state: directory
   become: True
-  when: ansible_distribution == 'Ubuntu'
-
-- name: Create /home/images
-  file:
-    path: /home/images
-    mode: 0770
-    owner: root
-    group: libvirt
-    state: directory
-  become: True
-  when: ansible_distribution == 'Fedora'
 
 - name: Add groups
   group:
@@ -33,6 +22,7 @@
   with_items:
     - cfielder
     - docker
+    - "{{ libvirt_group }}"
   become: True
 
 - block:
@@ -43,31 +33,11 @@
       shell: /bin/bash
       group: cfielder
       groups:
-        - libvirt
         - docker
+        - "{{ libvirt_group }}"
       append: yes
       uid: 1000
   become: True
-  when: ansible_distribution == 'Fedora'
-
-- block:
-  - name: Add cfielder
-    user:
-      name: cfielder
-      comment: Craig James Fielder
-      shell: /bin/bash
-      group: cfielder
-      groups:
-        - libvirtd
-        - docker
-      append: yes
-      uid: 1000
-  - name: Add libvirtd group
-    group:
-      name: libvirtd
-      state: present
-  become: True
-  when: ansible_distribution == 'Ubuntu'
 
 - name: Make dirs
   file:
@@ -76,18 +46,7 @@
     group: cfielder
     mode: 0755
     state: directory
-  with_items:
-    - .config/i3
-    - .config/nvim
-    - .config/terminator
-    - .config/alacritty
-    - .fonts
-    - .weechat
-    - go
-    - go/src
-    - go/bin
-    - go/pkg
-    - .local/share/konsole
+  with_items: "{{ cfielder_dirs }}"
 
 - name: Install files
   copy:
