@@ -1,5 +1,7 @@
-# workstation
+# Workstation
 
-This repo utilises Kickstart and Saltstack to get a Fedora workstation up and running in less than an hour. 
+This repo utilises Ansible to configure a Ubuntu or Fedora Workstation to my specifications.
 
-I am currently working towards getting ansible working as well
+The Fedora workflow includes a Kickstart file to bootstrap the system and execute my ansible playbook.
+
+The Saltstack states are currently no longer in use.
