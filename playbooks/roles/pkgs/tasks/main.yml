@@ -63,52 +63,21 @@
   when: ansible_distribution == 'Fedora'
 - name: Ubuntu package tasks
   block:
-    - name: Install wine key
+    - name: Install apt keys
       apt_key:
-        url: 'https://dl.winehq.org/wine-builds/Release.key'
+        url: "{{ item }}"
         state: present
-    - name: Install Signal Desktop key
-      apt_key:
-        url: 'https://updates.signal.org/desktop/apt/keys.asc'
-        state: present
-    - name: Install lutris key
-      apt_key:
-        url: >-
-          http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key
-        state: present
-    - name: Install nvidia driver repository
+      with_items: "{{ apt_keys }}"
+    - name: Install ppas
       apt_repository:
-        repo: 'ppa:graphics-drivers/ppa'
-    - name: Install ukuu repository
-      apt_repository:
-        repo: 'ppa:teejee2008/ppa'
+        repo: "{{ item }}"
+      with_items: "{{ ppas }}"
     - name: Install wine repository
       apt_repository:
-        repo: >-
-          deb https://dl.winehq.org/wine-builds/ubuntu/
-          {{ansible_distribution_release}} main
-        filename: /etc/apt/sources.list.d/winehq
+        repo: "{{ apt_repos.repo }}"
+        filename: "{{ apt_repos.filename }}"
         state: present
-    - name: Install Signal Desktop repo
-      apt_repository:
-        repo: 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main'
-        filename: /etc/apt/sources.list.d/signal
-        state: present
-    - name: Install lutris repository
-      apt_repository:
-        repo: >-
-          deb
-          http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/
-          ./
-        filename: /etc/apt/sources.list.d/lutris
-        state: present
-    - name: Install vscode repository
-      apt_repository:
-        repo: >-
-          deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable
-          main
-        filename: /etc/apt/sources.list.d/lutris
-        state: present
+      with_items: "{{ apt_repos }}"
     - name: Update apt repository
       apt:
         update_cache: yes
