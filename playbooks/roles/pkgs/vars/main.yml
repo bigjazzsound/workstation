@@ -62,20 +62,19 @@ ubuntu_pkgs:
 apt_keys:
   - 'https://dl.winehq.org/wine-builds/Release.key'
   - 'https://updates.signal.org/desktop/apt/keys.asc'
-  - "http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key"
+  - 'http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key'
 
 ppas:
   - 'ppa:graphics-drivers/ppa'
   - 'ppa:teejee2008/ppa'
   - 'ppa:qbittorrent-team/qbittorrent-stable'
 
-
 apt_repos:
-  - { repo: "deb https://dl.winehq.org/wine-builds/ubuntu/ {{ansible_distribution_release}} main",
-    filename: "/etc/apt/sources.list.d/winehq" }
-  - { repo: 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main',
-      filename: "/etc/apt/sources.list.d/signal" }
-  - { repo: "deb http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/ ./",
-      filename: "/etc/apt/sources.list.d/lutris" }
-  - { repo: "deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main",
-      filename: "/etc/apt/sources.list.d/lutris" }
+  - repo: "deb https://dl.winehq.org/wine-builds/ubuntu/ {{ansible_distribution_release}} main",
+    filename: "/etc/apt/sources.list.d/winehq"
+  - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main",
+    filename: "/etc/apt/sources.list.d/signal"
+  - repo: "deb http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/ ./",
+    filename: "/etc/apt/sources.list.d/lutris"
+  - repo: "deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main",
+    filename: "/etc/apt/sources.list.d/vscode"
