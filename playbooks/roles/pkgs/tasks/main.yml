@@ -46,7 +46,7 @@
           - 'https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg'
     - name: update repo
       dnf:
-        name: "*"
+        name: '*'
         state: latest
       register: repo_data
     - debug:
@@ -54,7 +54,7 @@
       when: repo_data.changed
     - name: install pkgs
       dnf:
-        name: "{{all_pkgs}} + {{fedora_pkgs}}"
+        name: '{{all_pkgs}} + {{fedora_pkgs}}'
         state: present
       register: installed_packages
     - debug:
@@ -65,19 +65,20 @@
   block:
     - name: Install apt keys
       apt_key:
-        url: "{{ item }}"
+        url: '{{ item }}'
         state: present
-      with_items: "{{ apt_keys }}"
+      with_items: '{{ apt_keys }}'
     - name: Install ppas
       apt_repository:
-        repo: "{{ item }}"
-      with_items: "{{ ppas }}"
-    - name: Install wine repository
-      apt_repository:
-        repo: "{{ apt_repos.repo }}"
-        filename: "{{ apt_repos.filename }}"
+        repo: '{{ item }}'
         state: present
-      with_items: "{{ apt_repos }}"
+      with_items: '{{ ppas }}'
+    - name: Install apt repos
+      apt_repository:
+        repo: '{{ item.repo }}'
+        filename: '{{ item.filename }}'
+        state: present
+      with_items: '{{ apt_repos }}'
     - name: Update apt repository
       apt:
         update_cache: yes
@@ -86,7 +87,7 @@
       apt:
         name: '{{item}}'
         state: present
-      with_items: "{{all_pkgs}} + {{ubuntu_pkgs}}"
+      with_items: '{{all_pkgs}} + {{ubuntu_pkgs}}'
     - name: Install wine and recommended packages
       apt:
         name: '{{item}}'
