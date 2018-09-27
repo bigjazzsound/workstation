@@ -67,6 +67,7 @@ apt_keys:
 ppas:
   - 'ppa:graphics-drivers/ppa'
   - 'ppa:teejee2008/ppa'
+  - 'ppa:qbittorrent-team/qbittorrent-stable'
 
 
 apt_repos:
