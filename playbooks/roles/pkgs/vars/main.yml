@@ -53,6 +53,7 @@ ubuntu_pkgs:
   - lutris
   - ukuu
   - signal-desktop
+  - quassel-client
 apt_keys:
   - 'https://dl.winehq.org/wine-builds/Release.key'
   - 'https://updates.signal.org/desktop/apt/keys.asc'
