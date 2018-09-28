@@ -5,14 +5,6 @@
     dest: /etc/bash_completion.d/docker-machine.bash
     mode: 292
   become: true
-- name: Create /home/images
-  file:
-    path: /home/images
-    mode: 504
-    owner: root
-    group: '{{ libvirt_group }}'
-    state: directory
-  become: true
 - name: Add groups
   group:
     name: '{{ item }}'
@@ -21,6 +13,14 @@
     - cfielder
     - docker
     - '{{ libvirt_group }}'
+  become: true
+- name: Create /home/images
+  file:
+    path: /home/images
+    mode: 504
+    owner: root
+    group: '{{ libvirt_group }}'
+    state: directory
   become: true
 - block:
     - name: Add cfielder
