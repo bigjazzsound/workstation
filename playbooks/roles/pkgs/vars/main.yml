@@ -75,5 +75,3 @@ apt_repos:
       http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/
       ./
     filename: /etc/apt/sources.list.d/lutris
-  - repo: 'deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main'
-    filename: /etc/apt/sources.list.d/vscode
