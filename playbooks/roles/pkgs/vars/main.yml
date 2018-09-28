@@ -10,7 +10,6 @@ all_pkgs:
   - qbittorrent
   - curl
   - docker-compose
-  - weechat
   - xclip
   - python3
   - python3-pip

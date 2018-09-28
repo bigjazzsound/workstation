@@ -1,61 +1,55 @@
----
 - name: Install docker-machine bash completion scripts
   get_url:
-    url: https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
+    url: >-
+      https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
     dest: /etc/bash_completion.d/docker-machine.bash
-    mode: 0444
-  become: True
-
+    mode: 292
+  become: true
 - name: Create /home/images
   file:
     path: /home/images
-    mode: 0770
+    mode: 504
     owner: root
-    group: "{{ libvirt_group }}"
+    group: '{{ libvirt_group }}'
     state: directory
-  become: True
-
+  become: true
 - name: Add groups
   group:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - cfielder
     - docker
-    - "{{ libvirt_group }}"
-  become: True
-
+    - '{{ libvirt_group }}'
+  become: true
 - block:
-  - name: Add cfielder
-    user:
-      name: cfielder
-      comment: Craig James Fielder
-      shell: /bin/bash
-      group: cfielder
-      groups:
-        - docker
-        - "{{ libvirt_group }}"
-      append: yes
-      uid: 1000
-  become: True
-
+    - name: Add cfielder
+      user:
+        name: cfielder
+        comment: Craig James Fielder
+        shell: /bin/bash
+        group: cfielder
+        groups:
+          - docker
+          - '{{ libvirt_group }}'
+        append: yes
+        uid: 1000
+  become: true
 - name: Make dirs
   file:
-    path: /home/cfielder/{{ item }}
+    path: '/home/cfielder/{{ item }}'
     owner: cfielder
     group: cfielder
-    mode: 0755
+    mode: 493
     state: directory
-  with_items: "{{ cfielder_dirs }}"
-
+  with_items: '{{ cfielder_dirs }}'
 - name: Install files
   copy:
-    src: "{{ item.key }}"
-    dest: "/home/cfielder/{{ item.value }}"
+    src: '{{ item.key }}'
+    dest: '/home/cfielder/{{ item.value }}'
     owner: cfielder
     group: cfielder
   with_dict:
-    # filename: location
     alacritty: .config/alacritty/alacritty.yml
     bashrc: .bashrc
     i3: .config/i3/config
@@ -63,34 +57,29 @@
     redshift: .config/redshift.conf
     tmux: .tmux.conf
     vimrc: .vimrc
-    weechat: .weechat/weechat.conf
     dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
     konsole_profile: .local/share/konsole/dracula.profile
-
 - name: Create alacritty desktop shortcut
   copy:
     src: alacritty.desktop
     dest: /usr/share/applications/Alacritty.desktop
-  become: True
-
+  become: true
 - name: Make nvim config symlink
   file:
     src: /home/cfielder/.vimrc
     dest: /home/cfielder/.config/nvim/init.vim
     owner: cfielder
     group: cfielder
-    mode: 0644
+    mode: 420
     state: link
-
 - name: Test for alacritty
   stat: path=/home/cfielder/.cargo/bin/alacritty
   register: alacritty_present
-
 - name: Make global alacritty symlink
   file:
     src: /home/cfielder/.cargo/bin/alacritty
     dest: /usr/local/bin/alacritty
-    mode: 0755
+    mode: 493
     state: link
   when: alacritty_present.stat.exists == True
-  become: True
+  become: true
