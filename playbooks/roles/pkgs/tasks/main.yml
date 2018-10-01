@@ -110,17 +110,17 @@
   get_url:
     url: >-
       https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-    dest: /usr/local/bin/minikube
+    dest: /usr/local/bin/
     mode: 509
 - name: Install docker-machine
   get_url:
     url: >-
       https://github.com/docker/machine/releases/download/v0.15.0/docker-machine-Linux-x86_64
-    dest: /usr/local/bin/docker-machine
+    dest: /usr/local/bin/
     mode: 509
 - name: Install docker-machine KVM driver
   get_url:
     url: >-
-      https://github.com/kubernetes/minikube/releases/download/v0.28.2/docker-machine-driver-kvm2
-    dest: /usr/local/bin/docker-machine-driver-kvm2
+      https://github.com/kubernetes/minikube/releases/download/v0.29.0/docker-machine-driver-kvm2
+    dest: /usr/local/bin/
     mode: 509
