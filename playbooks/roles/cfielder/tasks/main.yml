@@ -1,10 +1,3 @@
-- name: Install docker-machine bash completion scripts
-  get_url:
-    url: >-
-      https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
-    dest: /etc/bash_completion.d/docker-machine.bash
-    mode: 292
-  become: true
 - name: Add groups
   group:
     name: '{{ item }}'
