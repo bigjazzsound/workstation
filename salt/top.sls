@@ -1,5 +1,0 @@
-base:
-  '*':
-    - cfielder
-    - pkgs
-    - nvim
