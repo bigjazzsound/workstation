@@ -1,14 +1,13 @@
----
 - name: Install pip2 packages
   pip:
     name:
       - neovim
       - yapf
-    extra_args: --user
+      - dopy
+    extra_args: '--user'
     state: latest
-  become: True
+  become: true
   become_user: cfielder
-
 - name: Install pip3 packages
   pip:
     name:
@@ -17,7 +16,7 @@
       - awscli
       - youtube-dl
     executable: pip3
-    extra_args: --user
+    extra_args: '--user'
     state: latest
-  become: True
+  become: true
   become_user: cfielder
