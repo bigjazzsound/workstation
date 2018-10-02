@@ -1,13 +1,14 @@
----
 - hosts: localhost
   roles:
     - role: system
-      become: True
+      become: true
       tags: system
     - role: pkgs
-      become: True
+      become: true
       tags: pkgs
     - role: cfielder
       tags: cfielder
     - role: python_pkgs
       tags: python_pkgs
+    - role: do
+      tags: do
