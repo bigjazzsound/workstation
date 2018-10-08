@@ -8,6 +8,8 @@
     state: latest
   become: true
   become_user: cfielder
+  tags:
+    - nox
 - name: Install pip3 packages
   pip:
     name:
@@ -20,3 +22,5 @@
     state: latest
   become: true
   become_user: cfielder
+  tags:
+    - nox

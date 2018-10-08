@@ -1,3 +1,12 @@
+- name: Install docker-machine bash completion scripts
+  get_url:
+    url: >-
+      https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
+    dest: /etc/bash_completion.d/docker-machine.bash
+    mode: 292
+  become: true
+  tags:
+    - nox
 - name: Add groups
   group:
     name: '{{ item }}'
@@ -7,6 +16,8 @@
     - docker
     - '{{ libvirt_group }}'
   become: true
+  tags:
+    - nox
 - name: Create /home/images
   file:
     path: /home/images
@@ -15,6 +26,8 @@
     group: '{{ libvirt_group }}'
     state: directory
   become: true
+  tags:
+    - nox
 - block:
     - name: Add cfielder
       user:
@@ -28,6 +41,8 @@
         append: yes
         uid: 1000
   become: true
+  tags:
+    - nox
 - name: Make dirs
   file:
     path: '/home/cfielder/{{ item }}'
@@ -36,6 +51,8 @@
     mode: 493
     state: directory
   with_items: '{{ cfielder_dirs }}'
+  tags:
+    - nox
 - name: Install files
   copy:
     src: '{{ item.key }}'
@@ -52,6 +69,8 @@
     vimrc: .vimrc
     dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
     konsole_profile: .local/share/konsole/dracula.profile
+  tags:
+    - nox
 - name: Create alacritty desktop shortcut
   copy:
     src: alacritty.desktop
@@ -65,6 +84,8 @@
     group: cfielder
     mode: 420
     state: link
+  tags:
+    - nox
 - name: Test for alacritty
   stat: path=/home/cfielder/.cargo/bin/alacritty
   register: alacritty_present
