@@ -4,25 +4,25 @@
       yum_repository:
         name: google-chrome
         description: Google Chrome Repository
-        baseurl: 'http://dl.google.com/linux/chrome/rpm/stable/$basearch'
+        baseurl: "http://dl.google.com/linux/chrome/rpm/stable/$basearch"
         gpgcheck: 1
-        gpgkey: 'https://dl.google.com/linux/linux_signing_key.pub'
+        gpgkey: "https://dl.google.com/linux/linux_signing_key.pub"
         enabled: true
     - name: Enable fedy
       yum_repository:
         name: fedy
         description: Fedy Repository
-        baseurl: 'https://dl.folkswithhats.org/fedora/$releasever/'
+        baseurl: "https://dl.folkswithhats.org/fedora/$releasever/"
         gpgcheck: 0
         enabled: true
     - name: Enable VSCode repo
       yum_repository:
         name: code
         description: Visual Studio Code
-        baseurl: 'https://packages.microsoft.com/yumrepos/vscode'
+        baseurl: "https://packages.microsoft.com/yumrepos/vscode"
         enabled: true
         gpgcheck: true
-        gpgkey: 'https://packages.microsoft.com/keys/microsoft.asc'
+        gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
     - name: Setup RPM Fusion Repos
       dnf:
         name:
@@ -37,16 +37,16 @@
         name: kubernetes
         file: kubernetes
         description: Kubernetes
-        baseurl: 'https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64'
+        baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
         enabled: true
         gpgcheck: true
         repo_gpgcheck: true
         gpgkey:
-          - 'https://packages.cloud.google.com/yum/doc/yum-key.gpg'
-          - 'https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg'
+          - "https://packages.cloud.google.com/yum/doc/yum-key.gpg"
+          - "https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
     - name: update repo
       dnf:
-        name: '*'
+        name: "*"
         state: latest
       register: repo_data
     - debug:
@@ -54,7 +54,7 @@
       when: repo_data.changed
     - name: install pkgs
       dnf:
-        name: '{{all_pkgs}} + {{fedora_pkgs}}'
+        name: "{{all_pkgs}} + {{fedora_pkgs}}"
         state: present
       register: installed_packages
     - debug:
@@ -65,32 +65,36 @@
   block:
     - name: Install apt keys
       apt_key:
-        url: '{{ item }}'
+        url: "{{ item }}"
         state: present
-      with_items: '{{ apt_keys }}'
+      with_items: "{{ apt_keys }}"
     - name: Install ppas
       apt_repository:
-        repo: '{{ item }}'
+        repo: "{{ item }}"
         state: present
-      with_items: '{{ ppas }}'
+      with_items: "{{ ppas }}"
     - name: Install apt repos
       apt_repository:
-        repo: '{{ item.repo }}'
-        filename: '{{ item.filename }}'
+        repo: "{{ item.repo }}"
+        filename: "{{ item.filename }}"
         state: present
-      with_items: '{{ apt_repos }}'
+      with_items: "{{ apt_repos }}"
     - name: Update apt repository
       apt:
         update_cache: yes
         cache_valid_time: 86400
     - name: Install apt packages
       apt:
-        name: '{{item}}'
+        name: "{{item}}"
         state: present
-      with_items: '{{all_pkgs}} + {{ubuntu_pkgs}}'
+      with_items: "{{all_pkgs}} + {{ubuntu_pkgs}}"
+    - name: Install Google Chrome
+      apt:
+        deb: "{{ item }}"
+      with_items: "{{ debs }}"
     - name: Install wine and recommended packages
       apt:
-        name: '{{item}}'
+        name: "{{item}}"
         state: present
         install_recommends: true
       with_items:
