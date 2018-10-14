@@ -19,7 +19,7 @@ fedora_pkgs:
   - vim-enhanced
   - chromium
   - docker
-  - '@Virtualization'
+  - "@Virtualization"
   - libguestfs-tools-c
   - python2
   - python2-pip
@@ -41,12 +41,12 @@ ubuntu_pkgs:
   - virtinst
   - virt-viewer
   - ttf-mscorefonts-installer
-  - 'libgnutls30:i386'
-  - 'libldap-2.4-2:i386'
-  - 'libgpg-error0:i386'
-  - 'libsqlite3-0:i386'
+  - "libgnutls30:i386"
+  - "libldap-2.4-2:i386"
+  - "libgpg-error0:i386"
+  - "libsqlite3-0:i386"
   - libvulkan1
-  - 'libvulkan1:i386'
+  - "libvulkan1:i386"
   - steam
   - winetricks
   - lutris
@@ -54,25 +54,35 @@ ubuntu_pkgs:
   - signal-desktop
   - quassel-client
   - openssh-server
+  - code
+  - kubectl
 apt_keys:
-  - 'https://dl.winehq.org/wine-builds/Release.key'
-  - 'https://updates.signal.org/desktop/apt/keys.asc'
+  - "https://dl.winehq.org/wine-builds/Release.key"
+  - "https://updates.signal.org/desktop/apt/keys.asc"
   - >-
     http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key
+  - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+  - "https://packages.microsoft.com/keys/microsoft.asc"
 ppas:
-  - 'ppa:graphics-drivers/ppa'
-  - 'ppa:teejee2008/ppa'
-  - 'ppa:qbittorrent-team/qbittorrent-stable'
-  - 'ppa:ansible/ansible'
+  - "ppa:graphics-drivers/ppa"
+  - "ppa:teejee2008/ppa"
+  - "ppa:qbittorrent-team/qbittorrent-stable"
+  - "ppa:ansible/ansible"
+debs:
+  - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 apt_repos:
   - repo: >-
       deb https://dl.winehq.org/wine-builds/ubuntu/
       {{ansible_distribution_release}} main
-    filename: /etc/apt/sources.list.d/winehq
-  - repo: 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main'
-    filename: /etc/apt/sources.list.d/signal
+    filename: winehq
+  - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+    filename: signal
   - repo: >-
       deb
       http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/
       ./
-    filename: /etc/apt/sources.list.d/lutris
+    filename: lutris
+  - repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+    filename: kubernetes
+  - repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    filename: vscode
