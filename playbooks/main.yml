@@ -10,3 +10,5 @@
       tags: cfielder
     - role: python_pkgs
       tags: python_pkgs
+    - role: vscode
+      tags: vscode
