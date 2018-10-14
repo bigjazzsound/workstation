@@ -1,4 +1,4 @@
-libvirt_group: '{{ ''libvirt'' if ansible_os_family == ''RedHat'' else ''libvirtd'' }}'
+libvirt_group: "{{ 'libvirt' if ansible_os_family == 'RedHat' else 'libvirtd' }}"
 cfielder_dirs:
   - .config/i3
   - .config/nvim
