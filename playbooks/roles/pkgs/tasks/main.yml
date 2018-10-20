@@ -83,6 +83,8 @@
       apt:
         update_cache: yes
         cache_valid_time: 86400
+      tags:
+        - nox
     - name: Install apt packages
       apt:
         name: "{{item}}"
@@ -103,12 +105,16 @@
       apt:
         upgrade: yes
       register: installed_packages
+      tags:
+        - nox
     - debug:
         var: installed_packages
       when: installed_packages.changed
     - name: Remove dependencies that are no longer required
       apt:
         autoremove: yes
+      tags:
+        - nox
   when: ansible_distribution == 'Ubuntu'
 - name: Install Minikube
   get_url:
