@@ -32,6 +32,11 @@ nnoremap <leader>l :set list <enter>
 nnoremap <leader>L :set nolist <enter>
 nnoremap <leader>t :NERDTreeToggle <enter>
 
+" settings for undo files
+set undodir=~/.vim/.undo/
+set backupdir=~/.vim/.backup/
+set directory=~/.vim/.swp/
+
 " settings for search
 set hlsearch
 set incsearch

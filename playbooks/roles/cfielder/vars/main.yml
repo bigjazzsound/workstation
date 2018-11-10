@@ -10,3 +10,6 @@ cfielder_dirs:
   - go/bin
   - go/pkg
   - .local/share/konsole
+  - .vim/.backup
+  - .vim/.swp
+  - .vim/.undo
