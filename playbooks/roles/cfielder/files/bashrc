@@ -108,7 +108,11 @@ alias ip='ip -c'
 # exported variables
 export TERM="screen-256color"
 export PS1="\[\033[1;36m\]\\$> \[$(tput sgr0)\]"
-export PATH=$PATH:$(go env GOPATH)/bin:$HOME/.local/bin:$HOME/.cargo/bin
+if [[ $(command -v go) ]]; then
+    export PATH=$PATH:$(go env GOPATH)/bin:$HOME/.local/bin:$HOME/.cargo/bin
+else
+    export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
+fi
 
 #aliases
 alias pbcopy='xsel --clipboard --input'
@@ -117,16 +121,12 @@ alias sudo='sudo -E '
 # neovim all the things, if installed
 if [ -f $(which nvim) ]; then
     alias vim='$(which nvim)'
-    export EDITOR=nvim
-    export VISUAL=nvim
+    export EDITOR=nvim VISUAL=nvim
 else
-    export EDITOR=vim
-    export VISUAL=vim
+    export EDITOR=vim VISUAL=vim
 fi
 
-if [ -f $(which kubectl) ]; then
-    source <(kubectl completion bash)
-fi
+command -v kubectl && source <(kubectl completion bash)
 
 # AWS CLI bash completion
 complete -C "$HOME/.local/bin/aws_completer" aws
