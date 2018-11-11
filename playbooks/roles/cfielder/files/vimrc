@@ -21,7 +21,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " shortcuts with map leader
-"let mapleader = ','
 nnoremap <leader>/ :nohls <enter>
 nnoremap <leader>w :w <enter>
 nnoremap <leader>W :%s/\s\+$//e <enter>
@@ -58,86 +57,77 @@ nnoremap <space> za
 "
 " Plugins
 "
+if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.vim/plugged") && has('nvim'))
+    call plug#begin('~/.vim/plugged')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-markdown'
+    Plug 'tpope/vim-dispatch'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'godlygeek/tabular'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'w0rp/ale'
+    Plug 'enricobacis/paste.vim'
+    Plug 'google/yapf'
+    Plug 'dracula/vim',{'as':'dracula'}
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+    Plug 'zchee/deoplete-jedi'
+    Plug 'zchee/deoplete-go', { 'do': 'make'}
+    Plug 'sealeg/vim-kickstart'
+    Plug 'junegunn/goyo.vim'
+    call plug#end()
 
-call plug#begin('~/.vim/plugged')
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'arcticicestudio/nord-vim'
-" Plug 'valloric/youcompleteme'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-dispatch'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'godlygeek/tabular'
-Plug 'sheerun/vim-polyglot'
-Plug 'w0rp/ale'
-Plug 'enricobacis/paste.vim'
-Plug 'google/yapf'
-Plug 'dracula/vim',{'as':'dracula'}
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+    color dracula
+
+    " airline settings
+    set laststatus=2
+    let g:airline_theme='dracula'
+
+    " dispatch settings
+    nnoremap <F3> :Dispatch<CR>
+    nnoremap <F4> :Start<CR>
+
+    " ale settings
+    let g:ale_fixers = {
+    \   'python': ['yapf'],
+    \   'c': ['clang-format'],
+    \   'yaml': ['yamllint'],
+    \   'javascript': ['eslint'],
+    \}
+    let g:airline#extensions#ale#enabled = 1
+    let g:ale_sign_column_always = 1
+    nmap <F10> <Plug>(ale_fix)
+
+    " Deoplete
+    let g:deoplete#enable_at_startup = 1
+
+    " vim-markdown
+    let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 endif
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'sealeg/vim-kickstart'
-Plug 'junegunn/goyo.vim'
-call plug#end()
 
 " Set colorscheme and fixes
 set t_Co=256
 set background=dark
-color dracula
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
-" airline settings
-set laststatus=2
-let g:airline_theme='dracula'
-"let g:airline_powerline_fonts = 1
-
-" dispatch settings
-nnoremap <F3> :Dispatch<CR>
-nnoremap <F4> :Start<CR>
-
-" ale settings
-let g:ale_fixers = {
-\   'python': ['yapf'],
-\   'c': ['clang-format'],
-\   'yaml': ['yamllint'],
-\   'javascript': ['eslint'],
-\}
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_column_always = 1
-nmap <F10> <Plug>(ale_fix)
-
-" YouCompleteMe
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_filetype_blacklist = {}
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-
-" vim-markdown
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 "
 " Settings for specific filetypes
 "
-
-autocmd BufWritePost /etc/apache2/* !apache2ctl configtest
-
-" settings for C makefiles
-autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
 " settings for editing Salt .sls files with yaml syntax hilighting
 autocmd BufNewFile,BufRead *.sls set filetype=yaml tabstop=2 softtabstop=2
@@ -149,8 +139,8 @@ autocmd BufNewFile,BufRead *.yml set filetype=yaml tabstop=2 softtabstop=2 shift
 autocmd BufNewFile,BufRead *.md set filetype=markdown textwidth=0
 
 " settings for editing python .py files
-"autocmd FileType python let b:dispatch = 'python %'
-"autocmd BufNewFile,BufRead *.py
+" autocmd FileType python let b:dispatch = 'python %'
+" autocmd BufNewFile,BufRead *.py
 autocmd FileType python silent!
   set filetype=python
   set tabstop=4
