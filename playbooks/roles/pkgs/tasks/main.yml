@@ -1,5 +1,8 @@
+---
+
 - name: Fedora package tasks
   block:
+
     - name: Enable chrome repo
       yum_repository:
         name: google-chrome
@@ -8,6 +11,7 @@
         gpgcheck: 1
         gpgkey: "https://dl.google.com/linux/linux_signing_key.pub"
         enabled: true
+
     - name: Enable fedy
       yum_repository:
         name: fedy
@@ -15,6 +19,7 @@
         baseurl: "https://dl.folkswithhats.org/fedora/$releasever/"
         gpgcheck: 0
         enabled: true
+
     - name: Enable VSCode repo
       yum_repository:
         name: code
@@ -23,6 +28,7 @@
         enabled: true
         gpgcheck: true
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+
     - name: Setup RPM Fusion Repos
       dnf:
         name:
@@ -32,68 +38,83 @@
           - >-
             https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{
             ansible_distribution_version}}.noarch.rpm
+
     - name: Enable Kubernetes
       yum_repository:
         name: kubernetes
         file: kubernetes
         description: Kubernetes
-        baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
+        baseurl: >-
+          "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
         enabled: true
         gpgcheck: true
         repo_gpgcheck: true
         gpgkey:
           - "https://packages.cloud.google.com/yum/doc/yum-key.gpg"
           - "https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
+
     - name: update repo
       dnf:
         name: "*"
         state: latest
       register: repo_data
+
     - debug:
         var: repo_data
       when: repo_data.changed
+
     - name: install pkgs
       dnf:
         name: "{{all_pkgs}} + {{fedora_pkgs}}"
         state: present
       register: installed_packages
+
     - debug:
         var: installed_packages
       when: installed_packages.changed
+
   when: ansible_distribution == 'Fedora'
+
 - name: Ubuntu package tasks
   block:
+
     - name: Install apt keys
       apt_key:
         url: "{{ item }}"
         state: present
       with_items: "{{ apt_keys }}"
+
     - name: Install ppas
       apt_repository:
         repo: "{{ item }}"
         state: present
       with_items: "{{ ppas }}"
+
     - name: Install apt repos
       apt_repository:
         repo: "{{ item.repo }}"
         filename: "{{ item.filename }}"
         state: present
       with_items: "{{ apt_repos }}"
+
     - name: Update apt repository
       apt:
-        update_cache: yes
+        update_cache: true
         cache_valid_time: 86400
       tags:
         - nox
+
     - name: Install apt packages
       apt:
         name: "{{item}}"
         state: present
       with_items: "{{all_pkgs}} + {{ubuntu_pkgs}}"
+
     - name: Install Google Chrome
       apt:
         deb: "{{ item }}"
       with_items: "{{ debs }}"
+
     - name: Install wine and recommended packages
       apt:
         name: "{{item}}"
@@ -101,21 +122,26 @@
         install_recommends: true
       with_items:
         - wine-staging
+
     - name: Upgrade packages
       apt:
-        upgrade: yes
+        upgrade: true
       register: installed_packages
       tags:
         - nox
+
     - debug:
         var: installed_packages
       when: installed_packages.changed
+
     - name: Remove dependencies that are no longer required
       apt:
-        autoremove: yes
+        autoremove: true
       tags:
         - nox
+
   when: ansible_distribution == 'Ubuntu'
+
 - name: Install Minikube
   get_url:
     url: >-
@@ -124,6 +150,7 @@
     mode: 509
   async: 60
   poll: 0
+
 - name: Install docker-machine
   get_url:
     url: >-
@@ -132,6 +159,7 @@
     mode: 509
   async: 60
   poll: 0
+
 - name: Install docker-machine KVM driver
   get_url:
     url: >-
@@ -140,6 +168,7 @@
     mode: 509
   async: 60
   poll: 0
+
 - name: Install docker-machine bash completion scripts
   get_url:
     url: >-

@@ -1,3 +1,5 @@
+---
+
 - name: Install docker-machine bash completion scripts
   get_url:
     url: >-
@@ -7,6 +9,7 @@
   become: true
   tags:
     - nox
+
 - name: Add groups
   group:
     name: '{{ item }}'
@@ -18,6 +21,7 @@
   become: true
   tags:
     - nox
+
 - name: Create /home/images
   file:
     path: /home/images
@@ -28,6 +32,7 @@
   become: true
   tags:
     - nox
+
 - block:
     - name: Add cfielder
       user:
@@ -38,11 +43,12 @@
         groups:
           - docker
           - '{{ libvirt_group }}'
-        append: yes
+        append: true
         uid: 1000
   become: true
   tags:
     - nox
+
 - name: Make dirs
   file:
     path: '/home/cfielder/{{ item }}'
@@ -53,6 +59,7 @@
   with_items: '{{ cfielder_dirs }}'
   tags:
     - nox
+
 - name: Install files
   copy:
     src: '{{ item.key }}'
@@ -71,11 +78,13 @@
     konsole_profile: .local/share/konsole/dracula.profile
   tags:
     - nox
+
 - name: Create alacritty desktop shortcut
   copy:
     src: alacritty.desktop
     dest: /usr/share/applications/Alacritty.desktop
   become: true
+
 - name: Make nvim config symlink
   file:
     src: /home/cfielder/.vimrc
@@ -86,9 +95,11 @@
     state: link
   tags:
     - nox
+
 - name: Test for alacritty
   stat: path=/home/cfielder/.cargo/bin/alacritty
   register: alacritty_present
+
 - name: Make global alacritty symlink
   file:
     src: /home/cfielder/.cargo/bin/alacritty

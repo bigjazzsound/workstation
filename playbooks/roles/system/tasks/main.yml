@@ -1,10 +1,11 @@
 ---
+
 - name: Set sysctls
   sysctl:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
     state: present
-    reload: True
+    reload: true
   with_items: "{{ sysctl_settings }}"
   tags:
     - nox
