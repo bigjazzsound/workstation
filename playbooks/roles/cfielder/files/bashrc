@@ -119,8 +119,9 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias sudo='sudo -E '
 # neovim all the things, if installed
-if [ -f $(which nvim) ]; then
-    alias vim='$(which nvim)'
+if [[ -f $(command -v nvim) ]]; then
+    alias vim='$(command -v nvim)'
+    alias vimdiff='nvim -d '
     export EDITOR=nvim VISUAL=nvim
 else
     export EDITOR=vim VISUAL=vim
