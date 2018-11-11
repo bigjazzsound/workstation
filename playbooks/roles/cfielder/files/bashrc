@@ -127,7 +127,7 @@ else
     export EDITOR=vim VISUAL=vim
 fi
 
-command -v kubectl && source <(kubectl completion bash)
+command -v kubectl >/dev/null && source <(kubectl completion bash)
 
 # AWS CLI bash completion
 complete -C "$HOME/.local/bin/aws_completer" aws
