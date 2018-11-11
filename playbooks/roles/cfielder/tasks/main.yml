@@ -5,7 +5,7 @@
     url: >-
       https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
     dest: /etc/bash_completion.d/docker-machine.bash
-    mode: 292
+    mode: 0444
   become: true
   tags:
     - nox
@@ -25,13 +25,11 @@
 - name: Create /home/images
   file:
     path: /home/images
-    mode: 504
+    mode: 0770
     owner: root
     group: '{{ libvirt_group }}'
     state: directory
   become: true
-  tags:
-    - nox
 
 - block:
     - name: Add cfielder
@@ -54,8 +52,9 @@
     path: '/home/cfielder/{{ item }}'
     owner: cfielder
     group: cfielder
-    mode: 493
+    mode: 0760
     state: directory
+    recurse: true
   with_items: '{{ cfielder_dirs }}'
   tags:
     - nox
@@ -91,7 +90,7 @@
     dest: /home/cfielder/.config/nvim/init.vim
     owner: cfielder
     group: cfielder
-    mode: 420
+    mode: 0600
     state: link
   tags:
     - nox
@@ -104,7 +103,7 @@
   file:
     src: /home/cfielder/.cargo/bin/alacritty
     dest: /usr/local/bin/alacritty
-    mode: 493
+    mode: 0600
     state: link
   when: alacritty_present.stat.exists == True
   become: true
