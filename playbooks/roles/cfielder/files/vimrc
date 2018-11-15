@@ -174,3 +174,10 @@ autocmd FileType go setlocal commentstring=//\ %s
 
 " settings for editing vimrc
 autocmd Filetype vim setlocal commentstring=\"\ %s
+
+" dynamic settings per host
+try
+    source $HOME/.vimrc.local
+catch
+    " pass
+endtry
