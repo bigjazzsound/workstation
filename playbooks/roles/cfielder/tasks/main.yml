@@ -1,5 +1,3 @@
----
-
 - name: Install docker-machine bash completion scripts
   get_url:
     url: >-
@@ -12,12 +10,11 @@
 
 - name: Add groups
   group:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
   with_items:
     - cfielder
-    - docker
-    - '{{ libvirt_group }}'
+    - "{{ libvirt_group }}"
   become: true
   tags:
     - nox
@@ -27,7 +24,7 @@
     path: /home/images
     mode: 0770
     owner: root
-    group: '{{ libvirt_group }}'
+    group: "{{ libvirt_group }}"
     state: directory
   become: true
 
@@ -39,8 +36,7 @@
         shell: /bin/bash
         group: cfielder
         groups:
-          - docker
-          - '{{ libvirt_group }}'
+          - "{{ libvirt_group }}"
         append: true
         uid: 1000
   become: true
@@ -49,19 +45,19 @@
 
 - name: Make dirs
   file:
-    path: '/home/cfielder/{{ item }}'
+    path: "/home/cfielder/{{ item }}"
     owner: cfielder
     group: cfielder
     mode: 0760
     state: directory
-  with_items: '{{ cfielder_dirs }}'
+  with_items: "{{ cfielder_dirs }}"
   tags:
     - nox
 
 - name: Install files
   copy:
-    src: '{{ item.key }}'
-    dest: '/home/cfielder/{{ item.value }}'
+    src: "{{ item.key }}"
+    dest: "/home/cfielder/{{ item.value }}"
     owner: cfielder
     group: cfielder
   with_dict:
