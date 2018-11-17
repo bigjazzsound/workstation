@@ -1,12 +1,11 @@
----
-
 - name: Install pip2 packages
   pip:
     name:
       - neovim
       - yapf
       - dopy
-    extra_args: '--user'
+      - ansible
+    extra_args: "--user"
     state: latest
   become: true
   become_user: cfielder
@@ -21,7 +20,7 @@
       - awscli
       - youtube-dl
     executable: pip3
-    extra_args: '--user'
+    extra_args: "--user"
     state: latest
   become: true
   become_user: cfielder

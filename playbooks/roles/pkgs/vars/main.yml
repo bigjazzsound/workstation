@@ -15,6 +15,7 @@ all_pkgs:
   - python3-pip
   - golang
   - neovim
+
 fedora_pkgs:
   - vim-enhanced
   - chromium
@@ -28,6 +29,7 @@ fedora_pkgs:
   - python2-libselinux
   - python3-libselinux
   - google-chrome-stable
+
 ubuntu_pkgs:
   - vim
   - chromium-browser
@@ -37,7 +39,8 @@ ubuntu_pkgs:
   - python-dev
   - python3-dev
   - qemu-kvm
-  - libvirt-bin
+  - libvirt-clients
+  - libvirt-daemon-system
   - virtinst
   - virt-viewer
   - ttf-mscorefonts-installer
@@ -56,27 +59,25 @@ ubuntu_pkgs:
   - openssh-server
   - code
   - kubectl
+
 apt_keys:
-  - "https://dl.winehq.org/wine-builds/Release.key"
-  - "https://updates.signal.org/desktop/apt/keys.asc"
   - >-
     http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://packages.microsoft.com/keys/microsoft.asc"
+  - "https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ansible_distribution_version}}_standard/Release.key"
+
 ppas:
   - "ppa:graphics-drivers/ppa"
   - "ppa:teejee2008/ppa"
-  - "ppa:qbittorrent-team/qbittorrent-stable"
-  - "ppa:ansible/ansible"
+
 debs:
   - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+
 apt_repos:
   - repo: >-
-      deb https://dl.winehq.org/wine-builds/ubuntu/
-      {{ansible_distribution_release}} main
+      deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ansible_distribution_version}}_standard ./
     filename: winehq
-  - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
-    filename: signal
   - repo: >-
       deb
       http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/

@@ -1,8 +1,5 @@
----
-
 - name: Fedora package tasks
   block:
-
     - name: Enable chrome repo
       yum_repository:
         name: google-chrome
@@ -69,7 +66,6 @@
 
 - name: Ubuntu package tasks
   block:
-
     - name: Install apt keys
       apt_key:
         url: "{{ item }}"
@@ -88,6 +84,8 @@
         filename: "{{ item.filename }}"
         state: present
       with_items: "{{ apt_repos }}"
+      tags:
+        - wine
 
     - name: Update apt repository
       apt:
@@ -98,9 +96,8 @@
 
     - name: Install apt packages
       apt:
-        name: "{{item}}"
+        name: "{{all_pkgs}} + {{ubuntu_pkgs}}"
         state: present
-      with_items: "{{all_pkgs}} + {{ubuntu_pkgs}}"
 
     - name: Install Google Chrome
       apt:
@@ -109,11 +106,9 @@
 
     - name: Install wine and recommended packages
       apt:
-        name: "{{item}}"
+        name: winehq-staging
         state: present
         install_recommends: true
-      with_items:
-        - wine-staging
 
     - name: Upgrade packages
       apt:
