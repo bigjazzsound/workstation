@@ -4,12 +4,11 @@ pipeline {
     }
     stages {
         stage('build') {
-            steps {
-                    ansiblePlaybook(
-                        playbook: 'main.yml',
-                        inventory: 'hosts.yml',
-                        colorized: true)
-            }
+            ansiblePlaybook(
+                playbook: 'main.yml',
+                inventory: 'hosts.yml',
+                limit: 'local',
+                colorized: true)
         }
     }
 }
