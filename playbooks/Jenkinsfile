@@ -1,19 +1,18 @@
 pipeline {
     agent { 
-        node { label 'desktop' } 
+        node { 
+            label 'desktop' 
+        } 
     }
     stages {
-
-        stage('init') {
-            checkout scm
-        }
-
         stage('build') {
-            ansiblePlaybook(
-                playbook: 'main.yml',
-                inventory: 'hosts.yml',
-                limit: 'local',
-                colorized: true)
+            steps {
+                ansiblePlaybook('main.yml') {
+                    inventoryPath: 'hosts.yml',
+                    limit: 'local',
+                    colorized: true
+                }
+            }
         }
     }
 }
