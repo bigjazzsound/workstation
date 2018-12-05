@@ -8,9 +8,9 @@ pipeline {
         stage('build') {
             steps {
                 ansiblePlaybook('main.yml') {
-                    inventoryPath: 'hosts.yml',
-                    limit: 'local',
-                    colorized: true
+                    inventoryPath('hosts.yml'),
+                    limit('local'),
+                    colorized(true)
                 }
             }
         }
