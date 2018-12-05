@@ -5,12 +5,10 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                ansiColor('xterm') {
                     ansiblePlaybook(
                         playbook: 'main.yml',
                         inventory: 'hosts.yml',
                         colorized: true)
-                }
             }
         }
     }
