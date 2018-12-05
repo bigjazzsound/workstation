@@ -3,6 +3,11 @@ pipeline {
         node { label 'desktop' } 
     }
     stages {
+
+        stage('init') {
+            checkout scm
+        }
+
         stage('build') {
             ansiblePlaybook(
                 playbook: 'main.yml',
