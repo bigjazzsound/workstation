@@ -8,7 +8,10 @@ pipeline {
         stage('build') {
             steps {
                 ansiblePlaybook(
-                    playbook: 'main.yml')
+                    playbook: 'playbooks/main.yml',
+                    inventory: 'playbooks/hosts.yml',
+                    limit: 'local'
+                )
             }
         }
     }

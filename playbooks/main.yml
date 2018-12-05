@@ -8,6 +8,7 @@
       tags: pkgs
     - role: cfielder
       tags: cfielder
+      become: true
     - role: python_pkgs
       tags: python_pkgs
     - role: vscode
