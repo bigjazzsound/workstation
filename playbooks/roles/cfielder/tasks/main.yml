@@ -1,3 +1,4 @@
+---
 - name: Install docker-machine bash completion scripts
   get_url:
     url: >-
@@ -102,3 +103,35 @@
     state: link
   when: alacritty_present.stat.exists == True
   become: true
+
+- name: Install pip2 packages
+  pip:
+    name:
+      - neovim
+      - yapf
+      - dopy
+    extra_args: "--user -U"
+    state: present
+  become: true
+  become_user: cfielder
+  changed_when: false
+  tags:
+    - nox
+    - python_pkgs
+
+- name: Install pip3 packages
+  pip:
+    name:
+      - neovim
+      - yapf
+      - awscli
+      - youtube-dl
+    executable: pip3
+    extra_args: "--user -U"
+    state: present
+  become: true
+  become_user: cfielder
+  changed_when: false
+  tags:
+    - nox
+    - python_pkgs
