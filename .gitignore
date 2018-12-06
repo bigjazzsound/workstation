@@ -1,2 +1,3 @@
 *.retry
 env
+.env
