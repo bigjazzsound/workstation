@@ -1,9 +1,8 @@
 set nu
-set undofile
-"set paste
 syntax on
 set mouse-=a
 set guifont=Monaco\ for\ Powerline\ Regular\ 12
+set inccommand=nosplit
 
 " 80 character color difference
 let &colorcolumn=join(range(80,999),",")
@@ -13,6 +12,9 @@ hi ColorColumn ctermbg=Black
 " Lines for splitting
 set splitbelow
 set splitright
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
 
 " split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -32,6 +34,7 @@ nnoremap <leader>L :set nolist <enter>
 nnoremap <leader>t :NERDTreeToggle <enter>
 
 " settings for undo files
+set undofile
 set undodir=~/.vim/.undo/
 set backupdir=~/.vim/.backup/
 set directory=~/.vim/.swp/
@@ -48,9 +51,6 @@ set smarttab
 " settings for listchars
 set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
 
-" settings for closing brackets, parenthesis, etc
-"au Filetype c inoremap ( ()<Esc>i
-
 " settings for folds
 nnoremap <space> za
 
@@ -63,6 +63,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'vim-airline/vim-airline-themes'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     Plug 'arcticicestudio/nord-vim'
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-fugitive'
@@ -109,6 +110,8 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     \}
     let g:airline#extensions#ale#enabled = 1
     let g:ale_sign_column_always = 1
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_lint_on_enter = 0
     nmap <F10> <Plug>(ale_fix)
 
     " Deoplete
@@ -124,7 +127,6 @@ set background=dark
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
-
 "
 " Settings for specific filetypes
 "
@@ -139,35 +141,33 @@ autocmd BufNewFile,BufRead *.yml set filetype=yaml tabstop=2 softtabstop=2 shift
 autocmd BufNewFile,BufRead *.md set filetype=markdown textwidth=0
 
 " settings for editing python .py files
-" autocmd FileType python let b:dispatch = 'python %'
-" autocmd BufNewFile,BufRead *.py
-autocmd FileType python silent!
-  set filetype=python
-  set tabstop=4
-  set softtabstop=4
-  set shiftwidth=4
-  set textwidth=79
-  set expandtab
-  set autoindent
-  set fileformat=unix
-  set commentstring=#\ %s
-  set foldmethod=indent
-  nnoremap <LocalLeader>= :0,$!yapf<CR>
-  let b:dispatch = 'python %'
+autocmd FileType python setlocal
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
+    \ commentstring=#\ %s
+    \ foldmethod=indent
 
 " settings for editing .c files
-nnoremap <F8> :w <CR> :!gcc -o %< % && ./%< <CR>
-au BufEnter *.c compiler gcc
-au Filetype c inoremap { {<CR><BS>}<Esc>ko
-au Filetype c inoremap ( ()<Esc>i
-autocmd BufNewFile,BufRead *.c
-        \ set tabstop=4
-        \ softtabstop=4
-        \ shiftwidth=4
-        \ textwidth=79
-        \ expandtab
-        \ autoindent
-        \ fileformat=unix
+autocmd FileType c setlocal
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
+    if executable('clang')
+        let &makeprg="clang -Wall -o %< %"
+    else
+        let &makeprg="gcc -Wall -o %< %"
+    endif
+autocmd FileType c inoremap { {<CR><BS>}<Esc>ko
+autocmd FileType c inoremap ( ()<Esc>i
 
 " settings for editing go files
 autocmd FileType go setlocal commentstring=//\ %s
