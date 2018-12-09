@@ -66,6 +66,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'junegunn/fzf.vim'
     Plug 'arcticicestudio/nord-vim'
     Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
