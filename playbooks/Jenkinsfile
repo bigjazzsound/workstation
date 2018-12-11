@@ -4,6 +4,9 @@ pipeline {
             label 'desktop'
         }
     }
+    triggers {
+        pollSCM('H */5 * * * *')
+    }
     stages {
         stage('build') {
             steps {
