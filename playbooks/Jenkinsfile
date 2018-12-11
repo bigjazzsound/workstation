@@ -12,8 +12,8 @@ pipeline {
             steps {
                 ansiblePlaybook(
                     playbook: 'playbooks/main.yml',
-                    inventory: 'playbooks/hosts.yml',
-                    limit: 'local'
+                    inventory: 'localhost,',
+                    extras: '-c local'
                 )
             }
         }
