@@ -9,5 +9,3 @@
     - role: cfielder
       tags: cfielder
       become: true
-    - role: vscode
-      tags: vscode
