@@ -1,3 +1,4 @@
+---
 all_pkgs:
   - bash
   - bash-completion
@@ -43,6 +44,7 @@ ubuntu_pkgs:
   - libvirt-daemon-system
   - virtinst
   - virt-viewer
+  - virt-manager
   - ttf-mscorefonts-installer
   - "libgnutls30:i386"
   - "libldap-2.4-2:i386"
@@ -66,6 +68,7 @@ apt_keys:
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://packages.microsoft.com/keys/microsoft.asc"
   - "https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ansible_distribution_version}}_standard/Release.key"
+  - "https://updates.signal.org/desktop/apt/keys.asc"
 
 ppas:
   - "ppa:graphics-drivers/ppa"
@@ -87,3 +90,5 @@ apt_repos:
     filename: kubernetes
   - repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     filename: vscode
+  - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+    filename: signal-desktop
