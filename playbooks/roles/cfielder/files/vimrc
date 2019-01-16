@@ -91,9 +91,10 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'zchee/deoplete-go', { 'do': 'make'}
     Plug 'sealeg/vim-kickstart'
     Plug 'junegunn/goyo.vim'
+    Plug 'altercation/vim-colors-solarized'
     call plug#end()
 
-    color dracula
+    colorscheme solarized
     
     " fugitive git bindings
     nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -114,7 +115,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
 
     " airline settings
     set laststatus=2
-    let g:airline_theme='dracula'
+    let g:airline_theme='solarized'
 
     " dispatch settings
     nnoremap <F3> :Dispatch<CR>
@@ -124,7 +125,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     let g:ale_fixers = {
     \   'python': ['yapf'],
     \   'c': ['clang-format'],
-    \   'yaml': ['yamllint'],
+    \   'yaml': ['prettier'],
     \   'javascript': ['eslint'],
     \}
     let g:airline#extensions#ale#enabled = 1
