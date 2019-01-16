@@ -127,6 +127,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     \   'c': ['clang-format'],
     \   'yaml': ['prettier'],
     \   'javascript': ['eslint'],
+    \   'go': ['gofmt'],
     \}
     let g:airline#extensions#ale#enabled = 1
     let g:ale_sign_column_always = 1
