@@ -1,6 +1,6 @@
 ---
-
 libvirt_group: "{{ 'libvirt' if ansible_os_family == 'RedHat' else 'libvirt-qemu' }}"
+
 cfielder_dirs:
   - .config/i3
   - .config/nvim
@@ -15,3 +15,20 @@ cfielder_dirs:
   - .vim/.backup
   - .vim/.swp
   - .vim/.undo
+
+cfielder_files:
+  alacritty: .config/alacritty/alacritty.yml
+  bashrc: .bashrc
+  i3: .config/i3/config
+  profile: .profile
+  redshift: .config/redshift.conf
+  tmux: .tmux.conf
+  vimrc: .vimrc
+  dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
+  konsole_profile: .local/share/konsole/dracula.profile
+
+git_aliases:
+  alias.co: checkout
+  alias.br: branch
+  alias.ci: commit
+  alias.st: status

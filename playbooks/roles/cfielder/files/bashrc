@@ -118,6 +118,9 @@ fi
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias sudo='sudo -E '
+alias A='sudo apt update && sudo apt upgrade -y'
+alias Y='sudo yum upgrade -y'
+
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
     alias vim='$(command -v nvim)'

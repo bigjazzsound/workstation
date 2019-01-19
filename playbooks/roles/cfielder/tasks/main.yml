@@ -1,35 +1,29 @@
 ---
-- name: Install docker-machine bash completion scripts
-  get_url:
-    url: >-
-      https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
-    dest: /etc/bash_completion.d/docker-machine.bash
-    mode: 0444
-  become: true
-  tags:
-    - nox
+- name: I am root
+  block:
+    - name: Install docker-machine bash completion scripts
+      get_url:
+        url: >-
+          https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
+        dest: /etc/bash_completion.d/docker-machine.bash
+        mode: 0444
 
-- name: Add groups
-  group:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - cfielder
-    - "{{ libvirt_group }}"
-  become: true
-  tags:
-    - nox
+    - name: Add groups
+      group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - cfielder
+        - "{{ libvirt_group }}"
 
-- name: Create /home/images
-  file:
-    path: /home/images
-    mode: 0770
-    owner: root
-    group: "{{ libvirt_group }}"
-    state: directory
-  become: true
+    - name: Create /home/images
+      file:
+        path: /home/images
+        mode: 0770
+        owner: root
+        group: "{{ libvirt_group }}"
+        state: directory
 
-- block:
     - name: Add cfielder
       user:
         name: cfielder
@@ -41,8 +35,6 @@
         append: true
         uid: 1000
   become: true
-  tags:
-    - nox
 
 - name: Make dirs
   file:
@@ -51,73 +43,57 @@
     group: cfielder
     mode: 0760
     state: directory
-  with_items: "{{ cfielder_dirs }}"
+  loop: "{{ cfielder_dirs }}"
   tags:
     - nox
 
 - name: Install files
-  copy:
-    src: "{{ item.key }}"
+  file:
+    src: "{{ role_path }}/files/{{ item.key }}"
     dest: "/home/cfielder/{{ item.value }}"
     owner: cfielder
     group: cfielder
-  with_dict:
-    alacritty: .config/alacritty/alacritty.yml
-    bashrc: .bashrc
-    i3: .config/i3/config
-    profile: .profile
-    redshift: .config/redshift.conf
-    tmux: .tmux.conf
-    vimrc: .vimrc
-    dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
-    konsole_profile: .local/share/konsole/dracula.profile
+    state: link
+    force: true
+  loop: "{{ q('dict', cfielder_files) }}"
   tags:
     - nox
-
-- name: Create alacritty desktop shortcut
-  copy:
-    src: alacritty.desktop
-    dest: /usr/share/applications/Alacritty.desktop
-  become: true
 
 - name: Make nvim config symlink
   file:
-    src: /home/cfielder/.vimrc
+    src: "{{ role_path }}/files/vimrc"
     dest: /home/cfielder/.config/nvim/init.vim
     owner: cfielder
     group: cfielder
-    mode: 0600
     state: link
+    force: true
   tags:
     - nox
 
-- name: Test for alacritty
-  stat: path=/home/cfielder/.cargo/bin/alacritty
-  register: alacritty_present
-
-- name: Make global alacritty symlink
-  file:
-    src: /home/cfielder/.cargo/bin/alacritty
-    dest: /usr/local/bin/alacritty
-    mode: 0755
-    state: link
-  when: alacritty_present.stat.exists == True
-  become: true
-
-- name: Install pip2 packages
-  pip:
-    name:
-      - neovim
-      - yapf
-      - dopy
-    extra_args: "--user -U"
-    state: present
-  become: true
-  become_user: cfielder
-  changed_when: false
+- name: Config git
+  git_config:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    scope: global
+  loop: "{{ q('dict', git_aliases) }}"
   tags:
-    - nox
-    - python_pkgs
+    - git
+
+# - name: Install pip2 packages
+#   pip:
+#     name:
+#       - neovim
+#       - yapf
+#       - dopy
+#     extra_args: "--user -U"
+#     state: present
+#   become: true
+#   become_user: cfielder
+#   changed_when: false
+#   tags:
+#     - nox
+#     - python_pkgs
+#     - python2
 
 - name: Install pip3 packages
   pip:
@@ -135,3 +111,66 @@
   tags:
     - nox
     - python_pkgs
+    - python3
+
+- name: Test for rust
+  stat:
+    path: /home/cfielder/.cargo/bin/rustup
+  register: rust_present
+  tags:
+    - rust
+
+- name: Install rust and cargo packages
+  block:
+    - name: Install rustup
+      shell: curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
+      args:
+        warn: false
+    - name: Install cargo update
+      shell: "cargo install -q -j {{ ansible_processor_cores }} cargo-update"
+      failed_when: false
+    - name: Update crates
+      shell: cargo install-update -a > /dev/null 2>&1
+  when: rust_present.stat.exists == true
+  tags:
+    - rust
+
+- name: Test for alacritty
+  stat:
+    path: /home/cfielder/.cargo/bin/alacritty
+  register: alacritty_present
+
+- name: Setup alacritty shortcut/symlink
+  block:
+    - name: Create alacritty desktop shortcut
+      copy:
+        src: alacritty.desktop
+        dest: /usr/share/applications/Alacritty.desktop
+
+    - name: Make global alacritty symlink
+      file:
+        src: /home/cfielder/.cargo/bin/alacritty
+        dest: /usr/local/bin/alacritty
+        mode: 0755
+        state: link
+  when: alacritty_present.stat.exists == True
+  become: true
+  tags:
+    - alacritty
+
+- name: Cron jobs
+  block:
+    - cron:
+        name: Update vim plugins
+        minute: "*/10"
+        job: "nvim +PlugUpdate +qall"
+        user: cfielder
+
+    - cron:
+        name: Update git repos
+        minute: "*/10"
+        job: |
+          for i in $(fd -t d -H '^\.git$' ~/playground/); do git -C $i fetch -q; done
+        user: cfielder
+  tags:
+    - cron

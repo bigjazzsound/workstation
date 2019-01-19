@@ -63,8 +63,7 @@ ubuntu_pkgs:
   - kubectl
 
 apt_keys:
-  - >-
-    http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key
+  - "http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key"
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://packages.microsoft.com/keys/microsoft.asc"
   - "https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ansible_distribution_version}}_standard/Release.key"
@@ -74,7 +73,7 @@ ppas:
   - "ppa:graphics-drivers/ppa"
   - "ppa:teejee2008/ppa"
 
-debs:
+remote_debs:
   - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
 apt_repos:

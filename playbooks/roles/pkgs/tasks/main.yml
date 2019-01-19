@@ -70,20 +70,20 @@
       apt_key:
         url: "{{ item }}"
         state: present
-      with_items: "{{ apt_keys }}"
+      loop: "{{ apt_keys }}"
 
     - name: Install ppas
       apt_repository:
         repo: "{{ item }}"
         state: present
-      with_items: "{{ ppas }}"
+      loop: "{{ ppas }}"
 
     - name: Install apt repos
       apt_repository:
         repo: "{{ item.repo }}"
         filename: "{{ item.filename }}"
         state: present
-      with_items: "{{ apt_repos }}"
+      loop: "{{ apt_repos }}"
       tags:
         - wine
 
@@ -102,7 +102,7 @@
     - name: Install Google Chrome
       apt:
         deb: "{{ item }}"
-      with_items: "{{ debs }}"
+      loop: "{{ remote_debs }}"
 
     - name: Install wine and recommended packages
       apt:
