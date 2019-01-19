@@ -95,6 +95,7 @@ shopt -s cdable_vars
 # export dotfiles="$HOME/dotfiles"
 # export projects="$HOME/projects"
 export documents="$HOME/Documents"
+export plays="$HOME/playground/workstation/playbooks"
 # export dropbox="$HOME/Dropbox"
 
 # ls aliases
@@ -106,6 +107,7 @@ alias dirs='dirs -l -v'
 alias ip='ip -c'
 
 # exported variables
+export PAGER=less
 export TERM="screen-256color"
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
 if [[ $(command -v go) ]]; then
@@ -120,6 +122,7 @@ alias pbpaste='xsel --clipboard --output'
 alias sudo='sudo -E '
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
+alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/main.yml'
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
