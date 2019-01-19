@@ -32,3 +32,4 @@ git_aliases:
   alias.br: branch
   alias.ci: commit
   alias.st: status
+  alias.rh: reset --hard
