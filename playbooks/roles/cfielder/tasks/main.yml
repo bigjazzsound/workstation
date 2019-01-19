@@ -35,6 +35,8 @@
         append: true
         uid: 1000
   become: true
+  tags:
+    - nox
 
 - name: Make dirs
   file:
@@ -78,6 +80,7 @@
   loop: "{{ q('dict', git_aliases) }}"
   tags:
     - git
+    - nox
 
 # - name: Install pip2 packages
 #   pip:
@@ -119,6 +122,7 @@
   register: rust_present
   tags:
     - rust
+    - nox
 
 - name: Install rust and cargo packages
   block:
@@ -134,6 +138,7 @@
   when: rust_present.stat.exists == true
   tags:
     - rust
+    - nox
 
 - name: Test for alacritty
   stat:
@@ -174,3 +179,4 @@
         user: cfielder
   tags:
     - cron
+    - nox
