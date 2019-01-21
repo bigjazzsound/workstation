@@ -61,6 +61,9 @@ ubuntu_pkgs:
   - openssh-server
   - code
   - kubectl
+  - libssl-dev
+  - libssh2-1-dev
+  - libgit2-dev
 
 apt_keys:
   - "http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key"
