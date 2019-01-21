@@ -123,6 +123,7 @@ alias sudo='sudo -E '
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/main.yml'
+alias less='less -R'
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
