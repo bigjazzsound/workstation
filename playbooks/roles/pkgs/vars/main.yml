@@ -75,6 +75,7 @@ ppas:
 
 remote_debs:
   - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+  - "https://github.com/jwilm/alacritty/releases/download/v0.2.6/Alacritty-v0.2.6_amd64.deb"
 
 apt_repos:
   - repo: >-
