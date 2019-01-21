@@ -135,29 +135,6 @@
   tags:
     - rust
 
-- name: Test for alacritty
-  stat:
-    path: /home/cfielder/.cargo/bin/alacritty
-  register: alacritty_present
-
-- name: Setup alacritty shortcut/symlink
-  block:
-    - name: Create alacritty desktop shortcut
-      copy:
-        src: alacritty.desktop
-        dest: /usr/share/applications/Alacritty.desktop
-
-    - name: Make global alacritty symlink
-      file:
-        src: /home/cfielder/.cargo/bin/alacritty
-        dest: /usr/local/bin/alacritty
-        mode: 0755
-        state: link
-  when: alacritty_present.stat.exists == True
-  become: true
-  tags:
-    - alacritty
-
 - name: Cron jobs
   block:
     - cron:
