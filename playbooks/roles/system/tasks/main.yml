@@ -25,3 +25,10 @@
     mode: 644
   tags:
     - nox
+
+- name: Setup sudoers file
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers
+    validate: 'visudo -cf %s'
+    mode: 0440
