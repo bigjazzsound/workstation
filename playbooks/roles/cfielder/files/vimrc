@@ -33,6 +33,9 @@ nnoremap <leader>l :set list <enter>
 nnoremap <leader>L :set nolist <enter>
 nnoremap <leader>t :NERDTreeToggle <enter>
 
+" macros
+let @j = 'i"{{}}"'
+
 " settings for undo files
 set undofile
 set undodir=~/.vim/.undo/
@@ -123,7 +126,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
 
     " ale settings
     let g:ale_fixers = {
-    \   'python': ['yapf'],
+    \   'python': ['black', 'yapf'],
     \   'c': ['clang-format'],
     \   'yaml': ['prettier'],
     \   'javascript': ['eslint'],
@@ -194,7 +197,11 @@ autocmd FileType c inoremap { {<CR><BS>}<Esc>ko
 autocmd FileType c inoremap ( ()<Esc>i
 
 " settings for editing go files
-autocmd FileType go setlocal commentstring=//\ %s
+autocmd FileType go setlocal 
+    \ commentstring=//\ %s
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
 
 " settings for editing vimrc
 autocmd Filetype vim setlocal 
