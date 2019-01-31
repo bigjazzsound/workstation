@@ -135,7 +135,7 @@
       failed_when: false
     - name: Update crates
       shell: cargo install-update -a > /dev/null 2>&1
-  when: rust_present.stat.exists == true
+  when: rust_present.stat.exists == false
   tags:
     - rust
     - nox
