@@ -34,7 +34,7 @@ nnoremap <leader>L :set nolist <enter>
 nnoremap <leader>t :NERDTreeToggle <enter>
 
 " macros
-let @j = 'i"{{}}"'
+let @j = 'i "{{}}"'
 
 " settings for undo files
 set undofile
