@@ -145,14 +145,14 @@
     - cron:
         name: Update vim plugins
         minute: "*/10"
-        job: "nvim +PlugUpdate +qall"
+        job: "nvim +PlugUpdate +qall > /dev/null 2>&1"
         user: cfielder
 
     - cron:
         name: Update git repos
         minute: "*/10"
         job: |
-          for i in $(fd -t d -H '^\.git$' ~/playground/); do git -C $i fetch -q; done
+          for i in $($HOME/.cargo/bin/fd -t d -H '^\.git$' ~/playground/); do git -C $i fetch -q; done > /dev/null 2>&1
         user: cfielder
   tags:
     - cron
