@@ -127,6 +127,7 @@ alias less='less -R'
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
+    alias vi='$(command -v nvim)'
     alias vim='$(command -v nvim)'
     alias vimdiff='nvim -d '
     export EDITOR=nvim VISUAL=nvim
