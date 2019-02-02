@@ -129,6 +129,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     \   'python': ['black', 'yapf'],
     \   'c': ['clang-format'],
     \   'yaml': ['prettier'],
+    \   'json': ['prettier'],
     \   'javascript': ['eslint'],
     \   'go': ['gofmt'],
     \}
