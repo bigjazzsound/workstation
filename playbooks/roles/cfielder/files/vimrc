@@ -95,6 +95,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'sealeg/vim-kickstart'
     Plug 'junegunn/goyo.vim'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'jremmen/vim-ripgrep'
     call plug#end()
 
     colorscheme solarized
