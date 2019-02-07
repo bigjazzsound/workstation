@@ -34,7 +34,7 @@ nnoremap <leader>L :set nolist <enter>
 nnoremap <leader>t :NERDTreeToggle <enter>
 
 " macros
-let @j = 'i "{{}}"'
+let @j = 'a "{{  }}"4h'
 
 " settings for undo files
 set undofile
@@ -130,6 +130,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     \   'python': ['black', 'yapf'],
     \   'c': ['clang-format'],
     \   'yaml': ['prettier'],
+    \   'json': ['prettier'],
     \   'javascript': ['eslint'],
     \   'go': ['gofmt'],
     \}
