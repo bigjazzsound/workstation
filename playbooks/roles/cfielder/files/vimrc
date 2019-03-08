@@ -167,7 +167,15 @@ autocmd BufNewFile,BufRead *.sls set filetype=yaml tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.yml set filetype=yaml tabstop=2 softtabstop=2 shiftwidth=2 expandtab autoindent
 
 " settings for editing md files
-autocmd BufNewFile,BufRead *.md set filetype=markdown textwidth=0
+autocmd BufNewFile,BufRead *.md setlocal 
+    \ filetype=markdown 
+    \ textwidth=0
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
 
 " settings for editing python .py files
 autocmd FileType python setlocal
