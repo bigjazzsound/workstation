@@ -95,3 +95,9 @@ apt_repos:
     filename: vscode
   - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
     filename: signal-desktop
+
+go_pkgs:
+  - vault
+  - consul
+  - packer
+  - terraform

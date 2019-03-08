@@ -129,6 +129,12 @@
 
   when: ansible_distribution == 'Ubuntu'
 
+- name: Install go packages
+  command: "go get -u github.com/hashicorp/{{item}}"
+  loop: "{{ go_pkgs }}"
+  become: cfielder
+  tags: go
+
 - name: Install Minikube
   get_url:
     url: >-
