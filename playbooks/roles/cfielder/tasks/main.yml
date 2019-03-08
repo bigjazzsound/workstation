@@ -15,6 +15,7 @@
       loop:
         - cfielder
         - "{{ libvirt_group }}"
+        - docker
 
     - name: Create /home/images
       file:
@@ -32,6 +33,7 @@
         group: cfielder
         groups:
           - "{{ libvirt_group }}"
+          - docker
         append: true
         uid: 1000
   become: true
@@ -98,23 +100,23 @@
 #     - python_pkgs
 #     - python2
 
-- name: Install pip3 packages
-  pip:
-    name:
-      - neovim
-      - yapf
-      - awscli
-      - youtube-dl
-    executable: pip3
-    extra_args: "--user -U"
-    state: present
-  become: true
-  become_user: cfielder
-  changed_when: false
-  tags:
-    - nox
-    - python_pkgs
-    - python3
+# - name: Install pip3 packages
+#   pip:
+#     name:
+#       - neovim
+#       - yapf
+#       - awscli
+#       - youtube-dl
+#     executable: pip3
+#     extra_args: "--user -U"
+#     state: present
+#   become: true
+#   become_user: cfielder
+#   changed_when: false
+#   tags:
+#     - nox
+#     - python_pkgs
+#     - python3
 
 - name: Test for rust
   stat:
