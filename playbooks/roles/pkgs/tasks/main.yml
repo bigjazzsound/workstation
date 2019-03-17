@@ -99,7 +99,7 @@
         name: "{{all_pkgs}} + {{ubuntu_pkgs}}"
         state: present
 
-    - name: Install Google Chrome
+    - name: Install remote deb packages
       apt:
         deb: "{{ item }}"
       loop: "{{ remote_debs }}"
