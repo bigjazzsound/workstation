@@ -1,11 +1,14 @@
 ---
 - hosts: local
-  roles:
-    - role: system
+  tasks:
+    - import_role:
+        name: system
       become: true
       tags: system
-    - role: pkgs
+    - import_role:
+        name: pkgs
       become: true
       tags: pkgs
-    - role: cfielder
+    - import_role:
+        name: cfielder
       tags: cfielder
