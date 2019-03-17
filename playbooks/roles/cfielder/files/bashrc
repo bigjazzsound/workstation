@@ -139,6 +139,8 @@ command -v kubectl >/dev/null && source <(kubectl completion bash)
 
 # AWS CLI bash completion
 complete -C "$HOME/.local/bin/aws_completer" aws
+complete -C $(which vault) vault
+complete -C $(which consul) consul
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
