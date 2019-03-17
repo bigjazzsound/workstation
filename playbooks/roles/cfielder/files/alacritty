@@ -111,7 +111,7 @@ mouse:
   hide_when_typing: false
 
   url:
-    launcher: xdg-open
+    launcher: None
     modifiers: None
 
 selection:
