@@ -133,7 +133,9 @@
   command: "go get -u github.com/hashicorp/{{item}}"
   loop: "{{ go_pkgs }}"
   become: cfielder
-  tags: go
+  tags:
+    - go
+    - nox
 
 - name: Install Minikube
   get_url:
