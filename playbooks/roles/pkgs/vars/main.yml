@@ -101,9 +101,10 @@ static_binaries:
     dest: "/usr/local/bin/docker-machine"
   - url: "https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-Linux-x86_64"
     dest: "/usr/local/bin/"
-
   - url: "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash"
     dest: "/etc/bash_completion.d/docker-machine.bash"
+  - url: "https://github.com/mvdan/sh/releases/download/v2.6.4/shfmt_v2.6.4_linux_amd64"
+    dest: "/usr/local/bin/shfmt"
 
 static_archives:
   - "https://releases.hashicorp.com/vault/1.1.0/vault_1.1.0_linux_amd64.zip"

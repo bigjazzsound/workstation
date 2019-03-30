@@ -6,6 +6,7 @@ cfielder_dirs:
   - .config/nvim
   - .config/terminator
   - .config/alacritty
+  - .config/dircolors
   - .fonts
   - go
   - go/src
