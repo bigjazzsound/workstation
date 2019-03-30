@@ -162,84 +162,84 @@ highlight nonText ctermbg=NONE
 
 " settings for editing yml files
 augroup ft_yml
-autocmd!
-autocmd BufNewFile,BufRead *.yml setlocal
-    \ filetype=yaml
-    \ tabstop=2
-    \ softtabstop=2
-    \ shiftwidth=2
-    \ expandtab
-    \ autoindent
+    autocmd!
+    autocmd BufNewFile,BufRead *.yml setlocal
+        \ filetype=yaml
+        \ tabstop=2
+        \ softtabstop=2
+        \ shiftwidth=2
+        \ expandtab
+        \ autoindent
 augroup END
 
 " settings for editing md files
 augroup ft_md
-autocmd!
-autocmd BufNewFile,BufRead *.md setlocal
-    \ filetype=markdown
-    \ textwidth=0
-    \ tabstop=2
-    \ softtabstop=2
-    \ shiftwidth=2
-    \ expandtab
-    \ autoindent
-    \ fileformat=unix
+    autocmd!
+    autocmd BufNewFile,BufRead *.md setlocal
+        \ filetype=markdown
+        \ textwidth=0
+        \ tabstop=2
+        \ softtabstop=2
+        \ shiftwidth=2
+        \ expandtab
+        \ autoindent
+        \ fileformat=unix
 augroup END
 
 " settings for editing python .py files
 augroup ft_python
-autocmd!
-autocmd FileType python setlocal
-    \ tabstop=4
-    \ softtabstop=4
-    \ shiftwidth=4
-    \ textwidth=79
-    \ expandtab
-    \ autoindent
-    \ fileformat=unix
-    \ commentstring=#\ %s
-    \ foldmethod=indent
+    autocmd!
+    autocmd FileType python setlocal
+        \ tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
+        \ textwidth=79
+        \ expandtab
+        \ autoindent
+        \ fileformat=unix
+        \ commentstring=#\ %s
+        \ foldmethod=indent
 augroup END
 
 " settings for editing .c files
 augroup ft_c
-autocmd!
-autocmd FileType c setlocal
-    \ tabstop=4
-    \ softtabstop=4
-    \ shiftwidth=4
-    \ textwidth=79
-    \ expandtab
-    \ autoindent
-    \ fileformat=unix
-inoremap { {<CR><BS>}<Esc>ko
-inoremap ( ()<Esc>i
-if executable('clang')
-    let &makeprg="clang -Wall -o %< %"
-else
-    let &makeprg="gcc -Wall -o %< %"
-endif
+    autocmd!
+    autocmd FileType c setlocal
+        \ tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
+        \ textwidth=79
+        \ expandtab
+        \ autoindent
+        \ fileformat=unix
+        \ inoremap { {<CR><BS>}<Esc>ko
+        \ inoremap ( ()<Esc>i
+    if executable('clang')
+        let &makeprg="clang -Wall -o %< %"
+    else
+        let &makeprg="gcc -Wall -o %< %"
+    endif
 augroup END
 
 " settings for editing go files
 augroup ft_go
-autocmd!
-autocmd FileType go setlocal
-    \ commentstring=//\ %s
-    \ tabstop=4
-    \ softtabstop=4
-    \ shiftwidth=4
+    autocmd!
+    autocmd FileType go setlocal
+        \ commentstring=//\ %s
+        \ tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
 augroup END
 
 " settings for editing vimrc
 augroup ft_vim
-autocmd!
-autocmd Filetype vim setlocal
-    \ commentstring=\"\ %s
-    \ tabstop=4
-    \ softtabstop=4
-    \ shiftwidth=4
-autocmd! bufwritepost .vimrc source %
+    autocmd!
+    autocmd Filetype vim setlocal
+        \ commentstring=\"\ %s
+        \ tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
+    autocmd! bufwritepost .vimrc source %
 augroup END
 
 
