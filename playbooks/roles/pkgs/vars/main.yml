@@ -66,10 +66,10 @@ ubuntu_pkgs:
   - libgit2-dev
 
 apt_keys:
-  - "http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/Release.key"
+  - "http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ ansible_distribution_version }}/Release.key"
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://packages.microsoft.com/keys/microsoft.asc"
-  - "https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ansible_distribution_version}}_standard/Release.key"
+  - "https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ ansible_distribution_version }}_standard/Release.key"
   - "https://updates.signal.org/desktop/apt/keys.asc"
 
 ppas:
@@ -81,13 +81,11 @@ remote_debs:
   - "https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9_amd64.deb"
 
 apt_repos:
-  - repo: >-
-      deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ansible_distribution_version}}_standard ./
+  - repo: >
+      deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ ansible_distribution_version }}_standard ./
     filename: winehq
-  - repo: >-
-      deb
-      http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ansible_distribution_version}}/
-      ./
+  - repo: >
+      deb http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ ansible_distribution_version }}/ ./
     filename: lutris
   - repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
     filename: kubernetes
@@ -96,8 +94,20 @@ apt_repos:
   - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
     filename: signal-desktop
 
-go_pkgs:
-  - vault
-  - consul
-  - packer
-  - terraform
+static_binaries:
+  - url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
+    dest: "/usr/local/bin/minikube"
+  - url: "https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-Linux-x86_64"
+    dest: "/usr/local/bin/docker-machine"
+  - url: "https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-Linux-x86_64"
+    dest: "/usr/local/bin/"
+
+  - url: "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash"
+    dest: "/etc/bash_completion.d/docker-machine.bash"
+
+static_archives:
+  - "https://releases.hashicorp.com/vault/1.1.0/vault_1.1.0_linux_amd64.zip"
+  - "https://releases.hashicorp.com/packer/1.3.5/packer_1.3.5_linux_amd64.zip"
+  - "https://releases.hashicorp.com/consul/1.4.4/consul_1.4.4_linux_amd64.zip"
+  - "https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip"
+  - "https://github.com/tsenart/vegeta/releases/download/cli%2Fv12.2.1/vegeta-12.2.1-linux-amd64.tar.gz"
