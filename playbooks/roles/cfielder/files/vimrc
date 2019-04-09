@@ -130,6 +130,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     \   'javascript': ['eslint'],
     \   'go': ['gofmt'],
     \   'sh': ['shfmt'],
+    \   'terraform': ['terraform'],
     \}
     let g:airline#extensions#ale#enabled = 1
     let g:ale_sign_column_always = 1
