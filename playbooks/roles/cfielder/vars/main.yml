@@ -34,3 +34,4 @@ git_aliases:
   alias.ci: commit
   alias.st: status
   alias.rh: reset --hard
+  alias.lg: "log --pretty=format:'%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(20)%aN%Cred%d %Creset%s' --date=short"
