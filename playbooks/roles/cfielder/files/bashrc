@@ -91,20 +91,8 @@ CDPATH="."
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
 shopt -s cdable_vars
 
-# Examples:
-# export dotfiles="$HOME/dotfiles"
-# export projects="$HOME/projects"
 export documents="$HOME/Documents"
 export plays="$HOME/playground/workstation/playbooks"
-# export dropbox="$HOME/Dropbox"
-
-# ls aliases
-alias ls='ls --color'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias dirs='dirs -l -v'
-alias ip='ip -c'
 
 # exported variables
 export PAGER=less
@@ -116,7 +104,9 @@ else
     export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
 fi
 
-#aliases
+# aliases
+alias dirs='dirs -l -v'
+alias ip='ip -c'
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 alias sudo='sudo -E '
@@ -127,19 +117,29 @@ alias less='less -R'
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
-    alias vi='$(command -v nvim)'
-    alias vim='$(command -v nvim)'
+    alias v='nvim'
+    alias vi='nvim'
+    alias vim='nvim'
     alias vimdiff='nvim -d '
     export EDITOR=nvim VISUAL=nvim
 else
     export EDITOR=vim VISUAL=vim
 fi
 
+if [[ -f $(command -v exa) ]]; then
+    alias ls='exa'
+    alias ll='exa -l'
+    alias tree='exa -T'
+else
+    alias ls='ls --color'
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
+fi
+
 command -v kubectl >/dev/null && source <(kubectl completion bash)
 
-if [[ -f ~/.config/dircolors/dircolors.256dark ]]; then
-    eval $(dircolors ~/.config/dircolors/dircolors.256dark)
-fi
+[[ -f ~/.config/dircolors/dircolors.256dark ]] && eval $(dircolors ~/.config/dircolors/dircolors.256dark)
 
 # AWS CLI bash completion
 complete -C "$HOME/.local/bin/aws_completer" aws
