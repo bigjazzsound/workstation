@@ -159,7 +159,7 @@
 - name: Install bash completions
   get_url:
     url: "{{ item }}"
-    dest: "/etc/bash_completion.d/{{ item }}"
+    dest: /etc/bash_completion.d/
     mode: 0555
   loop: "{{ bash_completions }}"
   tags:
