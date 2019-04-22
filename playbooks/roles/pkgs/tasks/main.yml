@@ -144,3 +144,24 @@
   tags:
     - static_binaries
     - nox
+
+- name: Install man pages
+  get_url:
+    url: "{{ item }}"
+    dest: /usr/share/man/man1/
+    mode: 0444
+  loop: "{{ man_pages }}"
+  tags:
+    - man_pages
+    - man
+    - nox
+
+- name: Install bash completions
+  get_url:
+    url: "{{ item }}"
+    dest: /etc/bash_completion.d/
+    mode: 0555
+  loop: "{{ bash_completions }}"
+  tags:
+    - bash_completions
+    - nox
