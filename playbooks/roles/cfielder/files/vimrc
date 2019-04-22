@@ -107,7 +107,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
     nnoremap <leader>gp :Ggrep<Space>
     nnoremap <leader>gm :Gmove<Space>
-    nnoremap <leader>gb :Git branch<Space>
+    nnoremap <leader>gb :Gblame!<CR>
     nnoremap <leader>go :Git checkout<Space>
     nnoremap <leader>gps :Dispatch! git push<CR>
     nnoremap <leader>gpl :Dispatch! git pull<CR>
@@ -149,6 +149,9 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
 
     " NERDTree
     let NERDTreeMinimalUI = 1
+
+    " Goyo
+    nnoremap <leader>g :Goyo<CR>
 endif
 
 " Set colorscheme and fixes
