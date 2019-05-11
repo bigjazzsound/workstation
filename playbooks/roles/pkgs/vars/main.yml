@@ -81,7 +81,7 @@ remote_debs:
   - "https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9_amd64.deb"
 
 apt_repos:
-  - repo: "deb https://dl.winehq.org/wine-builds/ubuntu/ {{ ansible_distribution_version }} main"
+  - repo: "deb https://dl.winehq.org/wine-builds/ubuntu/ {{ ansible_distribution_release }} main"
     filename: winehq
   - repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
     filename: kubernetes
