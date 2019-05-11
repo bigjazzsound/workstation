@@ -1,0 +1,50 @@
+# vim: filetype=neomuttrc
+# muttrc file for account $title
+
+set timeout=10
+set wait_key = no		# mutt won't ask "press key to continue"
+set mime_forward = yes		# attachments are forwarded with mail
+set markers = no		# Disables the `+` displayed at line wraps
+set sleep_time = 0		# Pause 0 seconds for informational messages
+set fast_reply			# skip to compose when replying
+set forward_format = "Fwd: %s"	# format of subject when forwarding
+set edit_headers
+auto_view text/html		# automatically show html (mailcap uses w3m)
+
+set sidebar_visible
+set sidebar_folder_indent = yes
+set sidebar_indent_string = '  '
+set sidebar_sort_method = 'alpha'
+set sidebar_width = 25
+set sidebar_format = "%B (%N)"
+set sidebar_short_path = yes
+
+color normal default default
+color status color7 color6
+
+set realname = "Craig James Fielder"
+set from = "craigjamesfielder@gmail.com"
+set sendmail = "msmtp -a personal"
+set folder = "$HOME/.local/share/mail/personal"
+set header_cache = $cachedir/$title/headers
+set message_cachedir = $cachedir/$title/bodies
+set mbox_type = Maildir
+
+bind pager j next-line
+bind pager k previous-line
+bind index,pager x noop # normally exit
+bind index,pager g noop
+bind index,pager gg noop
+bind index gg first-entry
+bind index,pager M noop
+bind index,pager C noop
+bind index,pager a group-reply # Reply all
+bind index,pager c mail # Compose.
+bind index,pager m noop # Use "c" (Gmail default) instead.
+bind index,pager s noop
+macro index v "<save-message>?" ""
+bind index x tag-entry # Select a message like in gmail
+bind index t tag-thread # Usually "tag-entry", but we use "x" (Gmail key) for that.
+bind pager u exit
+unmailboxes *
+source /home/cfielder/.config/mutt/accounts/1-personal.muttrc

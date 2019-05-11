@@ -45,23 +45,23 @@
     path: "/home/cfielder/{{ item }}"
     owner: cfielder
     group: cfielder
-    mode: 0760
+    mode: 0770
     state: directory
   loop: "{{ cfielder_dirs }}"
   tags:
     - nox
+    - dotfiles
 
 - name: Install files
-  file:
+  copy:
     src: "{{ role_path }}/files/{{ item.key }}"
     dest: "/home/cfielder/{{ item.value }}"
     owner: cfielder
     group: cfielder
-    state: link
-    force: true
   loop: "{{ q('dict', cfielder_files) }}"
   tags:
     - nox
+    - dotfiles
 
 - name: Make nvim config symlink
   file:
@@ -126,17 +126,24 @@
     - rust
     - nox
 
+- name: Update crates
+  shell: cargo install-update -a > /dev/null 2>&1
+  when: rust_present.stat.exists == true
+  tags:
+    - rust
+    - nox
+
 - name: Install rust and cargo packages
   block:
     - name: Install rustup
       shell: curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
       args:
         warn: false
+
     - name: Install cargo update
-      shell: "cargo install -q -j {{ ansible_processor_cores }} cargo-update"
+      shell: "cargo install -q -j {{ ansible_processor_cores }} {{ rust_pkgs | join('\n') }}"
       failed_when: false
-    - name: Update crates
-      shell: cargo install-update -a > /dev/null 2>&1
+
   when: rust_present.stat.exists == false
   tags:
     - rust

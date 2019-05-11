@@ -8,7 +8,6 @@ all_pkgs:
   - pavucontrol
   - redshift
   - git
-  - qbittorrent
   - curl
   - docker-compose
   - xclip
@@ -53,46 +52,41 @@ ubuntu_pkgs:
   - libvulkan1
   - "libvulkan1:i386"
   - steam
-  - winetricks
-  - lutris
-  - ukuu
-  - signal-desktop
-  - quassel-client
   - openssh-server
-  - code
   - kubectl
   - libssl-dev
   - libssh2-1-dev
   - libgit2-dev
+  - cmake
+  - build-essential
+  - neomutt
+  - msmtp
+  - isync
+  - w3m
+  - urlview
+  - notmuch
+  - weechat
 
 apt_keys:
-  - "http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ ansible_distribution_version }}/Release.key"
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://packages.microsoft.com/keys/microsoft.asc"
-  - "https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ ansible_distribution_version }}_standard/Release.key"
-  - "https://updates.signal.org/desktop/apt/keys.asc"
+  - "https://dl.winehq.org/wine-builds/winehq.key"
 
 ppas:
-  - "ppa:graphics-drivers/ppa"
-  - "ppa:teejee2008/ppa"
+  - "ppa:lutris-team/lutris"
+  #- "ppa:graphics-drivers/ppa"
 
 remote_debs:
   - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
   - "https://github.com/jwilm/alacritty/releases/download/v0.2.9/Alacritty-v0.2.9_amd64.deb"
 
 apt_repos:
-  - repo: >
-      deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_{{ ansible_distribution_version }}_standard ./
+  - repo: "deb https://dl.winehq.org/wine-builds/ubuntu/ {{ ansible_distribution_version }} main"
     filename: winehq
-  - repo: >
-      deb http://download.opensuse.org/repositories/home:/strycore/xUbuntu_{{ ansible_distribution_version }}/ ./
-    filename: lutris
   - repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
     filename: kubernetes
   - repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     filename: vscode
-  - repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
-    filename: signal-desktop
 
 static_binaries:
   - url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
