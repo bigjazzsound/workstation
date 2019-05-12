@@ -31,6 +31,7 @@ cfielder_files:
   konsole_profile: .local/share/konsole/dracula.profile
   muttrc: .config/mutt/muttrc
   1-personal.muttrc: .config/mutt/accounts/1-personal.muttrc
+  2-work.muttrc: .config/mutt/accounts/2-work.muttrc
   msmtp: .config/msmtp/config
   mbsyncrc: .mbsyncrc
 
