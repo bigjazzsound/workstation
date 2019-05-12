@@ -1,33 +1,19 @@
 # vim: filetype=neomuttrc
 # muttrc file for account personal
-set editor = 'nvim +/^$ +nohlsearch'
 set status_format = "%f%r—[%?M?%M/?%m messages, %?n?%n new, ?%?d?%d deleted, ?%?F?%F important, ?%?t?%t selected, ?%?p?%p drafts, ?%l]———(%s/%S)—%>—(%P)———"
-set delete = yes
-set realname = "Craig Fielder"
 set from = "craigjamesfielder@gmail.com"
 alias me Craig Fielder <craigjamesfielder@gmail.com>
-set folder = "/home/cfielder/.local/share/mail/personal"
-set header_cache = /home/cfielder/.cache/mutt/personal/headers
-set message_cachedir = /home/cfielder/.cache/mutt/personal/bodies
+set folder = "~/.local/share/mail/personal"
+set header_cache = ~/.cache/mutt/personal/headers
+set message_cachedir = ~/.cache/mutt/personal/bodies
 set mbox_type = Maildir
 # TODO make something similar to this to send markdown mail
 # set sendmail = "env BUNDLE_GEMFILE=$HOME/.mutt/scripts/Gemfile $HOME/.mutt/scripts/msmtp.rb"
 set sendmail = "msmtp -a personal"
 # set sendmail = ".local/bin/sendmail.py"
 # macro compose \e5 "F pandoc -s -f markdown -t html \ny^T^Utext/html; charset=us-ascii\n"
-set wait_key=no
 
-set sort="threads"
-set strict_threads="yes"
-
-bind index,pager gg noop
-bind index,pager g noop
-bind index,pager M noop
-bind index,pager C noop
-bind index gg first-entry
-macro index o "<shell-escape>mailsync -V personal<enter>" "run mbsync to sync personal"
 unmailboxes *
-
 set spoolfile = "+INBOX"
 set record = "+[Gmail].Sent Mail"
 set postponed = "+[Gmail].Drafts"
@@ -48,3 +34,4 @@ macro index,pager Ct "<copy-message>=[Gmail].Trash<enter>" "copy mail to trash"
 macro index,pager gS "<change-folder>=[Gmail].Spam<enter>" "go to spam"
 macro index,pager MS "<save-message>=[Gmail].Spam<enter>" "move mail to spam"
 macro index,pager CS "<copy-message>=[Gmail].Spam<enter>" "copy mail to spam"
+macro index o "<shell-escape>mailsync -V personal<enter>" "run mbsync to sync personal"

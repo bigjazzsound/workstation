@@ -9,6 +9,11 @@ set sleep_time = 0		# Pause 0 seconds for informational messages
 set fast_reply			# skip to compose when replying
 set forward_format = "Fwd: %s"	# format of subject when forwarding
 set edit_headers
+set delete = yes
+set editor = 'nvim +/^$ +nohlsearch'
+set wait_key = no
+set mail_check_stats
+set mail_check_stats_interval = 60
 auto_view text/html		# automatically show html (mailcap uses w3m)
 
 set sidebar_visible
@@ -19,13 +24,13 @@ set sidebar_width = 25
 set sidebar_format = "%B (%N)"
 set sidebar_short_path = yes
 
+set sort="threads"
+set strict_threads="yes"
+
 color normal default default
 color status color7 color6
 
 set realname = "Craig James Fielder"
-set from = "craigjamesfielder@gmail.com"
-set sendmail = "msmtp -a personal"
-set folder = "$HOME/.local/share/mail/personal"
 set header_cache = $cachedir/$title/headers
 set message_cachedir = $cachedir/$title/bodies
 set mbox_type = Maildir
@@ -35,7 +40,9 @@ bind pager k previous-line
 bind index,pager x noop # normally exit
 bind index,pager g noop
 bind index,pager gg noop
+bind index,pager G noop
 bind index gg first-entry
+bind index G last-entry
 bind index,pager M noop
 bind index,pager C noop
 bind index,pager a group-reply # Reply all
@@ -47,4 +54,5 @@ bind index x tag-entry # Select a message like in gmail
 bind index t tag-thread # Usually "tag-entry", but we use "x" (Gmail key) for that.
 bind pager u exit
 unmailboxes *
-source /home/cfielder/.config/mutt/accounts/1-personal.muttrc
+macro index,pager <f1> '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/1-personal.muttrc<enter><change-folder>!<enter>;<check-stats>'
+source ~/.config/mutt/accounts/1-personal.muttrc

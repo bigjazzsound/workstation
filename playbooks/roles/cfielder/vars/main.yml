@@ -17,6 +17,7 @@ cfielder_dirs:
   - .vim/.backup
   - .vim/.swp
   - .vim/.undo
+  - .cache/mutt/personal
 
 cfielder_files:
   alacritty: .config/alacritty/alacritty.yml
