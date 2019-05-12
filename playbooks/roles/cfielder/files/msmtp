@@ -10,3 +10,10 @@ port 587
 from craigjamesfielder@gmail.com
 user craigjamesfielder@gmail.com
 passwordeval pass personal
+
+account work
+host smtp.office365.com
+port 587
+from craig.fielder@juvare.com
+user craig.fielder@juvare.com
+passwordeval pass work

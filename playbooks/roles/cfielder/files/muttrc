@@ -11,7 +11,7 @@ set forward_format = "Fwd: %s"	# format of subject when forwarding
 set edit_headers
 set delete = yes
 set editor = 'nvim +/^$ +nohlsearch'
-set wait_key = no
+set wait_key=no
 set mail_check_stats
 set mail_check_stats_interval = 60
 auto_view text/html		# automatically show html (mailcap uses w3m)
@@ -31,8 +31,6 @@ color normal default default
 color status color7 color6
 
 set realname = "Craig James Fielder"
-set header_cache = $cachedir/$title/headers
-set message_cachedir = $cachedir/$title/bodies
 set mbox_type = Maildir
 
 bind pager j next-line
@@ -53,6 +51,6 @@ macro index v "<save-message>?" ""
 bind index x tag-entry # Select a message like in gmail
 bind index t tag-thread # Usually "tag-entry", but we use "x" (Gmail key) for that.
 bind pager u exit
-unmailboxes *
 macro index,pager <f1> '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/1-personal.muttrc<enter><change-folder>!<enter>;<check-stats>'
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/2-work.muttrc<enter><change-folder>!<enter>;<check-stats>'
 source ~/.config/mutt/accounts/1-personal.muttrc
