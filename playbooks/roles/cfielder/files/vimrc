@@ -36,6 +36,7 @@ nnoremap <leader>t :NERDTreeToggle <enter>
 nnoremap <leader>f :FZF <enter>
 nnoremap <leader>r :Rg <enter>
 nnoremap <leader>s :set spell!
+nnoremap <leader>T :argadd `rg '.*role: (\w*).*' % -r '$1' --trim \\| xargs -i{} fd -tf . roles/{}/tasks` \| tab all <enter>
 
 " macros
 let @j = 'a "{{  }}"4h'
@@ -92,6 +93,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'sealeg/vim-kickstart'
     Plug 'junegunn/goyo.vim'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'b4b4r07/vim-ansible-vault'
     call plug#end()
 
     colorscheme solarized
@@ -243,6 +245,15 @@ augroup ft_go
     autocmd!
     autocmd FileType go setlocal
         \ commentstring=//\ %s
+        \ tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
+augroup END
+
+" settings for editing Jenkinsfile
+augroup ft_jenkins
+    autocmd!
+    autocmd FileType Jenkinsfile setlocal
         \ tabstop=4
         \ softtabstop=4
         \ shiftwidth=4
