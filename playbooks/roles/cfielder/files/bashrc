@@ -137,6 +137,11 @@ else
     alias l='ls -CF'
 fi
 
+if [[ -f $(command -v neomutt) ]]; then
+    alias m='neomutt'
+    alias mutt='neomutt'
+fi
+
 command -v kubectl >/dev/null && source <(kubectl completion bash)
 
 [[ -f ~/.config/dircolors/dircolors.256dark ]] && eval $(dircolors ~/.config/dircolors/dircolors.256dark)

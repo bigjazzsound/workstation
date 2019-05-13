@@ -80,8 +80,6 @@
         filename: "{{ item.filename }}"
         state: present
       loop: "{{ apt_repos }}"
-      tags:
-        - wine
 
     - name: Update apt repository
       apt:

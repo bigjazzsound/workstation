@@ -1,0 +1,19 @@
+# vim: filetype=neomuttrc
+# muttrc file for account work
+# set status_format = "%f%r—[%?M?%M/?%m messages, %?n?%n new, ?%?d?%d deleted, ?%?F?%F important, ?%?t?%t selected, ?%?p?%p drafts, ?%l]———(%s/%S)—%>—(%P)———"
+unmailboxes *
+set from = "craig.fielder@juvare.com"
+alias me Craig Fielder <craig.fielder@juvare.com>
+set folder = "~/.local/share/mail/work"
+set header_cache = ~/.cache/mutt/work/headers
+set message_cachedir = ~/.cache/mutt/work/bodies
+set mbox_type = Maildir
+set sendmail = "msmtp -a work"
+
+set spoolfile="+INBOX"
+set postponed="+Drafts"
+set record="+Sent Items"
+set trash="+Deleted Items"
+mailboxes =work ===================== "=INBOX" "=Drafts" "=pingdom" "=Deleted Items" "=Sent Items" "=training" "=datadog" "=keepers" "=nagios" "=datapipe_gov" "=Archive" "=jira"
+
+macro index o "<shell-escape>mailsync -V work<enter>" "run mbsync to sync personal"
