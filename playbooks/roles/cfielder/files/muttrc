@@ -11,10 +11,10 @@ set forward_format = "Fwd: %s"	# format of subject when forwarding
 set edit_headers
 set delete = yes
 set editor = 'nvim +/^$ +nohlsearch'
-set wait_key=no
+set wait_key = no
 set mail_check_stats
 set mail_check_stats_interval = 60
-auto_view text/html		# automatically show html (mailcap uses w3m)
+auto_view text/html
 
 set sidebar_visible
 set sidebar_folder_indent = yes
@@ -24,7 +24,8 @@ set sidebar_width = 25
 set sidebar_format = "%B (%N)"
 set sidebar_short_path = yes
 
-set sort="threads"
+set sort = threads
+set sort_aux = last-date-received
 set strict_threads="yes"
 
 color normal default default
@@ -40,6 +41,8 @@ bind index,pager g noop
 bind index,pager gg noop
 bind index,pager G noop
 bind index gg first-entry
+bind pager gg top
+bind pager G bottom
 bind index G last-entry
 bind index,pager M noop
 bind index,pager C noop
