@@ -10,12 +10,6 @@
   tags:
     - nox
 
-- name: Set timezone to EST
-  timezone:
-    name: America/New_York
-  tags:
-    - nox
-
 - name: Setup journald.conf file
   copy:
     src: journald.conf
