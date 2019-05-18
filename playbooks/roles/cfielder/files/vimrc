@@ -43,9 +43,9 @@ let @j = 'a "{{  }}"4h'
 
 " settings for undo files
 set undofile
-set undodir=~/.vim/.undo/
-set backupdir=~/.vim/.backup/
-set directory=~/.vim/.swp/
+set undodir=~/.vim/undo/
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swp/
 
 " settings for search
 set hlsearch

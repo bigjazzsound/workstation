@@ -17,9 +17,9 @@ cfielder_dirs:
   - playground/go/bin
   - playground/go/pkg
   - .local/share/konsole
-  - .vim/.backup
-  - .vim/.swp
-  - .vim/.undo
+  - .vim/backup
+  - .vim/swp
+  - .vim/undo
   - .cache/mutt/personal
   - .local/share/nvim/site/autoload
 
