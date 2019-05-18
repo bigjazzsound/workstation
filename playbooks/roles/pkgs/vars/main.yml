@@ -66,6 +66,7 @@ ubuntu_pkgs:
   - urlview
   - notmuch
   - weechat
+  - python3-venv
 
 apt_keys:
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
