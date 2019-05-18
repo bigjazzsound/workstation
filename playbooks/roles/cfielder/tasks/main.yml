@@ -46,7 +46,7 @@
     group: cfielder
     mode: 0770
     state: directory
-    recursive: true
+    recurse: true
   loop: "{{ cfielder_dirs }}"
   tags:
     - nox
