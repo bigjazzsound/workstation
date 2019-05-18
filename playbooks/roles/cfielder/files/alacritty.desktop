@@ -1,7 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=Alacritty
-Exec=sh -c "env WAYLAND_DISPLAY= alacritty"
-Icon=utilities-terminal
-Type=Application
-Categories=Development;

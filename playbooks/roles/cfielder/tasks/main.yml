@@ -3,9 +3,8 @@
   block:
     - name: Install docker-machine bash completion scripts
       get_url:
-        url: >-
-          https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
-        dest: /etc/bash_completion.d/docker-machine.bash
+        url: "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash"
+        dest: "/etc/bash_completion.d/docker-machine.bash"
         mode: 0444
 
     - name: Add groups
@@ -62,6 +61,14 @@
   tags:
     - nox
     - dotfiles
+
+- name: Install vim-plug
+  get_url:
+    url: "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    dest: "{{ ansible_user_dir }}/.local/share/nvim/site/autoload/plug.vim"
+  tags:
+    - nox
+    - vim-plug
 
 - name: Make nvim config symlink
   file:
@@ -120,29 +127,46 @@
 
 - name: Test for rust
   stat:
-    path: /home/cfielder/.cargo/bin/rustup
+    path: "{{ ansible_user_dir }}/.cargo/bin/rustup"
   register: rust_present
   tags:
     - rust
     - nox
 
-- name: Update crates
-  shell: cargo install-update -a > /dev/null 2>&1
-  when: rust_present.stat.exists == true
-  tags:
-    - rust
-    - nox
+- name: Update rust and crates
+  block:
+    - name: Update rust
+      shell: rustup update
+      register: result
+      changed_when: "result.stdout is search('installing component')"
+      tags:
+        - rust
+        - nox
 
-- name: Install rust and cargo packages
+    - name: Update crates
+      shell: cargo install-update -a 2> /dev/null
+      register: result
+      changed_when: "not result.stdout is search('No packages need updating')"
+      tags:
+        - rust
+        - nox
+
+  when: rust_present.stat.exists == true
+
+- name: Install rust and cargo packages if rust is not installed
   block:
     - name: Install rustup
-      shell: curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
+      shell: "curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y"
+      register: result
+      changed_when: "result.stdout is search('downloading installer')"
       args:
         warn: false
 
-    - name: Install cargo update
-      shell: "cargo install -q -j {{ ansible_processor_cores }} {{ rust_pkgs | join('\n') }}"
-      failed_when: false
+    - name: Install rust packages
+      command: "cargo install -q -j {{ ansible_processor_cores }} {{ rust_pkgs | join(' ') }}"
+      register: result
+      changed_when: "not result.rc == 101"
+      failed_when: "not result.rc == 101"
 
   when: rust_present.stat.exists == false
   tags:

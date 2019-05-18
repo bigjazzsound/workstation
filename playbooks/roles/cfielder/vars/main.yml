@@ -18,6 +18,7 @@ cfielder_dirs:
   - .vim/.swp
   - .vim/.undo
   - .cache/mutt/personal
+  - .local/share/nvim/site/autoload
 
 cfielder_files:
   alacritty: .config/alacritty/alacritty.yml
