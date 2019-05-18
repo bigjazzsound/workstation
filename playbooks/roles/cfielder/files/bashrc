@@ -92,7 +92,7 @@ CDPATH="."
 shopt -s cdable_vars
 
 export documents="$HOME/Documents"
-export plays="$HOME/playground/workstation/playbooks"
+export plays="$HOME/playground/workstation"
 
 # exported variables
 export PAGER=less
@@ -112,7 +112,7 @@ alias pbpaste='xsel --clipboard --output'
 alias sudo='sudo -E '
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
-alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/main.yml'
+alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
 alias less='less -R'
 
 # neovim all the things, if installed
