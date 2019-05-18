@@ -8,6 +8,8 @@ cfielder_dirs:
   - .config/alacritty
   - .config/dircolors
   - .config/mutt
+  - .config/mutt/accounts
+  - .config/msmtp
   - .fonts
   - playground/go
   - playground/go/src
