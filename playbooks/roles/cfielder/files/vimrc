@@ -142,6 +142,8 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
     let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
+    " As of 2.8, Ansible wants boolean variables to be True or False
+    let g:ale_yaml_yamllint_options = '-d "{rules: {truthy: disable}}"'
     nmap <F10> <Plug>(ale_fix)
 
     " Deoplete
