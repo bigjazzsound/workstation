@@ -1,7 +1,6 @@
 set nu
 syntax on
 set mouse-=a
-set guifont=Monaco\ for\ Powerline\ Regular\ 12
 set inccommand=nosplit
 
 " 80 character color difference
@@ -67,13 +66,8 @@ nnoremap <space> za
 "
 if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.vim/plugged") && has('nvim'))
     call plug#begin('~/.vim/plugged')
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
@@ -81,22 +75,22 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-repeat'
     Plug 'christoomey/vim-tmux-navigator'
-    Plug 'godlygeek/tabular'
     Plug 'sheerun/vim-polyglot'
     Plug 'w0rp/ale'
     Plug 'enricobacis/paste.vim'
-    Plug 'google/yapf'
-    Plug 'dracula/vim',{'as':'dracula'}
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-jedi'
     Plug 'zchee/deoplete-go', { 'do': 'make'}
-    Plug 'sealeg/vim-kickstart'
     Plug 'junegunn/goyo.vim'
-    Plug 'altercation/vim-colors-solarized'
+    " Plug 'altercation/vim-colors-solarized'
     Plug 'b4b4r07/vim-ansible-vault'
+    " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+    Plug 'rbong/vim-crystalline'
+    Plug 'iCyMind/NeoSolarized'
     call plug#end()
 
-    colorscheme solarized
+    " colorscheme solarized
+    colorscheme NeoSolarized
 
     " fugitive git bindings
     nnoremap <leader>ga :Git add %:p<CR><CR>
@@ -116,8 +110,61 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <leader>gpl :Dispatch! git pull<CR>
 
     " airline settings
+    " set laststatus=2
+    " let g:airline_theme='solarized'
+    function! StatusLine(current)
+      return (a:current ? crystalline#mode() . '%#Crystalline#' : '%#CrystallineInactive#')
+            \ . ' %f%h%w%m%r '
+            \ . (a:current ? '%#CrystallineFill# %{fugitive#head()} ' : '')
+            \ . '%=' . (a:current ? '%#Crystalline# %{&paste?"PASTE ":""}%{&spell?"SPELL ":""}' . crystalline#mode_color() : '')
+            \ . ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
+    endfunction
+    let g:crystalline_statusline_fn = 'StatusLine'
+    let g:crystalline_theme = 'solarized'
     set laststatus=2
-    let g:airline_theme='solarized'
+
+    " Can't use this just yet because coc-python is iffy
+    " coc settings
+    " let g:coc_global_extensions = [
+    " \   'coc-emoji', 'coc-prettier',
+    " \   'coc-json', 'coc-python', 'coc-yaml'
+    " \]
+
+    " " Better display for messages
+    " " set cmdheight=2
+    " " Smaller updatetime for CursorHold & CursorHoldI
+    " set updatetime=300
+    " " don't give |ins-completion-menu| messages.
+    " set shortmess+=c
+    " " always show signcolumns
+    " set signcolumn=yes
+
+    " " Use `lp` and `ln` for navigate diagnostics
+    " nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
+    " nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
+
+    " " Remap keys for gotos
+    " nmap <silent> <leader>ld <Plug>(coc-definition)
+    " nmap <silent> <leader>lt <Plug>(coc-type-definition)
+    " nmap <silent> <leader>li <Plug>(coc-implementation)
+    " nmap <silent> <leader>lf <Plug>(coc-references)
+
+    " " Remap for rename current word
+    " nmap <leader>lr <Plug>(coc-rename)
+
+    " " Use K for show documentation in preview window
+    " nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    " function! s:show_documentation()
+    "   if &filetype == 'vim'
+    "     execute 'h '.expand('<cword>')
+    "   else
+    "     call CocAction('doHover')
+    "   endif
+    " endfunction
+
+    " " Highlight symbol under cursor on CursorHold
+    " autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " dispatch settings
     nnoremap <F3> :Dispatch<CR>
@@ -150,18 +197,15 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     " vim-markdown
     let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
-    " NERDTree
-    let NERDTreeMinimalUI = 1
-
     " Goyo
     nnoremap <leader>g :Goyo<CR>
 endif
 
 " Set colorscheme and fixes
-set t_Co=256
-set background=dark
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
+" set t_Co=256
+" set background=dark
+" highlight Normal ctermbg=NONE
+" highlight nonText ctermbg=NONE
 
 "
 " Settings for specific filetypes
