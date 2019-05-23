@@ -93,33 +93,38 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     colorscheme NeoSolarized
 
     " fugitive git bindings
-    nnoremap <leader>ga :Git add %:p<CR><CR>
-    nnoremap <leader>gs :Gstatus<CR>
-    nnoremap <leader>gc :Gcommit -v -q<CR>
-    nnoremap <leader>gt :Gcommit -v -q %:p<CR>
-    nnoremap <leader>gd :Gdiff<CR>
-    nnoremap <leader>ge :Gedit<CR>
-    nnoremap <leader>gr :Gread<CR>
-    nnoremap <leader>gw :Gwrite<CR><CR>
-    nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
-    nnoremap <leader>gp :Ggrep<Space>
-    nnoremap <leader>gm :Gmove<Space>
-    nnoremap <leader>gb :Gblame!<CR>
-    nnoremap <leader>go :Git checkout<Space>
+    nnoremap <leader>ga  :Git add %:p<CR><CR>
+    nnoremap <leader>gs  :Gstatus<CR>
+    nnoremap <leader>gc  :Gcommit -v -q<CR>
+    nnoremap <leader>gt  :Gcommit -v -q %:p<CR>
+    nnoremap <leader>gd  :Gdiff<CR>
+    nnoremap <leader>ge  :Gedit<CR>
+    nnoremap <leader>gr  :Gread<CR>
+    nnoremap <leader>gw  :Gwrite<CR><CR>
+    nnoremap <leader>gl  :silent! Glog<CR>:bot copen<CR>
+    nnoremap <leader>gp  :Ggrep<Space>
+    nnoremap <leader>gm  :Gmove<Space>
+    nnoremap <leader>gb  :Gblame!<CR>
+    nnoremap <leader>go  :Git checkout<Space>
     nnoremap <leader>gps :Dispatch! git push<CR>
     nnoremap <leader>gpl :Dispatch! git pull<CR>
 
-    " airline settings
-    " set laststatus=2
-    " let g:airline_theme='solarized'
-    function! StatusLine(current)
+    " vim-crystalline settings
+    function! StatusLine(current, width)
       return (a:current ? crystalline#mode() . '%#Crystalline#' : '%#CrystallineInactive#')
             \ . ' %f%h%w%m%r '
             \ . (a:current ? '%#CrystallineFill# %{fugitive#head()} ' : '')
             \ . '%=' . (a:current ? '%#Crystalline# %{&paste?"PASTE ":""}%{&spell?"SPELL ":""}' . crystalline#mode_color() : '')
-            \ . ' %{&ft}  %l/%L  %P '
+            \ . (a:width > 80 ? ' %{&ft}  %l/%L  %P ' : ' ')
     endfunction
+
+    function! TabLine()
+		let l:vimlabel = has("nvim") ? "NVIM" : "VIM"
+		return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab#'
+	endfunction
+
     let g:crystalline_statusline_fn = 'StatusLine'
+    let g:crystalline_tabline_fn = 'TabLine'
     let g:crystalline_theme = 'solarized'
     set laststatus=2
 
@@ -277,8 +282,8 @@ augroup ft_c
         \ expandtab
         \ autoindent
         \ fileformat=unix
-        \ inoremap { {<CR><BS>}<Esc>ko
-        \ inoremap ( ()<Esc>i
+    autocmd FileType c inoremap { {<CR><BS>}<Esc>ko
+    autocmd FileType c inoremap ( ()<Esc>i
     if executable('clang')
         let &makeprg="clang -Wall -o %< %"
     else
