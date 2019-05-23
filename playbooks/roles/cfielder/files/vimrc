@@ -117,7 +117,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
             \ . ' %f%h%w%m%r '
             \ . (a:current ? '%#CrystallineFill# %{fugitive#head()} ' : '')
             \ . '%=' . (a:current ? '%#Crystalline# %{&paste?"PASTE ":""}%{&spell?"SPELL ":""}' . crystalline#mode_color() : '')
-            \ . ' %{&ft}[%{&enc}][%{&ffs}] %l/%L %c%V %P '
+            \ . ' %{&ft}  %l/%L  %P '
     endfunction
     let g:crystalline_statusline_fn = 'StatusLine'
     let g:crystalline_theme = 'solarized'
