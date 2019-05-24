@@ -112,9 +112,23 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <leader>gpl :Dispatch! git pull<CR>
 
     " vim-crystalline settings
+    function! LinterStatus() abort
+        let l:counts = ale#statusline#Count(bufnr(''))
+
+        let l:all_errors = l:counts.error + l:counts.style_error
+        let l:all_non_errors = l:counts.total - l:all_errors
+
+        return l:counts.total == 0 ? 'OK' : printf(
+        \   '[%dE] [%dW]',
+        \   all_non_errors,
+        \   all_errors
+        \)
+    endfunction
+
     function! StatusLine(current, width)
       return (a:current ? crystalline#mode() . '%#Crystalline#' : '%#CrystallineInactive#')
             \ . ' %f%h%w%m%r '
+            \ . (a:current ? '%{LinterStatus()} ' : '')
             \ . (a:current ? '%#CrystallineFill# %{fugitive#head()} ' : '')
             \ . '%=' . (a:current ? '%#Crystalline# %{&paste?"PASTE ":""}%{&spell?"SPELL ":""}' . crystalline#mode_color() : '')
             \ . (a:width > 80 ? ' %{&ft}  %l/%L  %P ' : ' ')
@@ -208,6 +222,8 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
 
     " Goyo
     nnoremap <leader>g :Goyo<CR>
+
+    nnoremap <C-p> :FZF<cr>
 endif
 
 " Set colorscheme and fixes
