@@ -30,7 +30,7 @@ cfielder_files:
   profile: .profile
   redshift: .config/redshift.conf
   tmux: .tmux.conf
-  vimrc: .vimrc
+  vimrc: .config/nvim/init.vim
   dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
   konsole_profile: .local/share/konsole/dracula.profile
   muttrc: .config/mutt/muttrc
