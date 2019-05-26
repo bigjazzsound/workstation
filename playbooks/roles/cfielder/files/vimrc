@@ -1,9 +1,9 @@
-" Lets try to go without the Esc key
-inoremap <esc> <nop>
 set nu
 syntax on
 set mouse-=a
 set inccommand=nosplit
+set tags=tags
+let mapleader=" "
 
 " 80 character color difference
 let &colorcolumn=join(range(80,999),",")
@@ -60,9 +60,6 @@ set smarttab
 " settings for listchars
 set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
 
-" settings for folds
-nnoremap <space> za
-
 "
 " Plugins
 "
@@ -78,17 +75,16 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'tpope/vim-repeat'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'sheerun/vim-polyglot'
-    Plug 'w0rp/ale'
     Plug 'enricobacis/paste.vim'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-jedi'
-    Plug 'zchee/deoplete-go', { 'do': 'make'}
     Plug 'junegunn/goyo.vim'
-    " Plug 'altercation/vim-colors-solarized'
     Plug 'b4b4r07/vim-ansible-vault'
-    " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     Plug 'rbong/vim-crystalline'
     Plug 'iCyMind/NeoSolarized'
+    " Plug 'w0rp/ale'
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'zchee/deoplete-jedi'
+    " Plug 'zchee/deoplete-go', { 'do': 'make'}
     call plug#end()
 
     " colorscheme solarized
@@ -112,113 +108,150 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <leader>gpl :Dispatch! git pull<CR>
 
     " vim-crystalline settings
-    function! LinterStatus() abort
-        let l:counts = ale#statusline#Count(bufnr(''))
+    " function! LinterStatus() abort
+    "     let l:counts = ale#statusline#Count(bufnr(''))
 
-        let l:all_errors = l:counts.error + l:counts.style_error
-        let l:all_non_errors = l:counts.total - l:all_errors
+    "     let l:all_errors = l:counts.error + l:counts.style_error
+    "     let l:all_non_errors = l:counts.total - l:all_errors
 
-        return l:counts.total == 0 ? 'OK' : printf(
-        \   '[%dE] [%dW]',
-        \   all_non_errors,
-        \   all_errors
-        \)
+    "     return l:counts.total == 0 ? 'OK' : printf(
+    "     \   '[%dE] [%dW]',
+    "     \   all_non_errors,
+    "     \   all_errors
+    "     \)
+    " endfunction
+
+    function! StatusDiagnostic() abort
+      let info = get(b:, 'coc_diagnostic_info', {})
+      if empty(info) | return '' | endif
+      let msgs = []
+      if get(info, 'error', 0)
+        call add(msgs, 'E' . info['error'])
+      endif
+      if get(info, 'warning', 0)
+        call add(msgs, 'W' . info['warning'])
+      endif
+      return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
     endfunction
 
     function! StatusLine(current, width)
       return (a:current ? crystalline#mode() . '%#Crystalline#' : '%#CrystallineInactive#')
             \ . ' %f%h%w%m%r '
-            \ . (a:current ? '%{LinterStatus()} ' : '')
             \ . (a:current ? '%#CrystallineFill# %{fugitive#head()} ' : '')
+            \ . (a:current ? '%{StatusDiagnostic()}': '')
             \ . '%=' . (a:current ? '%#Crystalline# %{&paste?"PASTE ":""}%{&spell?"SPELL ":""}' . crystalline#mode_color() : '')
             \ . (a:width > 80 ? ' %{&ft}  %l/%L  %P ' : ' ')
     endfunction
 
     function! TabLine()
-		let l:vimlabel = has("nvim") ? "NVIM" : "VIM"
-		return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab#'
-	endfunction
+        let l:vimlabel = has("nvim") ? "NVIM" : "VIM"
+        return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab#'
+    endfunction
 
     let g:crystalline_statusline_fn = 'StatusLine'
     let g:crystalline_tabline_fn = 'TabLine'
     let g:crystalline_theme = 'solarized'
     set laststatus=2
 
-    " Can't use this just yet because coc-python is iffy
     " coc settings
-    " let g:coc_global_extensions = [
-    " \   'coc-emoji', 'coc-prettier',
-    " \   'coc-json', 'coc-python', 'coc-yaml'
-    " \]
+    let g:coc_global_extensions = [
+    \   'coc-emoji', 
+    \   'coc-prettier',
+    \   'coc-json', 
+    \   'coc-python', 
+    \   'coc-yaml',
+    \]
 
-    " " Better display for messages
-    " " set cmdheight=2
-    " " Smaller updatetime for CursorHold & CursorHoldI
-    " set updatetime=300
-    " " don't give |ins-completion-menu| messages.
-    " set shortmess+=c
-    " " always show signcolumns
-    " set signcolumn=yes
+    " Use `:Format` to format current buffer
+    command! -nargs=0 Format :call CocAction('format')
 
-    " " Use `lp` and `ln` for navigate diagnostics
-    " nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
-    " nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
+    " Use `:Fold` to fold current buffer
+    command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-    " " Remap keys for gotos
-    " nmap <silent> <leader>ld <Plug>(coc-definition)
-    " nmap <silent> <leader>lt <Plug>(coc-type-definition)
-    " nmap <silent> <leader>li <Plug>(coc-implementation)
-    " nmap <silent> <leader>lf <Plug>(coc-references)
+    " Better display for messages
+    " set cmdheight=2
+    " Smaller updatetime for CursorHold & CursorHoldI
+    set updatetime=300
+    " don't give |ins-completion-menu| messages.
+    set shortmess+=c
+    set signcolumn=yes
+    " Too many suggestions, just show the top ten
+    set pumheight=10
 
-    " " Remap for rename current word
-    " nmap <leader>lr <Plug>(coc-rename)
+    " Use tab for trigger completion with characters ahead and navigate.
+    inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    " " Use K for show documentation in preview window
-    " nnoremap <silent> K :call <SID>show_documentation()<CR>
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
 
-    " function! s:show_documentation()
-    "   if &filetype == 'vim'
-    "     execute 'h '.expand('<cword>')
-    "   else
-    "     call CocAction('doHover')
-    "   endif
-    " endfunction
+    " Use <c-space> to trigger completion.
+    inoremap <silent><expr> <c-space> coc#refresh()
 
-    " " Highlight symbol under cursor on CursorHold
-    " autocmd CursorHold * silent call CocActionAsync('highlight')
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+    " Remap keys for gotos
+    nmap <silent> <leader>ld <Plug>(coc-definition)
+    nmap <silent> <leader>lt <Plug>(coc-type-definition)
+    nmap <silent> <leader>li <Plug>(coc-implementation)
+    nmap <silent> <leader>lf <Plug>(coc-references)
+
+    " Remap for rename current word
+    nmap <leader>lr <Plug>(coc-rename)
+
+    " Use K for show documentation in preview window
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+      if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
+    " Highlight symbol under cursor on CursorHold
+    autocmd CursorHold * silent call CocActionAsync('highlight')
 
     " dispatch settings
     nnoremap <F3> :Dispatch<CR>
     nnoremap <F4> :Start<CR>
 
+    " Saving this in case I change my mind about coc-nvim
     " ale settings
-    let g:ale_fixers = {
-    \   '*': ['trim_whitespace'],
-    \   'python': ['black', 'yapf'],
-    \   'c': ['clang-format'],
-    \   'yaml': ['prettier'],
-    \   'json': ['prettier'],
-    \   'javascript': ['eslint'],
-    \   'go': ['gofmt'],
-    \   'sh': ['shfmt'],
-    \   'terraform': ['terraform'],
-    \}
-    let g:airline#extensions#ale#enabled = 1
-    let g:ale_sign_column_always = 1
-    let g:ale_lint_on_text_changed = 'never'
-    let g:ale_lint_on_enter = 0
-    let g:ale_echo_msg_error_str = 'E'
-    let g:ale_echo_msg_warning_str = 'W'
-    let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
-    " As of 2.8, Ansible wants boolean variables to be True or False
-    let g:ale_yaml_yamllint_options = '-d "{rules: {truthy: disable}}"'
-    nmap <F10> <Plug>(ale_fix)
+    " let g:ale_fixers = {
+    " \   '*': ['trim_whitespace'],
+    " \   'python': ['black', 'yapf'],
+    " \   'c': ['clang-format'],
+    " \   'yaml': ['prettier'],
+    " \   'json': ['prettier'],
+    " \   'javascript': ['eslint'],
+    " \   'go': ['gofmt'],
+    " \   'sh': ['shfmt'],
+    " \   'terraform': ['terraform'],
+    " \}
+    " let g:airline#extensions#ale#enabled = 1
+    " let g:ale_sign_column_always = 1
+    " let g:ale_lint_on_text_changed = 'never'
+    " let g:ale_lint_on_enter = 0
+    " let g:ale_echo_msg_error_str = 'E'
+    " let g:ale_echo_msg_warning_str = 'W'
+    " let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
+    " " As of 2.8, Ansible wants boolean variables to be True or False
+    " let g:ale_yaml_yamllint_options = '-d "{rules: {truthy: disable}}"'
+    " nmap <F10> <Plug>(ale_fix)
 
-    " Deoplete
-    let g:deoplete#enable_at_startup = 1
+    " " Deoplete
+    " let g:deoplete#enable_at_startup = 1
 
     " vim-markdown
-    let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+    let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'help']
 
     " Goyo
     nnoremap <leader>g :Goyo<CR>
