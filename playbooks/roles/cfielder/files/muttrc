@@ -23,6 +23,7 @@ set sidebar_sort_method = 'alpha'
 set sidebar_width = 25
 set sidebar_format = "%B (%N)"
 set sidebar_short_path = yes
+set query_command = "mu cfind --personal --format=mutt-ab '%s'"
 
 set sort = threads
 set sort_aux = last-date-received
@@ -54,6 +55,12 @@ macro index v "<save-message>?" ""
 bind index x tag-entry # Select a message like in gmail
 bind index t tag-thread # Usually "tag-entry", but we use "x" (Gmail key) for that.
 bind pager u exit
+bind index / noop
+bind index z noop
+
 macro index,pager <f1> '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/1-personal.muttrc<enter><change-folder>!<enter>;<check-stats>'
 macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/mutt/accounts/2-work.muttrc<enter><change-folder>!<enter>;<check-stats>'
+macro index / "<shell-escape>mu find --clearlinks --format=links --linksdir=/tmp/mailsearch " "mu find"
+macro index z "<change-folder-readonly>/tmp/mailsearch\n" "mu find results"
+
 source ~/.config/mutt/accounts/1-personal.muttrc
