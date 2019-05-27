@@ -160,6 +160,9 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     \   'coc-json', 
     \   'coc-python', 
     \   'coc-yaml',
+    \   'coc-git',
+    \   'coc-vimlsp',
+    \   'coc-docker',
     \]
 
     " Use `:Format` to format current buffer
