@@ -4,6 +4,8 @@ set mouse-=a
 set inccommand=nosplit
 set tags=tags
 let mapleader=" "
+set cursorline
+command! Vimrc :vs $MYVIMRC
 
 " 80 character color difference
 let &colorcolumn=join(range(80,999),",")

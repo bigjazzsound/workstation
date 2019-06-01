@@ -177,12 +177,6 @@
 - name: Cron jobs
   block:
     - cron:
-        name: Update vim plugins
-        minute: "*/10"
-        job: "nvim +PlugUpdate +qall > /dev/null 2>&1"
-        user: cfielder
-
-    - cron:
         name: Update git repos
         minute: "*/10"
         job: |
