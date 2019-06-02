@@ -65,6 +65,16 @@ set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
 "
 " Plugins
 "
+
+" Download vim-plug if it is not already present
+let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
+if !filereadable(autoload_plug_path)
+  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
+      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+unlet autoload_plug_path
+
 if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.vim/plugged") && has('nvim'))
     call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -157,10 +167,10 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
 
     " coc settings
     let g:coc_global_extensions = [
-    \   'coc-emoji', 
+    \   'coc-emoji',
     \   'coc-prettier',
-    \   'coc-json', 
-    \   'coc-python', 
+    \   'coc-json',
+    \   'coc-python',
     \   'coc-yaml',
     \   'coc-git',
     \   'coc-vimlsp',
