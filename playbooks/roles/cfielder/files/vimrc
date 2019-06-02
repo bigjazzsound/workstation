@@ -6,6 +6,7 @@ set tags=tags
 let mapleader=" "
 set cursorline
 command! Vimrc :vs $MYVIMRC
+inoremap jk <Esc>
 
 " 80 character color difference
 let &colorcolumn=join(range(80,999),",")
