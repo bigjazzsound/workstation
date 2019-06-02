@@ -17,7 +17,7 @@ set -g history-limit 5000
 set -g set-titles on
 set -g set-titles-string "#T"
 
-#reload configuration
+# reload configuration
 bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
 
 # pane navigation
@@ -25,10 +25,8 @@ bind -r h select-pane -L  # move left
 bind -r j select-pane -D  # move down
 bind -r k select-pane -U  # move up
 bind -r l select-pane -R  # move right
-# bind > swap-pane -D       # swap current pane with the next one
-# bind < swap-pane -U       # swap current pane with the previous one
-bind-key -r < swap-window -t -1
-bind-key -r > swap-window -t +1
+bind-key -r < swap-window -t -1 # move window left
+bind-key -r > swap-window -t +1 # move window right
 
 # pane resizing
 bind -r H resize-pane -L 2
@@ -52,58 +50,19 @@ unbind %
 # renumber windows when a window is closed
 set -g renumber-windows on
 
-# -- New status ---------------------------------------------------------------
-set -g status-bg "colour59"
-set -g message-command-fg "colour117"
-set -g status-justify "left"
-set -g status-left-length "100"
-set -g status "on"
-set -g pane-active-border-fg "colour215"
-set -g message-bg "colour59"
-set -g status-right-length "100"
-set -g status-right-attr "none"
-set -g message-fg "colour117"
-set -g message-command-bg "colour59"
-set -g status-attr "none"
-set -g pane-border-fg "colour59"
-set -g status-left-attr "none"
-setw -g window-status-fg "colour231"
-setw -g window-status-attr "none"
-setw -g window-status-activity-bg "colour59"
-setw -g window-status-activity-attr "none"
-setw -g window-status-activity-fg "colour215"
-setw -g window-status-separator ""
-setw -g window-status-bg "colour59"
-set -g status-left "#[fg=colour17,bg=colour215] #S #[fg=colour215,bg=colour59,nobold,nounderscore,noitalics]"
-set -g status-right "#[fg=colour61,bg=colour59,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour61] %Y-%m-%d | %H:%M #[fg=colour141,bg=colour61,nobold,nounderscore,noitalics]#[fg=colour17,bg=colour141] #h "
-setw -g window-status-format "#[fg=colour231,bg=colour59] #I |#[fg=colour231,bg=colour59] #W "
-setw -g window-status-current-format "#[fg=colour59,bg=colour59,nobold,nounderscore,noitalics]#[fg=colour117,bg=colour59] #I |#[fg=colour117,bg=colour59] #W #[fg=colour59,bg=colour59,nobold,nounderscore,noitalics]"
+# Status
+set -g window-status-separator ' '
+set -g status-bg "colour0"
+set -g status-fg "colour15"
+set -g status-left "#[fg=colour15,bg=colour04][#S]"
+set -g status-right "#[fg=colour15,bg=colour04] %H:%M | %Y-%m-%d "
+setw -g window-status-format "#[fg=colour15,bg=colour0] #I:#W "
+setw -g window-status-current-format "#[fg=colour15,bg=colour04] #I:#W "
 
-# -- Old status ---------------------------------------------------------------
-# left status config
-# set-window-option -g status-left " #[bold][#S] "
-# set-window-option -g status-left-fg colour200
-# set-window-option -g status-left-bg black
-
-# # right status config
-# set-window-option -g status-right " #[bold]#(curl ipv4.icanhazip.com)"
-# set-window-option -g status-right-fg colour200
-# set-window-option -g status-right-bg black
-
-# set -g status-fg colour59
-# set -g status-bg black
-# set -g window-status-fg colour60
-# set -g window-status-bg black
-# set-window-option -g window-status-format " #[bold]#I: #W "
-
-# set-window-option -g window-status-current-format " #[bold]#I: #W "
-# set-window-option -g window-status-current-fg colour45
-# set-window-option -g window-status-current-bg black
-
-# -- monitoring activity ------------------------------------------------------
+# Monitoring activity
 setw -g monitor-activity on
-# setw -g window-status-activity-bg colour46
-# setw -g window-status-activity-fg colour60
+# setw -g window-status-activity-bg colour01
+# setw -g window-status-activity-fg colour0
 set -g visual-activity off
 set -g status-interval 10
 set-window-option -g mode-keys vi
@@ -119,24 +78,14 @@ run -b 'tmux bind -t vi-choice L tree-expand-all 2> /dev/null || true'
 run -b 'tmux bind -t vi-choice Escape cancel 2> /dev/null || true'
 
 
-# -- edit mode ----------------------------------------------------------------
-
-# vi-edit is gone in tmux >= 2.4
+# Edit mode
 run -b 'tmux bind -ct vi-edit H start-of-line 2> /dev/null || true'
 run -b 'tmux bind -ct vi-edit L end-of-line 2> /dev/null || true'
 run -b 'tmux bind -ct vi-edit q cancel 2> /dev/null || true'
 run -b 'tmux bind -ct vi-edit Escape cancel 2> /dev/null || true'
 
-# the following vi-copy bindings match my vim settings
-#   see https://github.com/gpakosz/.vim.git
-#bind -ct vi-edit H start-of-line
-#bind -ct vi-edit L end-of-line
-#bind -ct vi-edit q cancel
-#bind -ct vi-edit Escape cancel
 
-
-# -- copy mode ----------------------------------------------------------------
-
+# Copy mode
 bind Enter copy-mode # enter copy mode
 
 run -b 'tmux bind -t vi-copy v begin-selection 2> /dev/null || true'
