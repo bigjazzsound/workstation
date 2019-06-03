@@ -5,7 +5,7 @@ set inccommand=nosplit
 set tags=tags
 let mapleader=" "
 set cursorline
-command! Vimrc :vs $MYVIMRC
+command! Vimrc :edit $MYVIMRC
 inoremap jk <Esc>
 
 " 80 character color difference
