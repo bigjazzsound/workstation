@@ -3,15 +3,12 @@ syntax on
 set mouse-=a
 set inccommand=nosplit
 set tags=tags
-let mapleader=" "
 set cursorline
 command! Vimrc :edit $MYVIMRC
-inoremap jk <Esc>
 
 " 80 character color difference
 let &colorcolumn=join(range(80,999),",")
-highlight ColorColumn ctermbg=8
-hi ColorColumn ctermbg=Black
+" highlight ColorColumn ctermbg=Black
 
 " Lines for splitting
 set splitbelow
@@ -19,9 +16,13 @@ set splitright
 
 " automatically rebalance windows on vim resize
 augroup auto_resize
-autocmd!
-autocmd VimResized * :wincmd =
+    autocmd!
+    autocmd VimResized * :wincmd =
 augroup END
+
+" Remaps
+inoremap jk <Esc>
+inoremap <Esc> <Nop>
 
 " split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -30,6 +31,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " shortcuts with map leader
+let mapleader=" "
 nnoremap <leader>/ :nohls <enter>
 nnoremap <leader>w :w <enter>
 nnoremap <leader>W :%s/\s\+$//e <enter>
@@ -43,7 +45,7 @@ nnoremap <leader>s :set spell!
 nnoremap <leader>T :argadd `rg '.*role: (\w*).*' % -r '$1' --trim \\| xargs -i{} fd -tf . roles/{}/tasks` \| tab all <enter>
 
 " macros
-let @j = 'a "{{  }}"4h'
+let @j = 'a"{{  }}"4h'
 
 " settings for undo files
 set undofile
@@ -94,10 +96,6 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     Plug 'rbong/vim-crystalline'
     Plug 'iCyMind/NeoSolarized'
-    " Plug 'w0rp/ale'
-    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    " Plug 'zchee/deoplete-jedi'
-    " Plug 'zchee/deoplete-go', { 'do': 'make'}
     call plug#end()
 
     " colorscheme solarized
@@ -119,20 +117,6 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <leader>go  :Git checkout<Space>
     nnoremap <leader>gps :Dispatch! git push<CR>
     nnoremap <leader>gpl :Dispatch! git pull<CR>
-
-    " vim-crystalline settings
-    " function! LinterStatus() abort
-    "     let l:counts = ale#statusline#Count(bufnr(''))
-
-    "     let l:all_errors = l:counts.error + l:counts.style_error
-    "     let l:all_non_errors = l:counts.total - l:all_errors
-
-    "     return l:counts.total == 0 ? 'OK' : printf(
-    "     \   '[%dE] [%dW]',
-    "     \   all_non_errors,
-    "     \   all_errors
-    "     \)
-    " endfunction
 
     function! StatusDiagnostic() abort
       let info = get(b:, 'coc_diagnostic_info', {})
@@ -180,6 +164,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
 
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
+    map <F10> :Format<cr>
 
     " Use `:Fold` to fold current buffer
     command! -nargs=? Fold :call CocAction('fold', <f-args>)
@@ -239,33 +224,6 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <F3> :Dispatch<CR>
     nnoremap <F4> :Start<CR>
 
-    " Saving this in case I change my mind about coc-nvim
-    " ale settings
-    " let g:ale_fixers = {
-    " \   '*': ['trim_whitespace'],
-    " \   'python': ['black', 'yapf'],
-    " \   'c': ['clang-format'],
-    " \   'yaml': ['prettier'],
-    " \   'json': ['prettier'],
-    " \   'javascript': ['eslint'],
-    " \   'go': ['gofmt'],
-    " \   'sh': ['shfmt'],
-    " \   'terraform': ['terraform'],
-    " \}
-    " let g:airline#extensions#ale#enabled = 1
-    " let g:ale_sign_column_always = 1
-    " let g:ale_lint_on_text_changed = 'never'
-    " let g:ale_lint_on_enter = 0
-    " let g:ale_echo_msg_error_str = 'E'
-    " let g:ale_echo_msg_warning_str = 'W'
-    " let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
-    " " As of 2.8, Ansible wants boolean variables to be True or False
-    " let g:ale_yaml_yamllint_options = '-d "{rules: {truthy: disable}}"'
-    " nmap <F10> <Plug>(ale_fix)
-
-    " " Deoplete
-    " let g:deoplete#enable_at_startup = 1
-
     " vim-markdown
     let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'help']
 
@@ -275,15 +233,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <C-p> :FZF<cr>
 endif
 
-" Set colorscheme and fixes
-" set t_Co=256
-" set background=dark
-" highlight Normal ctermbg=NONE
-" highlight nonText ctermbg=NONE
-
-"
 " Settings for specific filetypes
-"
 
 " settings for editing yml files
 augroup ft_yml
@@ -387,7 +337,6 @@ augroup ft_vim
         \ shiftwidth=4
     autocmd! bufwritepost .vimrc source %
 augroup END
-
 
 " dynamic settings per host
 try
