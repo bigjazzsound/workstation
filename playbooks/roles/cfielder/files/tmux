@@ -5,7 +5,7 @@ set -sg repeat-time 600
 
 # remap prefix from 'C-b' to 'C-a'
 # unbind C-b
-# set-option -g prefix C-a
+set-option -g prefix C-Space
 # bind-key C-a send-prefix
 
 # makes C-a usable in addition to C-b
@@ -42,8 +42,8 @@ bind -r C-l next-window     # select next window
 bind Tab last-window        # move to last active window
 
 # split panes using | and -
-bind | split-window -h
-bind - split-window -v
+bind v split-window -h
+bind x split-window -v
 unbind '"'
 unbind %
 
