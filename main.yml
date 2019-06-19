@@ -1,0 +1,7 @@
+- hosts: local
+  tasks:
+    - vim-plug:
+        state: install
+      environment:
+        NVIM_PYTHON_LOG_FILE: /tmp/nvim.log 
+        NVIM_PYTHON_LOG_LEVEL: DEBUG

@@ -98,10 +98,10 @@ static_binaries:
     dest: "/usr/local/bin/shfmt"
 
 static_archives:
-  - "https://releases.hashicorp.com/vault/1.1.2/vault_1.1.2_linux_amd64.zip"
+  - "https://releases.hashicorp.com/vault/1.1.3/vault_1.1.3_linux_amd64.zip"
   - "https://releases.hashicorp.com/packer/1.4.1/packer_1.4.1_linux_amd64.zip"
-  - "https://releases.hashicorp.com/consul/1.5.0/consul_1.5.0_linux_amd64.zip"
-  - "https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip"
+  - "https://releases.hashicorp.com/consul/1.5.1/consul_1.5.1_linux_amd64.zip"
+  - "https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip"
   - "https://github.com/tsenart/vegeta/releases/download/cli%2Fv12.5.1/vegeta-12.5.1-linux-amd64.tar.gz"
 
 man_pages:
