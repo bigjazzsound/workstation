@@ -38,6 +38,7 @@ cfielder_files:
   2-work.muttrc: .config/mutt/accounts/2-work.muttrc
   msmtp: .config/msmtp/config
   mbsyncrc: .mbsyncrc
+  coc: .config/nvim/coc-settings.json
 
 git_aliases:
   alias.co: checkout
