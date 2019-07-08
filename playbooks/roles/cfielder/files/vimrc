@@ -247,6 +247,18 @@ augroup ft_yml
         \ autoindent
 augroup END
 
+" settings for editing json files
+augroup ft_json
+    autocmd!
+    autocmd BufNewFile,BufRead *.json setlocal
+        \ filetype=json
+        \ tabstop=2
+        \ softtabstop=2
+        \ shiftwidth=2
+        \ expandtab
+        \ autoindent
+augroup END
+
 " settings for editing md files
 augroup ft_md
     autocmd!
