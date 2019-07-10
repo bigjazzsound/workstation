@@ -34,6 +34,6 @@ macro index,pager Ct "<copy-message>=[Gmail].Trash<enter>" "copy mail to trash"
 macro index,pager gS "<change-folder>=[Gmail].Spam<enter>" "go to spam"
 macro index,pager MS "<save-message>=[Gmail].Spam<enter>" "move mail to spam"
 macro index,pager CS "<copy-message>=[Gmail].Spam<enter>" "copy mail to spam"
-macro index o "<shell-escape>mailsync -V personal<enter>" "run mbsync to sync personal"
+macro index o "<shell-escape>mbsync personal<enter>" "run mbsync to sync personal"
 
 subscribe ansible-devel ansible-project
