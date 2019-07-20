@@ -4,6 +4,7 @@ all_pkgs:
   - bash-completion
   - curl
   - docker-compose
+  - flatpak
   - git
   - golang
   - htop
