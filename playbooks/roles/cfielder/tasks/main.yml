@@ -126,6 +126,16 @@
 #     - python_pkgs
 #     - python3
 
+- name: Install flatpaks
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  loop: "{{ flatpaks }}"
+  tags:
+    - flatpak
+    - flatpaks
+
 - name: Test for rust
   stat:
     path: "{{ ansible_user_dir }}/.cargo/bin/rustup"
