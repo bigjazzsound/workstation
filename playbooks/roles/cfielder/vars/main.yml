@@ -38,6 +38,7 @@ cfielder_files:
   2-work.muttrc: .config/mutt/accounts/2-work.muttrc
   msmtp: .config/msmtp/config
   mbsyncrc: .mbsyncrc
+  coc: .config/nvim/coc-settings.json
 
 git_aliases:
   alias.co: checkout
@@ -52,3 +53,12 @@ rust_pkgs:
   - exa
   - find-fd
   - ripgrep
+
+flatpaks:
+  - "com.discordapp.Discord"
+  - "com.spotify.Client"
+  - "org.freedesktop.Platform.GL32.nvidia-430-26"
+  - "org.freedesktop.Platform.GL.nvidia-430-26"
+  - "org.signal.Signal"
+  - "org.telegram.desktop"
+  - "us.zoom.Zoom"

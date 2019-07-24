@@ -1,0 +1,32 @@
+{
+  "python.autoComplete.addBrackets": true,
+  "python.formatting.provider": "black",
+  "yaml.format.enable": true,
+  "yaml.validate": true,
+  "yaml.hover": true,
+  "yaml.completion": true,
+  "yaml.schemas": {
+    "http://json.schemastore.org/ansible-stable-2.5": "tasks/*.yml",
+    "kubernetes": "kubernetes.yml"
+  },
+  "diagnostic.errorSign": ">>",
+  "diagnostic.warningSign": ">",
+  "diagnostic.infoSign": ">>",
+  "coc.preferences.hoverTarget": "echo",
+  "list.normalMappings": {
+    "t": "action:tabe",
+    "v": "action:vsplit",
+    "s": "action:split",
+    "d": "expr:GetDeleteAction"
+  },
+  "list.insertMappings": {
+    "<C-t>": "action:tabe",
+    "<C-w>": "command:wincmd k"
+  },
+  "languageserver": {
+    "terraform": {
+      "command": "/usr/local/bin/terraform-lsp",
+      "filetypes": ["terraform"]
+    }
+  }
+}
