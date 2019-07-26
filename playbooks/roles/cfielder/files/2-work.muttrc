@@ -14,6 +14,6 @@ set spoolfile="+INBOX"
 set postponed="+Drafts"
 set record="+Sent Items"
 set trash="+Deleted Items"
-mailboxes =work ===================== "=INBOX" "=Drafts" "=pingdom" "=Deleted Items" "=Sent Items" "=training" "=datadog" "=keepers" "=nagios" "=datapipe_gov" "=Archive" "=jira"
+mailboxes =work ===================== "=INBOX" "=Drafts" "=pingdom" "=Deleted Items" "=Sent Items" "=training" "=datadog" "=keepers" "=nagios" "=datapipe_gov" "=Archive" "=jira" "=deepsecurity"
 
-macro index o "<shell-escape>mailsync -V work<enter>" "run mbsync to sync personal"
+macro index o "<shell-escape>mbsync work<enter>" "run mbsync to sync personal"
