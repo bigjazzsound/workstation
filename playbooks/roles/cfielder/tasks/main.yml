@@ -33,9 +33,9 @@
         groups:
           - "{{ libvirt_group }}"
           - docker
-        append: true
+        append: True
         uid: 1000
-  become: true
+  become: True
   tags:
     - nox
 
@@ -46,7 +46,7 @@
     group: cfielder
     mode: 0770
     state: directory
-    recurse: true
+    recurse: True
   loop: "{{ cfielder_dirs }}"
   tags:
     - nox
@@ -78,7 +78,7 @@
     owner: cfielder
     group: cfielder
     state: link
-    force: true
+    force: True
   tags:
     - nox
 
@@ -100,9 +100,9 @@
 #       - dopy
 #     extra_args: "--user -U"
 #     state: present
-#   become: true
+#   become: True
 #   become_user: cfielder
-#   changed_when: false
+#   changed_when: False
 #   tags:
 #     - nox
 #     - python_pkgs
@@ -118,9 +118,9 @@
 #     executable: pip3
 #     extra_args: "--user -U"
 #     state: present
-#   become: true
+#   become: True
 #   become_user: cfielder
-#   changed_when: false
+#   changed_when: False
 #   tags:
 #     - nox
 #     - python_pkgs
@@ -171,7 +171,7 @@
       register: result
       changed_when: "result.stdout is search('downloading installer')"
       args:
-        warn: false
+        warn: False
 
     - name: Install rust packages
       command: "cargo install -q -j {{ ansible_processor_cores }} {{ rust_pkgs | join(' ') }}"

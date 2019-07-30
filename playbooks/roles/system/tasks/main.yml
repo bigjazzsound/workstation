@@ -5,7 +5,7 @@
     name: "{{ item.name }}"
     value: "{{ item.value }}"
     state: present
-    reload: true
+    reload: True
   with_items: "{{ sysctl_settings }}"
   tags:
     - nox

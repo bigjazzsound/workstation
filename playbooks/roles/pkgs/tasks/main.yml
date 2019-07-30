@@ -8,15 +8,15 @@
         baseurl: "http://dl.google.com/linux/chrome/rpm/stable/$basearch"
         gpgcheck: 1
         gpgkey: "https://dl.google.com/linux/linux_signing_key.pub"
-        enabled: true
+        enabled: True
 
     - name: Enable VSCode repo
       yum_repository:
         name: code
         description: Visual Studio Code
         baseurl: "https://packages.microsoft.com/yumrepos/vscode"
-        enabled: true
-        gpgcheck: true
+        enabled: True
+        gpgcheck: True
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
 
     - name: Setup RPM Fusion Repos
@@ -31,9 +31,9 @@
         file: kubernetes
         description: Kubernetes
         baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
-        enabled: true
-        gpgcheck: true
-        repo_gpgcheck: true
+        enabled: True
+        gpgcheck: True
+        repo_gpgcheck: True
         gpgkey:
           - "https://packages.cloud.google.com/yum/doc/yum-key.gpg"
           - "https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
@@ -83,7 +83,7 @@
 
     - name: Update apt repository
       apt:
-        update_cache: true
+        update_cache: True
         cache_valid_time: 86400
       tags:
         - nox
@@ -102,11 +102,11 @@
       apt:
         name: winehq-staging
         state: present
-        install_recommends: true
+        install_recommends: True
 
     - name: Upgrade packages
       apt:
-        upgrade: true
+        upgrade: True
       register: installed_packages
       tags:
         - nox
@@ -117,7 +117,7 @@
 
     - name: Remove dependencies that are no longer required
       apt:
-        autoremove: true
+        autoremove: True
       tags:
         - nox
 
@@ -127,7 +127,7 @@
   unarchive:
     src: "{{ item }}"
     dest: /usr/local/bin/
-    remote_src: true
+    remote_src: True
   loop: "{{ static_archives }}"
   tags:
     - static_archives

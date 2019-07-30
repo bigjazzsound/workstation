@@ -9,7 +9,7 @@ platforms:
   - name: ubuntu
     image: solita/ubuntu-systemd
     image_version: latest
-    privileged: true
+    privileged: True
 provisioner:
   name: ansible
   lint:

@@ -8,6 +8,6 @@
     size_id: s-1vcpu-1gb
     image_id: ubuntu-18-04-x64
     region_id: tor1
-    private_networking: true
-    ipv6: true
+    private_networking: True
+    ipv6: True
     user_data: '{{ user_data }}'
