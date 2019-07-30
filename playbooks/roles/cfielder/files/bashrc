@@ -117,6 +117,8 @@ alias less='less -R'
 alias sb="source ~/.bashrc"
 alias vs="vim /tmp/$(openssl rand -hex 6).md"
 alias vsg="vim +Goyo /tmp/$(openssl rand -hex 6).md"
+alias vj="vim /tmp/$(openssl rand -hex 6).json"
+alias vy="vim /tmp/$(openssl rand -hex 6).yml"
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
