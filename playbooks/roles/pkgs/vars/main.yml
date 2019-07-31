@@ -105,7 +105,7 @@ static_archives:
   - "https://releases.hashicorp.com/consul/1.5.1/consul_1.5.1_linux_amd64.zip"
   - "https://releases.hashicorp.com/terraform/0.12.4/terraform_0.12.4_linux_amd64.zip"
   - "https://github.com/tsenart/vegeta/releases/download/cli%2Fv12.5.1/vegeta-12.5.1-linux-amd64.tar.gz"
-  - "https://github.com/juliosueiras/terraform-lsp/releases/download/v0.0.3/terraform-lsp_0.0.3_linux_amd64.tar.gz"
+  - "https://github.com/juliosueiras/terraform-lsp/releases/download/v0.0.5/terraform-lsp_0.0.5_linux_amd64.tar.gz"
 
 man_pages:
   - "https://raw.githubusercontent.com/ogham/exa/master/contrib/man/exa.1"
