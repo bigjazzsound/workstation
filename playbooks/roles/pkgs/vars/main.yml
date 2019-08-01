@@ -52,6 +52,7 @@ ubuntu_pkgs:
   - "libvulkan1:i386"
   - msmtp
   - neomutt
+  - newbeuter
   - notmuch
   - openssh-server
   - python

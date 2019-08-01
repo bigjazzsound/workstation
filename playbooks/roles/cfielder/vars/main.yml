@@ -23,6 +23,7 @@ cfielder_dirs:
   - .cache/mutt/personal
   - .local/share/nvim/site/autoload
   - .weechat
+  - .newsbeuter
 
 cfielder_files:
   alacritty: .config/alacritty/alacritty.yml
@@ -43,6 +44,8 @@ cfielder_files:
   weechat/irc.conf: .weechat/irc.conf
   weechat/sec.conf: .weechat/sec.conf
   weechat/weechat.conf: .weechat/weechat.conf
+  newsbeuter/config: .newsbeuter/config
+  newsbeuter/urls: .newsbeuter/urls
 
 git_aliases:
   alias.co: checkout
