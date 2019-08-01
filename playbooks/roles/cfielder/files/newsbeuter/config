@@ -33,3 +33,6 @@ unbind-key n
 bind-key n next-unread-feed
 unbind-key p
 bind-key p prev-unread-feed
+
+# Settings
+text-width 80
