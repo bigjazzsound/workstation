@@ -1,7 +1,7 @@
 # Colors
 color background   default   default
 color listnormal   default   default
-color listfocus    black     yellow
+color listfocus    black     blue
 color info         default   black
 color article      default   default
 
