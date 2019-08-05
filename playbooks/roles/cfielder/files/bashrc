@@ -96,6 +96,7 @@ export plays="$HOME/playground/workstation"
 
 # exported variables
 export PAGER=less
+export LESS='-RIq'
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
 if [[ $(command -v go) ]]; then
     export PATH=$PATH:$(go env GOPATH)/bin:$HOME/.local/bin:$HOME/.cargo/bin
@@ -116,7 +117,6 @@ alias sudo='sudo -E '
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
-alias less='less -R'
 alias sb="source ~/.bashrc"
 alias vs="vim /tmp/$(openssl rand -hex 6).md"
 alias vsg="vim +Goyo /tmp/$(openssl rand -hex 6).md"
