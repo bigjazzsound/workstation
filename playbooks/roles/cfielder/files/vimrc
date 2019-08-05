@@ -378,6 +378,15 @@ augroup ft_gitcommit
         \ spell
 augroup END
 
+" settings for editing ansible files
+augroup ft_ansible
+    autocmd!
+    " Set the filetype to yaml.ansible if it is in the playbooks directory
+    autocmd BufRead,BufNewFile */playbooks/*.yml set
+        \ filetype=yaml.ansible
+    let &makeprg="ansible-lint %"
+augroup END
+
 " dynamic settings per host
 try
     source $HOME/.vimrc.local
