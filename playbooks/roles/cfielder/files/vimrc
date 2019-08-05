@@ -1,5 +1,6 @@
 set nu
 syntax on
+set termguicolors
 set mouse-=a
 set inccommand=nosplit
 set tags=tags
