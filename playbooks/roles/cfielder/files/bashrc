@@ -96,7 +96,6 @@ export plays="$HOME/playground/workstation"
 
 # exported variables
 export PAGER=less
-export TERM="screen-256color"
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
 if [[ $(command -v go) ]]; then
     export PATH=$PATH:$(go env GOPATH)/bin:$HOME/.local/bin:$HOME/.cargo/bin
