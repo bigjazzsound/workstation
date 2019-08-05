@@ -371,6 +371,13 @@ augroup ft_vim
     autocmd! bufwritepost .vimrc source %
 augroup END
 
+" settings for editing gitcommit files
+augroup ft_gitcommit
+    autocmd!
+    autocmd Filetype gitcommit setlocal
+        \ spell
+augroup END
+
 " dynamic settings per host
 try
     source $HOME/.vimrc.local
