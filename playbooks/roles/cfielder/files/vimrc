@@ -388,8 +388,6 @@ augroup ft_ansible
 augroup END
 
 " dynamic settings per host
-try
+if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
-catch
-    " pass
-endtry
+endif
