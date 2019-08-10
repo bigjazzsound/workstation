@@ -44,9 +44,7 @@
     path: "/home/cfielder/{{ item }}"
     owner: cfielder
     group: cfielder
-    mode: 0770
     state: directory
-    recurse: True
   loop: "{{ cfielder_dirs }}"
   tags:
     - nox
