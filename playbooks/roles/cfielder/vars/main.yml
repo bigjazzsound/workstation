@@ -1,43 +1,33 @@
 ---
 libvirt_group: "{{ 'libvirt' if ansible_os_family == 'RedHat' else 'libvirt-qemu' }}"
 
-cfielder_dirs:
-  - .config/i3
-  - .config/nvim
-  - .config/terminator
-  - .config/alacritty
-  - .config/dircolors
-  - .config/mutt
-  - .config/mutt/accounts
-  - .config/msmtp
-  - .local/share/nvim/site/autoload
-  - .fonts
-  - playground/go
-  - playground/go/src
-  - playground/go/bin
-  - playground/go/pkg
-  - .local/share/konsole
-  - .vim/backup
-  - .vim/swp
-  - .vim/undo
-  - .cache/mutt/personal
-  - .local/share/nvim/site/autoload
-  - .weechat
-  - .newsbeuter
+dirs:
+  - ".cache/mutt/personal"
+  - ".config/dircolors"
+  - ".config/nvim"
+  - ".fonts"
+  - ".local/go"
+  - ".local/go/bin"
+  - ".local/go/pkg"
+  - ".local/go/src"
+  - ".vim/backup"
+  - ".vim/swp"
+  - ".vim/undo"
+  - ".weechat"
 
 git_aliases:
-  alias.co: checkout
-  alias.br: branch
-  alias.ci: commit
-  alias.st: status
-  alias.rh: reset --hard
+  alias.co: "checkout"
+  alias.br: "branch"
+  alias.ci: "commit"
+  alias.st: "status"
+  alias.rh: "reset --hard"
   alias.lg: "log --pretty=format:'%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(20)%aN%Cred%d %Creset%s' --date=short"
 
 rust_pkgs:
-  - cargo-update
-  - exa
-  - find-fd
-  - ripgrep
+  - "cargo-update"
+  - "exa"
+  - "find-fd"
+  - "ripgrep"
 
 flatpaks:
   - "com.discordapp.Discord"
