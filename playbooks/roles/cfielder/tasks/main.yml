@@ -45,7 +45,8 @@
     owner: cfielder
     group: cfielder
     state: directory
-  loop: "{{ cfielder_dirs }}"
+  loop: "{{ q('filetree', role_path + '/files') }}"
+  when: item.state == 'directory'
   tags:
     - nox
     - dotfiles
