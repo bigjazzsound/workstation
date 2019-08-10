@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/cfielder/playground/workstation/tests'
+let g:netrw_dirhist_2='/home/cfielder/.config/nvim/rplugin/python3'
+let g:netrw_dirhist_3='/home/cfielder/.config/mutt/accounts'

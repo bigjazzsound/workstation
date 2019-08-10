@@ -25,28 +25,6 @@ cfielder_dirs:
   - .weechat
   - .newsbeuter
 
-cfielder_files:
-  alacritty: .config/alacritty/alacritty.yml
-  bashrc: .bashrc
-  i3: .config/i3/config
-  profile: .profile
-  redshift: .config/redshift.conf
-  tmux: .tmux.conf
-  vimrc: .config/nvim/init.vim
-  dracula_colorscheme: .local/share/konsole/Dracula.colorscheme
-  konsole_profile: .local/share/konsole/dracula.profile
-  muttrc: .config/mutt/muttrc
-  1-personal.muttrc: .config/mutt/accounts/1-personal.muttrc
-  2-work.muttrc: .config/mutt/accounts/2-work.muttrc
-  msmtp: .config/msmtp/config
-  mbsyncrc: .mbsyncrc
-  coc: .config/nvim/coc-settings.json
-  weechat/irc.conf: .weechat/irc.conf
-  weechat/sec.conf: .weechat/sec.conf
-  weechat/weechat.conf: .weechat/weechat.conf
-  newsbeuter/config: .newsbeuter/config
-  newsbeuter/urls: .newsbeuter/urls
-
 git_aliases:
   alias.co: checkout
   alias.br: branch

@@ -52,13 +52,14 @@
     - nox
     - dotfiles
 
-- name: Install files
-  copy:
-    src: "{{ role_path }}/files/{{ item.key }}"
-    dest: "/home/cfielder/{{ item.value }}"
-    owner: cfielder
-    group: cfielder
-  loop: "{{ q('dict', cfielder_files) }}"
+- name: Install dotfiles
+  file:
+    src: "{{ item.src }}"
+    path: "~/{{ item.path }}"
+    state: link
+    force: True
+  loop: "{{ q('filetree', role_path + '/files') }}"
+  when: item.state == 'file'
   tags:
     - nox
     - dotfiles
