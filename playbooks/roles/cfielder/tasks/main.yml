@@ -52,7 +52,7 @@
 
 - name: Make dirs
   file:
-    path: "/home/cfielder/{{ item }}"
+    path: "/home/cfielder/{{ item.path }}"
     owner: cfielder
     group: cfielder
     state: directory
