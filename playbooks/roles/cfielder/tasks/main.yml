@@ -41,6 +41,17 @@
 
 - name: Make dirs
   file:
+    path: "{{ ansible_user_dir + '/' + item }}"
+    owner: cfielder
+    group: cfielder
+    state: directory
+  loop: "{{ dirs }}"
+  tags:
+    - nox
+    - dotfiles
+
+- name: Make dirs
+  file:
     path: "/home/cfielder/{{ item }}"
     owner: cfielder
     group: cfielder
