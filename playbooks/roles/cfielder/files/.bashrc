@@ -98,8 +98,9 @@ export plays="$HOME/playground/workstation"
 export PAGER=less
 export LESS='-RIq'
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
+export GOPATH="$HOME/.local/go"
 if [[ $(command -v go) ]]; then
-    export PATH=$PATH:$(go env GOPATH)/bin:$HOME/.local/bin:$HOME/.cargo/bin
+    export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/go/bin
 else
     export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
 fi
