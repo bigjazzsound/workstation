@@ -43,6 +43,7 @@ nnoremap <leader>t :NERDTreeToggle <enter>
 nnoremap <leader>f :FZF <enter>
 nnoremap <leader>r :Rg <enter>
 nnoremap <leader>s :set spell!
+nnoremap <leader>b :Buffers <enter>
 nnoremap <leader>T :argadd `rg '.*role: (\w*).*' % -r '$1' --trim \\| xargs -i{} fd -tf . roles/{}/tasks` \| tab all <enter>
 
 " macros
