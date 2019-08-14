@@ -8,7 +8,7 @@ window:
     y: 2
   dynamic_padding: false
   decorations: full
-  start_maximized: true
+  startup_mode: Maximized
 
 scrolling:
   history: 0
@@ -43,8 +43,8 @@ font:
     x: 0
     y: 0
 
-render_timer: false
-persistent_logging: false
+debug.render_timer: false
+debug.persistent_logging: false
 draw_bold_text_with_bright_colors: true
 
 # Colors (Solarized Dark)
