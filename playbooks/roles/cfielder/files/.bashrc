@@ -18,13 +18,13 @@ export LESS='-RIq'
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
 export GOPATH="$HOME/.local/go"
 if [[ $(command -v go) ]]; then
-    export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/go/bin
+	export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/go/bin
 else
-    export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
+	export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
 fi
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v fd) ]]; then
-    export FZF_DEFAULT_COMMAND='fd --type f'
+	export FZF_DEFAULT_COMMAND='fd --type f'
 fi
 
 # aliases
@@ -46,29 +46,29 @@ alias tff="terraform fmt "
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
-    alias v='nvim'
-    alias vi='nvim'
-    alias vim='nvim'
-    alias vimdiff='nvim -d '
-    export EDITOR=nvim VISUAL=nvim
+	alias v='nvim'
+	alias vi='nvim'
+	alias vim='nvim'
+	alias vimdiff='nvim -d '
+	export EDITOR=nvim VISUAL=nvim
 else
-    export EDITOR=vim VISUAL=vim
+	export EDITOR=vim VISUAL=vim
 fi
 
 if [[ -f $(command -v exa) ]]; then
-    alias ls='exa'
-    alias ll='exa -l'
-    alias tree='exa -T'
+	alias ls='exa'
+	alias ll='exa -l'
+	alias tree='exa -T'
 else
-    alias ls='ls --color'
-    alias ll='ls -alF'
-    alias la='ls -A'
-    alias l='ls -CF'
+	alias ls='ls --color'
+	alias ll='ls -alF'
+	alias la='ls -A'
+	alias l='ls -CF'
 fi
 
 if [[ -f $(command -v neomutt) ]]; then
-    alias m='neomutt'
-    alias mutt='neomutt'
+	alias m='neomutt'
+	alias mutt='neomutt'
 fi
 
 [[ -f ~/.config/dircolors/dircolors.256dark ]] || wget -q -O ~/.config/dircolors/dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
