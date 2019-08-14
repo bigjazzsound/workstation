@@ -71,16 +71,16 @@ if [[ -f $(command -v neomutt) ]]; then
     alias mutt='neomutt'
 fi
 
-command -v kubectl >/dev/null && source <(kubectl completion bash)
 [[ -f ~/.config/dircolors/dircolors.256dark ]] || wget -q -O ~/.config/dircolors/dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
 eval $(dircolors ~/.config/dircolors/dircolors.256dark)
 
 [[ -f ~/.config/dircolors/dircolors.256dark ]] && eval $(dircolors ~/.config/dircolors/dircolors.256dark)
 
-# AWS CLI bash completion
+# completions
 complete -C "$HOME/.local/bin/aws_completer" aws
 complete -C $(which vault) vault
 complete -C $(which consul) consul
+command -v kubectl >/dev/null && source <(kubectl completion bash)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
