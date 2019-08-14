@@ -78,14 +78,14 @@ if [[ ! -d ~/.fzf ]]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 	~/.fzf/install --key-bindings --completion --no-update-rc
 fi
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 if [[ -f $GOPATH/bin/powerline-go ]]; then
     function _update_ps1() {
         PS1="$($GOPATH/bin/powerline-go -modules 'nix-shell,user,host,ssh,cwd,perms,jobs,dotenv,git,aws,terraform-workspace,venv,docker,kube')"
     }
 
-    if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    if [[ "$TERM" != "linux" ]] && [[ -f "$GOPATH/bin/powerline-go" ]]; then
         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
     fi
 fi
@@ -97,4 +97,4 @@ complete -C $(which consul) consul
 command -v kubectl >/dev/null && source <(kubectl completion bash)
 
 # Local bashrc file for per-host changes
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+[[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
