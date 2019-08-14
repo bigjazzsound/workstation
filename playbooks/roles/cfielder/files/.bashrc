@@ -74,7 +74,11 @@ fi
 [[ -f ~/.config/dircolors/dircolors.256dark ]] || wget -q -O ~/.config/dircolors/dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
 eval $(dircolors ~/.config/dircolors/dircolors.256dark)
 
-[[ -f ~/.config/dircolors/dircolors.256dark ]] && eval $(dircolors ~/.config/dircolors/dircolors.256dark)
+if [[ ! -d ~/.fzf ]]; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install --key-bindings --completion --no-update-rc
+fi
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # completions
 complete -C "$HOME/.local/bin/aws_completer" aws
@@ -82,5 +86,5 @@ complete -C $(which vault) vault
 complete -C $(which consul) consul
 command -v kubectl >/dev/null && source <(kubectl completion bash)
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Local bashrc file for per-host changes
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
