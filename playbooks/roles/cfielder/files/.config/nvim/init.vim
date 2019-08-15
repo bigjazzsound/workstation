@@ -38,10 +38,7 @@ nnoremap <leader>w :w <enter>
 nnoremap <leader>W :%s/\s\+$//e <enter>
 nnoremap <leader>n :set nu! <enter>
 nnoremap <leader>l :set list! <enter>
-nnoremap <leader>f :FZF <enter>
-nnoremap <leader>r :Rg <enter>
 nnoremap <leader>s :set spell!
-nnoremap <leader>b :Buffers <enter>
 nnoremap <leader>T :argadd `rg '.*role: (\w*).*' % -r '$1' --trim \\| xargs -i{} fd -tf . roles/{}/tasks` \| tab all <enter>
 nnoremap <leader>bd :bd <enter>
 nnoremap <leader>bn :bn <enter>
@@ -252,7 +249,12 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     autocmd! User GoyoEnter call <SID>goyo_enter()
     autocmd! User GoyoLeave call <SID>goyo_leave()
 
+    " FZF
     nnoremap <C-p> :FZF<cr>
+    nnoremap <leader>f :FZF <enter>
+    nnoremap <leader>r :Rg <enter>
+    nnoremap <leader>bl :Buffers <enter> " bl = buffer list
+
 endif
 
 " dynamic settings per host
