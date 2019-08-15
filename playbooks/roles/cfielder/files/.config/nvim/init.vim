@@ -87,7 +87,6 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-markdown'
     Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-repeat'
     Plug 'christoomey/vim-tmux-navigator'
