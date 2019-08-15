@@ -39,7 +39,6 @@ nnoremap <leader>W :%s/\s\+$//e <enter>
 nnoremap <leader>q :bd <enter>
 nnoremap <leader>n :set nu! <enter>
 nnoremap <leader>l :set list! <enter>
-nnoremap <leader>t :NERDTreeToggle <enter>
 nnoremap <leader>f :FZF <enter>
 nnoremap <leader>r :Rg <enter>
 nnoremap <leader>s :set spell!
