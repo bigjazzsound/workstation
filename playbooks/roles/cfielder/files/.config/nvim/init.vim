@@ -257,7 +257,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <C-p> :FZF<cr>
     nnoremap <leader>f :FZF <enter>
     nnoremap <leader>r :Rg <enter>
-    nnoremap <leader>bl :Buffers <enter> " bl = buffer list
+    nnoremap <leader>b :Buffers <enter>
 
     " editorconfig settings
     let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
