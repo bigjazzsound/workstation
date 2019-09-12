@@ -291,6 +291,9 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     " editorconfig settings
     let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
+    " editorconfig
+    let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+
 endif
 
 " dynamic settings per host
