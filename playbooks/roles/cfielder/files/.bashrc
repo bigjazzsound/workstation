@@ -82,7 +82,7 @@ fi
 
 if [[ -f $GOPATH/bin/powerline-go ]]; then
     function _update_ps1() {
-        PS1="$($GOPATH/bin/powerline-go -modules 'nix-shell,user,host,ssh,cwd,perms,jobs,dotenv,git,aws,terraform-workspace,venv,docker,kube')"
+        PS1="$($GOPATH/bin/powerline-go -modules 'nix-shell,user,host,ssh,perms,jobs,dotenv,git,aws,terraform-workspace,venv,kube')"
     }
 
     if [[ "$TERM" != "linux" ]] && [[ -f "$GOPATH/bin/powerline-go" ]]; then
