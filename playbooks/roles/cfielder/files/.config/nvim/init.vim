@@ -98,6 +98,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     Plug 'rbong/vim-crystalline'
     Plug 'iCyMind/NeoSolarized'
+    Plug 'editorconfig/editorconfig-vim'
     call plug#end()
 
     " colorscheme solarized
@@ -257,6 +258,9 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     nnoremap <leader>f :FZF <enter>
     nnoremap <leader>r :Rg <enter>
     nnoremap <leader>bl :Buffers <enter> " bl = buffer list
+
+    " editorconfig settings
+    let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
 endif
 
