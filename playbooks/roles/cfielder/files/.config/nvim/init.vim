@@ -98,6 +98,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     Plug 'rbong/vim-crystalline'
     Plug 'iCyMind/NeoSolarized'
+    Plug 'hashivim/vim-hashicorp-tools'
     Plug 'editorconfig/editorconfig-vim'
     call plug#end()
 
