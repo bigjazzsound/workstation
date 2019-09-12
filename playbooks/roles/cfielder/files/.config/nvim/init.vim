@@ -43,6 +43,9 @@ nnoremap <leader>T :argadd `rg '.*role: (\w*).*' % -r '$1' --trim \\| xargs -i{}
 nnoremap <leader>bd :bd <enter>
 nnoremap <leader>bn :bn <enter>
 nnoremap <leader>bp :bp <enter>
+if executable("clip.exe")
+    nnoremap <leader>c :w !clip.exe <enter> <enter>
+endif
 
 " macros
 let @j = 'a"{{  }}"4h'
