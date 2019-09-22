@@ -1,4 +1,7 @@
 ---
+env:
+  TERM: tmux-256color
+
 window:
   dimensions:
     columns: 0
