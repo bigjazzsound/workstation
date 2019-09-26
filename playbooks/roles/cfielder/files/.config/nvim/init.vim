@@ -85,7 +85,7 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
-    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive', { 'tag': '*' }
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-dispatch'
@@ -93,13 +93,13 @@ if (!isdirectory("$HOME/.vim/autoload") && has('vim')) || (!isdirectory("$HOME/.
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'sheerun/vim-polyglot'
     Plug 'enricobacis/paste.vim'
-    Plug 'junegunn/goyo.vim'
-    Plug 'b4b4r07/vim-ansible-vault'
-    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+    Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+    Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
     Plug 'rbong/vim-crystalline'
     Plug 'iCyMind/NeoSolarized'
     Plug 'hashivim/vim-hashicorp-tools'
     Plug 'editorconfig/editorconfig-vim'
+    Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
     call plug#end()
 
     " colorscheme solarized

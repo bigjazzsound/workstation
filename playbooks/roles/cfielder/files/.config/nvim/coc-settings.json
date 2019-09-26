@@ -6,7 +6,6 @@
   "yaml.hover": true,
   "yaml.completion": true,
   "yaml.schemas": {
-    "http://json.schemastore.org/ansible-stable-2.5": "tasks/*.yml",
     "kubernetes": "kubernetes.yml"
   },
   "diagnostic.errorSign": ">>",
