@@ -1,12 +1,10 @@
-## GENERAL OPTIONS ##
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
 *) return ;;
 esac
 
-[[ -f ~/.local/bin/sensible.bash ]] || wget -q -O ~/.local/bin/sensible.bash https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash
-source ~/.local/bin/sensible.bash
+([[ -f ~/.local/bin/sensible.bash ]] || wget -q -O ~/.local/bin/sensible.bash https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash) && source ~/.local/bin/sensible.bash
 
 # exported dirs
 export documents="$HOME/Documents"
@@ -16,15 +14,11 @@ export plays="$HOME/playground/workstation"
 export PAGER=less
 export LESS='-RIq'
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
-export GOPATH="$HOME/.local/go"
-if [[ $(command -v go) ]]; then
-	export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/go/bin
-else
-	export PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
-fi
+export GOPATH="$HOME/.local"
+export PATH=$PATH:$HOME/.cargo/bin
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v fd) ]]; then
-	export FZF_DEFAULT_COMMAND='fd --type f'
+    export FZF_DEFAULT_COMMAND='fd --type f'
 fi
 
 # aliases
@@ -46,55 +40,53 @@ alias tff="terraform fmt "
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
-	alias v='nvim'
-	alias vi='nvim'
-	alias vim='nvim'
-	alias vimdiff='nvim -d '
-	export EDITOR=nvim VISUAL=nvim
+    alias v='nvim'
+    alias vi='nvim'
+    alias vim='nvim'
+    alias vimdiff='nvim -d '
+    export EDITOR=nvim VISUAL=nvim
 else
-	export EDITOR=vim VISUAL=vim
+    export EDITOR=vim VISUAL=vim
 fi
 
 if [[ -f $(command -v exa) ]]; then
-	alias ls='exa'
-	alias ll='exa -l'
-	alias tree='exa -T'
+    alias ls='exa'
+    alias ll='exa -l'
+    alias tree='exa -T'
 else
-	alias ls='ls --color'
-	alias ll='ls -alF'
-	alias la='ls -A'
-	alias l='ls -CF'
+    alias ls='ls --color'
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
 fi
 
 if [[ -f $(command -v neomutt) ]]; then
-	alias m='neomutt'
-	alias mutt='neomutt'
+    alias m='neomutt'
+    alias mutt='neomutt'
 fi
 
 [[ -f ~/.config/dircolors/dircolors.256dark ]] || wget -q -O ~/.config/dircolors/dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
 eval $(dircolors ~/.config/dircolors/dircolors.256dark)
 
 if [[ ! -d ~/.fzf ]]; then
-	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-	~/.fzf/install --key-bindings --completion --no-update-rc
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --key-bindings --completion --no-update-rc
 fi
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
-if [[ -f $GOPATH/bin/powerline-go ]]; then
+if [[ -f $(command -v powerline-go) ]]; then
     function _update_ps1() {
-        PS1="$($GOPATH/bin/powerline-go -modules 'nix-shell,user,host,ssh,perms,jobs,dotenv,git,aws,terraform-workspace,venv,docker,kube')"
+        PS1="$(powerline-go -modules 'nix-shell,user,host,ssh,perms,jobs,dotenv,git,aws,terraform-workspace,venv,kube')"
     }
 
-    if [[ "$TERM" != "linux" ]] && [[ -f "$GOPATH/bin/powerline-go" ]]; then
-        PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-    fi
+    [[ "$TERM" != "linux" ]] && PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
 # completions
-complete -C "$HOME/.local/bin/aws_completer" aws
-complete -C $(which vault) vault
-complete -C $(which consul) consul
-command -v kubectl >/dev/null && source <(kubectl completion bash)
+[[ -f $(command -v aws_completer) ]] && complete -C "$(which aws_completer)" aws
+[[ -f $(command -v vault) ]] && complete -C "$(which vault)" vault
+[[ -f $(command -v consul) ]] && complete -C "$(which consul)" consul
+[[ -f $(command -v kubectl) ]] && source <(kubectl completion bash)
 
 # Local bashrc file for per-host changes
 [[ -f ~/.bashrc.local ]] && source ~/.bashrc.local
