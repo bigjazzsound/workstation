@@ -15,7 +15,7 @@ export PAGER=less
 export LESS='-RIq'
 export PS1="\[\033[1;36m\]\\u@\h \$ \[$(tput sgr0)\]"
 export GOPATH="$HOME/.local"
-export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v fd) ]]; then
     export FZF_DEFAULT_COMMAND='fd --type f'
