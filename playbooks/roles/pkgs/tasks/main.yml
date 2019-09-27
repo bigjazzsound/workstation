@@ -53,12 +53,8 @@
         name: "{{ all_pkgs }} + {{ fedora_pkgs }}"
         state: present
       register: installed_packages
-
-    - debug:
-        var: installed_packages
-      when: installed_packages.changed
-
   when: ansible_distribution == 'Fedora'
+  become: True
 
 - name: Ubuntu package tasks
   block:
@@ -111,22 +107,18 @@
       tags:
         - nox
 
-    - debug:
-        var: installed_packages
-      when: installed_packages.changed
-
     - name: Remove dependencies that are no longer required
       apt:
         autoremove: True
       tags:
         - nox
-
   when: ansible_distribution == 'Ubuntu'
+  become: True
 
 - name: Install static archives
   unarchive:
     src: "{{ item }}"
-    dest: /usr/local/bin/
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/"
     remote_src: True
   loop: "{{ static_archives }}"
   tags:
@@ -136,7 +128,7 @@
 - name: Install static binaries
   get_url:
     url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/{{ item.dest }}"
     mode: 0555
   loop: "{{ static_binaries }}"
   tags:
@@ -149,6 +141,7 @@
     dest: /usr/share/man/man1/
     mode: 0444
   loop: "{{ man_pages }}"
+  become: True
   tags:
     - man_pages
     - man
@@ -160,6 +153,7 @@
     dest: /etc/bash_completion.d/
     mode: 0555
   loop: "{{ bash_completions }}"
+  become: True
   tags:
     - bash_completions
     - nox

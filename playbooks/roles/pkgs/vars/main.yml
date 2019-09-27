@@ -28,8 +28,6 @@ fedora_pkgs:
   - python2-pip
   - python3-devel
   - python3-libselinux
-  - vim-enhanced
-  - "@Virtualization"
 
 ubuntu_pkgs:
   - autoconf
@@ -89,7 +87,6 @@ apt_keys:
 
 ppas:
   - "ppa:lutris-team/lutris"
-  #- "ppa:graphics-drivers/ppa"
 
 remote_debs:
   - "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
@@ -105,11 +102,11 @@ apt_repos:
 
 static_binaries:
   - url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
-    dest: "/usr/local/bin/minikube"
+    dest: "minikube"
   - url: "https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-Linux-x86_64"
-    dest: "/usr/local/bin/docker-machine"
+    dest: "docker-machine"
   - url: "https://github.com/mvdan/sh/releases/download/v2.6.4/shfmt_v2.6.4_linux_amd64"
-    dest: "/usr/local/bin/shfmt"
+    dest: "shfmt"
 
 static_archives:
   - "https://releases.hashicorp.com/vault/1.2.1/vault_1.2.1_linux_amd64.zip"
