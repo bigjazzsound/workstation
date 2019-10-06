@@ -107,12 +107,14 @@ static_binaries:
     dest: "docker-machine"
   - url: "https://github.com/mvdan/sh/releases/download/v2.6.4/shfmt_v2.6.4_linux_amd64"
     dest: "shfmt"
+  - url: "https://github.com/aelsabbahy/goss/releases/download/v0.3.7/goss-linux-amd64"
+    dest: "goss"
 
 static_archives:
   - "https://releases.hashicorp.com/vault/1.2.1/vault_1.2.1_linux_amd64.zip"
   - "https://releases.hashicorp.com/packer/1.4.2/packer_1.4.2_linux_amd64.zip"
   - "https://releases.hashicorp.com/consul/1.5.3/consul_1.5.3_linux_amd64.zip"
-  - "https://releases.hashicorp.com/terraform/0.12.6/terraform_0.12.6_linux_amd64.zip"
+  - "https://releases.hashicorp.com/terraform/0.12.9/terraform_0.12.9_linux_amd64.zip"
   - "https://github.com/tsenart/vegeta/releases/download/cli%2Fv12.5.1/vegeta-12.5.1-linux-amd64.tar.gz"
   - "https://github.com/juliosueiras/terraform-lsp/releases/download/v0.0.5/terraform-lsp_0.0.5_linux_amd64.tar.gz"
 
