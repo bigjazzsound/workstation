@@ -21,8 +21,8 @@
     - nox
 
 - name: Setup sudoers file
-  template:
-    src: sudoers.j2
-    dest: /etc/sudoers
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: 'Defaults !tty_tickets'
     validate: 'visudo -cf %s'
-    mode: 0440
