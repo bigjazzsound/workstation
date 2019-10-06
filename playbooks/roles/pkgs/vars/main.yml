@@ -103,7 +103,7 @@ apt_repos:
 static_binaries:
   - url: "https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64"
     dest: "minikube"
-  - url: "https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-Linux-x86_64"
+  - url: "https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-Linux-x86_64"
     dest: "docker-machine"
   - url: "https://github.com/mvdan/sh/releases/download/v2.6.4/shfmt_v2.6.4_linux_amd64"
     dest: "shfmt"
@@ -111,15 +111,12 @@ static_binaries:
     dest: "goss"
 
 static_archives:
-  - "https://releases.hashicorp.com/vault/1.2.1/vault_1.2.1_linux_amd64.zip"
-  - "https://releases.hashicorp.com/packer/1.4.2/packer_1.4.2_linux_amd64.zip"
-  - "https://releases.hashicorp.com/consul/1.5.3/consul_1.5.3_linux_amd64.zip"
+  - "https://releases.hashicorp.com/vault/1.2.3/vault_1.2.3_linux_amd64.zip"
+  - "https://releases.hashicorp.com/packer/1.4.4/packer_1.4.4_linux_amd64.zip"
+  - "https://releases.hashicorp.com/consul/1.6.1/consul_1.6.1_linux_amd64.zip"
   - "https://releases.hashicorp.com/terraform/0.12.9/terraform_0.12.9_linux_amd64.zip"
-  - "https://github.com/tsenart/vegeta/releases/download/cli%2Fv12.5.1/vegeta-12.5.1-linux-amd64.tar.gz"
-  - "https://github.com/juliosueiras/terraform-lsp/releases/download/v0.0.5/terraform-lsp_0.0.5_linux_amd64.tar.gz"
-
-man_pages:
-  - "https://raw.githubusercontent.com/ogham/exa/master/contrib/man/exa.1"
+  - "https://github.com/tsenart/vegeta/releases/download/v12.7.0/vegeta-12.7.0-linux-amd64.tar.gz"
+  - "https://github.com/juliosueiras/terraform-lsp/releases/download/v0.0.9/terraform-lsp_0.0.9_linux_amd64.tar.gz"
 
 bash_completions:
   - "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash"
