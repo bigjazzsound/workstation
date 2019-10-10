@@ -11,7 +11,7 @@ window:
     y: 2
   dynamic_padding: false
   decorations: full
-  startup_mode: Maximized
+  # startup_mode: Maximized
 
 scrolling:
   history: 0
@@ -31,7 +31,7 @@ font:
   italic:
     family: Fira Mono for Powerline
     style: Italic
-  size: 17.0
+  size: 15.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.

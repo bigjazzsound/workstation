@@ -42,11 +42,6 @@
       dnf:
         name: "*"
         state: latest
-      register: repo_data
-
-    - debug:
-        var: repo_data
-      when: repo_data.changed
 
     - name: install pkgs
       dnf:
@@ -133,18 +128,6 @@
   loop: "{{ static_binaries }}"
   tags:
     - static_binaries
-    - nox
-
-- name: Install man pages
-  get_url:
-    url: "{{ item }}"
-    dest: /usr/share/man/man1/
-    mode: 0444
-  loop: "{{ man_pages }}"
-  become: True
-  tags:
-    - man_pages
-    - man
     - nox
 
 - name: Install bash completions
