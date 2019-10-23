@@ -98,7 +98,7 @@ Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 Plug 'rbong/vim-crystalline'
 Plug 'iCyMind/NeoSolarized'
 Plug 'hashivim/vim-hashicorp-tools'
-Plug 'editorconfig/editorconfig-vim', filereadable('.editorconfig') ? {} : { 'on': [] }
+Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 call plug#end()
 
