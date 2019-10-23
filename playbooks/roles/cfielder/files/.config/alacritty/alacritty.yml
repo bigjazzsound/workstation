@@ -23,13 +23,13 @@ tabspaces: 8
 
 font:
   normal:
-    family: Fira Mono for Powerline
+    family: CascadiaCode Nerd Font
     style: Regular
   bold:
-    family: Fira Mono for Powerline
+    family: CascadiaCode Nerd Font
     style: Bold
   italic:
-    family: Fira Mono for Powerline
+    family: CascadiaCode Nerd Font
     style: Italic
   size: 15.0
 
