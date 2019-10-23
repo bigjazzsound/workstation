@@ -49,6 +49,7 @@ endif
 
 " macros
 let @j = 'a"{{  }}"4h'
+let @c = 'i{code:bash}{code}jkki'
 
 " settings for undo files
 set undofile
