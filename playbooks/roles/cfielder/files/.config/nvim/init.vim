@@ -8,8 +8,9 @@ set cursorline
 command! Vimrc :edit $MYVIMRC
 
 " 80 character color difference
-let &colorcolumn=join(range(80,999),",")
-" highlight ColorColumn ctermbg=Black
+" let &colorcolumn=join(range(80,999),",")
+set colorcolumn=80
+highlight ColorColumn ctermbg=DarkBlue
 
 " Lines for splitting
 set splitbelow
@@ -101,10 +102,11 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
+Plug 'herrbischoff/cobalt2.vim'
 call plug#end()
 
 " colorscheme solarized
-colorscheme NeoSolarized
+colorscheme cobalt2
 
 " fugitive git bindings
 nnoremap <leader>ga  :Git add %:p<CR><CR>
