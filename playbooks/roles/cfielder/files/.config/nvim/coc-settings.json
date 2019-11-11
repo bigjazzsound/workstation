@@ -24,7 +24,7 @@
   },
   "languageserver": {
     "terraform": {
-      "command": "/usr/local/bin/terraform-lsp",
+      "command": "terraform-lsp",
       "filetypes": ["terraform"]
     }
   }
