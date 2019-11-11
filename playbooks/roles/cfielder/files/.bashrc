@@ -37,6 +37,7 @@ alias vy="vim /tmp/$(openssl rand -hex 6).yml"
 alias news="newsbeuter"
 alias tf="terraform "
 alias tff="terraform fmt "
+alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
