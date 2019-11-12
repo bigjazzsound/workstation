@@ -34,9 +34,12 @@ alias vs='vim -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
 alias vy="vim /tmp/$(openssl rand -hex 6).yml"
+alias vg="vim +Gstatus +only"
 alias news="newsbeuter"
 alias tf="terraform "
 alias tff="terraform fmt "
+alias tfa="terraform apply "
+alias tfp="terraform plan "
 alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
 
 # neovim all the things, if installed

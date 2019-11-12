@@ -103,6 +103,7 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'herrbischoff/cobalt2.vim'
+Plug 'liuchengxu/vim-clap'
 call plug#end()
 
 " colorscheme solarized
