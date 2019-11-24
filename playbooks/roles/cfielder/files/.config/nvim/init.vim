@@ -98,15 +98,13 @@ Plug 'enricobacis/paste.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 Plug 'rbong/vim-crystalline'
-Plug 'iCyMind/NeoSolarized'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'herrbischoff/cobalt2.vim'
-Plug 'liuchengxu/vim-clap'
+Plug 'psliwka/vim-smoothie'
 call plug#end()
 
-" colorscheme solarized
 colorscheme cobalt2
 
 " fugitive git bindings
@@ -274,4 +272,32 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 " dynamic settings per host
 if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
+endif
+
+" Testing floating fzf window
+if has('nvim') && exists('&winblend') && &termguicolors
+  set winblend=2
+
+  hi NormalFloat guibg=None
+  if exists('g:fzf_colors.bg')
+    call remove(g:fzf_colors, 'bg')
+  endif
+
+  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
+    let $FZF_DEFAULT_OPTS .= ' --border'
+  endif
+
+  function! FloatingFZF()
+    let width = float2nr(&columns * 0.8)
+    let height = float2nr(&lines * 0.6)
+    let opts = { 'relative': 'editor',
+               \ 'row': (&lines - height) / 2,
+               \ 'col': (&columns - width) / 2,
+               \ 'width': width,
+               \ 'height': height }
+
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 endif
