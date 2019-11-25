@@ -102,7 +102,6 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'herrbischoff/cobalt2.vim'
-Plug 'psliwka/vim-smoothie'
 call plug#end()
 
 colorscheme cobalt2
