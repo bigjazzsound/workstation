@@ -56,8 +56,4 @@ function fish_prompt
     $GOPATH/bin/powerline-go -error $status -shell bare -modules 'nix-shell,user,host,ssh,perms,jobs,dotenv,git,aws,terraform-workspace,venv,kube'
 end
 
-function fish_user_key_bindings
-    bind \cn forward-word
-end
-
 set PATH ~/.local/bin ~/.cargo/bin $PATH
