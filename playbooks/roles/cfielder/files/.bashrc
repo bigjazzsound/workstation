@@ -41,6 +41,7 @@ alias tff="terraform fmt "
 alias tfa="terraform apply "
 alias tfp="terraform plan "
 alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
+vf() { nvim $(fzf --height 60% --preview "bat --color=always --style=numbers --theme TwoDark -r ':30' {}") ; }
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
