@@ -118,6 +118,7 @@
   loop: "{{ static_archives }}"
   tags:
     - static_archives
+    - binaries
     - nox
 
 - name: Install static binaries
@@ -128,6 +129,7 @@
   loop: "{{ static_binaries }}"
   tags:
     - static_binaries
+    - binaries
     - nox
 
 - name: Install bash completions
