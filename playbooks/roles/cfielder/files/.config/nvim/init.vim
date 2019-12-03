@@ -85,24 +85,24 @@ endif
 unlet! autoload_plug_path
 
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'enricobacis/paste.vim'
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'herrbischoff/cobalt2.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive', { 'tag': '*' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-repeat'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'sheerun/vim-polyglot'
-Plug 'enricobacis/paste.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
-Plug 'rbong/vim-crystalline'
-Plug 'hashivim/vim-hashicorp-tools'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
-Plug 'herrbischoff/cobalt2.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'rbong/vim-crystalline'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive', { 'tag': '*' }
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 colorscheme cobalt2
