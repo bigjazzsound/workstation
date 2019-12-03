@@ -102,6 +102,7 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'herrbischoff/cobalt2.vim'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 colorscheme cobalt2
@@ -181,7 +182,6 @@ let g:coc_global_extensions = [
 \   'coc-json',
 \   'coc-python',
 \   'coc-yaml',
-\   'coc-git',
 \   'coc-vimlsp',
 \   'coc-docker',
 \]
