@@ -3,7 +3,6 @@ all_pkgs:
   - bash
   - bash-completion
   - curl
-  - docker-compose
   - flatpak
   - git
   - golang
@@ -19,12 +18,10 @@ all_pkgs:
 
 fedora_pkgs:
   - chromium
-  - docker
   - google-chrome-stable
   - libguestfs-tools-c
   - python2
   - python2-devel
-  - python2-libselinux
   - python2-pip
   - python3-devel
   - python3-libselinux

@@ -166,7 +166,7 @@
         warn: False
 
     - name: Install rust packages
-      command: "cargo install -q -j {{ ansible_processor_cores }} {{ rust_pkgs | join(' ') }}"
+      command: "cargo install -q {{ rust_pkgs | join(' ') }}"
       register: result
       changed_when: "not result.rc == 101"
       failed_when: "not result.rc == 101"
