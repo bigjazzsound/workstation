@@ -5,6 +5,7 @@ set mouse-=a
 set inccommand=nosplit
 set tags=tags
 set cursorline
+set winblend=15
 command! Vimrc :edit $MYVIMRC
 
 " 80 character color difference
