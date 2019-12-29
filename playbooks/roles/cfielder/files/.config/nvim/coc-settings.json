@@ -1,6 +1,7 @@
 {
   "python.autoComplete.addBrackets": true,
   "python.formatting.provider": "black",
+  "python.jediEnabled": false,
   "yaml.format.enable": true,
   "yaml.validate": true,
   "yaml.hover": true,
@@ -25,7 +26,9 @@
   "languageserver": {
     "terraform": {
       "command": "terraform-lsp",
-      "filetypes": ["terraform"]
+      "filetypes": [
+        "terraform"
+      ]
     }
   }
 }
