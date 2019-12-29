@@ -96,7 +96,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
-Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
+" Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'rbong/vim-crystalline'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
