@@ -85,7 +85,6 @@ endif
 unlet! autoload_plug_path
 
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'enricobacis/paste.vim'
@@ -94,6 +93,7 @@ Plug 'herrbischoff/cobalt2.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'rbong/vim-crystalline'
