@@ -57,3 +57,7 @@ function fish_prompt
 end
 
 set PATH ~/.local/bin ~/.cargo/bin $PATH
+
+if test -e ~/.config/fish/local.fish
+    source ~/.config/fish/local.fish
+end
