@@ -7,7 +7,7 @@ alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
 alias sb="source ~/.bashrc"
-alias vs='vim -c "set spell" /tmp/(openssl rand -hex 6).md'
+alias vs='vim /tmp/(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/(openssl rand -hex 6).md'
 alias vj="vim /tmp/(openssl rand -hex 6).json"
 alias vy="vim /tmp/(openssl rand -hex 6).yml"

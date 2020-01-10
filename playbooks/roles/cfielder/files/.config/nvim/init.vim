@@ -94,6 +94,7 @@ Plug 'herrbischoff/cobalt2.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'justinmk/vim-dirvish'
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
@@ -108,6 +109,9 @@ Plug 'tpope/vim-surround'
 call plug#end()
 
 colorscheme cobalt2
+
+" vim-signify settings
+let g:signify_sign_change='~'
 
 " fugitive git bindings
 nnoremap <leader>ga  :Git add %:p<CR><CR>
