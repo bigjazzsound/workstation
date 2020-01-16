@@ -95,7 +95,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'justinmk/vim-dirvish'
+Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
 " Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
@@ -103,7 +105,9 @@ Plug 'rbong/vim-crystalline'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 call plug#end()
@@ -112,6 +116,9 @@ colorscheme cobalt2
 
 " vim-signify settings
 let g:signify_sign_change='~'
+
+" vim-sneak
+let g:sneak#label = 1
 
 " fugitive git bindings
 nnoremap <leader>ga  :Git add %:p<CR><CR>
