@@ -1,12 +1,62 @@
-set nu
-syntax on
-set termguicolors
-set mouse-=a
-set inccommand=nosplit
-set tags=tags
-set cursorline
-set winblend=15
-command! Vimrc :edit $MYVIMRC
+" Testing a couple of options available via the lua api.
+lua <<EOF
+local api = vim.api
+
+api.nvim_win_set_option(0, 'number', true)
+api.nvim_set_option(
+    'statusline',
+    '[%n] %f%h%w%m%r  %{fugitive#head()} %{StatusDiagnostic()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P '
+)
+
+api.nvim_command("command! Vimrc :edit $MYVIMRC")
+api.nvim_command("autocmd! VimResized * :wincmd =")
+
+api.nvim_set_option('syntax', 'on')
+api.nvim_set_option('termguicolors', true)
+api.nvim_set_option('inccommand', 'nosplit')
+api.nvim_set_option('splitbelow', true)
+api.nvim_set_option('splitright', true)
+api.nvim_set_option('cursorline', true)
+api.nvim_set_option('tags', 'tags')
+api.nvim_set_option('winblend', 5)
+api.nvim_set_option('laststatus', 2)
+
+api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap = true, silent = true})
+api.nvim_set_keymap('i', '<Esc>', '', {noremap = true, silent = true})
+
+-- split navigation
+api.nvim_set_keymap('n', '<C-J>', '<C-W><C-J>', {noremap = true, silent = true})
+api.nvim_set_keymap('n', '<C-K>', '<C-W><C-K>', {noremap = true, silent = true})
+api.nvim_set_keymap('n', '<C-L>', '<C-W><C-L>', {noremap = true, silent = true})
+api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', {noremap = true, silent = true})
+
+-- settings for undofiles
+api.nvim_set_option('undofile', false)
+api.nvim_set_option('undodir', '~/.vim/undo/')
+api.nvim_set_option('backupdir', '~/.vim/backup/')
+api.nvim_set_option('directory', '~/.vim/swp/')
+
+-- settings for search
+api.nvim_set_option('hlsearch', true)
+api.nvim_set_option('incsearch', true)
+
+-- settings for tabs
+api.nvim_set_option('expandtab', true)
+api.nvim_set_option('autoindent', true)
+api.nvim_set_option('smarttab', true)
+
+api.nvim_set_option('listchars', 'tab:..,trail:-,extends:>,precedes:<,nbsp:~')
+EOF
+
+" set nu
+" syntax on
+" set termguicolors
+" set mouse-=a
+" set inccommand=nosplit
+" set tags=tags
+" set cursorline
+" set winblend=15
+" command! Vimrc :edit $MYVIMRC
 
 " 80 character color difference
 " let &colorcolumn=join(range(80,999),",")
@@ -14,24 +64,24 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=DarkBlue
 
 " Lines for splitting
-set splitbelow
-set splitright
+" set splitbelow
+" set splitright
 
 " automatically rebalance windows on vim resize
-augroup auto_resize
-    autocmd!
-    autocmd VimResized * :wincmd =
-augroup END
+" augroup auto_resize
+"     autocmd!
+"     autocmd VimResized * :wincmd =
+" augroup END
 
 " Remaps
-inoremap jk <Esc>
-inoremap <Esc> <Nop>
+" inoremap jk <Esc>
+" inoremap <Esc> <Nop>
 
 " split navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " shortcuts with map leader
 let mapleader=" "
@@ -54,22 +104,22 @@ let @j = 'a"{{  }}"4h'
 let @c = 'i{code:bash}{code}jkki'
 
 " settings for undo files
-set undofile
-set undodir=~/.vim/undo/
-set backupdir=~/.vim/backup/
-set directory=~/.vim/swp/
+" set undofile
+" set undodir=~/.vim/undo/
+" set backupdir=~/.vim/backup/
+" set directory=~/.vim/swp/
 
 " settings for search
-set hlsearch
-set incsearch
+" set hlsearch
+" set incsearch
 
 " settings for tabs
-set expandtab
-set autoindent
-set smarttab
+" set expandtab
+" set autoindent
+" set smarttab
 
 " settings for listchars
-set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
+" set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
 
 "
 " Plugins
@@ -78,7 +128,7 @@ set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
 " Download vim-plug if it is not already present
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 if !filereadable(autoload_plug_path)
-  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
+  silent execute '!curl -fLo ' . autoload_plug_path . ' --create-dirs
       \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
   autocmd VimEnter * PlugInstall --sync
   source $MYVIMRC
@@ -91,9 +141,11 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'enricobacis/paste.vim'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'herrbischoff/cobalt2.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-signify'
@@ -101,7 +153,6 @@ Plug 'mhinz/vim-startify'
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
 " Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
-Plug 'rbong/vim-crystalline'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -149,44 +200,6 @@ function! StatusDiagnostic() abort
   endif
   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
-
-function! StatusLine(current, width)
-  let l:s = ''
-
-  if a:current
-    let l:s .= crystalline#mode() . crystalline#right_mode_sep('')
-  else
-    let l:s .= '%#CrystallineInactive#'
-  endif
-  let l:s .= ' %f%h%w%m%r '
-  if a:current
-    let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()} %{StatusDiagnostic()}'
-  endif
-
-  let l:s .= '%='
-  if a:current
-    let l:s .= crystalline#left_sep('', 'Fill') . ' %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
-    let l:s .= crystalline#left_mode_sep('')
-  endif
-  if a:width > 80
-    let l:s .= ' %{&ft}  %l/%L  %P '
-  else
-    let l:s .= ' '
-  endif
-
-  return l:s
-endfunction
-
-function! TabLine()
-    let l:vimlabel = has("nvim") ? "NVIM" : "VIM"
-    return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab#'
-endfunction
-
-let g:crystalline_enable_sep = 1
-let g:crystalline_statusline_fn = 'StatusLine'
-let g:crystalline_tabline_fn = 'TabLine'
-let g:crystalline_theme = 'solarized'
-set laststatus=2
 
 " coc settings
 let g:coc_global_extensions = [
@@ -306,9 +319,6 @@ nnoremap <silent> <leader>cp :<C-u>CocListResume<CR>
 nnoremap <F3> :Dispatch<CR>
 nnoremap <F4> :Start<CR>
 
-" vim-markdown
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'help']
-
 " Goyo
 nnoremap <leader>g :Goyo<CR>
 function! s:goyo_enter()
@@ -348,32 +358,75 @@ endif
 
 " Terminal buffer options for fzf
 autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu
+autocmd  FileType fzf set noshowmode noruler nonu signcolumn=no
+let $FZF_DEFAULT_OPTS .= ' --layout=reverse -m --border'
 
 " Testing floating fzf window
-if has('nvim') && exists('&winblend') && &termguicolors
-  set winblend=15
+" if has('nvim') && exists('&winblend') && &termguicolors
+"   set winblend=5
 
-  hi NormalFloat guibg=None
-  if exists('g:fzf_colors.bg')
-    call remove(g:fzf_colors, 'bg')
-  endif
+"   hi NormalFloat guibg=None
+"   if exists('g:fzf_colors.bg')
+"     call remove(g:fzf_colors, 'bg')
+"   endif
 
-  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
-    let $FZF_DEFAULT_OPTS .= ' --border --layout=reverse'
-  endif
+"   if stridx($FZF_DEFAULT_OPTS, '--border') == -1
+"     let $FZF_DEFAULT_OPTS .= ' --border --layout=reverse'
+"   endif
 
-  function! FloatingFZF()
-    let width = float2nr(&columns * 0.8)
-    let height = float2nr(&lines * 0.6)
-    let opts = { 'relative': 'editor',
-               \ 'row': (&lines - height) / 2,
-               \ 'col': (&columns - width) / 2,
-               \ 'width': width,
-               \ 'height': height }
+"   function! FloatingFZF()
+"     let width = float2nr(&columns * 0.8)
+"     let height = float2nr(&lines * 0.6)
+"     let opts = { 'relative': 'editor',
+"                \ 'row': (&lines - height) / 2,
+"                \ 'col': (&columns - width) / 2,
+"                \ 'width': width,
+"                \ 'height': height }
 
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-  endfunction
+"     call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+"   endfunction
 
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-endif
+"   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+" endif
+
+lua <<EOF
+function NavigationFloatingWin()
+  -- get the editor's max width and height
+  local width = vim.api.nvim_get_option("columns")
+  local height = vim.api.nvim_get_option("lines")
+
+  -- create a new, scratch buffer, for fzf
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+
+  -- if the editor is big enough
+  if (width > 150 or height > 35) then
+    -- fzf's window height is 3/4 of the max height, but not more than 30
+    local win_height = math.min(math.ceil(height * 3 / 4), 30)
+    local win_width
+
+    -- if the width is small
+    if (width < 150) then
+      -- just subtract 8 from the editor's width
+      win_width = math.ceil(width - 8)
+    else
+      -- use 90% of the editor's width
+      win_width = math.ceil(width * 0.9)
+    end
+
+    -- settings for the fzf window
+    local opts = {
+      relative = "editor",
+      width = win_width,
+      height = win_height,
+      row = math.ceil((height - win_height) / 2),
+      col = math.ceil((width - win_width) / 2)
+    }
+
+    -- create a new floating window, centered in the editor
+    local win = vim.api.nvim_open_win(buf, true, opts)
+  end
+end
+EOF
+
+let g:fzf_layout = { 'window': 'lua NavigationFloatingWin()' }
