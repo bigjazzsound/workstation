@@ -1,192 +1,192 @@
 " Testing a couple of options available via the lua api.
 lua <<EOF
 local api = vim.api
+local home = os.getenv("HOME")
+local DEFAULT_KEYMAP = { noremap = true, silent = true }
+local set_option = api.nvim_set_option
+local set_keymap = api.nvim_set_keymap
 
 api.nvim_win_set_option(0, 'number', true)
-api.nvim_set_option(
-    'statusline',
-    '[%n] %f%h%w%m%r  %{fugitive#head()} %{StatusDiagnostic()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P '
+set_option(
+  'statusline',
+  '[%n] %f%h%w%m%r  %{fugitive#head()} %{StatusDiagnostic()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P '
 )
 
 api.nvim_command("command! Vimrc :edit $MYVIMRC")
 api.nvim_command("autocmd! VimResized * :wincmd =")
 
-api.nvim_set_option('syntax', 'on')
-api.nvim_set_option('termguicolors', true)
-api.nvim_set_option('inccommand', 'nosplit')
-api.nvim_set_option('splitbelow', true)
-api.nvim_set_option('splitright', true)
-api.nvim_set_option('cursorline', true)
-api.nvim_set_option('tags', 'tags')
-api.nvim_set_option('winblend', 5)
-api.nvim_set_option('laststatus', 2)
+set_option('syntax', 'on')
+set_option('termguicolors', true)
+set_option('inccommand', 'nosplit')
+set_option('splitbelow', true)
+set_option('splitright', true)
+set_option('cursorline', true)
+set_option('tags', 'tags')
+set_option('winblend', 5)
+set_option('laststatus', 2)
 
-api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap = true, silent = true})
-api.nvim_set_keymap('i', '<Esc>', '', {noremap = true, silent = true})
+set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
+set_keymap('i', '<Esc>', '', DEFAULT_KEYMAP)
 
 -- split navigation
-api.nvim_set_keymap('n', '<C-J>', '<C-W><C-J>', {noremap = true, silent = true})
-api.nvim_set_keymap('n', '<C-K>', '<C-W><C-K>', {noremap = true, silent = true})
-api.nvim_set_keymap('n', '<C-L>', '<C-W><C-L>', {noremap = true, silent = true})
-api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', {noremap = true, silent = true})
+set_keymap('n', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
+set_keymap('n', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
+set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
+set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- settings for undofiles
-api.nvim_set_option('undofile', false)
-api.nvim_set_option('undodir', '~/.vim/undo/')
-api.nvim_set_option('backupdir', '~/.vim/backup/')
-api.nvim_set_option('directory', '~/.vim/swp/')
+set_option('undofile', false)
+set_option('undodir', home .. '/.vim/undo/')
+set_option('backupdir', home .. '/.vim/backup/')
+set_option('directory', home .. '/.vim/swp/')
 
 -- settings for search
-api.nvim_set_option('hlsearch', true)
-api.nvim_set_option('incsearch', true)
+set_option('hlsearch', true)
+set_option('incsearch', true)
 
 -- settings for tabs
-api.nvim_set_option('expandtab', true)
-api.nvim_set_option('autoindent', true)
-api.nvim_set_option('smarttab', true)
+set_option('expandtab', true)
+set_option('autoindent', true)
+set_option('smarttab', true)
 
-api.nvim_set_option('listchars', 'tab:..,trail:-,extends:>,precedes:<,nbsp:~')
+set_option('listchars', 'tab:..,trail:-,extends:>,precedes:<,nbsp:~')
+
+-- 80 character color difference
+api.nvim_win_set_option(0, 'colorcolumn', '80')
+api.nvim_command('highlight ColorColumn ctermbg=DarkBlue')
+
+-- shortcuts with map leader
+api.nvim_command('let mapleader=" "')
+set_keymap('n', '<leader>/', ':nohls <enter>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>w', ':w <enter>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>bd', ':bd <enter>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>bn', ':bn <enter>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>bp', ':bp <enter>', DEFAULT_KEYMAP)
+
+-- Plugins
+local autoload_plug_path = api.nvim_eval("stdpath('config')") .. '/site/autoload/plug.vim'
+local plug_file = io.open(autoload_plug_path , "r")
+if plug_file == nil then
+  os.execute('curl -fLo ' .. autoload_plug_path .. ' --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"')
+  api.nvim_command('autocmd VimEnter * PlugInstall --sync')
+  api.nvim_command('source $MYVIMRC')
+else
+  local plugins = {
+    "'christoomey/vim-tmux-navigator'",
+    "'editorconfig/editorconfig-vim'",
+    "'enricobacis/paste.vim'",
+    "'hashivim/vim-hashicorp-tools'",
+    "'herrbischoff/cobalt2.vim'",
+    "'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }",
+    "'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }",
+    "'junegunn/fzf.vim'",
+    "'junegunn/goyo.vim', { 'for': 'markdown' }",
+    "'junegunn/vim-easy-align'",
+    "'justinmk/vim-dirvish'",
+    "'justinmk/vim-sneak'",
+    "'mhinz/vim-signify'",
+    "'mhinz/vim-startify'",
+    "'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }",
+    "'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }",
+    "'rhysd/git-messenger.vim'",
+    "'sheerun/vim-polyglot'",
+    "'tpope/vim-commentary'",
+    "'tpope/vim-dispatch'",
+    "'tpope/vim-eunuch'",
+    "'tpope/vim-fugitive'",
+    "'tpope/vim-obsession'",
+    "'tpope/vim-repeat'",
+    "'tpope/vim-surround'",
+  }
+  api.nvim_command("call plug#begin('" .. home .. "/.vim/plugged')")
+  for index, value in ipairs(plugins) do api.nvim_command("Plug " .. value) end
+  api.nvim_command("call plug#end()")
+end
+
+api.nvim_command('colorscheme cobalt2')
+
+-- vim-signify settings
+vim.g.signify_sign_change = '~'
+
+-- vim-sneak
+vim.g['sneak#label'] = 1
+
+-- fugitive git bindings
+set_keymap('n', '<leader>ga', ':Git add %:p<CR><CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gs', ':Gstatus<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gc', ':Gcommit -v -q<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gt', ':Gcommit -v -q %:p<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gd', ':Gdiff<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>ge', ':Gedit<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gr', ':Gread<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gw', ':Gwrite<CR><CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gl', ':silent! Glog<CR>:bot copen<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gp', ':Ggrep<Space>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gm', ':Gmove<Space>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gb', ':Gblame!<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>go', ':Git checkout<Space>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gps', ':Dispatch! git push<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gpl', ':Dispatch! git pull<CR>', DEFAULT_KEYMAP)
+
+-- editorconfig
+vim.g['EditorConfig_exclude_patterns'] = { 'fugitive://.\\*' }
+
+-- dispatch settings
+set_keymap('n', '<F3>', ':Dispatch<CR>', DEFAULT_KEYMAP)
+set_keymap('n', '<F4>', ':Start<CR>', DEFAULT_KEYMAP)
+
+-- FZF
+set_keymap('n', '<C-p>', ':FZF<cr>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>f', ':FZF <enter>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>r', ':Rg <enter>', DEFAULT_KEYMAP)
+set_keymap('n', '<leader>b', ':Buffers <enter>', DEFAULT_KEYMAP)
+
+-- Terminal buffer options for fzf
+api.nvim_command("autocmd! FileType fzf set noshowmode noruler nonu signcolumn=no")
+api.nvim_command("let $FZF_DEFAULT_OPTS .= ' --layout=reverse -m --border'")
+
+function NavigationFloatingWin()
+  -- get the editor's max width and height
+  local width = vim.api.nvim_get_option("columns")
+  local height = vim.api.nvim_get_option("lines")
+
+  -- create a new, scratch buffer, for fzf
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+
+  -- if the editor is big enough
+  if (width > 150 or height > 35) then
+    -- fzf's window height is 3/4 of the max height, but not more than 30
+    local win_height = math.min(math.ceil(height * 3 / 4), 30)
+    local win_width
+
+    -- if the width is small
+    if (width < 150) then
+      -- just subtract 8 from the editor's width
+      win_width = math.ceil(width - 8)
+    else
+      -- use 90% of the editor's width
+      win_width = math.ceil(width * 0.9)
+    end
+
+    -- settings for the fzf window
+    local opts = {
+      relative = "editor",
+      width = win_width,
+      height = win_height,
+      row = math.ceil((height - win_height) / 2),
+      col = math.ceil((width - win_width) / 2)
+    }
+
+    -- create a new floating window, centered in the editor
+    local win = vim.api.nvim_open_win(buf, true, opts)
+  end
+end
+
+vim.g['fzf_layout'] = { window = 'lua NavigationFloatingWin()' }
 EOF
 
-" set nu
-" syntax on
-" set termguicolors
-" set mouse-=a
-" set inccommand=nosplit
-" set tags=tags
-" set cursorline
-" set winblend=15
-" command! Vimrc :edit $MYVIMRC
-
-" 80 character color difference
-" let &colorcolumn=join(range(80,999),",")
-set colorcolumn=80
-highlight ColorColumn ctermbg=DarkBlue
-
-" Lines for splitting
-" set splitbelow
-" set splitright
-
-" automatically rebalance windows on vim resize
-" augroup auto_resize
-"     autocmd!
-"     autocmd VimResized * :wincmd =
-" augroup END
-
-" Remaps
-" inoremap jk <Esc>
-" inoremap <Esc> <Nop>
-
-" split navigation
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
-
-" shortcuts with map leader
-let mapleader=" "
-nnoremap <leader>/ :nohls <enter>
-nnoremap <leader>w :w <enter>
-nnoremap <leader>W :%s/\s\+$//e <enter>
-nnoremap <leader>n :set nu! <enter>
-nnoremap <leader>l :set list! <enter>
-nnoremap <leader>s :set spell!
-nnoremap <leader>T :argadd `rg '.*role: (\w*).*' % -r '$1' --trim \\| xargs -i{} fd -tf . roles/{}/tasks` \| tab all <enter>
-nnoremap <leader>bd :bd <enter>
-nnoremap <leader>bn :bn <enter>
-nnoremap <leader>bp :bp <enter>
-if executable("clip.exe")
-    nnoremap <leader>c :w !clip.exe <enter> <enter>
-endif
-
-" macros
-let @j = 'a"{{  }}"4h'
-let @c = 'i{code:bash}{code}jkki'
-
-" settings for undo files
-" set undofile
-" set undodir=~/.vim/undo/
-" set backupdir=~/.vim/backup/
-" set directory=~/.vim/swp/
-
-" settings for search
-" set hlsearch
-" set incsearch
-
-" settings for tabs
-" set expandtab
-" set autoindent
-" set smarttab
-
-" settings for listchars
-" set listchars=tab:..,trail:-,extends:>,precedes:<,nbsp:~
-
-"
-" Plugins
-"
-
-" Download vim-plug if it is not already present
-let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
-if !filereadable(autoload_plug_path)
-  silent execute '!curl -fLo ' . autoload_plug_path . ' --create-dirs
-      \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
-  autocmd VimEnter * PlugInstall --sync
-  source $MYVIMRC
-endif
-unlet! autoload_plug_path
-
-call plug#begin('~/.vim/plugged')
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'enricobacis/paste.vim'
-Plug 'hashivim/vim-hashicorp-tools'
-Plug 'herrbischoff/cobalt2.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-dirvish'
-Plug 'justinmk/vim-sneak'
-Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
-" Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive', { 'tag': '*' }
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-call plug#end()
-
-colorscheme cobalt2
-
-" vim-signify settings
-let g:signify_sign_change='~'
-
-" vim-sneak
-let g:sneak#label = 1
-
-" fugitive git bindings
-nnoremap <leader>ga  :Git add %:p<CR><CR>
-nnoremap <leader>gs  :Gstatus<CR>
-nnoremap <leader>gc  :Gcommit -v -q<CR>
-nnoremap <leader>gt  :Gcommit -v -q %:p<CR>
-nnoremap <leader>gd  :Gdiff<CR>
-nnoremap <leader>ge  :Gedit<CR>
-nnoremap <leader>gr  :Gread<CR>
-nnoremap <leader>gw  :Gwrite<CR><CR>
-nnoremap <leader>gl  :silent! Glog<CR>:bot copen<CR>
-nnoremap <leader>gp  :Ggrep<Space>
-nnoremap <leader>gm  :Gmove<Space>
-nnoremap <leader>gb  :Gblame!<CR>
-nnoremap <leader>go  :Git checkout<Space>
-nnoremap <leader>gps :Dispatch! git push<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
+" EVERYTHING ELSE here is COC related, which might go after nvim lsp hits
 
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
@@ -314,119 +314,3 @@ nnoremap <silent> <leader>cj :<C-u>CocNext<CR>
 nnoremap <silent> <leader>ck :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <leader>cp :<C-u>CocListResume<CR>
-
-" dispatch settings
-nnoremap <F3> :Dispatch<CR>
-nnoremap <F4> :Start<CR>
-
-" Goyo
-nnoremap <leader>g :Goyo<CR>
-function! s:goyo_enter()
-  let b:quitting = 0
-  let b:quitting_bang = 0
-  autocmd QuitPre <buffer> let b:quitting = 1
-  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-endfunction
-
-" Quit Vim if this is the only remaining buffer
-function! s:goyo_leave()
-  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    if b:quitting_bang
-      qa!
-    else
-      qa
-    endif
-  endif
-endfunction
-
-autocmd! User GoyoEnter call <SID>goyo_enter()
-autocmd! User GoyoLeave call <SID>goyo_leave()
-
-" FZF
-nnoremap <C-p> :FZF<cr>
-nnoremap <leader>f :FZF <enter>
-nnoremap <leader>r :Rg <enter>
-nnoremap <leader>b :Buffers <enter>
-
-" editorconfig
-let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
-
-" dynamic settings per host
-if filereadable(expand("$HOME/.vimrc.local"))
-    source $HOME/.vimrc.local
-endif
-
-" Terminal buffer options for fzf
-autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu signcolumn=no
-let $FZF_DEFAULT_OPTS .= ' --layout=reverse -m --border'
-
-" Testing floating fzf window
-" if has('nvim') && exists('&winblend') && &termguicolors
-"   set winblend=5
-
-"   hi NormalFloat guibg=None
-"   if exists('g:fzf_colors.bg')
-"     call remove(g:fzf_colors, 'bg')
-"   endif
-
-"   if stridx($FZF_DEFAULT_OPTS, '--border') == -1
-"     let $FZF_DEFAULT_OPTS .= ' --border --layout=reverse'
-"   endif
-
-"   function! FloatingFZF()
-"     let width = float2nr(&columns * 0.8)
-"     let height = float2nr(&lines * 0.6)
-"     let opts = { 'relative': 'editor',
-"                \ 'row': (&lines - height) / 2,
-"                \ 'col': (&columns - width) / 2,
-"                \ 'width': width,
-"                \ 'height': height }
-
-"     call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-"   endfunction
-
-"   let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-" endif
-
-lua <<EOF
-function NavigationFloatingWin()
-  -- get the editor's max width and height
-  local width = vim.api.nvim_get_option("columns")
-  local height = vim.api.nvim_get_option("lines")
-
-  -- create a new, scratch buffer, for fzf
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
-
-  -- if the editor is big enough
-  if (width > 150 or height > 35) then
-    -- fzf's window height is 3/4 of the max height, but not more than 30
-    local win_height = math.min(math.ceil(height * 3 / 4), 30)
-    local win_width
-
-    -- if the width is small
-    if (width < 150) then
-      -- just subtract 8 from the editor's width
-      win_width = math.ceil(width - 8)
-    else
-      -- use 90% of the editor's width
-      win_width = math.ceil(width * 0.9)
-    end
-
-    -- settings for the fzf window
-    local opts = {
-      relative = "editor",
-      width = win_width,
-      height = win_height,
-      row = math.ceil((height - win_height) / 2),
-      col = math.ceil((width - win_width) / 2)
-    }
-
-    -- create a new floating window, centered in the editor
-    local win = vim.api.nvim_open_win(buf, true, opts)
-  end
-end
-EOF
-
-let g:fzf_layout = { 'window': 'lua NavigationFloatingWin()' }
