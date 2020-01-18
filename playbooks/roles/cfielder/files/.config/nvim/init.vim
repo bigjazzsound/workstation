@@ -88,7 +88,6 @@ else
     "'mhinz/vim-startify'",
     "'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }",
     "'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }",
-    "'rhysd/git-messenger.vim'",
     "'sheerun/vim-polyglot'",
     "'tpope/vim-commentary'",
     "'tpope/vim-dispatch'",
