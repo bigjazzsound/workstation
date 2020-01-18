@@ -6,6 +6,7 @@ dirs:
   - ".config/dircolors"
   - ".config/fish"
   - ".config/nvim"
+  - ".config/nvim/lua"
   - ".fonts"
   - ".local/go"
   - ".local/go/bin"
