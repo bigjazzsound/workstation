@@ -89,6 +89,8 @@ else
 'mhinz/vim-startify'
 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
+'pearofducks/ansible-vim', { 'for': 'yaml' }
+'stephpy/vim-yaml', { 'for': 'yaml' }
 'tpope/vim-commentary'
 'tpope/vim-dispatch'
 'tpope/vim-eunuch'
