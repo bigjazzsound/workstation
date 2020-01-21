@@ -79,7 +79,7 @@ else
 'christoomey/vim-tmux-navigator'
 'editorconfig/editorconfig-vim'
 'enricobacis/paste.vim'
-'hashivim/vim-terraform'
+'hashivim/vim-terraform', { 'for': 'terraform' }
 'herrbischoff/cobalt2.vim'
 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -94,6 +94,7 @@ else
 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
 'pearofducks/ansible-vim', { 'for': 'yaml' }
 'stephpy/vim-yaml', { 'for': 'yaml' }
+'tbastos/vim-lua', { 'for': 'lua' }
 'tpope/vim-commentary'
 'tpope/vim-dispatch'
 'tpope/vim-eunuch'
