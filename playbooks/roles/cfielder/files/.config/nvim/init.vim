@@ -2,6 +2,9 @@ lua <<EOF
   require('init')
 EOF
 
+" This remap is pure magic and I don't know how to convert it to lua
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/':'%%'
+
 " EVERYTHING ELSE here is COC related, which might go after nvim lsp hits
 
 function! StatusDiagnostic() abort
