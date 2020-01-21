@@ -64,6 +64,7 @@ set_keymap('n', '<leader>bp', ':bp <enter>', DEFAULT_KEYMAP)
 -- shortucts for cmdline mode
 set_keymap('c', '<A-b>', '<S-Left>', { noremap = true })
 set_keymap('c', '<A-e>', '<S-Right>', { noremap = true })
+set_keymap('c', '%%', [[<C-R>=expand('%:h').'/'<CR>]], { noremap = true })
 
 -- Plugins
 local autoload_plug_path = api.nvim_eval("stdpath('data')") .. '/site/autoload/plug.vim'
