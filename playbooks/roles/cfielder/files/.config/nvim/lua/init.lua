@@ -64,6 +64,8 @@ set_keymap('n', '<leader>bp', ':bp <enter>', DEFAULT_KEYMAP)
 -- shortucts for cmdline mode
 set_keymap('c', '<A-b>', '<S-Left>', { noremap = true })
 set_keymap('c', '<A-e>', '<S-Right>', { noremap = true })
+set_keymap('c', '<c-e>', '<End>', { noremap = true })
+set_keymap('c', '<c-a>', '<Home>', { noremap = true })
 set_keymap('c', '%%', [[<C-R>=expand('%:h').'/'<CR>]], { noremap = true })
 
 -- Plugins
