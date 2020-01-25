@@ -108,14 +108,12 @@ static_binaries:
     dest: "goss"
 
 static_archives:
-  - "https://releases.hashicorp.com/vault/1.2.3/vault_1.2.3_linux_amd64.zip"
-  - "https://releases.hashicorp.com/packer/1.4.4/packer_1.4.4_linux_amd64.zip"
-  - "https://releases.hashicorp.com/consul/1.6.1/consul_1.6.1_linux_amd64.zip"
-  - "https://releases.hashicorp.com/terraform/0.12.17/terraform_0.12.17_linux_amd64.zip"
-  - "https://github.com/tsenart/vegeta/releases/download/v12.7.0/vegeta-12.7.0-linux-amd64.tar.gz"
+  - "https://github.com/I60R/page/releases/download/v2.1.0/page-v2.1.0-x86_64-unknown-linux-gnu.tar.gz"
   - "https://github.com/juliosueiras/terraform-lsp/releases/download/v0.0.9/terraform-lsp_0.0.9_linux_amd64.tar.gz"
+  - "https://github.com/tsenart/vegeta/releases/download/v12.7.0/vegeta-12.7.0-linux-amd64.tar.gz"
+  - "https://releases.hashicorp.com/vault/1.3.2/vault_1.3.2_linux_amd64.zip"
 
 bash_completions:
   - "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash"
-  - "https://raw.githubusercontent.com/ogham/exa/master/contrib/completions.bash"
   - "https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux"
+  - "https://raw.githubusercontent.com/ogham/exa/master/contrib/completions.bash"

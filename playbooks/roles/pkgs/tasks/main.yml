@@ -110,6 +110,27 @@
   when: ansible_distribution == 'Ubuntu'
   become: true
 
+- name: Get version and download information for hashicorp products
+  uri:
+    url: "https://checkpoint-api.hashicorp.com/v1/check/{{ item }}"
+    return_content: yes
+  register: hashicorp_return_value
+  loop:
+    - "consul"
+    - "packer"
+    - "terraform"
+  tags:
+    - "hashicorp"
+
+- name: Install hashicorp packages
+  unarchive:
+    src: "{{ item.url }}{{ item.name }}_{{ item.version }}_linux_amd64.zip "
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin/"
+    remote_src: true
+  loop: "{{ hashicorp_return_value | json_query('results[].json.{ name: product, version: current_version, url: current_download_url }') }}"
+  tags:
+    - "hashicorp"
+
 - name: Install static archives
   unarchive:
     src: "{{ item }}"
