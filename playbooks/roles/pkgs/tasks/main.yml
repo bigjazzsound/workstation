@@ -8,15 +8,15 @@
         baseurl: "http://dl.google.com/linux/chrome/rpm/stable/$basearch"
         gpgcheck: 1
         gpgkey: "https://dl.google.com/linux/linux_signing_key.pub"
-        enabled: True
+        enabled: true
 
     - name: Enable VSCode repo
       yum_repository:
         name: code
         description: Visual Studio Code
         baseurl: "https://packages.microsoft.com/yumrepos/vscode"
-        enabled: True
-        gpgcheck: True
+        enabled: true
+        gpgcheck: true
         gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
 
     - name: Setup RPM Fusion Repos
@@ -31,9 +31,9 @@
         file: kubernetes
         description: Kubernetes
         baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64"
-        enabled: True
-        gpgcheck: True
-        repo_gpgcheck: True
+        enabled: true
+        gpgcheck: true
+        repo_gpgcheck: true
         gpgkey:
           - "https://packages.cloud.google.com/yum/doc/yum-key.gpg"
           - "https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
@@ -49,7 +49,7 @@
         state: present
       register: installed_packages
   when: ansible_distribution == 'Fedora'
-  become: True
+  become: true
 
 - name: Ubuntu package tasks
   block:
@@ -74,7 +74,7 @@
 
     - name: Update apt repository
       apt:
-        update_cache: True
+        update_cache: true
         cache_valid_time: 86400
       tags:
         - nox
@@ -93,28 +93,28 @@
       apt:
         name: winehq-staging
         state: present
-        install_recommends: True
+        install_recommends: true
 
     - name: Upgrade packages
       apt:
-        upgrade: True
+        upgrade: true
       register: installed_packages
       tags:
         - nox
 
     - name: Remove dependencies that are no longer required
       apt:
-        autoremove: True
+        autoremove: true
       tags:
         - nox
   when: ansible_distribution == 'Ubuntu'
-  become: True
+  become: true
 
 - name: Install static archives
   unarchive:
     src: "{{ item }}"
     dest: "{{ lookup('env', 'HOME') }}/.local/bin/"
-    remote_src: True
+    remote_src: true
   loop: "{{ static_archives }}"
   tags:
     - static_archives
@@ -138,7 +138,7 @@
     dest: /etc/bash_completion.d/
     mode: 0555
   loop: "{{ bash_completions }}"
-  become: True
+  become: true
   tags:
     - bash_completions
     - nox
