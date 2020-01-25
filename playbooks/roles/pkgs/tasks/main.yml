@@ -45,7 +45,7 @@
 
     - name: install pkgs
       dnf:
-        name: "{{ all_pkgs }} + {{ fedora_pkgs }}"
+        name: "{{ pkgs }} + {{ fedora_pkgs }}"
         state: present
       register: installed_packages
   when: ansible_distribution == 'Fedora'
@@ -81,7 +81,7 @@
 
     - name: Install apt packages
       apt:
-        name: "{{ all_pkgs }} + {{ ubuntu_pkgs }}"
+        name: "{{ pkgs }} + {{ ubuntu_pkgs }}"
         state: present
 
     - name: Install remote deb packages

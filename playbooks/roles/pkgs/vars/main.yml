@@ -1,5 +1,5 @@
 ---
-all_pkgs:
+pkgs:
   - bash
   - bash-completion
   - curl
