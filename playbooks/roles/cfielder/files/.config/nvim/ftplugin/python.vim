@@ -7,3 +7,5 @@ setlocal autoindent
 setlocal fileformat=unix
 setlocal commentstring=#\ %s
 setlocal foldmethod=indent
+
+nnoremap <F8> :CocCommand python.execInTerminal<CR>
