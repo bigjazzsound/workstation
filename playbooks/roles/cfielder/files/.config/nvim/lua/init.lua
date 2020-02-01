@@ -81,7 +81,6 @@ else
 'enricobacis/paste.vim'
 'hashivim/vim-terraform', { 'for': 'terraform' }
 'herrbischoff/cobalt2.vim'
-'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 'junegunn/fzf.vim'
 'junegunn/goyo.vim', { 'for': 'markdown' }
