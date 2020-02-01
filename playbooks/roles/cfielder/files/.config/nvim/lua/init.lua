@@ -26,8 +26,8 @@ options = {
   tags          = 'tags',
   winblend      = 5,
   laststatus    = 2,
-  -- statusline    = '[%n] %f%h%w%m%r  %{fugitive#head()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P ',
-  statusline    = '[%n] %f%h%w%m%r  %{fugitive#head()} %{StatusDiagnostic()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P ',
+  -- statusline    = '[%n] %f%h%w%m%r %{fugitive#head()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P ',
+  statusline    = '[%n] %f%h%w%m%r %{fugitive#head()} %{StatusDiagnostic()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P ',
   -- settings for search
   hlsearch      = true,
   incsearch     = true,
