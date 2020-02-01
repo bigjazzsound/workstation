@@ -15,6 +15,9 @@ api.nvim_win_set_option(0, 'number', true)
 
 api.nvim_command("command! Vimrc :edit $MYVIMRC")
 api.nvim_command("autocmd! VimResized * :wincmd =")
+-- I've had some weird errors with cursorline not being set for certain filetypes and when I am
+-- using multiple windows, buffers, etc. So, I will just explicitly turn it on for all filetypes.
+api.nvim_command("autocmd! Filetype * :set cursorline")
 
 options = {
   syntax        = 'on',
