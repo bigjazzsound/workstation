@@ -88,6 +88,7 @@ else
 'junegunn/vim-easy-align'
 'justinmk/vim-dirvish'
 'justinmk/vim-sneak'
+'mhartington/oceanic-next'
 'mhinz/vim-signify'
 'mhinz/vim-startify'
 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
@@ -110,7 +111,7 @@ else
   vim.fn["plug#end"]()
 end
 
-api.nvim_command('colorscheme cobalt2')
+api.nvim_command('colorscheme OceanicNext')
 
 -- vim-signify settings
 vim.g.signify_sign_change = '~'
