@@ -50,7 +50,7 @@ set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 80 character color difference
-api.nvim_win_set_option(0, 'colorcolumn', '80')
+api.nvim_win_set_option(0, 'colorcolumn', '100')
 api.nvim_command('highlight ColorColumn ctermbg=DarkBlue')
 
 -- shortcuts with map leader
