@@ -1,5 +1,5 @@
 lua <<EOF
-  require('init')
+require('init')
 EOF
 
 " EVERYTHING ELSE here is COC related, which might go after nvim lsp hits
