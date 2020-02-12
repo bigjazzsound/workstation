@@ -7,7 +7,7 @@ bindkey -e
 export PAGER=less
 export LESS='-RIq'
 export GOPATH="$HOME/.local"
-# export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v fd) ]]; then
     export FZF_DEFAULT_COMMAND='fd --type f'
@@ -21,7 +21,7 @@ alias pbpaste='xsel --clipboard --output'
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
-alias sb="source ~/.bashrc"
+alias sz="source ~/.zshrc"
 alias vs='vim -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
@@ -60,6 +60,7 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
+# TODO move starship to a zinit plugin
 eval "$(starship init zsh)"
 
 ### Added by Zinit's installer
@@ -90,10 +91,13 @@ zinit snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zdharma/zsh-diff-so-fancy
-zinit snippet "https://github.com/lincheney/fzf-tab-completion/blob/master/zsh/fzf-zsh-completion.sh"
+# zinit snippet "https://github.com/lincheney/fzf-tab-completion/blob/master/zsh/fzf-zsh-completion.sh"
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^n' autosuggest-accept
 
 autoload compinit; compinit
 # AWS completion is not working with plugins, so just manually load with source
 source $(which aws_zsh_completer.sh)
+
+# Get any local overrides
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
