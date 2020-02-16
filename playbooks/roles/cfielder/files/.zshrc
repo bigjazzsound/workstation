@@ -60,9 +60,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-# TODO move starship to a zinit plugin
-eval "$(starship init zsh)"
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
@@ -77,9 +74,13 @@ autoload -Uz _zinit
 ### End of Zinit installer's chunk
 
 #
-zinit ice from"gh-r" as"command" bpick"*linux*" mv"exa* -> exa"; zinit load ogham/exa
-zinit ice from"gh-r" as"command" bpick"fd-*-x86_64-unknown-linux-gnu.tar.gz" pick"fd*/fd"; zinit load sharkdp/fd
-zinit ice from"gh-r" as"command" bpick"ripgrep-*linux-*" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
+if [[ "$(uname)" == "Linux" ]]; then
+	zinit ice from"gh-r" as"command" bpick"*linux*" mv"exa* -> exa"; zinit load ogham/exa
+	zinit ice from"gh-r" as"command" bpick"dust-v*-x86_64-unknown-linux-gnu.tar.gz" pick"dust*/dust"; zinit load bootandy/dust
+	zinit ice from"gh-r" as"command" bpick"fd-*-x86_64-unknown-linux-gnu.tar.gz" pick"fd*/fd"; zinit load sharkdp/fd
+	zinit ice from"gh-r" as"command" bpick"ripgrep-*linux-*" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
+	zinit ice from"gh-r" as"command" bpick"starship-x86_64-unknown-linux-gnu*"; zinit load starship/starship
+fi
 # FZF
 zinit ice from"gh-r" as"command"; zinit load junegunn/fzf-bin
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
@@ -98,6 +99,14 @@ bindkey '^n' autosuggest-accept
 autoload compinit; compinit
 # AWS completion is not working with plugins, so just manually load with source
 source $(which aws_zsh_completer.sh)
+
+# Swap the case of letters in completion
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+# Enable partial completion
+zstyle ':completion:*' list-suffixes
+zstyle ':completion:*' expand prefix suffix
+
+eval "$(starship init zsh)"
 
 # Get any local overrides
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
