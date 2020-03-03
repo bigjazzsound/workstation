@@ -16,8 +16,10 @@ fi
 # aliases
 alias dirs='dirs -l -v'
 alias ip='ip -c'
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
+if [[ -f $(command -v xsel) ]]; then
+        alias pbcopy='xsel --clipboard --input'
+        alias pbpaste='xsel --clipboard --output'
+fi
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
@@ -33,9 +35,11 @@ alias tff="terraform fmt "
 alias tfa="terraform apply "
 alias tfp="terraform plan "
 alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
-alias ls='exa'
-alias ll='exa -l'
-alias tree='exa -T'
+if [[ -f $(command -v exa) ]]; then
+        alias ls='exa'
+        alias ll='exa -l'
+        alias tree='exa -T'
+fi
 alias ccd="cd "
 alias ..="cd .."
 
@@ -80,6 +84,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 	zinit ice from"gh-r" as"command" bpick"fd-*-x86_64-unknown-linux-gnu.tar.gz" pick"fd*/fd"; zinit load sharkdp/fd
 	zinit ice from"gh-r" as"command" bpick"ripgrep-*linux-*" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
 	zinit ice from"gh-r" as"command" bpick"starship-x86_64-unknown-linux-gnu*"; zinit load starship/starship
+        zinit snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
 fi
 # FZF
 zinit ice from"gh-r" as"command"; zinit load junegunn/fzf-bin
@@ -88,7 +93,6 @@ zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zs
 zinit snippet "https://github.com/mhartington/oceanic-next-shell/blob/master/oceanic-next.dark.sh"
 zinit ice as"completion"; zinit snippet "https://github.com/docker/cli/tree/master/contrib/completion/zsh/_docker"
 zinit snippet OMZ::lib/history.zsh
-zinit snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zdharma/zsh-diff-so-fancy
