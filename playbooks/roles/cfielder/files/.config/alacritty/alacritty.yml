@@ -1,6 +1,6 @@
 ---
 env:
-  TERM: tmux-256color
+  TERM: xterm-256color
 
 window:
   dimensions:
