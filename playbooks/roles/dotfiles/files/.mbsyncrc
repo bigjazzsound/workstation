@@ -1,0 +1,23 @@
+# WORK
+IMAPStore work-remote
+Host outlook.office365.com
+Port 993
+User craig.fielder@juvare.com
+PassCmd "security find-generic-password -s ad -w"
+SSLType IMAP
+AuthMechs *
+Timeout 120
+PipelineDepth 50
+
+MaildirStore work-local
+Subfolders Verbatim
+Path ~/.local/mail/work/
+Inbox ~/.local/mail/work/INBOX
+
+Channel work
+Master :work-remote:
+Slave :work-local:
+Patterns *
+Create Slave
+Expunge Slave
+Sync All

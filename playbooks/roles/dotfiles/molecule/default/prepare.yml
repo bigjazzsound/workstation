@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: install git
+      apt:
+        name: git
+        update_cache: yes

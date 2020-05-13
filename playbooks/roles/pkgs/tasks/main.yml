@@ -110,56 +110,29 @@
   when: ansible_distribution == 'Ubuntu'
   become: true
 
-- name: Get version and download information for hashicorp products
-  uri:
-    url: "https://checkpoint-api.hashicorp.com/v1/check/{{ item }}"
-    return_content: yes
-  register: hashicorp_return_value
-  loop:
-    - "consul"
-    - "packer"
-    - "terraform"
+- name: Install flatpaks
+  flatpak:
+    name: "{{ item }}"
+    state: present
+    method: user
+  loop: "{{ flatpaks }}"
+  when: ansible_system == 'Linux'
   tags:
-    - "hashicorp"
+    - flatpak
+    - flatpaks
 
-- name: Install hashicorp packages
-  unarchive:
-    src: "{{ item.url }}{{ item.name }}_{{ item.version }}_linux_amd64.zip "
-    dest: "{{ lookup('env', 'HOME') }}/.local/bin/"
-    remote_src: true
-  loop: "{{ hashicorp_return_value | json_query('results[].json.{ name: product, version: current_version, url: current_download_url }') }}"
-  tags:
-    - "hashicorp"
+- name: Homebrew tasks
+  block:
+    - name: Install homebrew packages
+      homebrew:
+        name: "{{ homebrew_packages }}"
+        state: present
 
-- name: Install static archives
-  unarchive:
-    src: "{{ item }}"
-    dest: "{{ lookup('env', 'HOME') }}/.local/bin/"
-    remote_src: true
-  loop: "{{ static_archives }}"
+    - name: Update homebrew packages
+      homebrew:
+        update_homebrew: true
+        upgrade_all: true
+  when: ansible_system == 'Darwin'
   tags:
-    - static_archives
-    - binaries
-    - nox
-
-- name: Install static binaries
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ lookup('env', 'HOME') }}/.local/bin/{{ item.dest }}"
-    mode: 0555
-  loop: "{{ static_binaries }}"
-  tags:
-    - static_binaries
-    - binaries
-    - nox
-
-- name: Install bash completions
-  get_url:
-    url: "{{ item }}"
-    dest: /etc/bash_completion.d/
-    mode: 0555
-  loop: "{{ bash_completions }}"
-  become: true
-  tags:
-    - bash_completions
-    - nox
+    - brew
+    - homebrew

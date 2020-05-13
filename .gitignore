@@ -1,3 +1,4 @@
 *.retry
 env
 .env
+**/__pycache__

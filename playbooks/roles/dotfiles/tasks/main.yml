@@ -1,0 +1,35 @@
+---
+- name: Get list of files
+  set_fact:
+    files: "{{ q('filetree', role_path + '/files') }}"
+
+- name: Make dirs
+  file:
+    path: "{{ ansible_user_dir }}/{{ item }}"
+    owner: "{{ ansible_user_id }}"
+    state: directory
+  loop: "{{ files | json_query('[?state==`directory`].path') }}"
+  tags:
+    - nox
+    - dotfiles
+
+- name: Install dotfiles
+  file:
+    src: "{{ item.src }}"
+    path: "{{ ansible_user_dir }}/{{ item.path }}"
+    state: link
+    force: true
+  loop: "{{ files | json_query('[?state==`file`].{\"src\": src, \"path\": path }') }}"
+  tags:
+    - nox
+    - dotfiles
+
+- name: Configure git
+  git_config:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    scope: global
+  loop: "{{ q('dict', git_aliases) }}"
+  tags:
+    - git
+    - nox

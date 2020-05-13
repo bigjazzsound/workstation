@@ -1,17 +1,53 @@
 ---
-- hosts: 
-    - all
+- hosts: all
   tasks:
-    - import_role:
-        name: system
-      become: True
-      tags: 
+    - block:
+        - name: Set sysctls
+          sysctl:
+            name: "{{ item.name }}"
+            value: "{{ item.value }}"
+            state: present
+            reload: True
+          loop:
+            - name: vm.swappiness
+              value: 0
+            - name: fs.inotify.max_user_watches
+              value: 524288
+            - name: net.core.default_qdisc
+              value: fq
+            - name: net.ipv4.tcp_congestion_control
+              value: bbr
+
+        - name: Setup journald.conf file
+          copy:
+            content: |
+              [Journal]
+              Storage=auto
+              Compress=yes
+              SystemMaxFileSize=5M
+              SystemMaxFiles=100
+            dest: "/etc/systemd/journald.conf"
+            owner: root
+            group: root
+            mode: "0644"
+
+        - name: Setup sudoers file
+          lineinfile:
+            path: "/etc/sudoers"
+            state: present
+            line: 'Defaults !tty_tickets'
+            validate: 'visudo -cf %s'
+      when: ansible_system == 'Linux'
+      become: true
+      tags:
         - system
+
     - import_role:
         name: pkgs
-      tags: 
+      tags:
         - pkgs
+
     - import_role:
-        name: cfielder
-      tags: 
-        - cfielder
+        name: dotfiles
+      tags:
+        - dotfiles
