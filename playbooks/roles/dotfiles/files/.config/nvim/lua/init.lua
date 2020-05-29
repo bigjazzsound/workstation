@@ -161,11 +161,16 @@ set_keymap('n', '<C-p>',     ':FZF<enter>',      DEFAULT_KEYMAP)
 set_keymap('n', '<leader>f', ':FZF <enter>',     DEFAULT_KEYMAP)
 set_keymap('n', '<leader>r', ':Rg <enter>',      DEFAULT_KEYMAP)
 set_keymap('n', '<leader>b', ':Buffers <enter>', DEFAULT_KEYMAP)
-api.nvim_command("autocmd! FileType fzf set noshowmode noruler nonu signcolumn=no")
-api.nvim_command("let $FZF_DEFAULT_OPTS .= ' --layout=reverse -m --border'")
+
+vim.call(
+  "setenv",
+  "FZF_DEFAULT_OPTS",
+  '--layout=reverse -m --preview="bat --color=always --style plain --theme base16 {}"'
+)
+
 vim.g.fzf_layout = {
   window = {
     width = 0.9,
-    height = 0.6
+    height = 0.8,
   }
 }
