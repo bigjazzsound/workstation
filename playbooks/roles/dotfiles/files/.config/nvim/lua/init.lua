@@ -62,7 +62,7 @@ api.nvim_win_set_option(0, 'colorcolumn', '100')
 api.nvim_command('highlight ColorColumn ctermbg=DarkBlue')
 
 -- shortcuts with map leader
-api.nvim_command('let mapleader=" "')
+vim.g.mapleader = " "
 set_keymap('n', '<leader>/', ':nohls <enter>', DEFAULT_KEYMAP)
 set_keymap('n', '<leader>w', ':w <enter>', DEFAULT_KEYMAP)
 set_keymap('n', '<leader>bl', ':Buffers <enter>', DEFAULT_KEYMAP)
