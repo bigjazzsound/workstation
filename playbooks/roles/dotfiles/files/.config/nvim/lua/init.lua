@@ -103,6 +103,7 @@ else
 'mhinz/vim-signify'
 'neovim/nvim-lsp'
 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
+'PProvost/vim-ps1', { 'for': 'ps1' }
 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 'stephpy/vim-yaml', { 'for': 'yaml' }
 'tbastos/vim-lua', { 'for': 'lua' }
