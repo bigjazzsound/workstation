@@ -16,6 +16,7 @@ vim.g.loaded_node_provider   = 0
 vim.g.loaded_perl_provider   = 0
 
 api.nvim_win_set_option(0, 'relativenumber', true)
+api.nvim_win_set_option(0, 'number', true)
 
 api.nvim_command("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua | tab all")
 api.nvim_command("autocmd! VimResized * :wincmd =")
