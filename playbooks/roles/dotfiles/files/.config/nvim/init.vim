@@ -8,13 +8,13 @@ EOF
 if has("nvim-0.5.0")
 lua <<EOF
 require('lsp')
-local nvim_lsp = require('nvim_lsp')
+lsp = require('nvim_lsp')
 
-nvim_lsp.bashls.setup{}
-nvim_lsp.dockerls.setup{}
-nvim_lsp.gopls.setup{}
-nvim_lsp.jsonls.setup{}
-nvim_lsp.pyls_ms.setup{
+lsp.bashls.setup{}
+lsp.dockerls.setup{}
+lsp.gopls.setup{}
+lsp.jsonls.setup{}
+lsp.pyls_ms.setup{
   interpreter = {
     properties = {
       InterpreterPath = "/usr/local/opt/python@3.8/bin/python3",
@@ -22,18 +22,34 @@ nvim_lsp.pyls_ms.setup{
     }
   }
 }
-nvim_lsp.sumneko_lua.setup{}
-nvim_lsp.terraformls.setup{}
-nvim_lsp.vimls.setup{}
-nvim_lsp.yamlls.setup{
-  settings = {
-    schemas = {
-      "http://json.schemastore.org/ansible-stable-2.9",
-    }
-  }
+lsp.sumneko_lua.setup{}
+lsp.terraformls.setup{}
+lsp.vimls.setup{}
+lsp.yamlls.setup{}
+
+local nvimux = require('nvimux')
+
+-- Nvimux configuration
+nvimux.config.set_all{
+  prefix = '<C-Space>',
+  new_window = 'enew', -- Use 'term' if you want to open a new term for every new window
+  new_tab = nil, -- Defaults to new_window. Set to 'term' if you want a new term for every new tab
+  new_window_buffer = 'single',
+  quickterm_direction = 'botright',
+  quickterm_orientation = 'vertical',
+  quickterm_scope = 't', -- Use 'g' for global quickterm
+  quickterm_size = '80',
 }
 
-vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- Nvimux custom bindings
+nvimux.bindings.bind_all{
+  {'s', ':NvimuxHorizontalSplit', {'n', 'v', 'i', 't'}},
+  {'v', ':NvimuxVerticalSplit', {'n', 'v', 'i', 't'}},
+  {'<C-l>', 'gt', {'n'}},
+  {'<C-h>', 'gT', {'n'}},
+}
 
+-- Required so nvimux sets the mappings correctly
+nvimux.bootstrap()
 EOF
 endif

@@ -1,13 +1,20 @@
-local api = vim.api
-local home = os.getenv("HOME")
+api     = vim.api
+env     = vim.env
+fn      = vim.fn
+vim_cmd = vim.api.nvim_command
+home    = env["HOME"]
 
-local set_option = api.nvim_set_option
-local set_keymap = api.nvim_set_keymap
+set_option = api.nvim_set_option
+set_keymap = api.nvim_set_keymap
 
 DEFAULT_KEYMAP = {
   noremap = true,
   silent = true
 }
+
+if fn.filereadable('/usr/local/bin/python3') then
+  vim.g.python3_host_prog = '/usr/local/bin/python3'
+end
 
 -- disable unused providers
 vim.g.loaded_python_provider = 0
@@ -18,14 +25,14 @@ vim.g.loaded_perl_provider   = 0
 api.nvim_win_set_option(0, 'relativenumber', true)
 api.nvim_win_set_option(0, 'number', true)
 
-api.nvim_command("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua | tab all")
-api.nvim_command("autocmd! VimResized * :wincmd =")
+vim_cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua | tab all")
+vim_cmd("autocmd! VimResized * :wincmd =")
 -- I've had some weird errors with cursorline not being set for certain filetypes and when I am
 -- using multiple windows, buffers, etc. So, I will just explicitly turn it on for all filetypes.
-api.nvim_command("autocmd! Filetype * :set cursorline")
+vim_cmd("autocmd! Filetype * :set cursorline")
 
-if vim.fn.exists('##TextYankPost') then
-  api.nvim_command[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
+if fn.exists('##TextYankPost') then
+  vim_cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
 end
 
 local OPTIONS = {
@@ -47,6 +54,11 @@ local OPTIONS = {
   smarttab      = true,
   listchars     = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~',
   signcolumn    = "yes",
+  undofile      = false,
+  undodir       = home .. '/.local/vim/undo/',
+  backupdir     = home .. '/.local/vim/backup/',
+  directory     = home .. '/.local/vim/swp/',
+  shadafile     = home .. '/.local/vim/viminfo',
 }
 
 for key, value in pairs(OPTIONS) do set_option(key, value) end
@@ -62,7 +74,7 @@ set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 80 character color difference
 api.nvim_win_set_option(0, 'colorcolumn', '100')
-api.nvim_command('highlight ColorColumn ctermbg=DarkBlue')
+vim_cmd('highlight ColorColumn ctermbg=DarkBlue')
 
 -- shortcuts with map leader
 vim.g.mapleader = " "
@@ -79,3 +91,7 @@ set_keymap('c', '<A-e>', '<S-Right>',   { noremap = true })
 set_keymap('c', '<c-e>', '<End>',       { noremap = true })
 set_keymap('c', '<c-a>', '<Home>',      { noremap = true })
 set_keymap('c', '<c-d>', '<Backspace>', { noremap = true })
+
+-- terminal shortcuts
+set_keymap('t', 'jk', [[<C-\><C-n>]], DEFAULT_KEYMAP)
+vim_cmd[[au TermOpen * setlocal nonumber norelativenumber]]

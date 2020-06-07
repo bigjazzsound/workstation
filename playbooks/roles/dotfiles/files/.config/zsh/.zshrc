@@ -15,7 +15,7 @@ if [[ -f $(command -v bat) ]]; then
     export BAT_THEME=ansi-dark
     export MANPAGER="sh -c 'col -bx | bat -l man'"
 fi
-[[ -f $(command -v fd) ]] && export FZF_DEFAULT_COMMAND='fd --type f'
+[[ -f $(command -v fd) ]] && export FZF_DEFAULT_COMMAND='fd -H --type f'
 
 # aliases
 alias dirs='dirs -l -v'
@@ -27,7 +27,7 @@ fi
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
-alias sz="source ~/.zshrc"
+alias sz="source $HOME/.config/zsh/.zshrc"
 alias vs='vim -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
@@ -86,7 +86,6 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh"
-zinit snippet "https://github.com/mhartington/oceanic-next-shell/blob/master/oceanic-next.dark.sh"
 zinit ice as"completion"; zinit snippet "https://github.com/docker/cli/tree/master/contrib/completion/zsh/_docker"
 zinit snippet OMZ::lib/history.zsh
 zinit light zdharma/fast-syntax-highlighting
@@ -95,6 +94,7 @@ zinit light zdharma/zsh-diff-so-fancy
 # zinit snippet "https://github.com/lincheney/fzf-tab-completion/blob/master/zsh/fzf-zsh-completion.sh"
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^n' autosuggest-accept
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14,bold,underline"
 
 autoload compinit; compinit
 # AWS completion is not working with plugins, so just manually load with source
