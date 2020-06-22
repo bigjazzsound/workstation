@@ -10,7 +10,7 @@ window:
     x: 2
     y: 2
   dynamic_padding: false
-  decorations: buttonless
+  decorations: full
   startup_mode: Maximized
 
 scrolling:
