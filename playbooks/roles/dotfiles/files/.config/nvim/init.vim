@@ -43,13 +43,17 @@ nvimux.config.set_all{
 
 -- Nvimux custom bindings
 nvimux.bindings.bind_all{
-  {'s', ':NvimuxHorizontalSplit', {'n', 'v', 'i', 't'}},
-  {'v', ':NvimuxVerticalSplit', {'n', 'v', 'i', 't'}},
+  {'x', ':belowright Tnew', {'n', 'v', 'i', 't'}},
+  {'v', ':vertical Tnew', {'n', 'v', 'i', 't'}},
   {'<C-l>', 'gt', {'n'}},
   {'<C-h>', 'gT', {'n'}},
 }
 
 -- Required so nvimux sets the mappings correctly
 nvimux.bootstrap()
+
+vim.g.neoterm_autoinsert = 1
+vim.g.neoterm_clear_cmd = { "clear", "" }
+vim.g.neoterm_default_mod = "vertical"
 EOF
 endif
