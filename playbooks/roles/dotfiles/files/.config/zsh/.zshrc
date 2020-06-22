@@ -4,12 +4,13 @@ export plays="$HOME/playground/workstation"
 bindkey -e
 
 setopt HIST_IGNORE_DUPS
+setopt autocd
 
 # exported variables
 export PAGER=less
 export LESS='-RIq'
 export GOPATH="$HOME/.local"
-export PATH=$PATH:$HOME/.local/bin
+export PATH=${HOME}/.local/bin:${PATH}
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v bat) ]]; then
     export BAT_THEME=ansi-dark
@@ -114,5 +115,3 @@ eval "$(starship init zsh)"
 
 # Add any local overrides
 [[ -f $ZDOTDIR/.zshrc.local ]] && source $ZDOTDIR/.zshrc.local
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

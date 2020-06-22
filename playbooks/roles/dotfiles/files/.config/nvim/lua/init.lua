@@ -25,7 +25,7 @@ vim.g.loaded_perl_provider   = 0
 api.nvim_win_set_option(0, 'relativenumber', true)
 api.nvim_win_set_option(0, 'number', true)
 
-vim_cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua | tab all")
+vim_cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua")
 vim_cmd("autocmd! VimResized * :wincmd =")
 -- I've had some weird errors with cursorline not being set for certain filetypes and when I am
 -- using multiple windows, buffers, etc. So, I will just explicitly turn it on for all filetypes.
@@ -80,6 +80,7 @@ vim_cmd('highlight ColorColumn ctermbg=DarkBlue')
 vim.g.mapleader = " "
 set_keymap('n', '<leader>/',  ':nohls <enter>',   DEFAULT_KEYMAP)
 set_keymap('n', '<leader>w',  ':w <enter>',       DEFAULT_KEYMAP)
+set_keymap('n', '<leader>q',  ':q<enter>',        DEFAULT_KEYMAP)
 set_keymap('n', '<leader>bl', ':Buffers <enter>', DEFAULT_KEYMAP)
 set_keymap('n', '<leader>bd', ':bd <enter>',      DEFAULT_KEYMAP)
 set_keymap('n', '<leader>bn', ':bn <enter>',      DEFAULT_KEYMAP)
@@ -94,4 +95,8 @@ set_keymap('c', '<c-d>', '<Backspace>', { noremap = true })
 
 -- terminal shortcuts
 set_keymap('t', 'jk', [[<C-\><C-n>]], DEFAULT_KEYMAP)
+set_keymap('t', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
+set_keymap('t', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
+set_keymap('t', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
+set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 vim_cmd[[au TermOpen * setlocal nonumber norelativenumber]]
