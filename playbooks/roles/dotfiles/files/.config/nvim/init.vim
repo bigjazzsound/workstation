@@ -23,7 +23,7 @@ lsp.pyls_ms.setup{
   }
 }
 lsp.sumneko_lua.setup{}
-lsp.terraformls.setup{}
+-- lsp.terraformls.setup{}
 lsp.vimls.setup{}
 lsp.yamlls.setup{}
 
@@ -45,8 +45,9 @@ nvimux.config.set_all{
 nvimux.bindings.bind_all{
   {'x', ':belowright Tnew', {'n', 'v', 'i', 't'}},
   {'v', ':vertical Tnew', {'n', 'v', 'i', 't'}},
-  {'<C-l>', 'gt', {'n'}},
-  {'<C-h>', 'gT', {'n'}},
+  {'<C-l>', 'gt', {'n', 'v', 'i', 't'}},
+  {'<C-h>', 'gT', {'n', 'v', 'i', 't'}},
+  {'c', ':tab Tnew', {'n', 'v', 'i', 't'}},
 }
 
 -- Required so nvimux sets the mappings correctly

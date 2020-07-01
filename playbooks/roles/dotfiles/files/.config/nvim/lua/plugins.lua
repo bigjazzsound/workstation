@@ -3,9 +3,11 @@ local plugins = [[
 'PProvost/vim-ps1'
 'cespare/vim-toml'
 'christoomey/vim-tmux-navigator'
+'danilamihailov/beacon.nvim'
 'editorconfig/editorconfig-vim'
 'enricobacis/paste.vim'
 'haorenW1025/completion-nvim'
+'hardcoreplayers/oceanic-material'
 'hashivim/vim-terraform'
 'herrbischoff/cobalt2.vim'
 'hkupty/nvimux'
@@ -46,12 +48,13 @@ else
   fn["plug#end"]()
   for _, values in pairs(vim.g.plugs) do
     if fn.isdirectory(values.dir) == 0 then
-      vim_cmd[[PlugInstall --sync]] --| qall]]
+      vim_cmd[[PlugInstall --sync]]
     end
   end
 end
 
-vim_cmd('colorscheme OceanicNext')
+-- vim_cmd('colorscheme OceanicNext')
+vim_cmd('colorscheme oceanic_material')
 
 -- vim-signify settings
 vim.g.signify_sign_change = '~'
@@ -82,6 +85,13 @@ vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
 -- dispatch settings
 set_keymap('n', '<F3>', ':Dispatch<CR>', DEFAULT_KEYMAP)
 set_keymap('n', '<F4>', ':Start<CR>', DEFAULT_KEYMAP)
+
+-- hardtime
+vim.g.hardtime_default_on = 1
+
+-- oceanic material
+vim.g.oceanic_material_enable_italic = 1
+vim.g.oceanic_material_transparent_background = 1
 
 -- FZF
 set_keymap('n', '<C-p>',     ':FZF<enter>',      DEFAULT_KEYMAP)
