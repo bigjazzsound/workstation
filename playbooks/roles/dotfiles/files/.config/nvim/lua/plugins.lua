@@ -18,6 +18,7 @@ local plugins = [[
 'junegunn/vim-plug'
 'justinmk/vim-dirvish'
 'justinmk/vim-sneak'
+'jvirtanen/vim-hcl'
 'kassio/neoterm'
 'martinda/Jenkinsfile-vim-syntax'
 'mhartington/oceanic-next'
