@@ -35,10 +35,15 @@ alias vj="vim /tmp/$(openssl rand -hex 6).json"
 alias vy="vim /tmp/$(openssl rand -hex 6).yml"
 alias vg="vim +Gstatus +only"
 alias news="newsbeuter"
-alias tf="terraform "
-alias tff="terraform fmt "
-alias tfa="terraform apply "
-alias tfp="terraform plan "
+if [[ -f $(command -v terraform) ]]; then
+    alias tf="terraform "
+    alias tff="terraform fmt "
+    alias tfa="terraform apply "
+    alias tfp="terraform plan "
+fi
+if [[ -f $(command -v terragrunt) ]]; then
+    alias tg="terragrunt "
+fi
 alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
 [[ -f $(command -v exa) ]] && alias ls='exa' ll='exa -l' tree='exa -T'
 alias ccd="cd "
@@ -76,23 +81,19 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit installer's chunk
 
-if [[ "$(uname)" == "Linux" ]]; then
-	zinit ice from"gh-r" as"command" bpick"*linux*" mv"exa* -> exa"; zinit load ogham/exa
-	zinit ice from"gh-r" as"command" bpick"dust-v*-x86_64-unknown-linux-gnu.tar.gz" pick"dust*/dust"; zinit load bootandy/dust
-	zinit ice from"gh-r" as"command" bpick"fd-*-x86_64-unknown-linux-gnu.tar.gz" pick"fd*/fd"; zinit load sharkdp/fd
-	zinit ice from"gh-r" as"command" bpick"ripgrep-*linux-*" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
-	zinit ice from"gh-r" as"command" bpick"starship-x86_64-unknown-linux-gnu*"; zinit load starship/starship
-    zinit snippet OMZ::plugins/ssh-agent/ssh-agent.plugin.zsh
-    zinit ice from"gh-r" as"command"; zinit load junegunn/fzf-bin
-fi
+zinit ice from"gh-r" as"command" mv"exa* -> exa"; zinit load ogham/exa
+zinit ice from"gh-r" as"command" pick"dust*/dust"; zinit load bootandy/dust
+zinit ice from"gh-r" as"command" pick"fd*/fd"; zinit load sharkdp/fd
+zinit ice from"gh-r" as"command" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
+zinit ice from"gh-r" as"command"; zinit load starship/starship
+zinit ice from"gh-r" as"command"; zinit load junegunn/fzf-bin
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh"
 zinit ice as"completion"; zinit snippet "https://github.com/docker/cli/tree/master/contrib/completion/zsh/_docker"
 zinit snippet OMZ::lib/history.zsh
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
-zinit light zdharma/zsh-diff-so-fancy
-# zinit snippet "https://github.com/lincheney/fzf-tab-completion/blob/master/zsh/fzf-zsh-completion.sh"
+# zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^n' autosuggest-accept
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14,bold,underline"
