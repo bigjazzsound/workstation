@@ -1,14 +1,15 @@
 local plugins = [[
-'Glench/Vim-Jinja2-Syntax'
-'PProvost/vim-ps1'
-'cespare/vim-toml'
+'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
+'PProvost/vim-ps1', { 'for': 'ps1' }
+'Yggdroot/indentLine', { 'for': 'yaml' }
+'cespare/vim-toml', { 'for': 'toml' }
 'christoomey/vim-tmux-navigator'
 'danilamihailov/beacon.nvim'
 'editorconfig/editorconfig-vim'
 'enricobacis/paste.vim'
 'haorenW1025/completion-nvim'
-'hardcoreplayers/oceanic-material'
-'hashivim/vim-terraform'
+'hardcoreplayers/oceanic-material', { 'commit': 'b018fba6a9583502fa389eb860d9bfa4f1754066' }
+'hashivim/vim-terraform', { 'for': 'terraform' }
 'herrbischoff/cobalt2.vim'
 'hkupty/nvimux'
 'junegunn/fzf'
@@ -18,22 +19,24 @@ local plugins = [[
 'junegunn/vim-plug'
 'justinmk/vim-dirvish'
 'justinmk/vim-sneak'
-'jvirtanen/vim-hcl'
 'kassio/neoterm'
-'martinda/Jenkinsfile-vim-syntax'
+'martinda/Jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' }
+'mattn/vim-gist'
+'mattn/webapi-vim'
 'mhartington/oceanic-next'
 'mhinz/vim-signify'
 'neovim/nvim-lsp'
-'numirias/semshi'
-'stephpy/vim-yaml'
-'tbastos/vim-lua'
+'numirias/semshi', { 'for': 'python' }
+'rbong/vim-flog'
+'stephpy/vim-yaml', { 'for': 'yaml' }
+'tbastos/vim-lua', { 'for': 'lua' }
 'tpope/vim-commentary'
 'tpope/vim-dispatch'
 'tpope/vim-eunuch'
 'tpope/vim-fugitive'
 'tpope/vim-repeat'
 'tpope/vim-surround'
-'z0mbix/vim-shfmt'
+'z0mbix/vim-shfmt', { 'for': ['sh', 'zsh'] }
 ]]
 
 local autoload_plug_path = api.nvim_eval("stdpath('data')") .. '/site/autoload/plug.vim'
@@ -91,7 +94,9 @@ set_keymap('n', '<F4>', ':Start<CR>', DEFAULT_KEYMAP)
 vim.g.hardtime_default_on = 1
 
 -- oceanic material
-vim.g.oceanic_material_enable_italic = 1
+vim.g.oceanic_material_allow_bold = 1
+vim.g.oceanic_material_allow_italic = 1
+vim.g.oceanic_material_allow_underline = 1
 vim.g.oceanic_material_transparent_background = 1
 
 -- FZF
