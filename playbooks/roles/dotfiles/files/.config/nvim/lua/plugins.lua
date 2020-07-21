@@ -8,7 +8,7 @@ local plugins = [[
 'editorconfig/editorconfig-vim'
 'enricobacis/paste.vim'
 'haorenW1025/completion-nvim'
-'hardcoreplayers/oceanic-material', { 'commit': 'b018fba6a9583502fa389eb860d9bfa4f1754066' }
+'hardcoreplayers/oceanic-material'
 'hashivim/vim-terraform', { 'for': 'terraform' }
 'herrbischoff/cobalt2.vim'
 'hkupty/nvimux'
