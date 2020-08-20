@@ -14,7 +14,7 @@ lsp.bashls.setup{}
 lsp.dockerls.setup{}
 lsp.gopls.setup{}
 lsp.jsonls.setup{}
-lsp.pyls_ms.setup{
+lsp.pyls.setup{
   interpreter = {
     properties = {
       InterpreterPath = "/usr/local/opt/python@3.8/bin/python3",
