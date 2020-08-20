@@ -12,6 +12,7 @@ window:
   dynamic_padding: false
   decorations: full
   startup_mode: Maximized
+  dynamic_title: true
 
 scrolling:
   history: 0
@@ -89,7 +90,7 @@ schemes:
 
 colors: *oceanic_material
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: "0xffffff"
@@ -112,8 +113,6 @@ mouse:
 selection:
   semantic_escape_chars: ',│`|:"'' ()[]{}<>'
   save_to_clipboard: true
-
-dynamic_title: true
 
 cursor:
   style: Block
