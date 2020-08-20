@@ -21,12 +21,10 @@ local plugins = [[
 'justinmk/vim-sneak'
 'kassio/neoterm'
 'martinda/Jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' }
-'mattn/vim-gist'
-'mattn/webapi-vim'
+'mbbill/undotree'
 'mhartington/oceanic-next'
 'mhinz/vim-signify'
 'neovim/nvim-lsp'
-'numirias/semshi', { 'for': 'python' }
 'nvim-treesitter/nvim-treesitter'
 'rbong/vim-flog'
 'stephpy/vim-yaml', { 'for': 'yaml' }
