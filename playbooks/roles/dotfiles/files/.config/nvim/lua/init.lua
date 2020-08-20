@@ -54,11 +54,13 @@ local OPTIONS = {
   smarttab      = true,
   listchars     = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~',
   signcolumn    = "yes",
-  undofile      = false,
-  undodir       = home .. '/.local/vim/undo/',
-  backupdir     = home .. '/.local/vim/backup/',
-  directory     = home .. '/.local/vim/swp/',
-  shadafile     = home .. '/.local/vim/viminfo',
+  undofile      = true,
+  undodir       = home .. '/.local/share',
+  backupdir     = home .. '/.local/share',
+  directory     = home .. '/.local/share',
+  shadafile     = home .. '/.local/share/viminfo',
+  showmatch     = true,
+  matchtime     = 3,
 }
 
 for key, value in pairs(OPTIONS) do set_option(key, value) end
