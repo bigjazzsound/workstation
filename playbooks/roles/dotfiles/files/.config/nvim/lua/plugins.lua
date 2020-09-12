@@ -1,7 +1,7 @@
 local plugins = [[
 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
 'PProvost/vim-ps1', { 'for': 'ps1' }
-'Yggdroot/indentLine', { 'for': 'yaml' }
+'Yggdroot/indentLine'
 'cespare/vim-toml', { 'for': 'toml' }
 'christoomey/vim-tmux-navigator'
 'danilamihailov/beacon.nvim'
