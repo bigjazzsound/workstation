@@ -7,6 +7,7 @@ local plugins = [[
 'danilamihailov/beacon.nvim'
 'editorconfig/editorconfig-vim'
 'enricobacis/paste.vim'
+'euclidianAce/BetterLua.vim'
 'haorenW1025/completion-nvim'
 'hardcoreplayers/oceanic-material'
 'hashivim/vim-terraform', { 'for': 'terraform' }
@@ -30,7 +31,6 @@ local plugins = [[
 'nvim-treesitter/nvim-treesitter'
 'rbong/vim-flog'
 'stephpy/vim-yaml', { 'for': 'yaml' }
-'tbastos/vim-lua', { 'for': 'lua' }
 'tpope/vim-commentary'
 'tpope/vim-dispatch'
 'tpope/vim-eunuch'
