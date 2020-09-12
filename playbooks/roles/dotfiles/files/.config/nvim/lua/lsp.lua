@@ -9,7 +9,7 @@ require('nvim_lsp').yamlls.setup{on_attach=require('completion').on_attach}
 
 api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 api.nvim_command[[autocmd BufEnter * lua require'completion'.on_attach()]]
-api.nvim_set_option("completeopt", "menuone,noinsert,noselect")
+vim.o.completeopt = "menuone,noinsert,noselect"
 
 set_keymap('n', 'gd',    ':lua vim.lsp.buf.declaration()<CR>',     DEFAULT_KEYMAP)
 set_keymap('n', '<c-]>', ':lua vim.lsp.buf.definition()<CR>',      DEFAULT_KEYMAP)

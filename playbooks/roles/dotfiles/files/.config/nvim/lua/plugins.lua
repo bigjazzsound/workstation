@@ -116,7 +116,4 @@ vim.g.fzf_layout = {
   }
 }
 
-set_option(
-  'statusline',
-  '[%n] %f%h%w%m%r %{fugitive#head()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P '
-)
+vim.o.statusline = '[%n] %f%h%w%m%r %{fugitive#head()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P '

@@ -3,7 +3,6 @@ env     = vim.env
 fn      = vim.fn
 home    = env["HOME"]
 
-set_option = api.nvim_set_option
 set_keymap = api.nvim_set_keymap
 
 DEFAULT_KEYMAP = {
@@ -34,35 +33,31 @@ if fn.exists('##TextYankPost') then
   vim.cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
 end
 
-local OPTIONS = {
-  syntax        = 'on',
-  termguicolors = true,
-  inccommand    = 'nosplit',
-  splitbelow    = true,
-  splitright    = true,
-  cursorline    = true,
-  tags          = 'tags',
-  winblend      = 5,
-  laststatus    = 2,
-  -- settings for search
-  hlsearch      = true,
-  incsearch     = true,
-  -- settings for tabs
-  expandtab     = true,
-  autoindent    = true,
-  smarttab      = true,
-  listchars     = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~',
-  signcolumn    = "yes",
-  undofile      = true,
-  undodir       = home .. '/.local/share',
-  backupdir     = home .. '/.local/share',
-  directory     = home .. '/.local/share',
-  shadafile     = home .. '/.local/share/viminfo',
-  showmatch     = true,
-  matchtime     = 3,
-}
-
-for key, value in pairs(OPTIONS) do set_option(key, value) end
+vim.o.syntax = 'on'
+vim.o.termguicolors = true
+vim.o.inccommand = 'nosplit'
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.cursorline = true
+vim.o.tags = 'tags'
+vim.o.winblend = 5
+vim.o.laststatus = 2
+-- settings for search
+vim.o.hlsearch = true
+vim.o.incsearch = true
+-- settings for tabs
+vim.o.expandtab = true
+vim.o.autoindent = true
+vim.o.smarttab = true
+vim.o.listchars = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~'
+vim.o.signcolumn = "yes"
+vim.o.undofile = true
+vim.o.undodir = home .. '/.local/share'
+vim.o.backupdir = home .. '/.local/share'
+vim.o.directory = home .. '/.local/share'
+vim.o.shadafile = home .. '/.local/share/viminfo'
+vim.o.showmatch = true
+vim.o.matchtime = 3
 
 -- map ESC to jk
 set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
