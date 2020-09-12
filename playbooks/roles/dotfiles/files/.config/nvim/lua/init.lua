@@ -20,8 +20,8 @@ vim.g.loaded_ruby_provider   = 0
 vim.g.loaded_node_provider   = 0
 vim.g.loaded_perl_provider   = 0
 
-api.nvim_win_set_option(0, 'relativenumber', true)
-api.nvim_win_set_option(0, 'number', true)
+vim.wo.relativenumber = true
+vim.wo.number = true
 
 vim.cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua")
 vim.cmd("autocmd! VimResized * :wincmd =")
@@ -69,7 +69,7 @@ set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 80 character color difference
-api.nvim_win_set_option(0, 'colorcolumn', '100')
+vim.wo.colorcolumn = '100'
 vim.cmd('highlight ColorColumn ctermbg=DarkBlue')
 
 -- shortcuts with map leader
