@@ -11,4 +11,4 @@ set_keymap('n', '1gD',   ':lua vim.lsp.buf.type_definition()<CR>', DEFAULT_KEYMA
 set_keymap('n', 'gr',    ':lua vim.lsp.buf.references()<CR>',      DEFAULT_KEYMAP)
 set_keymap('n', 'g0',    ':lua vim.lsp.buf.document_symbol()<CR>', DEFAULT_KEYMAP)
 
-vim_cmd[[command Format :lua vim.lsp.buf.formatting()]]
+vim.cmd[[command Format :lua vim.lsp.buf.formatting()]]

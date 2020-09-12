@@ -1,7 +1,6 @@
 api     = vim.api
 env     = vim.env
 fn      = vim.fn
-vim_cmd = vim.api.nvim_command
 home    = env["HOME"]
 
 set_option = api.nvim_set_option
@@ -25,14 +24,14 @@ vim.g.loaded_perl_provider   = 0
 api.nvim_win_set_option(0, 'relativenumber', true)
 api.nvim_win_set_option(0, 'number', true)
 
-vim_cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua")
-vim_cmd("autocmd! VimResized * :wincmd =")
+vim.cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua")
+vim.cmd("autocmd! VimResized * :wincmd =")
 -- I've had some weird errors with cursorline not being set for certain filetypes and when I am
 -- using multiple windows, buffers, etc. So, I will just explicitly turn it on for all filetypes.
-vim_cmd("autocmd! Filetype * :set cursorline")
+vim.cmd("autocmd! Filetype * :set cursorline")
 
 if fn.exists('##TextYankPost') then
-  vim_cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
+  vim.cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
 end
 
 local OPTIONS = {
@@ -76,7 +75,7 @@ set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 80 character color difference
 api.nvim_win_set_option(0, 'colorcolumn', '100')
-vim_cmd('highlight ColorColumn ctermbg=DarkBlue')
+vim.cmd('highlight ColorColumn ctermbg=DarkBlue')
 
 -- shortcuts with map leader
 vim.g.mapleader = " "
@@ -101,4 +100,4 @@ set_keymap('t', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
 set_keymap('t', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
 set_keymap('t', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
-vim_cmd[[au TermOpen * setlocal nonumber norelativenumber]]
+vim.cmd[[au TermOpen * setlocal nonumber norelativenumber]]

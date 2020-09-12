@@ -44,16 +44,16 @@ local autoload_plug_path = api.nvim_eval("stdpath('data')") .. '/site/autoload/p
 local plug_file = io.open(autoload_plug_path , "r")
 if plug_file == nil then
   os.execute('curl -fLso ' .. autoload_plug_path .. ' --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"')
-  vim_cmd[[qall]]
+  vim.cmd[[qall]]
 else
   fn["plug#begin"](home .. "/.local/vim/plugged")
   for _, value in ipairs(vim.split(vim.trim(plugins), "\n")) do
-    vim_cmd("Plug " .. value)
+    vim.cmd("Plug " .. value)
   end
   fn["plug#end"]()
   for _, values in pairs(vim.g.plugs) do
     if fn.isdirectory(values.dir) == 0 then
-      vim_cmd[[PlugInstall --sync]]
+      vim.cmd[[PlugInstall --sync]]
     end
   end
 end
