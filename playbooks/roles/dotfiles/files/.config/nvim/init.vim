@@ -23,7 +23,7 @@ lsp.pyls.setup{
   }
 }
 lsp.sumneko_lua.setup{}
--- lsp.terraformls.setup{}
+lsp.terraformls.setup{}
 lsp.vimls.setup{}
 lsp.yamlls.setup{}
 
