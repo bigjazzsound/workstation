@@ -24,6 +24,7 @@ local plugins = [[
 'mbbill/undotree'
 'mhartington/oceanic-next'
 'mhinz/vim-signify'
+'morhetz/gruvbox'
 'neovim/nvim-lsp'
 'nvim-lua/completion-nvim'
 'nvim-treesitter/nvim-treesitter'
@@ -57,8 +58,7 @@ else
   end
 end
 
--- vim_cmd('colorscheme OceanicNext')
-vim_cmd('colorscheme oceanic_material')
+vim.cmd('colorscheme gruvbox')
 
 -- vim-signify settings
 vim.g.signify_sign_change = '~'
