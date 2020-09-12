@@ -80,8 +80,8 @@ set_keymap('n', '<leader>gp',  ':Ggrep<Space>',                   DEFAULT_KEYMAP
 set_keymap('n', '<leader>gm',  ':Gmove<Space>',                   DEFAULT_KEYMAP)
 set_keymap('n', '<leader>gb',  ':Gblame!<CR>',                    DEFAULT_KEYMAP)
 set_keymap('n', '<leader>go',  ':Git checkout<Space>',            DEFAULT_KEYMAP)
-set_keymap('n', '<leader>gps', ':Dispatch! git push<CR>',         DEFAULT_KEYMAP)
-set_keymap('n', '<leader>gpl', ':Dispatch! git pull<CR>',         DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gps', ':Dispatch! Git push<CR>',         DEFAULT_KEYMAP)
+set_keymap('n', '<leader>gpl', ':Dispatch! Git pull<CR>',         DEFAULT_KEYMAP)
 
 -- editorconfig
 vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
