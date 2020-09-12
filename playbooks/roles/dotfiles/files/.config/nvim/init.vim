@@ -8,24 +8,6 @@ EOF
 if has("nvim-0.5.0")
 lua <<EOF
 require('lsp')
-lsp = require('nvim_lsp')
-
-lsp.bashls.setup{}
-lsp.dockerls.setup{}
-lsp.gopls.setup{}
-lsp.jsonls.setup{}
-lsp.pyls.setup{
-  interpreter = {
-    properties = {
-      InterpreterPath = "/usr/local/opt/python@3.8/bin/python3",
-      Version = "3.8"
-    }
-  }
-}
-lsp.sumneko_lua.setup{}
--- lsp.terraformls.setup{}
-lsp.vimls.setup{}
-lsp.yamlls.setup{}
 
 local nvimux = require('nvimux')
 

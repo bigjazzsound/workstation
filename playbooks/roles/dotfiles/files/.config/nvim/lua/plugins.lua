@@ -24,7 +24,7 @@ local plugins = [[
 'mbbill/undotree'
 'mhartington/oceanic-next'
 'mhinz/vim-signify'
-'neovim/nvim-lsp'
+'neovim/nvim-lspconfig'
 'nvim-treesitter/nvim-treesitter'
 'rbong/vim-flog'
 'stephpy/vim-yaml', { 'for': 'yaml' }
