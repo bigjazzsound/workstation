@@ -87,6 +87,7 @@ zinit ice from"gh-r" as"command" pick"fd*/fd"; zinit load sharkdp/fd
 zinit ice from"gh-r" as"command" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
 zinit ice from"gh-r" as"command"; zinit load starship/starship
 zinit ice from"gh-r" as"command"; zinit load junegunn/fzf-bin
+zinit ice from"gh-r" as"command"; zinit load hashicorp/terraform-ls
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
 zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh"
 zinit ice as"completion"; zinit snippet "https://github.com/docker/cli/tree/master/contrib/completion/zsh/_docker"
