@@ -3,7 +3,16 @@ require('nvim_lsp').dockerls.setup{on_attach=require('completion').on_attach}
 require('nvim_lsp').gopls.setup{on_attach=require('completion').on_attach}
 require('nvim_lsp').jsonls.setup{on_attach=require('completion').on_attach}
 require('nvim_lsp').pyls.setup{on_attach=require('completion').on_attach}
-require('nvim_lsp').sumneko_lua.setup{on_attach=require('completion').on_attach}
+require('nlua.lsp.nvim').setup(require('nvim_lsp'), {
+  on_attach = require('completion').on_attach,
+
+  globals = {
+    "api",
+    "env",
+    "set_keymap",
+    "home",
+  }
+})
 require('nvim_lsp').vimls.setup{on_attach=require('completion').on_attach}
 require('nvim_lsp').yamlls.setup{on_attach=require('completion').on_attach}
 

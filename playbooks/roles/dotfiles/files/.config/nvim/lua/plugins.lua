@@ -31,6 +31,7 @@ local plugins = [[
 'nvim-treesitter/nvim-treesitter'
 'rbong/vim-flog'
 'stephpy/vim-yaml', { 'for': 'yaml' }
+'tjdevries/nlua.nvim'
 'tpope/vim-commentary'
 'tpope/vim-dispatch'
 'tpope/vim-eunuch'
