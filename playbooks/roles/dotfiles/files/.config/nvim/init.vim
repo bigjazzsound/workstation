@@ -27,6 +27,15 @@ lsp.terraformls.setup{}
 lsp.vimls.setup{}
 lsp.yamlls.setup{}
 
+require('nvim_lsp').bashls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').dockerls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').gopls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').jsonls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').pyls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').sumneko_lua.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').vimls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').yamlls.setup{on_attach=require('completion').on_attach}
+
 local nvimux = require('nvimux')
 
 -- Nvimux configuration
