@@ -103,7 +103,6 @@ vim.g.oceanic_material_transparent_background = 1
 set_keymap('n', '<C-p>',     ':FZF<enter>',      DEFAULT_KEYMAP)
 set_keymap('n', '<leader>f', ':FZF <enter>',     DEFAULT_KEYMAP)
 set_keymap('n', '<leader>r', ':Rg <enter>',      DEFAULT_KEYMAP)
-set_keymap('n', '<leader>b', ':Buffers <enter>', DEFAULT_KEYMAP)
 
 env["BAT_THEME"] = "Dracula"
 env["FZF_DEFAULT_OPTS"] = [[--layout=reverse -m --preview="bat --color=always --style plain {}"]]
