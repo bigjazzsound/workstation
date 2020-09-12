@@ -47,13 +47,13 @@ if plug_file == nil then
   os.execute('curl -fLso ' .. autoload_plug_path .. ' --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"')
   vim.cmd[[qall]]
 else
-  fn["plug#begin"](home .. "/.local/vim/plugged")
+  vim.fn["plug#begin"](home .. "/.local/vim/plugged")
   for _, value in ipairs(vim.split(vim.trim(plugins), "\n")) do
     vim.cmd("Plug " .. value)
   end
-  fn["plug#end"]()
+  vim.fn["plug#end"]()
   for _, values in pairs(vim.g.plugs) do
-    if fn.isdirectory(values.dir) == 0 then
+    if vim.fn.isdirectory(values.dir) == 0 then
       vim.cmd[[PlugInstall --sync]]
     end
   end

@@ -1,6 +1,5 @@
 api     = vim.api
 env     = vim.env
-fn      = vim.fn
 home    = env["HOME"]
 
 set_keymap = api.nvim_set_keymap
@@ -10,7 +9,7 @@ DEFAULT_KEYMAP = {
   silent = true
 }
 
-if fn.filereadable('/usr/local/bin/python3') then
+if vim.fn.filereadable('/usr/local/bin/python3') then
   vim.g.python3_host_prog = '/usr/local/bin/python3'
 end
 
@@ -29,7 +28,7 @@ vim.cmd("autocmd! VimResized * :wincmd =")
 -- using multiple windows, buffers, etc. So, I will just explicitly turn it on for all filetypes.
 vim.cmd("autocmd! Filetype * :set cursorline")
 
-if fn.exists('##TextYankPost') then
+if vim.fn.exists('##TextYankPost') then
   vim.cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
 end
 
