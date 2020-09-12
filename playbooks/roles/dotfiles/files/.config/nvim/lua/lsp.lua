@@ -1,3 +1,12 @@
+require('nvim_lsp').bashls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').dockerls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').gopls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').jsonls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').pyls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').sumneko_lua.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').vimls.setup{on_attach=require('completion').on_attach}
+require('nvim_lsp').yamlls.setup{on_attach=require('completion').on_attach}
+
 api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 api.nvim_command[[autocmd BufEnter * lua require'completion'.on_attach()]]
 api.nvim_set_option("completeopt", "menuone,noinsert,noselect")

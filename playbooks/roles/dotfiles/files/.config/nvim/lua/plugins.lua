@@ -25,7 +25,7 @@ local plugins = [[
 'mhartington/oceanic-next'
 'mhinz/vim-signify'
 'morhetz/gruvbox'
-'neovim/nvim-lsp'
+'neovim/nvim-lspconfig'
 'nvim-lua/completion-nvim'
 'nvim-treesitter/nvim-treesitter'
 'rbong/vim-flog'
