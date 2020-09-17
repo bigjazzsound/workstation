@@ -1,8 +1,5 @@
-api     = vim.api
-env     = vim.env
-home    = env["HOME"]
-
-set_keymap = api.nvim_set_keymap
+home       = vim.env.HOME
+set_keymap = vim.api.nvim_set_keymap
 
 DEFAULT_KEYMAP = {
   noremap = true,
