@@ -34,6 +34,7 @@ alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
 alias vy="vim /tmp/$(openssl rand -hex 6).yml"
 alias vg="vim +Gstatus +only"
+alias vz="vim $HOME/.config/zsh/.zshrc*"
 alias news="newsbeuter"
 if [[ -f $(command -v terraform) ]]; then
     alias tf="terraform "
