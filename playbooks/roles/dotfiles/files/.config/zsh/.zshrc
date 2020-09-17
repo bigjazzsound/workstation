@@ -56,7 +56,7 @@ if [[ -f $(command -v nvim) ]]; then
     alias vi='nvim'
     alias vim='nvim'
     alias vimdiff='nvim -d '
-    export EDITOR=nvim VISUAL=nvim
+    export EDITOR=nvim VISUAL=nvim MANPAGER='nvim +Man!'
 else
     export EDITOR=vim VISUAL=vim
 fi
