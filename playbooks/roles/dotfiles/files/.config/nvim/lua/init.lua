@@ -64,9 +64,18 @@ set_keymap('n', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
 set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
--- 80 character color difference
-vim.wo.colorcolumn = '100'
-vim.cmd('highlight ColorColumn ctermbg=DarkBlue')
+-- 100 character color difference
+local colorcolumn = 255
+local cc = function(colorcolumn)
+  local cc = {}
+  for i=1,colorcolumn do table.insert(cc, i) end
+  return string.format("+%s", table.concat(cc, ",+"))
+end
+
+vim.wo.colorcolumn = cc(colorcolumn)
+vim.cmd [[ highlight ColorColumn ctermbg=DarkBlue ]]
+vim.cmd [[ autocmd! BufEnter * :setlocal cursorline textwidth=100 ]]
+vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline textwidth=0 ]]
 
 -- shortcuts with map leader
 vim.g.mapleader = " "
