@@ -21,9 +21,6 @@ vim.wo.number = true
 
 vim.cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua")
 vim.cmd("autocmd! VimResized * :wincmd =")
--- I've had some weird errors with cursorline not being set for certain filetypes and when I am
--- using multiple windows, buffers, etc. So, I will just explicitly turn it on for all filetypes.
-vim.cmd("autocmd! Filetype * :set cursorline")
 
 if vim.fn.exists('##TextYankPost') then
   vim.cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
