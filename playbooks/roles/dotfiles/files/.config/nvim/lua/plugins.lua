@@ -99,6 +99,7 @@ return require('packer').startup(function()
 
   use {
     'hardcoreplayers/oceanic-material',
+    vim.cmd('colorscheme oceanic_material'),
     config = function()
       vim.g.oceanic_material_allow_bold = 1
       vim.g.oceanic_material_allow_italic = 1
@@ -194,7 +195,7 @@ return require('packer').startup(function()
 
   use {
     'morhetz/gruvbox',
-    vim.cmd('colorscheme gruvbox'),
+    -- vim.cmd('colorscheme gruvbox'),
   }
 
   use {
