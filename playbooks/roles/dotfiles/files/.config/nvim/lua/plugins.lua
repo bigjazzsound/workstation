@@ -105,7 +105,8 @@ return require('packer').startup(function()
       vim.g.oceanic_material_allow_italic = 1
       vim.g.oceanic_material_allow_underline = 1
       vim.g.oceanic_material_transparent_background = 1
-    end
+      vim.o.background = "dark"
+    end,
   }
 
   use {
