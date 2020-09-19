@@ -84,6 +84,7 @@ return require('packer').startup({function()
     'junegunn/vim-plug',
     'mbbill/undotree',
     'mhartington/oceanic-next',
+    'mhinz/vim-startify',
     'nvim-lua/completion-nvim',
     'psliwka/vim-smoothie',
     'tjdevries/nlua.nvim',
