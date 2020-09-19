@@ -119,13 +119,18 @@ return require('packer').startup({function()
 
   use {
     'hardcoreplayers/oceanic-material',
-    vim.cmd('colorscheme oceanic_material'),
     config = function()
       vim.g.oceanic_material_allow_bold = 1
       vim.g.oceanic_material_allow_italic = 1
       vim.g.oceanic_material_allow_underline = 1
       vim.g.oceanic_material_transparent_background = 1
       vim.o.background = "dark"
+      local colors = vim.fn.getcompletion('', 'color')
+      if vim.tbl_contains(colors, 'oceanic_material') then
+          vim.cmd('colorscheme oceanic_material')
+      else
+          vim.cmd('colorscheme default')
+      end
     end,
   }
 
