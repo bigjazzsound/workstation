@@ -79,7 +79,6 @@ return require('packer').startup({function()
     'enricobacis/paste.vim',
     'euclidianAce/BetterLua.vim',
     'herrbischoff/cobalt2.vim',
-    'junegunn/fzf',
     'junegunn/goyo.vim',
     'junegunn/vim-easy-align',
     'junegunn/vim-plug',
@@ -163,6 +162,7 @@ return require('packer').startup({function()
   }
 
   use {
+    'junegunn/fzf',
     'junegunn/fzf.vim',
     config = function()
       set_keymap('n', '<C-p>',     ':FZF<enter>',  DEFAULT_KEYMAP)
