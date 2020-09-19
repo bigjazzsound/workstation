@@ -44,7 +44,7 @@ local fugitive_settings = function()
   set_keymap('n', '<leader>gpl',':Dispatch! Git pull<CR>', DEFAULT_KEYMAP)
 end
 
-return require('packer').startup(function()
+
 local open_win = function()
   local bufnr = vim.api.nvim_create_buf(false, true)
   local width = vim.api.nvim_get_option("columns")
@@ -63,6 +63,8 @@ local open_win = function()
     col = col
   })
 end
+
+return require('packer').startup({function()
 
   use {
     'wbthomason/packer.nvim',
@@ -291,4 +293,18 @@ end
     ft = { 'sh', 'zsh' },
   }
 
-end)
+  end,
+
+  config = {
+    display = {
+      open_fn = open_win,
+      working_sym = '.',
+      error_sym = 'X',
+      done_sym = 'C',
+      removed_sym = '-',
+      moved_sym = '->',
+      header_sym = '-',
+      show_all_info = false,
+    }
+  }
+})
