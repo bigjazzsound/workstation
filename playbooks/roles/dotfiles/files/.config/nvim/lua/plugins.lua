@@ -230,28 +230,32 @@ return require('packer').startup({function()
   use {
     'neovim/nvim-lspconfig',
     config = function()
+      local on_attach = function()
+        require('completion').on_attach()
+        require('diagnostic').on_attach()
+      end
+
       require('nvim_lsp').bashls.setup{
-        on_attach = require('completion').on_attach,
+        on_attach = on_attach,
         filetypes = {
           "sh",
           "zsh",
         }
       }
-      require('nvim_lsp').dockerls.setup{on_attach=require('completion').on_attach}
-      require('nvim_lsp').gopls.setup{on_attach=require('completion').on_attach}
-      require('nvim_lsp').jsonls.setup{on_attach=require('completion').on_attach}
-      require('nvim_lsp').pyls.setup{on_attach=require('completion').on_attach}
+      require('nvim_lsp').dockerls.setup{on_attach=on_attach}
+      require('nvim_lsp').gopls.setup{on_attach=on_attach}
+      require('nvim_lsp').jsonls.setup{on_attach=on_attach}
+      require('nvim_lsp').pyls.setup{on_attach=on_attach}
       require('nlua.lsp.nvim').setup(require('nvim_lsp'), {
-        on_attach = require('completion').on_attach,
-
+        on_attach = on_attach,
         globals = {
           "home",
           "set_keymap",
           "use"
         }
       })
-      require('nvim_lsp').vimls.setup{on_attach=require('completion').on_attach}
-      require('nvim_lsp').yamlls.setup{on_attach=require('completion').on_attach}
+      require('nvim_lsp').vimls.setup{on_attach=on_attach}
+      require('nvim_lsp').yamlls.setup{on_attach=on_attach}
 
       vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
       vim.cmd [[ autocmd BufEnter * lua require('completion').on_attach() ]]
