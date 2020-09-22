@@ -86,6 +86,8 @@ return require('packer').startup({function()
     'mhartington/oceanic-next',
     'mhinz/vim-startify',
     'nvim-lua/completion-nvim',
+    'nvim-lua/diagnostic-nvim',
+    'nvim-lua/lsp-status.nvim',
     'psliwka/vim-smoothie',
     'tjdevries/nlua.nvim',
     'tpope/vim-commentary',
