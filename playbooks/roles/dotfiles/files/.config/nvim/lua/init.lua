@@ -43,7 +43,6 @@ vim.o.expandtab = true
 vim.o.autoindent = true
 vim.o.smarttab = true
 vim.o.listchars = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~'
-vim.o.signcolumn = "yes"
 vim.o.undofile = true
 vim.o.undodir = home .. '/.local/share'
 vim.o.backupdir = home .. '/.local/share'
