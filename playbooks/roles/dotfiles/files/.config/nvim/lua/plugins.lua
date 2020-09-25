@@ -88,6 +88,7 @@ return require('packer').startup({function()
     'nvim-lua/completion-nvim',
     'nvim-lua/diagnostic-nvim',
     'nvim-lua/lsp-status.nvim',
+    'morhetz/gruvbox',
     'psliwka/vim-smoothie',
     'tjdevries/nlua.nvim',
     'tpope/vim-commentary',
@@ -220,11 +221,6 @@ return require('packer').startup({function()
   use {
     'mhinz/vim-signify',
     config = [[ vim.g.signify_sign_change = '~' ]],
-  }
-
-  use {
-    'morhetz/gruvbox',
-    -- vim.cmd('colorscheme gruvbox'),
   }
 
   use {

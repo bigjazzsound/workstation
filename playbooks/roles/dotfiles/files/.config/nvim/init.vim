@@ -7,3 +7,5 @@ endif
 
 " This is not working in lua, so putting it here
 set signcolumn=yes
+
+colorscheme gruvbox
