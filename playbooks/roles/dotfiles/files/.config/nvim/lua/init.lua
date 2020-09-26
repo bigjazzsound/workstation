@@ -68,6 +68,8 @@ local cc = function(colorcolumn)
   return string.format("+%s", table.concat(cc, ",+"))
 end
 
+-- When changing to a buffer, "highlight" the current file by changing
+-- the color of the background on the right side
 vim.wo.colorcolumn = cc(colorcolumn)
 vim.cmd [[ highlight ColorColumn ctermbg=DarkBlue ]]
 vim.cmd [[ autocmd! BufEnter * :setlocal cursorline textwidth=100 ]]
