@@ -14,7 +14,6 @@ export PATH=${HOME}/.local/bin:${PATH}
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v bat) ]]; then
     export BAT_THEME=ansi-dark
-    export MANPAGER="sh -c 'col -bx | bat -l man'"
 fi
 [[ -f $(command -v fd) ]] && export FZF_DEFAULT_COMMAND='fd -H --type f'
 
