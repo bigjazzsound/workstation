@@ -157,10 +157,8 @@ return require('packer').startup({function()
   }
 
   use {
-    'junegunn/fzf',
     'junegunn/fzf.vim',
     config = function()
-      set_keymap('n', '<C-p>',     ':FZF<enter>',  DEFAULT_KEYMAP)
       set_keymap('n', '<leader>f', ':FZF <enter>', DEFAULT_KEYMAP)
       set_keymap('n', '<leader>r', ':Rg <enter>',  DEFAULT_KEYMAP)
 
