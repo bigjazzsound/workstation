@@ -26,7 +26,6 @@ if not packer_exists then
 end
 
 local fugitive_settings = function()
-  vim.o.statusline = '[%n] %f%h%w%m%r %{fugitive#head()} %= %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} %{&ft}  %l/%L  %P '
   set_keymap('n', '<leader>ga', ':Git add %:p<CR><CR>', DEFAULT_KEYMAP)
   set_keymap('n', '<leader>gs', ':Gstatus<CR>', DEFAULT_KEYMAP)
   set_keymap('n', '<leader>gc', ':Gcommit -v -q<CR>', DEFAULT_KEYMAP)
