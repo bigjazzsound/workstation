@@ -1,4 +1,16 @@
 local nvim_lsp = require('nvim_lsp')
+local lsp_status = require('lsp-status')
+
+lsp_status.register_progress()
+lsp_status.config({
+  status_symbol = '',
+  indicator_errors = 'E',
+  indicator_warnings = 'W',
+  indicator_info = 'I',
+  indicator_hint = 'H',
+  indicator_ok = 'OK',
+  spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' },
+})
 
 local on_attach = function(client)
   require('completion').on_attach(client)
@@ -12,10 +24,27 @@ nvim_lsp.bashls.setup{
     "zsh",
   }
 }
-nvim_lsp.dockerls.setup{on_attach=on_attach}
-nvim_lsp.gopls.setup{on_attach=on_attach}
-nvim_lsp.jsonls.setup{on_attach=on_attach}
-nvim_lsp.pyls.setup{on_attach=on_attach}
+
+nvim_lsp.dockerls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
+nvim_lsp.gopls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
+nvim_lsp.jsonls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
+nvim_lsp.pyls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
 require('nlua.lsp.nvim').setup(nvim_lsp, {
   on_attach = on_attach,
   globals = {
@@ -24,8 +53,16 @@ require('nlua.lsp.nvim').setup(nvim_lsp, {
     "use"
   }
 })
-nvim_lsp.vimls.setup{on_attach=on_attach}
-nvim_lsp.yamlls.setup{on_attach=on_attach}
+
+nvim_lsp.vimls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
+nvim_lsp.yamlls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
 
 vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 vim.cmd [[ autocmd BufEnter * lua require('completion').on_attach() ]]
