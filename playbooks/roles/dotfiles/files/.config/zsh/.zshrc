@@ -42,9 +42,6 @@ if [[ -f $(command -v terraform) ]]; then
     alias tfa="terraform apply "
     alias tfp="terraform plan "
 fi
-if [[ -f $(command -v terragrunt) ]]; then
-    alias tg="terragrunt "
-fi
 alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
 [[ -f $(command -v exa) ]] && alias ls='exa' ll='exa -l' tree='exa -T'
 alias ccd="cd "
