@@ -95,7 +95,7 @@ zinit ice as"completion"; zinit snippet "https://github.com/docker/cli/tree/mast
 zinit snippet OMZ::lib/history.zsh
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
-# zinit light Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-autosuggestions
 bindkey '^n' autosuggest-accept
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14,bold,underline"
