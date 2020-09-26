@@ -1,8 +1,8 @@
 local nvim_lsp = require('nvim_lsp')
 
-local on_attach = function()
-  require('completion').on_attach()
-  require('diagnostic').on_attach()
+local on_attach = function(client)
+  require('completion').on_attach(client)
+  require('diagnostic').on_attach(client)
 end
 
 nvim_lsp.bashls.setup{
