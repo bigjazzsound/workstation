@@ -85,6 +85,7 @@ return require('packer').startup({function()
     'junegunn/fzf',
     'junegunn/goyo.vim',
     'junegunn/vim-easy-align',
+    'justinmk/vim-dirvish',
     'martinda/Jenkinsfile-vim-syntax',
     'mbbill/undotree',
     'mhartington/oceanic-next',
@@ -174,13 +175,6 @@ return require('packer').startup({function()
         }
       }
     end
-  }
-
-  use {
-    'justinmk/vim-dirvish',
-    cmd = {
-      'Dirvish',
-    }
   }
 
   use {
