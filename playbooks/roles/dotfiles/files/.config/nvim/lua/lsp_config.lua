@@ -77,7 +77,6 @@ nvim_lsp.yamlls.setup{
 }
 
 vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-vim.cmd [[ autocmd BufEnter * lua require('completion').on_attach() ]]
 vim.o.completeopt = "menuone,noinsert,noselect"
 
 vim.cmd [[ command! Format :lua vim.lsp.buf.formatting() ]]
@@ -85,6 +84,8 @@ vim.cmd [[ command! Format :lua vim.lsp.buf.formatting() ]]
 -- Visualize diagnostics
 vim.g.diagnostic_enable_virtual_text = 1
 vim.g.diagnostic_trimmed_virtual_text = '40'
+vim.g.completion_matching_ignore_case = 1
+vim.g.completion_matching_strategy_list = {'exact', 'fuzzy', 'substring', 'all'}
 -- Don't show diagnostics while in insert mode
 vim.g.diagnostic_insert_delay = 1
 
