@@ -85,9 +85,6 @@ return require('packer').startup({function()
     'mbbill/undotree',
     'mhartington/oceanic-next',
     'mhinz/vim-startify',
-    'nvim-lua/completion-nvim',
-    'nvim-lua/diagnostic-nvim',
-    'nvim-lua/lsp-status.nvim',
     'morhetz/gruvbox',
     'psliwka/vim-smoothie',
     'tjdevries/nlua.nvim',
@@ -205,49 +202,13 @@ return require('packer').startup({function()
 
   use {
     'neovim/nvim-lspconfig',
-    config = function()
-      local on_attach = function()
-        require('completion').on_attach()
-        require('diagnostic').on_attach()
-      end
-
-      require('nvim_lsp').bashls.setup{
-        on_attach = on_attach,
-        filetypes = {
-          "sh",
-          "zsh",
-        }
-      }
-      require('nvim_lsp').dockerls.setup{on_attach=on_attach}
-      require('nvim_lsp').gopls.setup{on_attach=on_attach}
-      require('nvim_lsp').jsonls.setup{on_attach=on_attach}
-      require('nvim_lsp').pyls.setup{on_attach=on_attach}
-      require('nlua.lsp.nvim').setup(require('nvim_lsp'), {
-        on_attach = on_attach,
-        globals = {
-          "home",
-          "set_keymap",
-          "use"
-        }
-      })
-      require('nvim_lsp').vimls.setup{on_attach=on_attach}
-      require('nvim_lsp').yamlls.setup{on_attach=on_attach}
-
-      vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-      vim.cmd [[ autocmd BufEnter * lua require('completion').on_attach() ]]
-      vim.o.completeopt = "menuone,noinsert,noselect"
-
-      set_keymap('n', 'gd',    ':lua vim.lsp.buf.declaration()<CR>',     DEFAULT_KEYMAP)
-      set_keymap('n', '<c-]>', ':lua vim.lsp.buf.definition()<CR>',      DEFAULT_KEYMAP)
-      set_keymap('n', 'K',     ':lua vim.lsp.buf.hover()<CR>',           DEFAULT_KEYMAP)
-      set_keymap('n', 'gD',    ':lua vim.lsp.buf.implementation()<CR>',  DEFAULT_KEYMAP)
-      set_keymap('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<CR>',  DEFAULT_KEYMAP)
-      set_keymap('n', '1gD',   ':lua vim.lsp.buf.type_definition()<CR>', DEFAULT_KEYMAP)
-      set_keymap('n', 'gr',    ':lua vim.lsp.buf.references()<CR>',      DEFAULT_KEYMAP)
-      set_keymap('n', 'g0',    ':lua vim.lsp.buf.document_symbol()<CR>', DEFAULT_KEYMAP)
-
-      vim.cmd [[ command Format :lua vim.lsp.buf.formatting() ]]
-    end
+    'nvim-lua/completion-nvim',
+    'nvim-lua/diagnostic-nvim',
+    'nvim-lua/lsp-status.nvim',
+    'tjdevries/lsp_extensions.nvim',
+    -- This needs to be here so that require('nvim_lsp') can find the library
+    -- TODO read https://github.com/wbthomason/packer.nvim/issues/4 for possible solutions
+    config = [[ require('lsp_config') ]],
   }
 
   use {
