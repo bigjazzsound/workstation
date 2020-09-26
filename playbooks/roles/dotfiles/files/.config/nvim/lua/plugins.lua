@@ -97,6 +97,10 @@ return require('packer').startup({function()
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
     'tpope/vim-surround',
+    'nvim-lua/completion-nvim',
+    'nvim-lua/diagnostic-nvim',
+    'nvim-lua/lsp-status.nvim',
+    'tjdevries/lsp_extensions.nvim',
   }
 
   use {
@@ -192,10 +196,6 @@ return require('packer').startup({function()
 
   use {
     'neovim/nvim-lspconfig',
-    'nvim-lua/completion-nvim',
-    'nvim-lua/diagnostic-nvim',
-    'nvim-lua/lsp-status.nvim',
-    'tjdevries/lsp_extensions.nvim',
     -- This needs to be here so that require('nvim_lsp') can find the library
     -- TODO read https://github.com/wbthomason/packer.nvim/issues/4 for possible solutions
     config = [[ require('lsp_config') ]],
