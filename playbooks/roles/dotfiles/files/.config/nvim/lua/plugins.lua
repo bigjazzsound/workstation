@@ -99,21 +99,6 @@ return require('packer').startup({function()
   }
 
   use {
-    'Glench/Vim-Jinja2-Syntax',
-    ft = { 'jinja' },
-  }
-
-  use {
-    'PProvost/vim-ps1',
-    ft = { 'ps1' },
-  }
-
-  use {
-    'cespare/vim-toml',
-    ft = { 'toml' },
-  }
-
-  use {
     'editorconfig/editorconfig-vim',
     config = function()
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
@@ -214,11 +199,6 @@ return require('packer').startup({function()
   }
 
   use {
-    'martinda/Jenkinsfile-vim-syntax',
-    ft = { 'Jenkinsfile' },
-  }
-
-  use {
     'mhinz/vim-signify',
     config = [[ vim.g.signify_sign_change = '~' ]],
   }
@@ -287,18 +267,8 @@ return require('packer').startup({function()
   }
 
   use {
-    'stephpy/vim-yaml',
-    ft = { 'yaml' },
-  }
-
-  use {
     'tpope/vim-fugitive',
     config = fugitive_settings()
-  }
-
-  use {
-    'z0mbix/vim-shfmt',
-    ft = { 'sh', 'zsh' },
   }
 
   end,
