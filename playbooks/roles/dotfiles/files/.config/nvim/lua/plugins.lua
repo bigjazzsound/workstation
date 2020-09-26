@@ -73,15 +73,19 @@ return require('packer').startup({function()
 
   -- Plugins without any special configuration
   use {
+    'Glench/Vim-Jinja2-Syntax',
+    'PProvost/vim-ps1',
     'Yggdroot/indentLine',
+    'cespare/vim-toml',
     'christoomey/vim-tmux-navigator',
     'danilamihailov/beacon.nvim',
     'enricobacis/paste.vim',
     'euclidianAce/BetterLua.vim',
     'herrbischoff/cobalt2.vim',
+    'junegunn/fzf',
     'junegunn/goyo.vim',
     'junegunn/vim-easy-align',
-    'junegunn/vim-plug',
+    'martinda/Jenkinsfile-vim-syntax',
     'mbbill/undotree',
     'mhartington/oceanic-next',
     'mhinz/vim-startify',
