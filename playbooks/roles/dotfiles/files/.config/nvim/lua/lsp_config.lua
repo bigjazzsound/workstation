@@ -15,6 +15,18 @@ lsp_status.config({
 local on_attach = function(client)
   require('completion').on_attach(client)
   require('diagnostic').on_attach(client)
+  lsp_status.on_attach(client)
+
+  set_keymap('n', 'gd',    ':lua vim.lsp.buf.declaration()<CR>',     DEFAULT_KEYMAP)
+  -- set_keymap('n', '<c-]>', ':lua vim.lsp.buf.definition()<CR>',      DEFAULT_KEYMAP)
+  set_keymap('n', 'K',     ':lua vim.lsp.buf.hover()<CR>',           DEFAULT_KEYMAP)
+  set_keymap('n', 'gD',    ':lua vim.lsp.buf.implementation()<CR>',  DEFAULT_KEYMAP)
+  set_keymap('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<CR>',  DEFAULT_KEYMAP)
+  set_keymap('n', '1gD',   ':lua vim.lsp.buf.type_definition()<CR>', DEFAULT_KEYMAP)
+  set_keymap('n', 'gr',    ':lua vim.lsp.buf.references()<CR>',      DEFAULT_KEYMAP)
+  set_keymap('n', 'g0',    ':lua vim.lsp.buf.document_symbol()<CR>', DEFAULT_KEYMAP)
+  set_keymap('n', 'g[',    '<cmd>PrevDiagnosticCycle<cr>',           DEFAULT_KEYMAP)
+  set_keymap('n', 'g]',    '<cmd>NextDiagnosticCycle<cr>',           DEFAULT_KEYMAP)
 end
 
 nvim_lsp.bashls.setup{
@@ -68,15 +80,6 @@ vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 vim.cmd [[ autocmd BufEnter * lua require('completion').on_attach() ]]
 vim.o.completeopt = "menuone,noinsert,noselect"
 
-set_keymap('n', 'gd',    ':lua vim.lsp.buf.declaration()<CR>',     DEFAULT_KEYMAP)
-set_keymap('n', '<c-]>', ':lua vim.lsp.buf.definition()<CR>',      DEFAULT_KEYMAP)
-set_keymap('n', 'K',     ':lua vim.lsp.buf.hover()<CR>',           DEFAULT_KEYMAP)
-set_keymap('n', 'gD',    ':lua vim.lsp.buf.implementation()<CR>',  DEFAULT_KEYMAP)
-set_keymap('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<CR>',  DEFAULT_KEYMAP)
-set_keymap('n', '1gD',   ':lua vim.lsp.buf.type_definition()<CR>', DEFAULT_KEYMAP)
-set_keymap('n', 'gr',    ':lua vim.lsp.buf.references()<CR>',      DEFAULT_KEYMAP)
-set_keymap('n', 'g0',    ':lua vim.lsp.buf.document_symbol()<CR>', DEFAULT_KEYMAP)
-
 vim.cmd [[ command! Format :lua vim.lsp.buf.formatting() ]]
 
 -- Visualize diagnostics
@@ -90,7 +93,3 @@ vim.g.diagnostic_insert_delay = 1
 vim.o.updatetime = 300
 -- Show diagnostic popup on cursor hold
 vim.cmd [[ autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics() ]]
-
--- Goto previous/next diagnostic warning/error
-set_keymap('n' , 'g[', '<cmd>PrevDiagnosticCycle<cr>', DEFAULT_KEYMAP)
-set_keymap('n' , 'g]', '<cmd>NextDiagnosticCycle<cr>', DEFAULT_KEYMAP)
