@@ -3,7 +3,6 @@ export documents="$HOME/Documents"
 export plays="$HOME/playground/workstation"
 bindkey -e
 
-setopt HIST_IGNORE_DUPS
 setopt autocd
 
 # exported variables
@@ -14,26 +13,22 @@ export PATH=${HOME}/.local/bin:${PATH}
 export FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v bat) ]]; then
     export BAT_THEME=ansi-dark
+    export PAGER=bat
 fi
-[[ -f $(command -v fd) ]] && export FZF_DEFAULT_COMMAND='fd -H --type f'
 
 # aliases
 alias dirs='dirs -l -v'
 alias ip='ip -c'
-if [[ -f $(command -v xsel) ]]; then
-    alias pbcopy='xsel --clipboard --input'
-    alias pbpaste='xsel --clipboard --output'
-fi
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
 alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
-alias sz="source $HOME/.config/zsh/.zshrc"
 alias vs='vim -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
 alias vy="vim /tmp/$(openssl rand -hex 6).yml"
 alias vg="vim +Gstatus +only"
-alias vz="vim $HOME/.config/zsh/.zshrc*"
+alias vz="vim $ZDOTDIR/.zshrc*"
+alias sz="source $ZDOTDIR/.zshrc"
 alias news="newsbeuter"
 if [[ -f $(command -v terraform) ]]; then
     alias tf="terraform "
@@ -42,61 +37,76 @@ if [[ -f $(command -v terraform) ]]; then
     alias tfp="terraform plan "
 fi
 alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
-[[ -f $(command -v exa) ]] && alias ls='exa' ll='exa -l' tree='exa -T'
 alias ccd="cd "
 alias ..="cd .."
 
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
-    alias v='nvim'
-    alias vi='nvim'
-    alias vim='nvim'
-    alias vimdiff='nvim -d '
+    alias v='nvim' vi='nvim' vim='nvim' vimdiff='nvim -d '
     export EDITOR=nvim VISUAL=nvim MANPAGER='nvim +Man!'
 else
+    alias v='vim'
     export EDITOR=vim VISUAL=vim
 fi
-
-# mutt
-[[ -f $(command -v neomutt) ]] && alias m='neomutt' mutt='neomutt'
 
 # Edit long command in nvim window
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-### Added by Zinit's installer
-declare -A ZINIT
-ZINIT[HOME_DIR]=$ZDOTDIR/zinit
-if [[ ! -f $ZDOTDIR/zinit/bin/zinit.zsh ]]; then
-    print -P "Installing DHARMA Initiative Plugin Manager (zdharma/zinit)"
-    command git clone https://github.com/zdharma/zinit "$ZDOTDIR/zinit/bin" && \
-        print -P "Installation successful." || print -P "The clone has failed."
-fi
-source "$ZDOTDIR/zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit installer's chunk
+# Setup starship prompt
+[[ -f $(command -v starship) ]] || \
+    $(curl -fsSL https://starship.rs/install.sh | bash -s -- --bin-dir $HOME/.local/bin --yes)
+eval "$(starship init zsh)"
 
-zinit ice from"gh-r" as"command" mv"exa* -> exa"; zinit load ogham/exa
-zinit ice from"gh-r" as"command" pick"dust*/dust"; zinit load bootandy/dust
-zinit ice from"gh-r" as"command" pick"fd*/fd"; zinit load sharkdp/fd
-zinit ice from"gh-r" as"command" pick"ripgrep*/rg"; zinit load BurntSushi/ripgrep
-zinit ice from"gh-r" as"command"; zinit load starship/starship
-zinit ice from"gh-r" as"command"; zinit load junegunn/fzf-bin
-zinit ice from"gh-r" as"command"; zinit load hashicorp/terraform-ls
-zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
-zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh"
-zinit ice as"completion"; zinit snippet "https://github.com/docker/cli/tree/master/contrib/completion/zsh/_docker"
-zinit snippet OMZ::lib/history.zsh
-zinit light zdharma/fast-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light Aloxaf/fzf-tab
-zinit light zsh-users/zsh-autosuggestions
+# PLUGINS
+ZPLUGINDIR=$HOME/.zsh
+if [[ ! -d  $ZPLUGINDIR ]]; then
+    mkdir $ZPLUGINDIR
+    [[ -f $(command -v git) ]] && \
+        git clone https://github.com/marlonrichert/zsh-snap.git $ZPLUGINDIR/zsh-snap
+fi
+source $ZPLUGINDIR/zsh-snap/znap.zsh
+
+PLUGINS=(
+    "Aloxaf/fzf-tab"
+    "MichaelAquilina/zsh-auto-notify"
+    "ohmyzsh/ohmyzsh"
+    "zdharma/fast-syntax-highlighting"
+    "zsh-users/zsh-autosuggestions"
+    "zsh-users/zsh-completions"
+    "zpm-zsh/clipboard"
+    "DarrinTisdale/zsh-aliases-exa"
+)
+
+for PLUGIN in ${PLUGINS}; do
+    if [[ ! -d ${ZPLUGINDIR}/$(basename ${PLUGIN}) ]]; then
+        ZPLUGINS+=($(echo "https://github.com/${PLUGIN}.git"))
+    fi
+done; [[ -n ${ZPLUGINS} ]] && znap clone $(echo ${ZPLUGINS} | xargs)
+
+OMZ="ohmyzsh"
+znap source ${OMZ}
+znap source ${OMZ} \
+    plugins/ansible \
+    plugins/fzf
+FZF_DEFAULT_OPTS='--height=60% --layout=reverse --multi'
+if [[ -f $(command -v fd) ]]; then
+    FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git venv'
+    FZF_CTRL_T_COMMAND='fd --type f --follow --exclude .git'
+    FZF_CTRL_T_OPTS='--multi --preview="bat --line-range :50 --color=always --style plain {}"'
+fi
+znap source fzf-tab
+znap source ${OMZ} "lib/history.zsh"
+znap source fast-syntax-highlighting
+znap source zsh-completions
+znap source zsh-autosuggestions
+znap source clipboard
+znap source zsh-aliases-exa
 bindkey '^n' autosuggest-accept
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14,bold,underline"
 
-autoload compinit; compinit
+autoload -Uz compinit; compinit -i
 # AWS completion is not working with plugins, so just manually load with source
 source $(which aws_zsh_completer.sh)
 
@@ -109,8 +119,6 @@ zstyle ':completion:*' matcher-list \
 # Enable partial completion
 zstyle ':completion:*' list-suffixes
 zstyle ':completion:*' expand prefix suffix
-
-eval "$(starship init zsh)"
 
 # Add any local overrides
 [[ -f $ZDOTDIR/.zshrc.local ]] && source $ZDOTDIR/.zshrc.local
