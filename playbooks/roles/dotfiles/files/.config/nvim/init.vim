@@ -1,3 +1,5 @@
+let g:vimsyn_embed = 'l' " enable embedded lua syntax highlighting
+
 if has("nvim")
 lua <<EOF
 require('init')
