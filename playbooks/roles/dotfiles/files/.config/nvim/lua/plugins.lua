@@ -90,17 +90,17 @@ return require('packer').startup({function()
     'mhartington/oceanic-next',
     'mhinz/vim-startify',
     'morhetz/gruvbox',
+    'nvim-lua/completion-nvim',
+    'nvim-lua/diagnostic-nvim',
+    'nvim-lua/lsp-status.nvim',
     'psliwka/vim-smoothie',
+    'tjdevries/lsp_extensions.nvim',
     'tjdevries/nlua.nvim',
     'tpope/vim-commentary',
     'tpope/vim-dispatch',
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
     'tpope/vim-surround',
-    'nvim-lua/completion-nvim',
-    'nvim-lua/diagnostic-nvim',
-    'nvim-lua/lsp-status.nvim',
-    'tjdevries/lsp_extensions.nvim',
   }
 
   use {
