@@ -55,6 +55,13 @@ nvim_lsp.pyls.setup{
   capabilities = lsp_status.capabilities,
 }
 
+nvim_lsp.terraformls.setup{
+  -- Currently breaks insert mode
+  -- on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+  cmd = {'terraform-ls', 'serve'},
+}
+
 require('nlua.lsp.nvim').setup(nvim_lsp, {
   on_attach = on_attach,
   globals = {
