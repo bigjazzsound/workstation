@@ -1,19 +1,19 @@
 # exported dirs
-export documents="$HOME/Documents"
-export plays="$HOME/playground/workstation"
+DOCUMENTS="$HOME/Documents"
+PLAYS="$HOME/playground/workstation"
 bindkey -e
 
 setopt autocd
 
 # exported variables
-export PAGER=less
-export LESS='-RIq'
-export GOPATH="$HOME/.local"
-export PATH=${HOME}/.local/bin:${PATH}
-export FZF_DEFAULT_OPTS='--height 40%'
+PAGER=less
+LESS='-RIq'
+GOPATH="$HOME/.local"
+PATH=${HOME}/.local/bin:${PATH}
+FZF_DEFAULT_OPTS='--height 40%'
 if [[ -f $(command -v bat) ]]; then
-    export BAT_THEME=ansi-dark
-    export PAGER=bat
+    BAT_THEME=ansi-dark
+    PAGER=bat
 fi
 
 # aliases
@@ -21,7 +21,7 @@ alias dirs='dirs -l -v'
 alias ip='ip -c'
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
-alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
+alias pwm='ANSIBLE_CONFIG=${PLAYS}/ansible.cfg ansible-playbook ${PLAYS}/playbooks/main.yml'
 alias vs='vim -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
@@ -43,11 +43,14 @@ alias ..="cd .."
 # neovim all the things, if installed
 if [[ -f $(command -v nvim) ]]; then
     alias v='nvim' vi='nvim' vim='nvim' vimdiff='nvim -d '
-    export EDITOR=nvim VISUAL=nvim MANPAGER='nvim +Man!'
+    EDITOR=nvim VISUAL=nvim MANPAGER='nvim +Man!'
 else
     alias v='vim'
-    export EDITOR=vim VISUAL=vim
+    EDITOR=vim VISUAL=vim
 fi
+
+FILETYPES=(c cfg conf csv go h html ini j2 json lua md php ps1 py sh tf tfvars tmpl txt vim xml yaml yml)
+for FILETYPE in ${FILETYPES}; do alias -s $FILETYPE="vim "; done
 
 # Edit long command in nvim window
 autoload -U edit-command-line
@@ -117,8 +120,7 @@ zstyle ':completion:*' matcher-list \
     'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
     'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 # Enable partial completion
-zstyle ':completion:*' list-suffixes
-zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' list-suffixes expand prefix suffix
 
 # Add any local overrides
 [[ -f $ZDOTDIR/.zshrc.local ]] && source $ZDOTDIR/.zshrc.local
