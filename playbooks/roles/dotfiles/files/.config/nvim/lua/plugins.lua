@@ -123,7 +123,7 @@ return require('packer').startup({function()
 
   use {
     'hashivim/vim-terraform',
-    ft = { 'terraform', 'tf' },
+    ft = { 'terraform', 'tf', 'tfvars' },
   }
 
   use {
