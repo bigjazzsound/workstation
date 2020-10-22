@@ -1,4 +1,5 @@
 *.retry
+collections
 env
 .env
 venv
