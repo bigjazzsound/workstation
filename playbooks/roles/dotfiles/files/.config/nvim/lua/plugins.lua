@@ -165,6 +165,7 @@ return require('packer').startup({function()
       vim.env.FZF_DEFAULT_OPTS = [[--layout=reverse -m --preview="bat --color=always --style plain {}"]]
       vim.env.FZF_DEFAULT_COMMAND = "fd --type f"
 
+      vim.g.fzf_buffers_jump = 1
       vim.g.fzf_layout = {
         window = {
           width = 0.9,
