@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: linux
   tasks:
     - block:
         - name: Set sysctls
@@ -51,3 +51,49 @@
         name: dotfiles
       tags:
         - dotfiles
+
+- hosts: windows
+  tasks:
+    - name: Install packages
+      win_chocolatey:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - 7zip
+        - Firefox
+        - alacritty
+        - brave
+        - brave
+        - calibre
+        - cascadia-code-nerd-font
+        - discord
+        - docker-desktop
+        - epicgameslauncher
+        - goggalaxy
+        - kindle
+        - microsoft-windows-terminal
+        - mochi
+        - nvidia-display-driver
+        - powertoys
+        - rufus
+        - signal
+        - steam
+        - zettlr
+      tags:
+        - packages
+        - pkgs
+
+    - name: Update all packages
+      win_chocolatey:
+        name: all
+        state: latest
+
+    - name: Update Windows
+      win_updates:
+        category_names:
+          - "CriticalUpdates"
+          - "Drivers"
+          - "SecurityUpdates"
+          - "UpdateRollups"
+          - "Updates"
+        state: installed
