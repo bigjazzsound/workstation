@@ -99,3 +99,5 @@ set_keymap('t', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
 set_keymap('t', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 vim.cmd[[au TermOpen * setlocal nonumber norelativenumber]]
+
+vim.cmd[[ command Flash :lua require('flash') ]]
