@@ -91,7 +91,6 @@ return require('packer').startup({function()
     'mhinz/vim-startify',
     'morhetz/gruvbox',
     'nvim-lua/completion-nvim',
-    'nvim-lua/diagnostic-nvim',
     'nvim-lua/lsp-status.nvim',
     'psliwka/vim-smoothie',
     'tjdevries/lsp_extensions.nvim',
