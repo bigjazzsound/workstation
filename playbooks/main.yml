@@ -60,7 +60,6 @@
         state: present
       loop:
         - 7zip
-        - Firefox
         - alacritty
         - brave
         - brave
@@ -68,8 +67,6 @@
         - cascadia-code-nerd-font
         - discord
         - docker-desktop
-        - epicgameslauncher
-        - goggalaxy
         - kindle
         - microsoft-windows-terminal
         - mochi
@@ -77,8 +74,6 @@
         - powertoys
         - rufus
         - signal
-        - steam
-        - zettlr
       tags:
         - packages
         - pkgs
