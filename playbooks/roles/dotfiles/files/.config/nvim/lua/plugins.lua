@@ -76,6 +76,7 @@ return require('packer').startup({function()
     'PProvost/vim-ps1',
     'Yggdroot/indentLine',
     'cespare/vim-toml',
+    'christianchiarulli/nvcode-color-schemes.vim',
     'christoomey/vim-tmux-navigator',
     'danilamihailov/beacon.nvim',
     'enricobacis/paste.vim',
