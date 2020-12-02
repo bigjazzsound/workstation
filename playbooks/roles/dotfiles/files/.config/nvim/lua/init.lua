@@ -27,6 +27,7 @@ if vim.fn.exists('##TextYankPost') then
 end
 
 vim.o.syntax = 'on'
+vim.o.smartcase = true
 vim.o.termguicolors = true
 vim.o.inccommand = 'nosplit'
 vim.o.splitbelow = true
