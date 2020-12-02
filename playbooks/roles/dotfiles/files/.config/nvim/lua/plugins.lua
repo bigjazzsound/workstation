@@ -226,7 +226,6 @@ return require('packer').startup({function()
 
   config = {
     display = {
-      open_fn = open_win,
       working_sym = '.',
       error_sym = 'X',
       done_sym = 'C',
