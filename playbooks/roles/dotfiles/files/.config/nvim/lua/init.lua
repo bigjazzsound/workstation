@@ -62,7 +62,7 @@ set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 100 character color difference
-local colorcolumn = 255
+local colorcolumn = 100
 local cc = function(colorcolumn)
   local cc = {}
   for i=1,colorcolumn do table.insert(cc, i) end
@@ -72,7 +72,6 @@ end
 -- When changing to a buffer, "highlight" the current file by changing
 -- the color of the background on the right side
 vim.wo.colorcolumn = cc(colorcolumn)
-vim.cmd [[ highlight ColorColumn ctermbg=DarkBlue ]]
 vim.cmd [[ autocmd! BufEnter * :setlocal cursorline textwidth=100 ]]
 vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline textwidth=0 ]]
 
