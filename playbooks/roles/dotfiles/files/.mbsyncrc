@@ -1,23 +1,24 @@
-# WORK
-IMAPStore work-remote
-Host outlook.office365.com
-Port 993
-User craig.fielder@juvare.com
-PassCmd "security find-generic-password -s ad -w"
-SSLType IMAP
-AuthMechs *
-Timeout 120
-PipelineDepth 50
+Create        Slave
+SyncState     *
 
-MaildirStore work-local
-Subfolders Verbatim
-Path ~/.local/mail/work/
-Inbox ~/.local/mail/work/INBOX
+IMAPAccount fastmail-creds
+SSLType     IMAPS
+User        cjf@cjf.ninja
+PassCmd     "[[ $(uname) == "Darwin" ]] && security find-generic-password -s fastmail -w"
+Host        imap.fastmail.com
+Port        993
 
-Channel work
-Master :work-remote:
-Slave :work-local:
-Patterns *
-Create Slave
-Expunge Slave
-Sync All
+MaildirStore    fastmail-local
+Subfolders      Verbatim
+Path            ~/.local/mail/fastmail/
+Inbox           ~/.local/mail/fastmail/INBOX
+
+IMAPStore       fastmail-remote
+Account         fastmail-creds
+
+Sync            All
+Channel         fastmail
+Patterns        *
+Master          :fastmail-remote:
+Slave           :fastmail-local:
+CopyArrivalDate yes

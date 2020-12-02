@@ -3,22 +3,22 @@
 set status_format = "%f%r—[%?M?%M/?%m messages, %?n?%n new, ?%?d?%d deleted, ?%?F?%F important, ?%?t?%t selected, ?%?p?%p drafts, ?%l]———(%s/%S)—%>—(%P)———"
 set from = "craigjamesfielder@gmail.com"
 alias me Craig Fielder <craigjamesfielder@gmail.com>
-set folder = "~/.local/share/mail/personal"
-set header_cache = ~/.cache/mutt/personal/headers
-set message_cachedir = ~/.cache/mutt/personal/bodies
+set folder = "~/.local/mail/fastmail"
+set header_cache = ~/.cache/mutt/fastmail/headers
+set message_cachedir = ~/.cache/mutt/fastmail/bodies
 set mbox_type = Maildir
 # TODO make something similar to this to send markdown mail
 # set sendmail = "env BUNDLE_GEMFILE=$HOME/.mutt/scripts/Gemfile $HOME/.mutt/scripts/msmtp.rb"
-set sendmail = "msmtp -a personal"
+set sendmail = "msmtp -a fastmail"
 # set sendmail = ".local/bin/sendmail.py"
 # macro compose \e5 "F pandoc -s -f markdown -t html \ny^T^Utext/html; charset=us-ascii\n"
 
 unmailboxes *
 set spoolfile = "+INBOX"
-set record = "+[Gmail].Sent Mail"
-set postponed = "+[Gmail].Drafts"
-set trash = "+[Gmail].Trash"
-mailboxes =personal ===================== "=[Gmail].Important" "=INBOX" "=keepers" "=[Gmail].Trash" "=ansible.ansible-devel" "=receipts" "=solus" "=[Gmail].Drafts" "=[Gmail].Sent Mail" "=certs" "=[Gmail].Starred" "=ansible.ansible-project" "=ansible" "=[Gmail].Spam" "=jobs" 
+# set record = "+[Gmail].Sent Mail"
+# set postponed = "+[Gmail].Drafts"
+# set trash = "+[Gmail].Trash"
+# mailboxes =personal ===================== "=[Gmail].Important" "=INBOX" "=keepers" "=[Gmail].Trash" "=ansible.ansible-devel" "=receipts" "=solus" "=[Gmail].Drafts" "=[Gmail].Sent Mail" "=certs" "=[Gmail].Starred" "=ansible.ansible-project" "=ansible" "=[Gmail].Spam" "=jobs"
 macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
 macro index,pager Mi "<save-message>=INBOX<enter>" "move mail to inbox"
 macro index,pager Ci "<copy-message>=INBOX<enter>" "copy mail to inbox"
@@ -36,4 +36,4 @@ macro index,pager MS "<save-message>=[Gmail].Spam<enter>" "move mail to spam"
 macro index,pager CS "<copy-message>=[Gmail].Spam<enter>" "copy mail to spam"
 macro index o "<shell-escape>mbsync personal<enter>" "run mbsync to sync personal"
 
-subscribe ansible-devel ansible-project
+# subscribe ansible-devel ansible-project
