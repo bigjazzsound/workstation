@@ -2,11 +2,11 @@
 libvirt_group: "{{ 'libvirt' if ansible_os_family == 'RedHat' else 'libvirt-qemu' }}"
 
 git_aliases:
-  alias.co: "checkout"
   alias.br: "branch"
   alias.ci: "commit"
-  alias.st: "status"
-  alias.rh: "reset --hard"
-  alias.lg: "log --pretty=format:'%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(20)%aN%Cred%d %Creset%s' --date=short"
+  alias.co: "checkout"
   alias.lb: "!git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'"
+  alias.lg: "log --pretty=format:'%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(20)%aN%Cred%d %Creset%s' --date=short"
   alias.pul: "pull"
+  alias.rh: "reset --hard"
+  alias.st: "status"
