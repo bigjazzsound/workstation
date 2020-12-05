@@ -100,6 +100,7 @@ lsp.pyls.setup{
 lsp.terraformls.setup{
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
+  filetypes = {'hcl'}
 }
 
 require('nlua.lsp.nvim').setup(lsp, {

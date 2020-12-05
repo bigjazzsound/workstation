@@ -126,12 +126,11 @@ return require('packer').startup({function()
     'PProvost/vim-ps1',
     'cespare/vim-toml',
     'euclidianAce/BetterLua.vim',
+    'jvirtanen/vim-hcl',
     'martinda/Jenkinsfile-vim-syntax',
   }
 
   use {
-    'hashivim/vim-terraform',
-    ft = { 'terraform', 'tf', 'tfvars' },
   }
 
   use {
