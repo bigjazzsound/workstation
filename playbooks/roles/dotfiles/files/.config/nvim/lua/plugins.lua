@@ -120,6 +120,15 @@ return require('packer').startup({function()
     end,
   }
 
+  -- filetypes
+  use {
+    'Glench/Vim-Jinja2-Syntax',
+    'PProvost/vim-ps1',
+    'cespare/vim-toml',
+    'euclidianAce/BetterLua.vim',
+    'martinda/Jenkinsfile-vim-syntax',
+  }
+
   use {
     'hashivim/vim-terraform',
     ft = { 'terraform', 'tf', 'tfvars' },
