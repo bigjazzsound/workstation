@@ -53,6 +53,22 @@ local on_attach = function(client)
 
 end
 
+lsp.clangd.setup{
+  on_attach = on_attach,
+  cmd = {
+    'clangd',
+    '--clang-tidy', '--completion-style=bundled', '--header-insertion=iwyu',
+    '--suggest-missing-includes', '--cross-file-rename'
+  },
+  handlers = lsp_status.extensions.clangd.setup(),
+  init_options = {
+    clangdFileStatus = true,
+    usePlaceholders = true,
+    completeUnimported = true,
+    semanticHighlighting = true
+  }
+}
+
 lsp.bashls.setup{
   on_attach = on_attach,
   filetypes = {
