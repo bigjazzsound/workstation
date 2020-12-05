@@ -1,5 +1,5 @@
 -- Shamelessly stolen from
--- https://raw.githubusercontent.com/tjdevries/config_manager/master/xdg_config/nvim/lua/plugins.lua
+-- https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/tj/plugins.lua
 -- Only required if you have packer in your `opt` pack
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
