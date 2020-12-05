@@ -24,15 +24,14 @@ local on_attach = function(client)
     }
   )
 
-  set_keymap('n', 'K',          ':lua vim.lsp.buf.hover()<CR>',                    DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gd', ':lua vim.lsp.buf.declaration()<CR>',              DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gD', ':lua vim.lsp.buf.definition()<CR>',               DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>',               DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gt', ':lua vim.lsp.buf.document_symbol()<CR>',          DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>dn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>dp', '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<CR>',               DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', 'K',          ':lua vim.lsp.buf.hover()<CR>',                    DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gd', ':lua vim.lsp.buf.declaration()<CR>',              DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gD', ':lua vim.lsp.buf.definition()<CR>',               DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>',               DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gt', ':lua vim.lsp.buf.document_symbol()<CR>',          DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dp', '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
 end
 
 lsp.bashls.setup{
