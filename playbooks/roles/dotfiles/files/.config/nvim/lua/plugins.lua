@@ -72,27 +72,16 @@ return require('packer').startup({function()
 
   -- Plugins without any special configuration
   use {
-    'Glench/Vim-Jinja2-Syntax',
-    'PProvost/vim-ps1',
     'Yggdroot/indentLine',
-    'cespare/vim-toml',
-    'christianchiarulli/nvcode-color-schemes.vim',
     'christoomey/vim-tmux-navigator',
     'danilamihailov/beacon.nvim',
     'enricobacis/paste.vim',
-    'euclidianAce/BetterLua.vim',
-    'herrbischoff/cobalt2.vim',
-    'junegunn/fzf',
-    'junegunn/goyo.vim',
     'junegunn/vim-easy-align',
     'justinmk/vim-dirvish',
-    'martinda/Jenkinsfile-vim-syntax',
-    'mbbill/undotree',
-    'mhartington/oceanic-next',
     'mhinz/vim-startify',
-    'morhetz/gruvbox',
     'nvim-lua/completion-nvim',
     'nvim-lua/lsp-status.nvim',
+    'romainl/vim-cool',
     'tjdevries/lsp_extensions.nvim',
     'tjdevries/nlua.nvim',
     'tpope/vim-commentary',
@@ -102,11 +91,10 @@ return require('packer').startup({function()
     'tpope/vim-surround',
   }
 
+  -- colors
   use {
-    'editorconfig/editorconfig-vim',
-    config = function()
-      vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
-    end
+    'christianchiarulli/nvcode-color-schemes.vim',
+    'mhartington/oceanic-next',
   }
 
   use {
@@ -131,6 +119,10 @@ return require('packer').startup({function()
   }
 
   use {
+    'editorconfig/editorconfig-vim',
+    config = function()
+      vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
+    end
   }
 
   use {
@@ -163,7 +155,13 @@ return require('packer').startup({function()
   }
 
   use {
+    'junegunn/goyo.vim',
+    cmd = {'Goyo'},
+  }
+
+  use {
     'junegunn/fzf.vim',
+    requires = 'junegunn/fzf',
     config = function()
       set_keymap('n', '<leader>f', ':FZF <enter>', DEFAULT_KEYMAP)
       set_keymap('n', '<leader>r', ':Rg <enter>',  DEFAULT_KEYMAP)
