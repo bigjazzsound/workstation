@@ -32,6 +32,25 @@ local on_attach = function(client)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dp', '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
+
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', DEFAULT_KEYMAP)
+  end
+
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_command [[ au CursorHold <buffer> lua vim.lsp.buf.document_highlight() ]]
+    vim.api.nvim_command [[ au CursorMoved <buffer> lua vim.lsp.buf.clear_references() ]]
+  end
+
+  -- Show diagnostic popup on cursor hold
+  vim.cmd [[ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics() ]]
+
+  vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+  vim.o.completeopt = "menuone,noinsert,noselect"
+  vim.g.completion_matching_ignore_case = 1
+  vim.g.completion_matching_strategy_list = {'exact', 'fuzzy', 'substring', 'all'}
+  vim.o.updatetime = 300
+
 end
 
 lsp.bashls.setup{
@@ -85,18 +104,3 @@ lsp.yamlls.setup{
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
 }
-
-vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-vim.o.completeopt = "menuone,noinsert,noselect"
-
-vim.cmd [[ command! Format :lua vim.lsp.buf.formatting() ]]
-
--- Visualize diagnostics
-vim.g.completion_matching_ignore_case = 1
-vim.g.completion_matching_strategy_list = {'exact', 'fuzzy', 'substring', 'all'}
-
--- -- Set updatetime for CursorHold
--- -- 300ms of no cursor movement to trigger CursorHold
-vim.o.updatetime = 300
--- -- Show diagnostic popup on cursor hold
-vim.cmd [[ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics() ]]
