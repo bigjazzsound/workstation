@@ -26,21 +26,21 @@ if not packer_exists then
 end
 
 local fugitive_settings = function()
-  set_keymap('n', '<leader>ga', ':Git add %:p<CR><CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gs', ':Gstatus<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gc', ':Gcommit -v -q<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gt', ':Gcommit -v -q %:p<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gd', ':Gdiff<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>ge', ':Gedit<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gr', ':Gread<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gw', ':Gwrite<CR><CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gl', ':silent! Glog<CR>:bot copen<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gp', ':Ggrep<Space>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gm', ':Gmove<Space>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gb', ':Gblame!<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>go', ':Git checkout<Space>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gps',':Dispatch! Git push<CR>', DEFAULT_KEYMAP)
-  set_keymap('n', '<leader>gpl',':Dispatch! Git pull<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>ga',  ':Git add %:p<CR><CR>',            DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gs',  ':Gstatus<CR>',                    DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gc',  ':Gcommit -v -q<CR>',              DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gt',  ':Gcommit -v -q %:p<CR>',          DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gd',  ':Gdiff<CR>',                      DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>ge',  ':Gedit<CR>',                      DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gr',  ':Gread<CR>',                      DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gw',  ':Gwrite<CR><CR>',                 DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gl',  ':silent! Glog<CR>:bot copen<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gp',  ':Ggrep<Space>',                   DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gm',  ':Gmove<Space>',                   DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gb',  ':Gblame!<CR>',                    DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>go',  ':Git checkout<Space>',            DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gps', ':Dispatch! Git push<CR>',         DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<leader>gpl', ':Dispatch! Git pull<CR>',         DEFAULT_KEYMAP)
 end
 
 
@@ -163,11 +163,10 @@ return require('packer').startup({function()
     'junegunn/fzf.vim',
     requires = 'junegunn/fzf',
     config = function()
-      set_keymap('n', '<leader>f', ':FZF <enter>', DEFAULT_KEYMAP)
-      set_keymap('n', '<leader>r', ':Rg <enter>',  DEFAULT_KEYMAP)
 
       vim.env.BAT_THEME = "Dracula"
       vim.env.FZF_DEFAULT_OPTS = [[--layout=reverse -m --preview="bat --color=always --style plain {}"]]
+      vim.api.nvim_set_keymap('n', '<leader>ff',  '<cmd>Files<CR>',     DEFAULT_KEYMAP)
       vim.env.FZF_DEFAULT_COMMAND = "fd --type f"
 
       vim.g.fzf_buffers_jump = 1

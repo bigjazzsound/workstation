@@ -1,5 +1,4 @@
 home       = vim.env.HOME
-set_keymap = vim.api.nvim_set_keymap
 
 DEFAULT_KEYMAP = {
   noremap = true,
@@ -53,13 +52,13 @@ vim.o.showmatch = true
 vim.o.matchtime = 3
 
 -- map ESC to jk
-set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
 
 -- split navigation
-set_keymap('n', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
-set_keymap('n', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
-set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
-set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 100 character color difference
 local colorcolumn = 100
@@ -77,27 +76,27 @@ vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline textwidth=0 ]]
 
 -- shortcuts with map leader
 vim.g.mapleader = " "
-set_keymap('n', '<leader>/',  ':nohls <enter>',   DEFAULT_KEYMAP)
-set_keymap('n', '<leader>w',  ':w <enter>',       DEFAULT_KEYMAP)
-set_keymap('n', '<leader>q',  ':q<enter>',        DEFAULT_KEYMAP)
-set_keymap('n', '<leader>bl', ':Buffers <enter>', DEFAULT_KEYMAP)
-set_keymap('n', '<leader>bd', ':bd <enter>',      DEFAULT_KEYMAP)
-set_keymap('n', '<leader>bn', ':bn <enter>',      DEFAULT_KEYMAP)
-set_keymap('n', '<leader>bp', ':bp <enter>',      DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>/',  ':nohls <enter>',   DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>w',  ':w <enter>',       DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>q',  ':q<enter>',        DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bl', ':Buffers <enter>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bd <enter>',      DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bn', ':bn <enter>',      DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bp', ':bp <enter>',      DEFAULT_KEYMAP)
 
 -- shortcuts for cmdline mode
-set_keymap('c', '<A-b>', '<S-Left>',    { noremap = true })
-set_keymap('c', '<A-e>', '<S-Right>',   { noremap = true })
-set_keymap('c', '<c-e>', '<End>',       { noremap = true })
-set_keymap('c', '<c-a>', '<Home>',      { noremap = true })
-set_keymap('c', '<c-d>', '<Backspace>', { noremap = true })
+vim.api.nvim_set_keymap('c', '<A-b>', '<S-Left>',    { noremap = true })
+vim.api.nvim_set_keymap('c', '<A-e>', '<S-Right>',   { noremap = true })
+vim.api.nvim_set_keymap('c', '<c-e>', '<End>',       { noremap = true })
+vim.api.nvim_set_keymap('c', '<c-a>', '<Home>',      { noremap = true })
+vim.api.nvim_set_keymap('c', '<c-d>', '<Backspace>', { noremap = true })
 
 -- terminal shortcuts
-set_keymap('t', 'jk', [[<C-\><C-n>]], DEFAULT_KEYMAP)
-set_keymap('t', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
-set_keymap('t', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
-set_keymap('t', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
-set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', 'jk', [[<C-\><C-n>]], DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 vim.cmd[[ au TermOpen * setlocal nonumber norelativenumber ]]
 
 vim.cmd[[ command Flash :lua require('flash') ]]
