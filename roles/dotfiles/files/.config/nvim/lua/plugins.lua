@@ -231,13 +231,20 @@ return require('packer').startup({function()
   }
 
   use {
-    'rbong/vim-flog',
-    cmd = { 'Flog', 'Flogsplit' },
+    'tpope/vim-fugitive',
+    config = fugitive_settings(),
   }
 
   use {
-    'tpope/vim-fugitive',
-    config = fugitive_settings()
+    'idanarye/vim-merginal',
+    requires = { 'tpope/vim-fugitive', },
+    cmd = { 'Merginal', 'MerginalToggle', 'MerginalClose', },
+  }
+
+  use {
+    'rbong/vim-flog',
+    requires = { 'tpope/vim-fugitive', },
+    cmd = { 'Flog', 'Flogsplit' },
   }
 
   end,
