@@ -97,6 +97,11 @@ lsp.pyls.setup{
   capabilities = lsp_status.capabilities,
 }
 
+lsp.rls.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
 lsp.terraformls.setup{
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
