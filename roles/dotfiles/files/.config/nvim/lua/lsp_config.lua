@@ -29,8 +29,8 @@ local on_attach = function(client)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gD', ':lua vim.lsp.buf.definition()<CR>',               DEFAULT_KEYMAP)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>',               DEFAULT_KEYMAP)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gt', ':lua vim.lsp.buf.document_symbol()<CR>',          DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dp', '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', ']d',         '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(0, 'n', '[d',         '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
 
   if client.resolved_capabilities.document_formatting then
