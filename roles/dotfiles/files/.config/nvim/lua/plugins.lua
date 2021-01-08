@@ -113,6 +113,7 @@ return require('packer').startup({function()
     'Glench/Vim-Jinja2-Syntax',
     'PProvost/vim-ps1',
     'cespare/vim-toml',
+    'chr4/nginx.vim',
     'euclidianAce/BetterLua.vim',
     'jvirtanen/vim-hcl',
     'martinda/Jenkinsfile-vim-syntax',
