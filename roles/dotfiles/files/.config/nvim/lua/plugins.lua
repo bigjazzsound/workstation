@@ -230,17 +230,6 @@ return require('packer').startup({function()
 
   use {
     'tpope/vim-fugitive',
-
-  use {
-    'idanarye/vim-merginal',
-    requires = { 'tpope/vim-fugitive', },
-    cmd = { 'Merginal', 'MerginalToggle', 'MerginalClose', },
-  }
-
-  use {
-    'rbong/vim-flog',
-    requires = { 'tpope/vim-fugitive', },
-    cmd = { 'Flog', 'Flogsplit' },
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>ga',  ':Git add %:p<CR><CR>',            DEFAULT_KEYMAP)
       vim.api.nvim_set_keymap('n', '<leader>gs',  ':Gstatus<CR>',                    DEFAULT_KEYMAP)
