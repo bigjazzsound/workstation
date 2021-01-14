@@ -18,11 +18,11 @@ vim.g.loaded_perl_provider   = 0
 vim.wo.relativenumber = true
 vim.wo.number = true
 
-vim.cmd("command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua")
-vim.cmd("autocmd! VimResized * :wincmd =")
+vim.cmd[[ command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua ]]
+vim.cmd[[ autocmd! VimResized * :wincmd = ]]
 
 if vim.fn.exists('##TextYankPost') then
-  vim.cmd[[autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250')]]
+  vim.cmd[[ autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250') ]]
 end
 
 vim.o.syntax = 'on'
