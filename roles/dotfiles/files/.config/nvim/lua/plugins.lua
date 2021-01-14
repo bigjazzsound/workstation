@@ -59,7 +59,6 @@ return require('packer').startup({function()
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
     'justinmk/vim-dirvish',
-    'mhinz/vim-startify',
     'nvim-lua/completion-nvim',
     'nvim-lua/lsp-status.nvim',
     'romainl/vim-cool',
@@ -98,6 +97,17 @@ return require('packer').startup({function()
     'euclidianAce/BetterLua.vim',
     'jvirtanen/vim-hcl',
     'martinda/Jenkinsfile-vim-syntax',
+  }
+
+  use {
+    'mhinz/vim-startify',
+    config = function()
+      if vim.fn.executable('figlet') then
+        vim.g.startify_custom_header = vim.fn['startify#pad'](
+          vim.fn.split(vim.fn.system[[ figlet -f 3D-ASCII "Neovim" ]], '\n')
+        )
+      end
+    end,
   }
 
   use {
