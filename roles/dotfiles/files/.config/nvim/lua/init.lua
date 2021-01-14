@@ -79,7 +79,6 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap('n', '<leader>/',  ':nohls <enter>',   DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>w',  ':w <enter>',       DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>q',  ':q<enter>',        DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>bl', ':Buffers <enter>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bd <enter>',      DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>bn', ':bn <enter>',      DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>bp', ':bp <enter>',      DEFAULT_KEYMAP)

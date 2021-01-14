@@ -198,36 +198,14 @@ return require('packer').startup({function()
   }
 
   use {
-    'junegunn/fzf.vim',
-    requires = 'junegunn/fzf',
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+    },
     config = function()
-      vim.api.nvim_set_keymap('n', '<leader>fC',  '<cmd>Commands<CR>',  DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fbc', '<cmd>BCommits<CR>',  DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fbl', '<cmd>BLines<CR>',    DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fc',  '<cmd>Commits<CR>',   DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>ff',  '<cmd>Files<CR>',     DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fgl', '<cmd>GFiles<CR>',    DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fgs', '<cmd>GFiles?<CR>',   DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fhc', '<cmd>History:<CR>',  DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fho', '<cmd>History<CR>',   DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fhs', '<cmd>History/<CR>',  DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fht', '<cmd>Helptags<CR>',  DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fl',  '<cmd>Lines<CR>',     DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>ft',  '<cmd>Filetypes<CR>', DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>fw',  '<cmd>Windows<CR>',   DEFAULT_KEYMAP)
-
-      vim.env.BAT_THEME = "OneHalfDark"
-      vim.env.FZF_DEFAULT_OPTS = [[ --layout=reverse -m ]]
-      vim.env.FZF_DEFAULT_COMMAND = "fd --type f"
-
-      vim.g.fzf_buffers_jump = 1
-      vim.g.fzf_layout = {
-        window = {
-          width = 0.93,
-          height = 0.95,
-          border = 'sharp',
-        }
-      }
+      require('bigjazzsound.telescope')
+      require('bigjazzsound.telescope.mappings')
     end
   }
 
