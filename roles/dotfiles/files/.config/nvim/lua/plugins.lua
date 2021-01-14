@@ -55,7 +55,6 @@ return require('packer').startup({function()
   use {
     'Yggdroot/indentLine',
     'christoomey/vim-tmux-navigator',
-    'danilamihailov/beacon.nvim',
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
     'justinmk/vim-dirvish',
