@@ -20,4 +20,6 @@ indent_style = tab
 
 [{Justfile,justfile}]
 indent_size = 2
+
+[{Caddfile,caddyfile}]
 indent_size = 2
