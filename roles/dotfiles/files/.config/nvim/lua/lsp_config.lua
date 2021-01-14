@@ -12,7 +12,7 @@ lsp_status.config({
   spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' },
 })
 
-local on_attach = function(client)
+local on_attach = function(client, bufnr)
   require('completion').on_attach(client)
   lsp_status.on_attach(client)
 
@@ -24,17 +24,17 @@ local on_attach = function(client)
     }
   )
 
-  vim.api.nvim_buf_set_keymap(0, 'n', 'K',          ':lua vim.lsp.buf.hover()<CR>',                    DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gd', ':lua vim.lsp.buf.declaration()<CR>',              DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gD', ':lua vim.lsp.buf.definition()<CR>',               DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>',               DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>gt', ':lua vim.lsp.buf.document_symbol()<CR>',          DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', ']d',         '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '[d',         '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',          ':lua vim.lsp.buf.hover()<CR>',                    DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gd', ':lua vim.lsp.buf.declaration()<CR>',              DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gD', ':lua vim.lsp.buf.definition()<CR>',               DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>',               DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gt', ':lua vim.lsp.buf.document_symbol()<CR>',          DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d',         '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d',         '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
 
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', DEFAULT_KEYMAP)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', DEFAULT_KEYMAP)
   end
 
   if client.resolved_capabilities.document_highlight then
