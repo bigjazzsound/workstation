@@ -244,13 +244,8 @@ return require('packer').startup({function()
 
   config = {
     display = {
-      working_sym = '.',
-      error_sym = 'X',
-      done_sym = 'C',
-      removed_sym = '-',
-      moved_sym = '->',
+      open_cmd = string.format("%svnew [packer]", math.floor(vim.api.nvim_get_option("columns") / 2)),
       header_sym = '-',
-      show_all_info = false,
     }
   }
 })
