@@ -10,3 +10,4 @@ git_aliases:
   alias.pul: "pull"
   alias.rh: "reset --hard"
   alias.st: "status"
+  alias.po: "!git push -u origin $(git branch --show-current)"
