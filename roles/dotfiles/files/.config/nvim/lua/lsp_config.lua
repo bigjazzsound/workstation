@@ -24,17 +24,17 @@ local on_attach = function(client, bufnr)
     }
   )
 
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',          ':lua vim.lsp.buf.hover()<CR>',                    DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gd', ':lua vim.lsp.buf.declaration()<CR>',              DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gD', ':lua vim.lsp.buf.definition()<CR>',               DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>',               DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gt', ':lua vim.lsp.buf.document_symbol()<CR>',          DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d',         '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d',         '<cmd>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',          '<CMD>lua vim.lsp.buf.hover()<CR>',                DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gd', '<CMD>lua vim.lsp.buf.declaration()<CR>',          DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gD', '<CMD>lua vim.lsp.buf.definition()<CR>',           DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gr', '<CMD>lua vim.lsp.buf.references()<CR>',           DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gt', '<CMD>lua vim.lsp.buf.document_symbol()<CR>',      DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d',         '<CMD>lua vim.lsp.diagnostic.goto_next()<CR>',     DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d',         '<CMD>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<CMD>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
 
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', DEFAULT_KEYMAP)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<CMD>lua vim.lsp.buf.formatting()<CR>', DEFAULT_KEYMAP)
   end
 
   if client.resolved_capabilities.document_highlight then
