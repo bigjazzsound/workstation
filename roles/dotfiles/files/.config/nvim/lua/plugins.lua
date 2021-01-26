@@ -91,10 +91,6 @@ return require('packer').startup({function()
   }
 
   use {
-    'kevinhwang91/nvim-hlslens',
-  }
-
-  use {
     'editorconfig/editorconfig-vim',
     config = function()
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
