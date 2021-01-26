@@ -128,7 +128,8 @@ return require('packer').startup({function()
   }
 
   use {
-    'datwaft/bubbly.nvim', config = function()
+    'datwaft/bubbly.nvim',
+    config = function()
       vim.g.bubbly_palette = {
         background = "#34343c",
         foreground = "#c5cdd9",
@@ -149,13 +150,11 @@ return require('packer').startup({function()
         'path',
         'branch',
         'signify',
+        'builtinlsp.diagnostic_count',
         'divisor',
+        'builtinlsp.current_function',
         'filetype',
-        {
-          {
-            data = '%l/%L',
-          }
-        },
+        {{ data = '%l/%L', }},
       }
     end
   }
