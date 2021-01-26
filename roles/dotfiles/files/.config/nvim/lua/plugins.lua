@@ -124,6 +124,7 @@ return require('packer').startup({function()
       nvimux.bootstrap()
     end,
     disable = true, -- I do not use this one often, but I would like to keep the configuration
+    opt = true,
   }
 
   use {
