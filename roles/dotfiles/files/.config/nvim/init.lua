@@ -61,18 +61,20 @@ vim.api.nvim_set_keymap('n', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 
 -- 100 character color difference
-local colorcolumn = 100
+local colorcolumn_depth = 100
 local cc = function(colorcolumn)
   local cc = {}
-  for i=1,colorcolumn do table.insert(cc, i) end
-  return string.format("+%s", table.concat(cc, ",+"))
+  for i=colorcolumn,256 do table.insert(cc, i) end
+  return string.format("%s", table.concat(cc, ","))
 end
+
+-- vim.wo.colorcolumn = cc(colorcolumn_depth)
+local colorcolumn = cc(colorcolumn_depth)
 
 -- When changing to a buffer, "highlight" the current file by changing
 -- the color of the background on the right side
--- vim.wo.colorcolumn = cc(colorcolumn)
-vim.cmd [[ autocmd! BufEnter * :setlocal cursorline textwidth=100 ]]
-vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline textwidth=0 ]]
+vim.cmd(string.format("autocmd! BufEnter * :setlocal cursorline colorcolumn=%s", colorcolumn))
+vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline colorcolumn=0 ]]
 
 -- shortcuts with map leader
 vim.g.mapleader = " "
