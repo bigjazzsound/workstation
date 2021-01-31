@@ -45,6 +45,9 @@ return require('packer').startup({function()
     'tjdevries/lsp_extensions.nvim',
     'tjdevries/nlua.nvim',
     'tpope/vim-commentary',
+    -- Waiting on this plugin to advance more. Specifically, using it with
+    -- visual selections keeps the highlight after commenting.
+    -- 'b3nj5m1n/kommentary',
     'tpope/vim-dispatch',
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
