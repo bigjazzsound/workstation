@@ -44,9 +44,14 @@ function M.show_all_buffers()
 end
 
 function M.find_dotfiles()
-  require('telescope.builtin').fd {
-    cwd = "~/.config/nvim/",
-    find_command = { 'fd', '--type', 'f', '--type', 'l', '-e', 'lua', '-e', 'vim', '--follow' },
+  require('telescope.builtin').git_files {
+    cwd = "~/playground/workstation",
+    layout_config = {
+      preview_width = 0.60,
+    },
+  }
+end
+
 function M.grep_dotfiles()
   require('telescope.builtin').live_grep {
     cwd = "~/playground/workstation",
