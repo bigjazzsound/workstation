@@ -68,12 +68,9 @@ local cc = function(colorcolumn)
   return string.format("%s", table.concat(cc, ","))
 end
 
--- vim.wo.colorcolumn = cc(colorcolumn_depth)
-local colorcolumn = cc(colorcolumn_depth)
-
 -- When changing to a buffer, "highlight" the current file by changing
 -- the color of the background on the right side
-vim.cmd(string.format("autocmd! BufEnter * :setlocal cursorline colorcolumn=%s", colorcolumn))
+vim.cmd(string.format("autocmd! BufEnter * :setlocal cursorline colorcolumn=%s", cc(colorcolumn_depth)))
 vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline colorcolumn=0 ]]
 
 -- shortcuts with map leader
