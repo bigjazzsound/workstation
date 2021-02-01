@@ -113,8 +113,21 @@ lsp.tsserver.setup{
   capabilities = lsp_status.capabilities,
 }
 
+local operating_system = function()
+  if vim.fn.has('mac') == 1 then
+    return 'macOS'
+  else
+    return 'Linux'
+  end
+end
+
 require('nlua.lsp.nvim').setup(lsp, {
   on_attach = on_attach,
+  cmd = {
+    vim.env.HOME .. string.format("/playground/lua-language-server/bin/%s/lua-language-server", operating_system()),
+    "-E",
+    vim.env.HOME .. "/playground/lua-language-server/main.lua"
+  },
   globals = {
     "home",
     "set_keymap",
