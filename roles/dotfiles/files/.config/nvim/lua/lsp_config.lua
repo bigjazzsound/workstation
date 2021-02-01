@@ -92,7 +92,7 @@ lsp.jsonls.setup{
   capabilities = lsp_status.capabilities,
 }
 
-lsp.pyls.setup{
+lsp.pyright.setup{
   on_attach = on_attach,
   capabilities = lsp_status.capabilities,
 }
