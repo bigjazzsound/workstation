@@ -237,7 +237,7 @@ return require('packer').startup({function()
       }
       vim.api.nvim_set_keymap('i', '<C-n>', 'compe#complete()',      { silent = true, expr = true, noremap = true })
       vim.api.nvim_set_keymap('i', '<CR>',  'compe#confirm("<CR>")', { silent = true, expr = true, noremap = true })
-      vim.api.nvim_set_keymap('i', '<CR>',  'compe#close("<C-e>")',  { silent = true, expr = true, noremap = true })
+      vim.api.nvim_set_keymap('i', '<C-e>', 'compe#close("<C-e>")',  { silent = true, expr = true, noremap = true })
     end,
   }
 
