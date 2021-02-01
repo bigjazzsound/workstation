@@ -108,6 +108,11 @@ lsp.terraformls.setup{
   filetypes = {'hcl'}
 }
 
+lsp.tsserver.setup{
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities,
+}
+
 require('nlua.lsp.nvim').setup(lsp, {
   on_attach = on_attach,
   globals = {
