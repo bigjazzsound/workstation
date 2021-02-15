@@ -52,6 +52,7 @@ vim.o.showmatch = true
 vim.o.matchtime = 3
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.signcolumn = "yes"
+vim.o.ignorecase = true
 
 -- map ESC to jk
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
