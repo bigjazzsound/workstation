@@ -50,6 +50,7 @@ vim.o.directory = home .. '/.local/share'
 vim.o.shadafile = home .. '/.local/share/viminfo'
 vim.o.showmatch = true
 vim.o.matchtime = 3
+vim.o.ignorecase = true
 
 -- map ESC to jk
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
