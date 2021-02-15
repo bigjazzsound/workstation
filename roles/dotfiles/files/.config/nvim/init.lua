@@ -51,6 +51,7 @@ vim.o.shadafile = home .. '/.local/share/viminfo'
 vim.o.showmatch = true
 vim.o.matchtime = 3
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+vim.o.signcolumn = "yes"
 
 -- map ESC to jk
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
@@ -105,5 +106,4 @@ vim.cmd [[ command Flash :lua require('flash') ]]
 require('plugins')
 
 vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
-vim.o.signcolumn = "yes"
 vim.cmd [[ colorscheme onedark ]]
