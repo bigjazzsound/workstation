@@ -52,6 +52,7 @@ return require('packer').startup({function()
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
     'tpope/vim-surround',
+    'tpope/vim-unimpaired',
   }
 
   -- colors
