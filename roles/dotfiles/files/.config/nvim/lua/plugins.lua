@@ -160,6 +160,9 @@ return require('packer').startup({function()
         'filetype',
         {{ data = '%l/%L', }},
       }
+      vim.g.bubbly_characters = {
+        close = '',
+      }
     end
   }
 
