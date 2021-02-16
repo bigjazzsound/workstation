@@ -21,7 +21,7 @@ scrolling:
 font:
   normal:
     family: FiraMono Nerd Font
-    style: Regular
+    style: Medium
   bold:
     style: Bold
   italic:
@@ -154,7 +154,7 @@ selection:
   save_to_clipboard: true
 
 cursor:
-  style: Block
+  style: Beam
   unfocused_hollow: true
 
 live_config_reload: true
