@@ -85,13 +85,7 @@ return require('packer').startup({function()
 
   use {
     'mhinz/vim-startify',
-    config = function()
-      if vim.fn.executable('figlet') then
-        vim.g.startify_custom_header = vim.fn['startify#pad'](
-          vim.fn.split(vim.fn.system[[ figlet -f 3D-ASCII "Neovim" ]], '\n')
-        )
-      end
-    end,
+    config = function() require('bigjazzsound.startify') end
   }
 
   use {
@@ -103,67 +97,14 @@ return require('packer').startup({function()
 
   use {
     'hkupty/nvimux',
-    config = function()
-      local nvimux = require('nvimux')
-
-      nvimux.config.set_all{
-        prefix = '<C-Space>',
-        new_window = 'enew',
-        new_tab = nil,
-        new_window_buffer = 'single',
-        quickterm_direction = 'botright',
-        quickterm_orientation = 'vertical',
-        quickterm_scope = 't',
-        quickterm_size = '80',
-      }
-
-      nvimux.bindings.bind_all{
-        {'x', ':belowright Tnew', {'n', 'v', 'i', 't'}},
-        {'v', ':vertical Tnew', {'n', 'v', 'i', 't'}},
-        {'<C-l>', 'gt', {'n', 'v', 'i', 't'}},
-        {'<C-h>', 'gT', {'n', 'v', 'i', 't'}},
-        {'c', ':tab Tnew', {'n', 'v', 'i', 't'}},
-      }
-
-      nvimux.bootstrap()
-    end,
+    config = function() require('bigjazzsound.nvimux') end,
     disable = true, -- I do not use this one often, but I would like to keep the configuration
     opt = true,
   }
 
   use {
     'datwaft/bubbly.nvim',
-    config = function()
-      vim.g.bubbly_palette = {
-        background = "#34343c",
-        foreground = "#c5cdd9",
-        black      = "#3e4249",
-        red        = "#ec7279",
-        green      = "#a0c980",
-        yellow     = "#deb974",
-        blue       = "#6cb6eb",
-        purple     = "#d38aea",
-        cyan       = "#5dbbc1",
-        white      = "#c5cdd9",
-        lightgrey  = "#57595e",
-        darkgrey   = "#404247",
-      }
-      vim.g.bubbly_statusline = {
-        'mode',
-        'truncate',
-        'path',
-        'branch',
-        'signify',
-        'builtinlsp.diagnostic_count',
-        'divisor',
-        'builtinlsp.current_function',
-        'filetype',
-        {{ data = '%l/%L', }},
-      }
-      vim.g.bubbly_characters = {
-        close = '',
-      }
-    end
+    config = function() require('bigjazzsound.status') end
   }
 
   use {
@@ -185,25 +126,12 @@ return require('packer').startup({function()
 
   use {
     'justinmk/vim-sneak',
-    config = function()
-      vim.g['sneak#label'] = 1
-      vim.g['sneak#use_ic_scs'] = 1
-      vim.g['sneak#s_next = 1'] = 1
-    end
+    config = function() require('bigjazzsound.sneak') end
   }
 
   use {
     'kassio/neoterm',
-    config = function()
-      vim.g.neoterm_autoinsert = 1
-      vim.g.neoterm_clear_cmd = { "clear", "" }
-      vim.g.neoterm_default_mod = "vertical"
-      vim.api.nvim_set_keymap('n', '<leader>tT', '<CMD>TtoggleAll<CR>',    DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>tc', '<CMD>Tclear!<CR>',       DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>tF', '<CMD>TREPLSendFile<CR>', DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>tn', '<CMD>Tnew<CR>',          DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>tt', '<CMD>Ttoggle<CR>',       DEFAULT_KEYMAP)
-    end
+    config = function() require('bigjazzsound.status') end
   }
 
   use {
@@ -213,40 +141,12 @@ return require('packer').startup({function()
 
   use {
     'neovim/nvim-lspconfig',
-    -- This needs to be here so that require('nvim_lsp') can find the library
-    -- TODO read https://github.com/wbthomason/packer.nvim/issues/4 for possible solutions
-    config = [[ require('lsp_config') ]],
+    config = function() require('bigjazzsound.lsp_config') end,
   }
 
   use {
     'hrsh7th/nvim-compe',
-    config = function()
-      require('compe').setup {
-        enabled = true,
-        autocomplete = true,
-        debug = false,
-        min_length = 1,
-        preselect = 'enable',
-        throttle_time = 80,
-        source_timeout = 200,
-        incomplete_delay = 400,
-        allow_prefix_unmatch = false,
-
-        source = {
-          path = true,
-          buffer = true,
-          calc = true,
-          vsnip = true,
-          nvim_lsp = true,
-          nvim_lua = true,
-          spell = true,
-          snippets_nvim = true,
-        },
-      }
-      vim.api.nvim_set_keymap('i', '<C-n>', 'compe#complete()',      { silent = true, expr = true, noremap = true })
-      vim.api.nvim_set_keymap('i', '<CR>',  'compe#confirm("<CR>")', { silent = true, expr = true, noremap = true })
-      vim.api.nvim_set_keymap('i', '<C-e>', 'compe#close("<C-e>")',  { silent = true, expr = true, noremap = true })
-    end,
+    config = function() require('bigjazzsound.completion') end
   }
 
   use {
@@ -263,23 +163,7 @@ return require('packer').startup({function()
 
   use {
     'tpope/vim-fugitive',
-    config = function()
-      vim.api.nvim_set_keymap('n', '<leader>ga',  ':Git add %:p<CR><CR>',            DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gs',  ':Gstatus<CR>',                    DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gc',  ':Gcommit -v -q<CR>',              DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gt',  ':Gcommit -v -q %:p<CR>',          DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gd',  ':Gdiff<CR>',                      DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>ge',  ':Gedit<CR>',                      DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gr',  ':Gread<CR>',                      DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gw',  ':Gwrite<CR><CR>',                 DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gl',  ':silent! Glog<CR>:bot copen<CR>', DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gp',  ':Ggrep<Space>',                   DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gm',  ':Gmove<Space>',                   DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gb',  ':Gblame!<CR>',                    DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>go',  ':Git checkout<Space>',            DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gps', ':Dispatch! Git push<CR>',         DEFAULT_KEYMAP)
-      vim.api.nvim_set_keymap('n', '<leader>gpl', ':Dispatch! Git pull<CR>',         DEFAULT_KEYMAP)
-    end
+    config = function() require('bigjazzsound.fugitive') end
   }
 
   end,
