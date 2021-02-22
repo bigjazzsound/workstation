@@ -119,7 +119,7 @@ return require('packer').startup({function()
 
   use {
     'kassio/neoterm',
-    config = function() require('bigjazzsound.status') end
+    config = function() require('bigjazzsound.neoterm') end
   }
 
   use {
