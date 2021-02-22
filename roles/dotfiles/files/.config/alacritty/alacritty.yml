@@ -28,7 +28,7 @@ font:
     style: Italic
   bold_italic:
     style: Bold Italic
-  size: 18.0
+  size: 14.0
   offset:
     x: 0
     y: 0
