@@ -58,18 +58,6 @@ return require('packer').startup({function()
   -- colors
   use {
     'christianchiarulli/nvcode-color-schemes.vim',
-    'mhartington/oceanic-next',
-  }
-
-  use {
-    'hardcoreplayers/oceanic-material',
-    config = function()
-      vim.g.oceanic_material_allow_bold = 1
-      vim.g.oceanic_material_allow_italic = 1
-      vim.g.oceanic_material_allow_underline = 1
-      vim.g.oceanic_material_transparent_background = 1
-      vim.o.background = "dark"
-    end,
   }
 
   -- filetypes
