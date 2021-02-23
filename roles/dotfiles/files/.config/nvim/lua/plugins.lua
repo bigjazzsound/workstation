@@ -129,7 +129,17 @@ return require('packer').startup({function()
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function() require('gitsigns').setup() end
+    config = function()
+      require('gitsigns').setup{
+        signs = {
+          add          = { hl = 'DiffAdd',    text = '+', numhl = 'GitSignsAddNr' },
+          change       = { hl = 'DiffChange', text = '~', numhl = 'GitSignsChangeNr' },
+          delete       = { hl = 'DiffDelete', text = '-', numhl = 'GitSignsDeleteNr' },
+          topdelete    = { hl = 'DiffDelete', text = '-', numhl = 'GitSignsDeleteNr' },
+          changedelete = { hl = 'DiffChange', text = '~', numhl = 'GitSignsChangeNr' },
+        },
+      }
+    end,
   }
 
   use {
