@@ -127,8 +127,9 @@ return require('packer').startup({function()
   }
 
   use {
-    'mhinz/vim-signify',
-    config = [[ vim.g.signify_sign_change = '~' ]],
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function() require('gitsigns').setup() end
   }
 
   use {
