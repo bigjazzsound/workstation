@@ -39,7 +39,6 @@ return require('packer').startup({function()
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
     'justinmk/vim-dirvish',
-    'nvim-lua/completion-nvim',
     'nvim-lua/lsp-status.nvim',
     'romainl/vim-cool',
     'tjdevries/lsp_extensions.nvim',
