@@ -71,6 +71,11 @@ return require('packer').startup({function()
   }
 
   use {
+    'euclio/vim-markdown-composer',
+    run = [[ cargo build --release ]],
+  }
+
+  use {
     'mhinz/vim-startify',
     config = function() require('bigjazzsound.startify') end
   }
