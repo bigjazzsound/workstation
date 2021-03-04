@@ -8,13 +8,14 @@ source $ZPLUGINDIR/zsh-snap/znap.zsh
 
 PLUGINS=(
     "Aloxaf/fzf-tab"
+    "DarrinTisdale/zsh-aliases-exa"
     "MichaelAquilina/zsh-auto-notify"
+    "blimmer/zsh-aws-vault"
     "ohmyzsh/ohmyzsh"
     "zdharma/fast-syntax-highlighting"
+    "zpm-zsh/clipboard"
     "zsh-users/zsh-autosuggestions"
     "zsh-users/zsh-completions"
-    "zpm-zsh/clipboard"
-    "DarrinTisdale/zsh-aliases-exa"
 )
 
 for PLUGIN in ${PLUGINS}; do
@@ -34,6 +35,7 @@ if [[ -f $(command -v fd) ]]; then
     FZF_CTRL_T_COMMAND='fd --type f --follow --exclude .git'
     FZF_CTRL_T_OPTS='--multi --preview="bat --line-range :50 --color=always --style plain {}"'
 fi
+znap source zsh-aws-vault
 znap source fzf-tab
 znap source ${OMZ} "lib/history.zsh"
 znap source fast-syntax-highlighting
