@@ -104,6 +104,7 @@ vim.api.nvim_set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
 vim.cmd [[ au TermOpen * setlocal nonumber norelativenumber ]]
 
 vim.cmd [[ command Flash :lua require('flash') ]]
+require('bigjazzsound.globals')
 require('plugins')
 
 vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
