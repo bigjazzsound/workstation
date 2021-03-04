@@ -95,8 +95,14 @@ return require('packer').startup({function()
   }
 
   use {
-    'datwaft/bubbly.nvim',
-    config = function() require('bigjazzsound.status') end
+    'glepnir/galaxyline.nvim',
+    branch = 'main',
+    config = function() require('bigjazzsound.status') end,
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      'ryanoasis/vim-devicons',
+      opt = true
+    },
   }
 
   use {
