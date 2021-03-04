@@ -134,15 +134,19 @@ return require('packer').startup({function()
 
   use {
     'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'glepnir/galaxyline.nvim',
+    },
     config = function()
       require('gitsigns').setup{
+        numhl = true,
         signs = {
-          add          = { hl = 'DiffAdd',    text = '+', numhl = 'GitSignsAddNr' },
-          change       = { hl = 'DiffChange', text = '~', numhl = 'GitSignsChangeNr' },
-          delete       = { hl = 'DiffDelete', text = '-', numhl = 'GitSignsDeleteNr' },
-          topdelete    = { hl = 'DiffDelete', text = '-', numhl = 'GitSignsDeleteNr' },
-          changedelete = { hl = 'DiffChange', text = '~', numhl = 'GitSignsChangeNr' },
+          add          = { hl = 'DiffAdd',    text = '', numhl='GalaxyDiffAdd' },
+          change       = { hl = 'DiffText',   text = '', numhl='GalaxyDiffModified' },
+          delete       = { hl = 'DiffDelete', text = '', numhl='GalaxyDiffRemove' },
+          topdelete    = { hl = 'DiffDelete', text = '', numhl='GalaxyDiffRemove' },
+          changedelete = { hl = 'DiffText',   text = '', numhl='GalaxyDiffModified' },
         },
       }
     end,
