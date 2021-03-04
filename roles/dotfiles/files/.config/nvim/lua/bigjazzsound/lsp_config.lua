@@ -13,7 +13,6 @@ lsp_status.config({
 })
 
 local on_attach = function(client, bufnr)
-  -- require('completion').on_attach(client)
   lsp_status.on_attach(client)
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
