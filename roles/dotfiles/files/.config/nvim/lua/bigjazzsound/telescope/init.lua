@@ -1,22 +1,20 @@
 local actions = require('telescope.actions')
 local previewers = require('telescope.previewers')
 
+local my_actions = {
+  ["jk"] = actions.close,
+  ["<C-j>"] = actions.move_selection_next,
+  ["<C-k>"] = actions.move_selection_previous,
+  ["<C-p>"] = actions.add_selection,
+  ["<tab>"] = actions.toggle_selection,
+  ["<C-q>"] = actions.send_selected_to_qflist,
+}
+
 require('telescope').setup{
   defaults = {
     mappings = {
-      i = {
-        ["jk"] = actions.close,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-      },
-      n = {
-        ["jk"] = actions.close,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-        -- ["<tab>"] = actions.add_selection,
-        ["<tab>"] = actions.toggle_selection,
-
-      },
+      i = my_actions,
+      n = my_actions,
     },
     -- Rounded corners don't look right with my font
     borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
