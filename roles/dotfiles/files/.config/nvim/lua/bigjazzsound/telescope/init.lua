@@ -32,13 +32,14 @@ require('telescope').setup{
 }
 
 local M = {}
+local preview_width = 0.55
 
 -- Does not seem to work with the show_all_buffers option
 function M.show_all_buffers()
   require('telescope.builtin').buffers{
     show_all_buffers = true,
     layout_config = {
-      preview_width = 0.60,
+      preview_width = preview_width,
     },
   }
 end
@@ -47,7 +48,7 @@ function M.find_dotfiles()
   require('telescope.builtin').git_files {
     cwd = "~/playground/workstation",
     layout_config = {
-      preview_width = 0.60,
+      preview_width = preview_width,
     },
   }
 end
@@ -57,7 +58,7 @@ function M.grep_dotfiles()
     cwd = "~/playground/workstation",
     vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '--hidden' },
     layout_config = {
-      preview_width = 0.60,
+      preview_width = preview_width,
     },
   }
 end
@@ -74,7 +75,7 @@ end
 function M.fd()
   require('telescope.builtin').fd{
     layout_config = {
-      preview_width = 0.60,
+      preview_width = preview_width,
     },
   }
 end
@@ -83,7 +84,7 @@ function M.oldfiles()
   require('telescope.builtin').oldfiles {
     shorten_path = true,
     layout_config = {
-      preview_width = 0.60,
+      preview_width = preview_width,
     },
   }
 end
