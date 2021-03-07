@@ -10,4 +10,8 @@ if pcall(require, 'plenary') then
     RELOAD(name)
     return require(name)
   end
+else
+  R = function(name)
+    return require(name)
+  end
 end
