@@ -68,6 +68,7 @@ return require('packer').startup({function()
     'euclidianAce/BetterLua.vim',
     'jvirtanen/vim-hcl',
     'martinda/Jenkinsfile-vim-syntax',
+    'saltstack/salt-vim',
   }
 
   use {
