@@ -1,4 +1,7 @@
 local actions = require('telescope.actions')
+local pickers = require('telescope.pickers')
+local sorters = require('telescope.sorters')
+local finders = require('telescope.finders')
 local previewers = require('telescope.previewers')
 
 local my_actions = {
@@ -32,6 +35,36 @@ require('telescope').setup{
 
 local M = {}
 local preview_width = 0.55
+
+function M.terraform_resources()
+  -- If there is a justfile in the current directory, then set just as the finder
+  local ft = {}
+  local files = vim.fn.readdir(".")
+  if vim.tbl_contains(vim.tbl_map(vim.fn.tolower, files), "justfile") then
+    ft = {
+      finder = { 'just', 'list' },
+      previewer = { 'just', 'show' },
+    }
+  else
+    ft = {
+      finder = { 'terraform', 'state', '-no-color', 'list' },
+      previewer = { 'terraform', 'state', '-no-color', 'show' },
+    }
+  end
+
+  pickers.new {
+    results_title = 'Resources',
+    finder = finders.new_oneshot_job(ft.finder),
+    sorter = sorters.get_fuzzy_file(),
+    -- TODO - this is really slow because `terraform show` is slow. Possible alternatives are
+    -- making a custom action that will open the content of `terraform show` in a new buffer on <CR>
+    previewer = previewers.new_termopen_previewer {
+      get_command = function(entry)
+        return vim.fn.extend(ft.previewer, {entry.value})
+      end
+    },
+  }:find()
+end
 
 -- Does not seem to work with the show_all_buffers option
 function M.show_all_buffers()
