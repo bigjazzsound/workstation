@@ -26,10 +26,6 @@ require('telescope').setup{
     width = 0.95,
     winblend = 5,
     preview_cutoff = 120,
-    -- These previewers are experimental but they are FAST
-    file_previewer = previewers.vim_buffer_cat.new,
-    grep_previewer = previewers.vim_buffer_vimgrep.new,
-    qflist_previewer = previewers.vim_buffer_qflist.new,
   }
 }
 
