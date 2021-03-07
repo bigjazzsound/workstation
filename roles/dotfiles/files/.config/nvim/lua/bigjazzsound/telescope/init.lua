@@ -23,7 +23,7 @@ require('telescope').setup{
     prompt_position = "top",
     sorting_strategy = "ascending",
     width = 0.95,
-    winblend = 10,
+    winblend = 5,
     -- These previewers are experimental but they are FAST
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
