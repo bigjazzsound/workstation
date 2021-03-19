@@ -5,10 +5,6 @@ DEFAULT_KEYMAP = {
   silent = true
 }
 
-if vim.fn.filereadable('/usr/local/bin/python3') then
-  vim.g.python3_host_prog = '/usr/local/bin/python3'
-end
-
 -- disable unused providers
 vim.g.loaded_python_provider = 0
 vim.g.loaded_ruby_provider   = 0
