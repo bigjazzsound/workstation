@@ -101,27 +101,43 @@ nvim_lsp.tsserver.setup{
   capabilities = capabilities,
 }
 
-local operating_system = function()
-  if vim.fn.has('mac') == 1 then
-    return 'macOS'
-  else
-    return 'Linux'
-  end
-end
-
-require('nlua.lsp.nvim').setup(lsp, {
+nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
+  capabilities = capabilities,
   cmd = {
-    vim.env.HOME .. string.format("/playground/lua-language-server/bin/%s/lua-language-server", operating_system()),
+    vim.env.HOME .. string.format(
+      "/playground/lua-language-server/bin/%s/lua-language-server",
+      function()
+        if vim.fn.has('mac') == 1 then
+          return 'macOS'
+        else
+          return 'Linux'
+        end
+      end
+    ),
     "-E",
     vim.env.HOME .. "/playground/lua-language-server/main.lua"
   },
-  globals = {
-    "home",
-    "set_keymap",
-    "use"
-  }
-})
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+        path = vim.split(package.path, ';')
+      },
+      diagnostics = {
+        globals = {
+          'vim',
+        },
+      },
+      workspace = {
+        library = {
+          [vim.env['VIMRUNTIME']..'lua'] = true,
+          [vim.env['VIMRUNTIME']..'lua/vim/lsp'] = true,
+        },
+      },
+    }
+  },
+}
 
 nvim_lsp.vimls.setup{
   on_attach = on_attach,
