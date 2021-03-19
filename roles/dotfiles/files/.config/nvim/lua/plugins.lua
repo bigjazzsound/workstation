@@ -38,7 +38,6 @@ return require('packer').startup({function(use)
     'christoomey/vim-tmux-navigator',
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
-    'justinmk/vim-dirvish',
     'romainl/vim-cool',
     'tjdevries/lsp_extensions.nvim',
     'tjdevries/nlua.nvim',
