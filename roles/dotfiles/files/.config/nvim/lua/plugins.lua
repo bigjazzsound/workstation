@@ -63,7 +63,6 @@ return require('packer').startup({function(use)
     'PProvost/vim-ps1',
     'cespare/vim-toml',
     'chr4/nginx.vim',
-    'euclidianAce/BetterLua.vim',
     'jvirtanen/vim-hcl',
     'martinda/Jenkinsfile-vim-syntax',
     'saltstack/salt-vim',
