@@ -17,7 +17,7 @@ vim.wo.number = true
 vim.cmd[[ autocmd! VimResized * :wincmd = ]]
 
 if vim.fn.exists('##TextYankPost') then
-  vim.cmd[[ autocmd TextYankPost * silent! lua require('vim.highlight').on_yank('IncSearch', '250') ]]
+  vim.cmd[[ autocmd TextYankPost * silent! lua require('vim.highlight').on_yank() ]]
 end
 
 vim.o.syntax = 'on'
