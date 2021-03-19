@@ -14,7 +14,6 @@ vim.g.loaded_perl_provider   = 0
 vim.wo.relativenumber = true
 vim.wo.number = true
 
-vim.cmd[[ command! Vimrc :args $MYVIMRC $HOME/.config/nvim/lua/*.lua ]]
 vim.cmd[[ autocmd! VimResized * :wincmd = ]]
 
 if vim.fn.exists('##TextYankPost') then
