@@ -1,7 +1,6 @@
-local lsp = require("lspconfig")
+local nvim_lsp = require("lspconfig")
 
 local on_attach = function(client, bufnr)
-  lsp_status.on_attach(client)
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -40,14 +39,16 @@ local on_attach = function(client, bufnr)
 
 end
 
-lsp.clangd.setup{
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+nvim_lsp.clangd.setup{
   on_attach = on_attach,
   cmd = {
     'clangd',
     '--clang-tidy', '--completion-style=bundled', '--header-insertion=iwyu',
     '--suggest-missing-includes', '--cross-file-rename'
   },
-  handlers = lsp_status.extensions.clangd.setup(),
   init_options = {
     clangdFileStatus = true,
     usePlaceholders = true,
@@ -56,7 +57,7 @@ lsp.clangd.setup{
   }
 }
 
-lsp.bashls.setup{
+nvim_lsp.bashls.setup{
   on_attach = on_attach,
   filetypes = {
     "sh",
@@ -64,40 +65,40 @@ lsp.bashls.setup{
   }
 }
 
-lsp.dockerls.setup{
+nvim_lsp.dockerls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
-lsp.gopls.setup{
+nvim_lsp.gopls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
-lsp.jsonls.setup{
+nvim_lsp.jsonls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
-lsp.pyright.setup{
+nvim_lsp.pyright.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
-lsp.rls.setup{
+nvim_lsp.rls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
-lsp.terraformls.setup{
+nvim_lsp.terraformls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
   filetypes = {'hcl'}
 }
 
-lsp.tsserver.setup{
+nvim_lsp.tsserver.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
 local operating_system = function()
@@ -122,12 +123,12 @@ require('nlua.lsp.nvim').setup(lsp, {
   }
 })
 
-lsp.vimls.setup{
+nvim_lsp.vimls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
 
-lsp.yamlls.setup{
+nvim_lsp.yamlls.setup{
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities,
+  capabilities = capabilities,
 }
