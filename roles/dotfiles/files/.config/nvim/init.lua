@@ -74,12 +74,11 @@ vim.cmd [[ autocmd! BufLeave * :setlocal nocursorline colorcolumn=0 ]]
 
 -- shortcuts with map leader
 vim.g.mapleader = " "
-vim.api.nvim_set_keymap('n', '<leader>/',  ':nohls <enter>',   DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>w',  ':w <enter>',       DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>q',  ':q<enter>',        DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>bd', ':bd <enter>',      DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>bn', ':bn <enter>',      DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>bp', ':bp <enter>',      DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>w',  ':w <enter>',  DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>q',  ':q<enter>',   DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bd <enter>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bn', ':bn <enter>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>bp', ':bp <enter>', DEFAULT_KEYMAP)
 
 -- shortcuts for cmdline mode
 vim.api.nvim_set_keymap('c', '<A-b>', '<S-Left>',    { noremap = true })
@@ -91,13 +90,11 @@ vim.api.nvim_set_keymap('c', '<c-f>', '<Right>',     { noremap = true })
 vim.api.nvim_set_keymap('c', '<c-b>', '<Left>',      { noremap = true })
 
 -- terminal shortcuts
-vim.api.nvim_set_keymap('t', 'jk', [[<C-\><C-n>]], DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', 'jk', [[<C-\><C-n>]],  DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('t', '<C-J>', '<C-W><C-J>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('t', '<C-K>', '<C-W><C-K>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('t', '<C-L>', '<C-W><C-L>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('t', '<C-H>', '<C-W><C-H>', DEFAULT_KEYMAP)
-
-vim.cmd [[ au TermOpen * setlocal nonumber norelativenumber ]]
 
 vim.cmd [[ command Flash :lua require('flash') ]]
 require('bigjazzsound.globals')
@@ -105,4 +102,11 @@ require('plugins')
 
 vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
 vim.cmd [[ au BufNewFile,BufRead justfile,Justfile setfiletype make ]]
-vim.cmd [[ colorscheme onedark ]]
+vim.cmd [[ colorscheme one-nvim ]]
+
+-- TODO - replace with https://github.com/bfredl/nvim-luadev
+vim.api.nvim_set_keymap('n', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_line()<CR>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('v', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_selection()<CR><ESC>', DEFAULT_KEYMAP)
+
+vim.api.nvim_set_keymap('n', '<leader>gpo', '<CMD>lua local git_po = R("bigjazzsound.commands").git_po(); R("bigjazzsound.commands").open_win(git_po)<CR>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>tfv', '<CMD>lua local output = R("bigjazzsound.commands").terraform_validate()<CR>', DEFAULT_KEYMAP)
