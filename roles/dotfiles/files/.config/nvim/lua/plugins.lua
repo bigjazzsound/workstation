@@ -129,7 +129,7 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'kassio/neoterm',
+    'akinsho/nvim-toggleterm.lua',
     config = function() require('bigjazzsound.neoterm') end
   }
 
