@@ -197,6 +197,10 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'onsails/lspkind-nvim',
+    config = function() require('lspkind').init() end,
+  }
+
   use {
     'TimUntersberger/neogit',
     config = function()
