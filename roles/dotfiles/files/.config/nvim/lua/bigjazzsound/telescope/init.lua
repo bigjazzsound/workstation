@@ -108,6 +108,12 @@ function M.fd()
   }
 end
 
+function M.find_projects()
+  require('telescope.builtin').file_browser {
+    cwd = "~/playground",
+  }
+end
+
 function M.oldfiles()
   require('telescope.builtin').oldfiles {
     shorten_path = true,
