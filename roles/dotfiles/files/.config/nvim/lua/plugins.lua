@@ -32,6 +32,7 @@ return require('packer').startup({function(use)
   -- Plugins without any special configuration
   use {
     'christoomey/vim-tmux-navigator',
+    'editorconfig/editorconfig-vim',
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
     'romainl/vim-cool',
@@ -81,10 +82,7 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'editorconfig/editorconfig-vim',
     config = function()
-      vim.g.EditorConfig_exclude_patterns = { 'fugitive://.\\*' }
-    end
   }
 
   use {
