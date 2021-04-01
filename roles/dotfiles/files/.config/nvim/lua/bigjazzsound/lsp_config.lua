@@ -105,19 +105,21 @@ nvim_lsp.tsserver.setup{
   capabilities = capabilities,
 }
 
+local function operating_system()
+  if vim.fn.has('mac') == 1 then
+    return 'macOS'
+  else
+    return 'Linux'
+  end
+end
+
 nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = {
     vim.env.HOME .. string.format(
       "/playground/lua-language-server/bin/%s/lua-language-server",
-      function()
-        if vim.fn.has('mac') == 1 then
-          return 'macOS'
-        else
-          return 'Linux'
-        end
-      end
+      operating_system()
     ),
     "-E",
     vim.env.HOME .. "/playground/lua-language-server/main.lua"
