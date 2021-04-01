@@ -82,6 +82,13 @@ nvim_lsp.gopls.setup{
 nvim_lsp.jsonls.setup{
   on_attach = on_attach,
   capabilities = capabilities,
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+      end
+    }
+  }
 }
 
 nvim_lsp.pyright.setup{
