@@ -100,11 +100,6 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'junegunn/goyo.vim',
-    cmd = {'Goyo'},
-  }
-
-  use {
     'nvim-telescope/telescope.nvim',
     requires = {
       {'nvim-lua/popup.nvim'},
