@@ -112,8 +112,11 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'justinmk/vim-sneak',
-    config = function() require('bigjazzsound.sneak') end
+    'phaazon/hop.nvim',
+    config = function()
+      require('hop').setup { winblend = 80 }
+      vim.api.nvim_set_keymap('n', 's', [[<CMD>lua require('hop').hint_char2()<CR>]], {})
+    end,
   }
 
   use {
