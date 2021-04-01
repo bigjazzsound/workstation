@@ -31,7 +31,6 @@ return require('packer').startup({function(use)
 
   -- Plugins without any special configuration
   use {
-    'Yggdroot/indentLine',
     'christoomey/vim-tmux-navigator',
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
@@ -77,6 +76,8 @@ return require('packer').startup({function(use)
   use {
     'mhinz/vim-startify',
     config = function() require('bigjazzsound.startify') end
+    'glepnir/indent-guides.nvim',
+    config = function() require('bigjazzsound.indents') end,
   }
 
   use {
