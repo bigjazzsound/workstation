@@ -37,7 +37,6 @@ return require('packer').startup({function(use)
     'junegunn/vim-easy-align',
     'romainl/vim-cool',
     'tjdevries/lsp_extensions.nvim',
-    'tjdevries/nlua.nvim',
     'tpope/vim-commentary',
     -- Waiting on this plugin to advance more. Specifically, using it with
     -- visual selections keeps the highlight after commenting.
