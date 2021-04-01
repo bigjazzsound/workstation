@@ -19,6 +19,10 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d',         '<CMD>lua vim.lsp.diagnostic.goto_previous()<CR>', DEFAULT_KEYMAP)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<CMD>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
 
+  if client.resolved_capabilities.document_range_formatting then
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<CMD>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<CR>', DEFAULT_KEYMAP)
+  end
+
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<CMD>lua vim.lsp.buf.formatting()<CR>', DEFAULT_KEYMAP)
   end
