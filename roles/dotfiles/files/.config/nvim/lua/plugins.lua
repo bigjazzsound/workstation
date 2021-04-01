@@ -218,6 +218,13 @@ return require('packer').startup({function(use)
     'Th3Whit3Wolf/one-nvim',
   }
 
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup{
+        '!packer',
+      }
+    end,
   }
 
   end,
