@@ -44,11 +44,6 @@ return require('packer').startup({function(use)
     'tpope/vim-unimpaired',
   }
 
-  -- colors
-  use {
-    'christianchiarulli/nvcode-color-schemes.vim',
-  }
-
   -- filetypes
   use {
     'Glench/Vim-Jinja2-Syntax',
@@ -185,6 +180,12 @@ return require('packer').startup({function(use)
   use {
     'tpope/vim-fugitive',
     config = function() require('bigjazzsound.fugitive') end
+  -- colors
+  use {
+    'christianchiarulli/nvcode-color-schemes.vim',
+    'Th3Whit3Wolf/one-nvim',
+  }
+
   }
 
   end,
