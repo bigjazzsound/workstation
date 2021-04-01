@@ -121,7 +121,7 @@ return require('packer').startup({function(use)
 
   use {
     'akinsho/nvim-toggleterm.lua',
-    config = function() require('bigjazzsound.neoterm') end
+    config = function() require('bigjazzsound.terminal') end
   }
 
   use {
