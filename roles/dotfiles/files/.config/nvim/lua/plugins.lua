@@ -37,10 +37,6 @@ return require('packer').startup({function(use)
     'junegunn/vim-easy-align',
     'romainl/vim-cool',
     'tjdevries/lsp_extensions.nvim',
-    'tpope/vim-commentary',
-    -- Waiting on this plugin to advance more. Specifically, using it with
-    -- visual selections keeps the highlight after commenting.
-    -- 'b3nj5m1n/kommentary',
     'tpope/vim-dispatch',
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
@@ -81,7 +77,14 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'b3nj5m1n/kommentary',
     config = function()
+      require('kommentary.config').configure_language("default", {
+        prefer_single_line_comments = true,
+      })
+    end,
+  }
+
   }
 
   use {
