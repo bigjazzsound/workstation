@@ -65,8 +65,6 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'mhinz/vim-startify',
-    config = function() require('bigjazzsound.startify') end
     'glepnir/indent-guides.nvim',
     config = function() require('bigjazzsound.indents') end,
   }
@@ -80,6 +78,9 @@ return require('packer').startup({function(use)
     end,
   }
 
+  use {
+    'mhinz/vim-startify',
+    config = function() require('bigjazzsound.startify') end
   }
 
   use {
