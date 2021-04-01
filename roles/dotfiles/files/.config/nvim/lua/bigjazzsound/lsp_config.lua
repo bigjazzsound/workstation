@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
   end
 
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-  vim.o.completeopt = "menuone,noinsert,noselect"
+  vim.o.completeopt = "menuone,noselect"
   vim.g.completion_matching_ignore_case = 1
   vim.g.completion_matching_strategy_list = {'exact', 'fuzzy', 'substring', 'all'}
   vim.o.updatetime = 300
