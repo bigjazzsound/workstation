@@ -32,9 +32,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[ au CursorMoved <buffer> lua vim.lsp.buf.clear_references() ]]
   end
 
-  -- Show diagnostic popup on cursor hold
-  vim.cmd [[ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics() ]]
-
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
   vim.o.completeopt = "menuone,noinsert,noselect"
   vim.g.completion_matching_ignore_case = 1
