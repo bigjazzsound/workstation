@@ -150,6 +150,11 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'norcalli/snippets.nvim',
+    config = function() require('bigjazzsound.snippets') end,
+  }
+
+  use {
     'hrsh7th/nvim-compe',
     config = function() require('bigjazzsound.completion') end
   }
