@@ -21,7 +21,6 @@ show_notifications = true
 [aws]
 style = "bold yellow"
 displayed_items = "all"
-symbol = "🧇 "
 
 [hostname]
 ssh_only = true
