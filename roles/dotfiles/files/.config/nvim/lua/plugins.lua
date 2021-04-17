@@ -156,6 +156,7 @@ return require('packer').startup({function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     config = function()
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
       require('nvim-treesitter.configs').setup {
         ensure_installed = "maintained",
         highlight = {
@@ -171,6 +172,18 @@ return require('packer').startup({function(use)
           },
         },
       }
+
+      parser_config.hcl = {
+        install_info = {
+          url = "~/playground/tree-sitter-hcl",
+          files = { "src/parser.c" }
+        },
+        filetype = "hcl",
+        used_by = { "terraform", "hcl" },
+      }
+    end
+  }
+
   use {
     'nvim-treesitter/playground',
     config = function()
