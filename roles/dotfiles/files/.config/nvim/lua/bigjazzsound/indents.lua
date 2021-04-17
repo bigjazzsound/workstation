@@ -5,5 +5,6 @@ require('indent_guides').setup {
     'help',
     'packer',
     'startify',
+    'toggleterm',
   },
 }
