@@ -100,7 +100,6 @@ vim.cmd [[ command Flash :lua require('flash') ]]
 require('bigjazzsound.globals')
 require('plugins')
 
-vim.cmd [[ autocmd BufWritePost plugins.lua PackerCompile ]]
 vim.cmd [[ au BufNewFile,BufRead justfile,Justfile setfiletype make ]]
 vim.cmd [[ colorscheme one-nvim ]]
 
