@@ -126,13 +126,6 @@ return require('packer').startup({function(use)
     config = function()
       require('gitsigns').setup{
         numhl = true,
-        signs = {
-          add          = { hl = 'DiffAdd',    text = '', numhl='GalaxyDiffAdd' },
-          change       = { hl = 'DiffText',   text = '', numhl='GalaxyDiffModified' },
-          delete       = { hl = 'DiffDelete', text = '', numhl='GalaxyDiffRemove' },
-          topdelete    = { hl = 'DiffDelete', text = '', numhl='GalaxyDiffRemove' },
-          changedelete = { hl = 'DiffText',   text = '', numhl='GalaxyDiffModified' },
-        },
       }
     end,
   }
