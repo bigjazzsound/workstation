@@ -52,17 +52,23 @@ M.open_win = function(text)
   local width = vim.api.nvim_get_option("columns")
   local height = vim.api.nvim_get_option("lines")
   vim.api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
+  local longest = 0
+  for _, line in pairs(text) do
+    if #line > longest then
+      longest = #line
+    end
+  end
   local win = vim.api.nvim_open_win(bufnr, false, {
     relative = "editor",
     style = "minimal",
-    width = 40,
-    height = 4,
-    row = height - 3,
+    width = longest + 5,
+    height = #text + 5,
+    row = height - 5,
     col = width - 3,
     anchor = "SE",
     focusable = false,
   })
-  vim.api.nvim_buf_set_lines(bufnr, 0, 1, false, text)
+  vim.api.nvim_buf_set_lines(bufnr, 0, #text, false, text)
   vim.defer_fn(function()
     vim.api.nvim_win_close(win, false)
   end, 3000)
