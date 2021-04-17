@@ -220,6 +220,16 @@ return require('packer').startup({function(use)
     end,
   }
 
+  use {
+    'numToStr/Navigator.nvim',
+    config = function()
+      require('Navigator').setup()
+      vim.api.nvim_set_keymap('n', "<C-h>", "<CMD>lua require('Navigator').left()<CR>",  DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', "<C-k>", "<CMD>lua require('Navigator').up()<CR>",    DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>",  DEFAULT_KEYMAP)
+    end
+  }
   end,
 
   config = {
