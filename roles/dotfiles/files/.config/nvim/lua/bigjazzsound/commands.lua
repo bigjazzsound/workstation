@@ -81,6 +81,68 @@ M.open_win = function(text)
   end, 3000)
 end
 
+M.query_todoist = function()
+  local api_key = os.getenv("TODOIST_API_KEY")
+  local job = require('plenary.job'):new {
+    command = 'curl',
+    args = {
+      '-s', '-X', 'GET',
+      '-H', 'Authorization: Bearer '..api_key,
+      'https://api.todoist.com/rest/v1/tasks?filter=today',
+    },
+  }:sync()
+
+  local nodate = {}
+  local tasks = {}
+  local timediff = 4
+  for _, task in pairs(vim.fn.json_decode(job)) do
+    if task.due.datetime then
+      local _, _, _, hour, minute, _ = task.due.datetime:match('^(%d%d%d%d)-(%d%d)-(%d%d)T(%d%d):(%d%d):(%d%d)Z')
+      if tonumber(hour) < 12 then
+        if tonumber(hour) < timediff then
+          task.hour = tonumber(hour) + 12 - timediff
+          task.meridian = "PM"
+        else
+          task.hour = tonumber(hour) - timediff
+          task.meridian = "AM"
+        end
+      else
+        task.hour = tonumber(hour) - 12 - timediff
+        task.meridian = "PM"
+      end
+      task.minute = minute
+      table.insert(tasks, task)
+    else
+      task.hour = 24
+      task.minute = 0
+      table.insert(nodate, task)
+    end
+  end
+  table.sort(tasks, function(a, b)
+    return a.due.datetime < b.due.datetime
+  end)
+
+  for _, value in pairs(nodate) do
+    value.meridian = "PM"
+    table.insert(tasks, value)
+  end
+
+  pickers:new {
+    results_title = 'Tasks',
+    finder = finders.new_table {
+      results = tasks,
+      entry_maker = function(entry)
+        return {
+          display = string.format("[%02d:%02d%s] %s", entry.hour, entry.minute, entry.meridian, entry.content),
+          value = entry.content,
+          ordinal = entry.content,
+        }
+      end
+    },
+    sorter = sorters.get_generic_fuzzy_sorter(),
+  }:find()
+end
+
 -- TODO - figure out how to consistently get authenticated with the Spotify API
 -- https://accounts.spotify.com/en/authorize?client_id=d94e23075223431db646be5712b49f46&redirect_uri=http:%2F%2Fcraigjamesfielder.com%2F&response_type=code&scope=user-read-currently-playing
 -- curl -d client_id="${SPOTIFY_CLIENT_ID}" -d client_secret="${SPOTIFY_CLIENT_SECRET}" -d grant_type=authorization_code -d code="${SPOTIFY_CODE}" -d redirect_uri="http://craigjamesfielder.com/" https://accounts.spotify.com/api/token
