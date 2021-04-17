@@ -6,6 +6,7 @@ local previewers = require('telescope.previewers')
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local jira_auth = os.getenv("JIRA_USER")..':'..os.getenv("JIRA_PASSWORD")
+local jira_url = os.getenv("JIRA_URL")
 
 M.git_po = function()
   local job = require('plenary.job')
@@ -142,6 +143,211 @@ M.query_todoist = function()
     sorter = sorters.get_generic_fuzzy_sorter(),
   }:find()
 end
+
+M.query_open = function()
+
+  local output = require('plenary.job'):new({
+    'curl',
+    '-s', '-X', 'POST',
+    '-u', jira_auth,
+    '-H', 'Content-Type: application/json',
+    '--data', vim.fn.json_encode({
+      jql = 'project = "SYS" AND status in ("Open")',
+      maxResults = 100,
+      fields = {"summary", "status", "creator", "issuetype", "project", "description", "comment"},
+    }),
+    string.format('%s/rest/api/latest/search', jira_url),
+  }):sync()
+
+  pickers:new {
+    results_title = 'Open issues',
+    finder = finders.new_table {
+      results = vim.fn.json_decode(output).issues,
+      entry_maker = function(entry)
+        local value = string.format("[%s] %s", entry.key, entry.fields.summary)
+        local separator = "--------------------------------------------------------------------------------"
+        local preview = {
+          "Creator: "..entry.fields.creator.displayName,
+          "Status: "..entry.fields.status.statusCategory.name,
+          "Resolution: "..entry.fields.status.name,
+          "Description:",
+          "",
+        }
+
+        for _, line in ipairs(vim.split(entry.fields.description, '\n')) do
+          table.insert(preview, line)
+        end
+
+        table.insert(preview, "")
+
+        for _, comment in ipairs(entry.fields.comment.comments) do
+          table.insert(preview, separator)
+          table.insert(preview, "")
+          table.insert(preview, comment.author.displayName..':')
+          table.insert(preview, "")
+          for _, line in ipairs(vim.split(comment.body, '\n')) do
+            table.insert(preview, line)
+          end
+          table.insert(preview, "")
+        end
+
+        table.insert(preview, separator)
+
+        return {
+          display = value,
+          value = entry.key,
+          ordinal = value,
+          description = entry.fields.description,
+          preview = preview,
+          id = entry.key,
+        }
+      end
+    },
+    sorter = sorters.get_generic_fuzzy_sorter(),
+    previewer = previewers.new_buffer_previewer {
+      define_preview = function(self, entry, status)
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, entry.preview)
+      end
+    },
+  }:find()
+end
+
+M.query_jira = function()
+
+  local output = require('plenary.job'):new {
+    command = 'curl',
+    args = {
+      '-s', '-X', 'POST',
+      '-u', os.getenv("JIRA_USER")..':'..os.getenv("JIRA_PASSWORD"),
+      '-H', 'Content-Type: application/json',
+      '--data', vim.fn.json_encode({
+        jql = 'assignee = currentUser() AND status in ("In Progress", "Selected for Development", "TO DO", Review)',
+        maxResults = 100,
+        fields = {"summary", "status", "creator", "issuetype", "project", "description", "comment"},
+      }),
+      string.format('%s/rest/api/latest/search', jira_url),
+    },
+  }:sync()
+
+  local json = vim.fn.json_decode(output)
+
+  local open = function(prompt_bufnr)
+    actions.close(prompt_bufnr)
+    local entry = action_state.get_selected_entry()
+    os.execute(string.format('brave-browser %s/browse/%s', jira_url, entry.id))
+  end
+
+  local assign = function(prompt_bufnr)
+    actions.close(prompt_bufnr)
+    local entry = action_state.get_selected_entry()
+    local output = require('plenary.job'):new {
+      command = 'curl',
+      args = {
+        '-v', '-s', '-o', '/dev/null',
+        '-s', '-X', 'PUT',
+        '-u', os.getenv("JIRA_USER")..':'..os.getenv("JIRA_PASSWORD"),
+        '-H', 'Content-Type: application/json',
+        '--data', vim.fn.json_encode({
+          fields = {
+            assignee = {
+              name = "craig.fielder"
+            }
+          }
+        }),
+        string.format("%s/rest/api/latest/issue/%s", jira_url, entry.id ),
+      },
+    }:sync()
+    P(output)
+  end
+
+  local transition = {}
+  transition.todo = function(prompt_bufnr)
+    actions.close(prompt_bufnr)
+    local entry = action_state.get_selected_entry()
+    local output = require('plenary.job'):new {
+      command = 'curl',
+      args = {
+        '-s', '-X', 'POST',
+        '-u', os.getenv("JIRA_USER")..':'..os.getenv("JIRA_PASSWORD"),
+        '-H', 'Content-Type: application/json',
+        '--data', vim.fn.json_encode({
+          transition = {
+            id = "121"
+          },
+          fields = {
+            assignee = {
+              name = "craig.fielder"
+            }
+          }
+        }),
+        string.format("%s/rest/api/latest/issue/%s/transitions", jira_url, entry.id ),
+      },
+    }:sync()
+  end
+
+  pickers:new {
+    results_title = 'My issues',
+    finder = finders.new_table {
+      results = vim.fn.json_decode(output).issues,
+      entry_maker = function(entry)
+        local value = string.format("[%s] %s", entry.key, entry.fields.summary)
+        local separator = "--------------------------------------------------------------------------------"
+        local preview = {
+          "Creator: "..entry.fields.creator.displayName,
+          "Status: "..entry.fields.status.statusCategory.name,
+          "Resolution: "..entry.fields.status.name,
+          "Description:",
+          "",
+        }
+
+        for _, line in ipairs(vim.split(entry.fields.description, '\n')) do
+          table.insert(preview, line)
+        end
+
+        table.insert(preview, "")
+
+        for _, comment in ipairs(entry.fields.comment.comments) do
+          table.insert(preview, separator)
+          table.insert(preview, "")
+          table.insert(preview, comment.author.displayName..':')
+          table.insert(preview, "")
+          for _, line in ipairs(vim.split(comment.body, '\n')) do
+            table.insert(preview, line)
+          end
+          table.insert(preview, "")
+        end
+
+        table.insert(preview, separator)
+
+        return {
+          display = value,
+          value = entry.key,
+          ordinal = value,
+          description = entry.fields.description,
+          preview = preview,
+          id = entry.key,
+        }
+      end
+    },
+    sorter = sorters.get_generic_fuzzy_sorter(),
+    previewer = previewers.new_buffer_previewer {
+      define_preview = function(self, entry, status)
+        vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, entry.preview)
+      end
+    },
+    attach_mappings = function(_, map)
+      map('i', '<C-o>', open)
+      map('n', '<C-o>', open)
+      map('i', '<C-y>', transition.todo)
+      map('n', '<C-y>', transition.todo)
+      map('i', '<C-a>', assign)
+      map('n', '<C-a>', assign)
+      return true
+    end
+  }:find()
+end
+
+vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 
 -- TODO - figure out how to consistently get authenticated with the Spotify API
 -- https://accounts.spotify.com/en/authorize?client_id=d94e23075223431db646be5712b49f46&redirect_uri=http:%2F%2Fcraigjamesfielder.com%2F&response_type=code&scope=user-read-currently-playing
