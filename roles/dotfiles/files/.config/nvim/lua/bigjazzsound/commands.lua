@@ -1,4 +1,11 @@
 local M = {}
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
+local sorters = require('telescope.sorters')
+local previewers = require('telescope.previewers')
+local actions = require('telescope.actions')
+local action_state = require('telescope.actions.state')
+local jira_auth = os.getenv("JIRA_USER")..':'..os.getenv("JIRA_PASSWORD")
 
 M.git_po = function()
   local job = require('plenary.job')
