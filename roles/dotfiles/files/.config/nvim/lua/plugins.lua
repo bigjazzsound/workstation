@@ -31,7 +31,6 @@ return require('packer').startup({function(use)
 
   -- Plugins without any special configuration
   use {
-    'christoomey/vim-tmux-navigator',
     'editorconfig/editorconfig-vim',
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
