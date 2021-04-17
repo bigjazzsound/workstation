@@ -46,7 +46,32 @@ local min_status = {
 
 local status = {
   left = {
-    min_status,
+    {
+      BufNr = {
+        provider = function() return '  [' .. vim.api.nvim_get_current_buf() .. '] ' end,
+        highlight = { colors.blue, colors.bg, 'bold' },
+      },
+    },
+    {
+      FileIcon = {
+        provider = 'FileIcon',
+        condition = condition.buffer_not_empty,
+        highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg },
+      },
+    },
+    {
+      FileName = {
+        provider = 'FileName',
+        condition = condition.buffer_not_empty,
+        highlight = { colors.magenta, colors.bg, 'bold' }
+      },
+    },
+    {
+      WhiteSpace = {
+        provider = 'WhiteSpace',
+        highlight = { colors.blue, colors.menu_grey },
+      },
+    },
     {
       DiagnosticError = {
         provider = 'DiagnosticError',
@@ -124,8 +149,33 @@ local status = {
     },
   },
   short_line_left = {
-    min_status,
-  },
+    {
+      BufNr = {
+        provider = function() return '  [' .. vim.api.nvim_get_current_buf() .. '] ' end,
+        highlight = { colors.blue, colors.bg, 'bold' },
+      },
+    },
+    {
+      FileIcon = {
+        provider = 'FileIcon',
+        condition = condition.buffer_not_empty,
+        highlight = { require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg },
+      },
+    },
+    {
+      FileName = {
+        provider = 'FileName',
+        condition = condition.buffer_not_empty,
+        highlight = { colors.magenta, colors.bg, 'bold' }
+      },
+    },
+    {
+      WhiteSpace = {
+        provider = 'WhiteSpace',
+        highlight = { colors.blue, colors.menu_grey },
+      },
+    },
+  }
 }
 
 for side, settings in pairs(status) do
