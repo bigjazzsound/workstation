@@ -14,16 +14,12 @@ M.git_po = function()
     end,
   }):sync()
 
-  P(output)
-  -- return output
+  return output
 end
 
 M.terraform_validate = function()
   local job = require('plenary.job')
-  local output = job:new({
-    command = 'terraform',
-    args = { 'validate', '-json' },
-  }):sync()
+  local output = job:new({'terraform', 'validate', '-json' }):sync()
 
   local json = vim.fn.json_decode(output)
 
