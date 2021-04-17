@@ -34,8 +34,8 @@ local preview_width = 0.55
 
 function M.terraform_resources()
   -- If there is a justfile in the current directory, then set just as the finder
-  local ft = {}
-  local files = vim.fn.readdir(".")
+  local ft  = {}
+  local files = require('plenary.scandir').scan_dir('.', { hidden = false, depth = 1 })
   if vim.tbl_contains(vim.tbl_map(vim.fn.tolower, files), "justfile") then
     ft = {
       finder = { 'just', 'list' },
