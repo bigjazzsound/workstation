@@ -84,13 +84,6 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'hkupty/nvimux',
-    config = function() require('bigjazzsound.nvimux') end,
-    disable = true, -- I do not use this one often, but I would like to keep the configuration
-    opt = true,
-  }
-
-  use {
     'glepnir/galaxyline.nvim',
     branch = 'main',
     config = function() require('bigjazzsound.status') end,

@@ -109,3 +109,11 @@ vim.api.nvim_set_keymap('v', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_
 
 vim.api.nvim_set_keymap('n', '<leader>gpo', '<CMD>lua local git_po = R("bigjazzsound.commands").git_po(); R("bigjazzsound.commands").open_win(git_po)<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>tfv', '<CMD>lua local output = R("bigjazzsound.commands").terraform_validate()<CR>', DEFAULT_KEYMAP)
+
+if not vim.env.TMUX then
+  vim.api.nvim_set_keymap('n', '<C-Space>c', '<CMD>:tabnew<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<C-Space>v', '<CMD>:vnew<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<C-Space>x', '<CMD>:new<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<C-Space><C-l>', '<CMD>:tabnext<CR>', DEFAULT_KEYMAP)
+  vim.api.nvim_set_keymap('n', '<C-Space><C-h>', '<CMD>:tabprevious<CR>', DEFAULT_KEYMAP)
+end
