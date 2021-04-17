@@ -129,6 +129,10 @@ function M.builtin()
   }
 end
 
+function M.file_browser()
+  require('telescope.builtin').file_browser {}
+end
+
 return setmetatable({}, {
   __index = function(_, k)
 
