@@ -3,7 +3,7 @@ require('toggleterm').setup{
   open_mapping = '<leader>tt',
   shade_filetypes = {},
   shade_terminals = false,
-  start_in_insert = true,
+  start_in_insert = false,
   persist_size = false,
   direction = 'vertical',
 }
