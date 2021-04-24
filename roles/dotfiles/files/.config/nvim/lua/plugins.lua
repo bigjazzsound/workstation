@@ -231,6 +231,18 @@ return require('packer').startup({function(use)
     "numtostr/FTerm.nvim",
     config = function() require('bigjazzsound.terminal') end
   }
+
+  use {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      vim.api.nvim_set_keymap('n', [[<CMD>execute('normal! ' . v:count1 . 'n')<CR>]], [[<Cmd>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', [[<CMD>execute('normal! ' . v:count1 . 'N')<CR>]], [[<Cmd>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', '*', [[*<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', '#', [[#<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', 'g*', [[g*<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+      vim.api.nvim_set_keymap('n', 'g#', [[g#<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+    end
+  }
   end,
 
   config = {
