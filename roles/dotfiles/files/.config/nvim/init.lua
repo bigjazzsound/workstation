@@ -108,7 +108,7 @@ vim.api.nvim_set_keymap('n', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_
 vim.api.nvim_set_keymap('v', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_selection()<CR><ESC>', DEFAULT_KEYMAP)
 
 vim.api.nvim_set_keymap('n', '<leader>gpo', '<CMD>lua local git_po = R("bigjazzsound.commands").git_po(); R("bigjazzsound.commands").open_win(git_po)<CR>', DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap('n', '<leader>tfv', '<CMD>lua local R("bigjazzsound.commands").terraform_validate()<CR>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('n', '<leader>tfv', '<CMD>lua R("bigjazzsound.commands").terraform_validate()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>jq', '<CMD>lua R("bigjazzsound.commands").query_jira()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>jo', '<CMD>lua R("bigjazzsound.commands").query_open()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>tdd', '<CMD>lua R("bigjazzsound.commands").query_todoist()<CR>', DEFAULT_KEYMAP)
