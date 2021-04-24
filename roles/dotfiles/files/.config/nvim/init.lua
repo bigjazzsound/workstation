@@ -101,7 +101,7 @@ require('bigjazzsound.globals')
 require('plugins')
 
 vim.cmd [[ au BufNewFile,BufRead justfile,Justfile setfiletype make ]]
-vim.cmd [[ colorscheme one-nvim ]]
+vim.cmd 'colorscheme tokyonight'
 
 -- TODO - replace with https://github.com/bfredl/nvim-luadev
 vim.api.nvim_set_keymap('n', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_line()<CR>', DEFAULT_KEYMAP)

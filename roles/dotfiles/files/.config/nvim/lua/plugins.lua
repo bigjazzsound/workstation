@@ -209,6 +209,7 @@ return require('packer').startup({function(use)
   use {
     'christianchiarulli/nvcode-color-schemes.vim',
     'Th3Whit3Wolf/one-nvim',
+    'folke/tokyonight.nvim',
   }
 
   use {
