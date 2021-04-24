@@ -100,12 +100,14 @@ function M.help_tags()
   }
 end
 
-function M.fd()
-  require('telescope.builtin').fd{
+function M.find_project_files()
+  local opts = {
     layout_config = {
       preview_width = preview_width,
     },
   }
+  local ok = pcall(require('telescope.builtin').git_files, opts)
+  if not ok then require('telescope.builtin').find_files(opts) end
 end
 
 function M.find_projects()
