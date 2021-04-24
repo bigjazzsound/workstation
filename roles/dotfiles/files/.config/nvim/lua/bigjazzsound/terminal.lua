@@ -1,11 +1,12 @@
-require('toggleterm').setup{
-  size = vim.api.nvim_get_option("columns") / 2,
-  open_mapping = '<leader>tt',
-  shade_filetypes = {},
-  shade_terminals = false,
-  start_in_insert = false,
-  persist_size = false,
-  direction = 'vertical',
+require("FTerm").setup {
+    dimensions  = {
+        height = 0.9,
+        width = 0.9,
+        x = 0.5,
+        y = 0.5
+    },
+    border = 'double'
 }
 
-vim.cmd [[ au TermOpen * setlocal nonumber norelativenumber | :wincmd = ]]
+vim.api.nvim_set_keymap('n', '<M-t>', '<CMD>lua require("FTerm").toggle()<CR>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap('t', '<M-t>', '<CMD>lua require("FTerm").toggle()<CR>', DEFAULT_KEYMAP)

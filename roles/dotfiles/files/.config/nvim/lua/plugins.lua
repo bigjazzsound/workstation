@@ -113,11 +113,6 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'akinsho/nvim-toggleterm.lua',
-    config = function() require('bigjazzsound.terminal') end
-  }
-
-  use {
     'lewis6991/gitsigns.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
@@ -230,6 +225,11 @@ return require('packer').startup({function(use)
       vim.api.nvim_set_keymap('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", DEFAULT_KEYMAP)
       vim.api.nvim_set_keymap('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>",  DEFAULT_KEYMAP)
     end
+  }
+
+  use {
+    "numtostr/FTerm.nvim",
+    config = function() require('bigjazzsound.terminal') end
   }
   end,
 
