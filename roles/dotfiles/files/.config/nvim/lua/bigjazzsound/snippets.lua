@@ -27,4 +27,14 @@ end]];
 {% for $0 %}
 {% endif %}]],
   },
+
+  hcl = {
+    ["res"] = [[resource "$1" "$2" {
+  $0
+}]],
+    mod = [[module "$1" {
+  source = ""
+  $0
+}]],
+  },
 }
