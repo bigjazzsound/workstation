@@ -243,6 +243,18 @@ return require('packer').startup({function(use)
       vim.api.nvim_set_keymap('n', 'g#', [[g#<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
     end
   }
+
+  use {
+    'kdav5758/TrueZen.nvim',
+    config = function()
+      require("true-zen").setup {
+        ataraxis = {
+          left_right_padding = 100
+        }
+      }
+    end
+  }
+
   end,
 
   config = {
