@@ -132,6 +132,12 @@
       homebrew:
         update_homebrew: true
         upgrade_all: true
+        upgrade_options: greedy
+
+    - name: Install neovim 0.5.0
+      community.general.homebrew:
+        name: foo
+        state: head
   when: ansible_system == 'Darwin'
   tags:
     - brew
