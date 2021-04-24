@@ -223,7 +223,7 @@ M.query_jira = function()
       '--data', vim.fn.json_encode({
         jql = 'assignee = currentUser() AND status in ("In Progress", "Selected for Development", "TO DO", Review)',
         maxResults = 100,
-        fields = {"summary", "status", "creator", "issuetype", "project", "description", "comment"},
+        fields = {"summary", "status", "creator", "issuetype", "project", "description"},
       }),
       string.format('%s/rest/api/latest/search', jira_url),
     },
@@ -231,10 +231,13 @@ M.query_jira = function()
 
   local json = vim.fn.json_decode(output)
 
-  local open = function(prompt_bufnr)
+  local open_issue_in_browser = function(prompt_bufnr)
     actions.close(prompt_bufnr)
     local entry = action_state.get_selected_entry()
-    os.execute(string.format('brave-browser %s/browse/%s', jira_url, entry.id))
+    os.execute(string.format('%s %s/browse/%s', (function()
+      if vim.fn.has("mac") == 1 then return "open" else return "xdg-open" end
+    end)(),
+    jira_url, entry.id))
   end
 
   local assign = function(prompt_bufnr)
@@ -285,13 +288,54 @@ M.query_jira = function()
     }:sync()
   end
 
+  local jira = {}
+
+  jira.open_comments = function(prompt_bufnr)
+    actions.close(prompt_bufnr)
+    local current_entry = action_state.get_selected_entry()
+    local get_comments = function()
+      local output = require('plenary.job'):new({
+        'curl',
+        '-s', '-X', 'GET',
+        '-u', jira_auth,
+        '-H', 'Content-Type: application/json',
+        string.format('%s/rest/api/latest/issue/%s/comment', jira_url, current_entry.id),
+      }):sync()
+
+      return vim.fn.json_decode(output)
+    end
+
+    local comments = get_comments()
+
+    pickers:new {
+      results_title = "Comments for "..current_entry.id,
+      finder = finders.new_table {
+        results = comments.comments,
+        entry_maker = function(entry)
+          return {
+            display = entry.author.displayName,
+            value = entry.author.displayName,
+            ordinal = entry.author.displayName,
+            body = entry.body,
+          }
+        end,
+      },
+      sorter = sorters.get_generic_fuzzy_sorter(),
+      previewer = previewers.new_buffer_previewer {
+        define_preview = function(self, entry)
+          vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.fn.split(entry.body, '\n'))
+        end
+      },
+    }:find()
+
+  end
+
   pickers:new {
     results_title = 'My issues',
     finder = finders.new_table {
       results = vim.fn.json_decode(output).issues,
       entry_maker = function(entry)
         local value = string.format("[%s] %s", entry.key, entry.fields.summary)
-        local separator = "--------------------------------------------------------------------------------"
         local preview = {
           "Creator: "..entry.fields.creator.displayName,
           "Status: "..entry.fields.status.statusCategory.name,
@@ -305,19 +349,6 @@ M.query_jira = function()
         end
 
         table.insert(preview, "")
-
-        for _, comment in ipairs(entry.fields.comment.comments) do
-          table.insert(preview, separator)
-          table.insert(preview, "")
-          table.insert(preview, comment.author.displayName..':')
-          table.insert(preview, "")
-          for _, line in ipairs(vim.split(comment.body, '\n')) do
-            table.insert(preview, line)
-          end
-          table.insert(preview, "")
-        end
-
-        table.insert(preview, separator)
 
         return {
           display = value,
@@ -336,12 +367,14 @@ M.query_jira = function()
       end
     },
     attach_mappings = function(_, map)
-      map('i', '<C-o>', open)
-      map('n', '<C-o>', open)
+      map('i', '<C-o>', open_issue_in_browser)
+      map('n', '<C-o>', open_issue_in_browser)
       map('i', '<C-y>', transition.todo)
       map('n', '<C-y>', transition.todo)
       map('i', '<C-a>', assign)
       map('n', '<C-a>', assign)
+      map('i', '<CR>', jira.open_comments)
+      map('n', '<CR>', jira.open_comments)
       return true
     end
   }:find()
