@@ -17,7 +17,7 @@ if not packer_exists then
   print(out)
   print("Downloading packer.nvim...")
 
-  vim.cmd [[ qall ]]
+  vim.cmd 'qall'
 
   return
 end
