@@ -107,7 +107,8 @@ vim.cmd 'colorscheme tokyonight'
 vim.api.nvim_set_keymap('n', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_line()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('v', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_selection()<CR><ESC>', DEFAULT_KEYMAP)
 
-vim.api.nvim_set_keymap('n', '<leader>gpo', '<CMD>lua local git_po = R("bigjazzsound.commands").git_po(); R("bigjazzsound.commands").open_win(git_po)<CR>', DEFAULT_KEYMAP)
+-- TODO - The refresh might need to be schedled to wait for the push
+vim.api.nvim_set_keymap('n', '<leader>gpo', '<CMD>lua local git_po = R("bigjazzsound.commands").git_po(); R("bigjazzsound.commands").open_win(git_po); require("neogit.status")<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>tfv', '<CMD>lua R("bigjazzsound.commands").terraform_validate()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>jq', '<CMD>lua R("bigjazzsound.commands").query_jira()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap('n', '<leader>jo', '<CMD>lua R("bigjazzsound.commands").query_open()<CR>', DEFAULT_KEYMAP)
