@@ -35,7 +35,6 @@ return require('packer').startup({function(use)
     'enricobacis/paste.vim',
     'junegunn/vim-easy-align',
     'romainl/vim-cool',
-    'tjdevries/lsp_extensions.nvim',
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
     'tpope/vim-surround',
