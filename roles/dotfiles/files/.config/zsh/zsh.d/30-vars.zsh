@@ -9,4 +9,7 @@ setopt histfcntllock histignorealldups histsavenodups sharehistory
 SAVEHIST=$(( 100 * 1000 ))
 HISTSIZE=$(( 1.2 * SAVEHIST ))  # zsh recommended value
 
+XDG_CONFIG_HOME="${HOME}"/.config
+XDG_DATA_HOME="${HOME}"/.local/share
+
 HISTFILE="${XDG_DATA_HOME}"/zsh_history
