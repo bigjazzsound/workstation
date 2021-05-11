@@ -36,7 +36,6 @@ return require('packer').startup({function(use)
     'junegunn/vim-easy-align',
     'romainl/vim-cool',
     'tjdevries/lsp_extensions.nvim',
-    'tpope/vim-dispatch',
     'tpope/vim-eunuch',
     'tpope/vim-repeat',
     'tpope/vim-surround',
