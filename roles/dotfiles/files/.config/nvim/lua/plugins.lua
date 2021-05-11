@@ -107,6 +107,12 @@ return require('packer').startup({function(use)
   }
 
   use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
+    requires = {'nvim-telescope/telescope.nvim'},
+  }
+
+  use {
     'phaazon/hop.nvim',
     config = function()
       require('hop').setup { winblend = 80 }
