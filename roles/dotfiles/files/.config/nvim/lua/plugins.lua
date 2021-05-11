@@ -149,7 +149,9 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'nvim-treesitter/nvim-treesitter',
+    {'nvim-treesitter/nvim-treesitter'},
+    {'nvim-treesitter/nvim-treesitter-textobjects',
+    run = ':TSUpdate',
     config = function()
       local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
       require('nvim-treesitter.configs').setup {
@@ -166,6 +168,53 @@ return require('packer').startup({function(use)
             node_decremental = "grm",
           },
         },
+        textobjects = {
+          select = {
+            enable = true,
+            keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ["]p"] = "@parameter.inner",
+            },
+            swap_previous = {
+              ["[p"] = "@parameter.inner",
+            },
+          },
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = "@class.outer",
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[]"] = "@class.outer",
+            },
+          },
+          lsp_interop = {
+            enable = true,
+            peek_definition_code = {
+              ["df"] = "@function.outer",
+              ["dF"] = "@class.outer",
+            },
+          },
+        },
       }
 
       parser_config.hcl = {
@@ -176,7 +225,8 @@ return require('packer').startup({function(use)
         filetype = "hcl",
         used_by = { "terraform", "hcl" },
       }
-    end
+    end,
+    }
   }
 
   use {
