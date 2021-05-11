@@ -134,8 +134,9 @@ return require('packer').startup({function(use)
   }
 
   use {
-    'neovim/nvim-lspconfig',
-    config = function() require('bigjazzsound.lsp_config') end,
+    { 'neovim/nvim-lspconfig' },
+    { 'lspcontainers/lspcontainers.nvim' },
+    { 'glepnir/lspsaga.nvim', config = function() require('bigjazzsound.lsp_config') end },
   }
 
   use {
