@@ -20,7 +20,6 @@ show_notifications = true
 
 [aws]
 style = "bold yellow"
-displayed_items = "all"
 
 [hostname]
 ssh_only = true
