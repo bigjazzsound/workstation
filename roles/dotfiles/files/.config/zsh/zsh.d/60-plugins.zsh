@@ -5,7 +5,6 @@ if [[ ! -d  $ZPLUGINDIR ]]; then
         git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git $ZPLUGINDIR/zsh-snap
 fi
 
-setopt histfcntllock histignorealldups histsavenodups sharehistory
 source $ZPLUGINDIR/zsh-snap/znap.zsh
 
 znap source marlonrichert/zcolors
@@ -24,6 +23,8 @@ znap source zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14,bold,underline"
 bindkey '^n' autosuggest-accept
 
+znap source zpm-zsh/clipboard
+
 # TODO - not sure if I wan to use this plugin yet or not
 # zstyle ':autocomplete:tab:*' widget-style menu-select
 # zstyle ':autocomplete:tab:*' fzf-completion yes
@@ -35,3 +36,5 @@ znap source DarrinTisdale/zsh-aliases-exa
 znap source blimmer/zsh-aws-vault
 
 znap source MichaelAquilina/zsh-auto-notify
+AUTO_NOTIFY_IGNORE+=("nvim", "git")
+AUTO_NOTIFY_THRESHOLD=30
