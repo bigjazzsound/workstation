@@ -49,6 +49,7 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.signcolumn = "yes"
 vim.o.ignorecase = true
 vim.g.netrw_banner = false
+vim.g.updatetime = 650
 
 -- map ESC to jk
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
