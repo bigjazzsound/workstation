@@ -122,3 +122,5 @@ if not vim.env.TMUX then
   vim.api.nvim_set_keymap('n', '<C-Space><C-l>', '<CMD>:tabnext<CR>', DEFAULT_KEYMAP)
   vim.api.nvim_set_keymap('n', '<C-Space><C-h>', '<CMD>:tabprevious<CR>', DEFAULT_KEYMAP)
 end
+
+vim.api.nvim_set_keymap('n', '<leader>ps', '<CMD>lua require("packer").sync()<CR>', DEFAULT_KEYMAP)
