@@ -30,3 +30,8 @@ fi
 
 FILETYPES=(c cfg conf csv go h html ini j2 json lua md php ps1 py tf tfvars tmpl txt vim xml yaml yml)
 for FILETYPE in ${FILETYPES}; do alias -s $FILETYPE="vim "; done
+
+if [[ -f $(command -v zoxide) ]]; then
+    eval "$(zoxide init zsh)"
+    alias cd="z"
+fi
