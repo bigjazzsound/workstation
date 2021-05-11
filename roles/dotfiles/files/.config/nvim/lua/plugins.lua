@@ -64,7 +64,10 @@ return require('packer').startup({function(use)
 
   use {
     'glepnir/indent-guides.nvim',
-    config = function() require('bigjazzsound.indents') end,
+    config = function()
+      require('bigjazzsound.indents')
+      vim.api.nvim_set_keymap('n', '<leader>it', '<CMD>IndentGuidesToggle<CR>', DEFAULT_KEYMAP)
+    end,
   }
 
   use {
