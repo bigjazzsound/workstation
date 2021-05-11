@@ -26,8 +26,17 @@ require('telescope').setup{
     width = 0.95,
     winblend = 5,
     preview_cutoff = 120,
+  },
+  extensions = {
+    fzf = {
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
   }
 }
+
+require('telescope').load_extension('fzf')
 
 local M = {}
 local preview_width = 0.55
