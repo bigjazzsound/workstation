@@ -54,7 +54,7 @@ return require('packer').startup({function(use)
 
   use {
     'euclio/vim-markdown-composer',
-    run = [[ cargo build --release ]],
+    run = 'cargo build --release',
     config = function()
       vim.g.markdown_composer_autostart = 0
       vim.g.markdown_composer_syntax_theme = "Atom One Dark"
