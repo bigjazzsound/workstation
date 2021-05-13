@@ -36,5 +36,5 @@ znap source DarrinTisdale/zsh-aliases-exa
 znap source blimmer/zsh-aws-vault
 
 znap source MichaelAquilina/zsh-auto-notify
-AUTO_NOTIFY_IGNORE+=("nvim", "git")
+AUTO_NOTIFY_IGNORE+=("nvim", "git", "mpv")
 AUTO_NOTIFY_THRESHOLD=30
