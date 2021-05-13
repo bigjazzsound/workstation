@@ -2,7 +2,7 @@ alias dirs='dirs -l -v'
 alias ip='ip -c'
 alias A='sudo apt update && sudo apt upgrade -y'
 alias Y='sudo yum upgrade -y'
-alias pwm='ANSIBLE_CONFIG=${PLAYS}/ansible.cfg ansible-playbook ${PLAYS}/playbooks/main.yml'
+alias pwm='ANSIBLE_CONFIG=${PLAYS}/ansible.cfg ${PLAYS}/venv/bin/ansible-playbook ${PLAYS}/playbooks/main.yml'
 alias vs='vim -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vsg='vim -c Goyo -c "set spell" /tmp/$(openssl rand -hex 6).md'
 alias vj="vim /tmp/$(openssl rand -hex 6).json"
