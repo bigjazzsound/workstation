@@ -51,3 +51,30 @@
         name: dotfiles
       tags:
         - dotfiles
+
+    - name: Neovim
+      block:
+        - name: Clone neovim
+          git:
+            repo: "https://github.com/neovim/neovim.git"
+            dest: "{{ nvim_dir }}"
+            # version: "HEAD~1"
+            version: "master"
+
+        - name: Build neovim
+          make:
+            chdir: "{{ nvim_dir }}"
+            target: nvim
+            params:
+              CMAKE_BUILD_TYPE: Release
+              CMAKE_INSTALL_PREFIX: "{{ (ansible_user_dir, '.local') | path_join }}"
+
+        - name: Install neovim
+          make:
+            chdir: "{{ nvim_dir }}"
+            target: install
+      vars:
+        nvim_dir: "{{ (ansible_user_dir, 'playground', 'vim', 'neovim') | path_join }}"
+      tags:
+        - neovim
+        - vim
