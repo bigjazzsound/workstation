@@ -14,7 +14,7 @@ local function make_flashcards()
     if vim.startswith(line, "##") then
       table.insert(cards, {
         key = line,
-        value = {}
+        value = {},
       })
       header = false
     end
@@ -29,15 +29,25 @@ end
 local function study_flashcards(cards)
   for _, item in ipairs(cards) do
     local buf = vim.api.nvim_create_buf(true, true)
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, {item["key"]})
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, { item["key"] })
     -- pretty the answer text to separate it from the question
-    for _, val in pairs({"", "====================================================================================================", ""}) do
+    for _, val in pairs {
+      "",
+      "====================================================================================================",
+      "",
+    } do
       table.insert(item["value"], 1, val)
     end
     vim.api.nvim_buf_set_var(buf, "answer", item["value"])
-    vim.api.nvim_buf_set_option(buf, 'filetype', 'markdown')
+    vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
 
-    vim.api.nvim_buf_set_keymap(buf, "n", "<CR>", [[:lua vim.api.nvim_put(vim.b.answer, "l", "p", false)<CR>]], DEFAULT_KEYMAP)
+    vim.api.nvim_buf_set_keymap(
+      buf,
+      "n",
+      "<CR>",
+      [[:lua vim.api.nvim_put(vim.b.answer, "l", "p", false)<CR>]],
+      DEFAULT_KEYMAP
+    )
     vim.api.nvim_buf_set_keymap(buf, "n", "n", ":bnext<CR>", DEFAULT_KEYMAP)
     vim.api.nvim_buf_set_keymap(buf, "n", "p", ":bprevious<CR>", DEFAULT_KEYMAP)
     vim.api.nvim_buf_set_keymap(buf, "n", "q", ":quit<CR>", DEFAULT_KEYMAP)

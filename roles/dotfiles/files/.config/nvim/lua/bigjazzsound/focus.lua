@@ -4,7 +4,9 @@
 local colorcolumn_depth = 100
 local cc = function(colorcolumn)
   local cc = {}
-  for i=colorcolumn,256 do table.insert(cc, i) end
+  for i = colorcolumn, 256 do
+    table.insert(cc, i)
+  end
   return string.format("%s", table.concat(cc, ","))
 end
 

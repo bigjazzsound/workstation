@@ -1,38 +1,77 @@
-local nvim_lsp = require("lspconfig")
+local nvim_lsp = require "lspconfig"
 
-local saga = require('lspsaga')
+local saga = require "lspsaga"
 
 local on_attach = function(client, bufnr)
-
   saga.init_lsp_saga()
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = false,
-      signs = true,
-      update_in_insert = false,
-    }
-  )
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false,
+    signs = true,
+    update_in_insert = false,
+  })
 
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gr', '<CMD>lua vim.lsp.buf.references()<CR>',           DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gt', '<CMD>lua vim.lsp.buf.document_symbol()<CR>',      DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dl', '<CMD>lua vim.lsp.diagnostic.set_loclist()<CR>',   DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gr", "<CMD>lua vim.lsp.buf.references()<CR>", DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gt", "<CMD>lua vim.lsp.buf.document_symbol()<CR>", DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dl", "<CMD>lua vim.lsp.diagnostic.set_loclist()<CR>", DEFAULT_KEYMAP)
 
   -- lspsaga maps
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<CMD>lua require("lspsaga.hover").render_hover_doc()<CR>', DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lR', '<CMD>lua require("lspsaga.rename").rename()<CR>', DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<CMD>lua require("lspsaga.provider").preview_definition()<CR>', DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gs', '<CMD>lua require("lspsaga.signaturehelp").signature_help()<CR>', DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', [[<CMD>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>]], DEFAULT_KEYMAP)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', [[<CMD>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>]], DEFAULT_KEYMAP)
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "K",
+    '<CMD>lua require("lspsaga.hover").render_hover_doc()<CR>',
+    DEFAULT_KEYMAP
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "<leader>lR",
+    '<CMD>lua require("lspsaga.rename").rename()<CR>',
+    DEFAULT_KEYMAP
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "gd",
+    '<CMD>lua require("lspsaga.provider").preview_definition()<CR>',
+    DEFAULT_KEYMAP
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "gs",
+    '<CMD>lua require("lspsaga.signaturehelp").signature_help()<CR>',
+    DEFAULT_KEYMAP
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "]d",
+    [[<CMD>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>]],
+    DEFAULT_KEYMAP
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "[d",
+    [[<CMD>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>]],
+    DEFAULT_KEYMAP
+  )
 
   vim.cmd [[au CursorHold <buffer> lua require('lspsaga.diagnostic').show_line_diagnostics()]]
 
   if client.resolved_capabilities.document_range_formatting then
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<CMD>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<CR>', DEFAULT_KEYMAP)
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      "n",
+      "<leader>lf",
+      '<CMD>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<CR>',
+      DEFAULT_KEYMAP
+    )
   end
 
   if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', '<CMD>lua vim.lsp.buf.formatting()<CR>', DEFAULT_KEYMAP)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lf", "<CMD>lua vim.lsp.buf.formatting()<CR>", DEFAULT_KEYMAP)
   end
 
   if client.resolved_capabilities.document_highlight then
@@ -42,125 +81,139 @@ local on_attach = function(client, bufnr)
 
   vim.o.completeopt = "menuone,noselect"
   vim.g.completion_matching_ignore_case = 1
-  vim.g.completion_matching_strategy_list = {'exact', 'fuzzy', 'substring', 'all'}
+  vim.g.completion_matching_strategy_list = { "exact", "fuzzy", "substring", "all" }
   vim.o.updatetime = 300
-
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-nvim_lsp.clangd.setup{
+nvim_lsp.clangd.setup {
   on_attach = on_attach,
   cmd = {
-    'clangd',
-    '--clang-tidy', '--completion-style=bundled', '--header-insertion=iwyu',
-    '--suggest-missing-includes', '--cross-file-rename'
+    "clangd",
+    "--clang-tidy",
+    "--completion-style=bundled",
+    "--header-insertion=iwyu",
+    "--suggest-missing-includes",
+    "--cross-file-rename",
   },
   init_options = {
     clangdFileStatus = true,
     usePlaceholders = true,
     completeUnimported = true,
-    semanticHighlighting = true
-  }
+    semanticHighlighting = true,
+  },
 }
 
-nvim_lsp.bashls.setup{
+nvim_lsp.bashls.setup {
   on_attach = on_attach,
   filetypes = {
     "sh",
     "zsh",
-  }
+  },
 }
 
-nvim_lsp.dockerls.setup{
+nvim_lsp.dockerls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.gopls.setup{
+nvim_lsp.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = require('lspcontainers').command('gopls'),
+  cmd = require "lspcontainers".command "gopls",
 }
 
-nvim_lsp.jsonls.setup{
+nvim_lsp.jsonls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   commands = {
     Format = {
       function()
-        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-      end
-    }
-  }
+        vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line "$", 0 })
+      end,
+    },
+  },
 }
 
-nvim_lsp.pyright.setup{
-  before_init = function(params) params.processId = vim.NIL end,
-  cmd = require('lspcontainers').command('pyright'),
+nvim_lsp.pyright.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require "lspcontainers".command "pyright",
   root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.rls.setup{
+nvim_lsp.rust_analyzer.setup {
+  cmd = require "lspcontainers".command "rust_analyzer",
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.terraformls.setup{
+nvim_lsp.terraformls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {'hcl'}
+  filetypes = { "hcl" },
 }
 
-nvim_lsp.tsserver.setup{
+nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
 local function operating_system()
-  if vim.fn.has('mac') == 1 then
-    return 'macOS'
+  if vim.fn.has "mac" == 1 then
+    return "macOS"
   else
-    return 'Linux'
+    return "Linux"
   end
 end
 
 nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = require('lspcontainers').command('sumneko_lua'),
+  cmd = require "lspcontainers".command "sumneko_lua",
   settings = {
     Lua = {
       runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';')
+        version = "LuaJIT",
+        path = vim.split(package.path, ";"),
       },
       diagnostics = {
         globals = {
-          'vim',
+          "vim",
         },
       },
       workspace = {
         library = {
-          [vim.env['VIMRUNTIME']..'lua'] = true,
-          [vim.env['VIMRUNTIME']..'lua/vim/lsp'] = true,
+          [vim.env["VIMRUNTIME"] .. "lua"] = true,
+          [vim.env["VIMRUNTIME"] .. "lua/vim/lsp"] = true,
         },
       },
-    }
+    },
+  },
+  commands = {
+    Format = {
+      function()
+        require "stylua-nvim".format_file()
+      end,
+    },
   },
 }
 
-nvim_lsp.vimls.setup{
+nvim_lsp.vimls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.yamlls.setup{
-  before_init = function(params) params.processId = vim.NIL end,
-  cmd = require('lspcontainers').command('yamlls'),
+nvim_lsp.yamlls.setup {
+  before_init = function(params)
+    params.processId = vim.NIL
+  end,
+  cmd = require "lspcontainers".command "yamlls",
   root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
