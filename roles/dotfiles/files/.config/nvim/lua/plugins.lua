@@ -329,14 +329,14 @@ return require "packer".startup {
     }
 
     use {
-      "kdav5758/TrueZen.nvim",
+      "folke/zen-mode.nvim",
       config = function()
-        require "true-zen".setup {
-          ataraxis = {
-            left_right_padding = 100,
-          },
+        require("zen-mode").setup {
+          window = {
+            backdrop = 1
+          }
         }
-      end,
+      end
     }
 
     -- use 'hkupty/daedalus.nvim'
