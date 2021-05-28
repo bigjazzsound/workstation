@@ -31,7 +31,6 @@ return require "packer".startup {
       "editorconfig/editorconfig-vim",
       "enricobacis/paste.vim",
       "junegunn/vim-easy-align",
-      "romainl/vim-cool",
       "tpope/vim-eunuch",
       "tpope/vim-repeat",
       "tpope/vim-surround",
@@ -322,6 +321,10 @@ return require "packer".startup {
         vim.api.nvim_set_keymap("n", "#", [[#<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
         vim.api.nvim_set_keymap("n", "g*", [[g*<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
         vim.api.nvim_set_keymap("n", "g#", [[g#<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
+
+        require "hlslens".setup {
+          calm_down = true,
+        }
       end,
     }
 
