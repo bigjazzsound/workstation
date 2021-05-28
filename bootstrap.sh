@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ ! -d venv ]]; then
-    python3 -m venv venv
-fi
+[[ ! -d venv ]] && python3 -m venv venv
 
 venv/bin/pip install -U pip wheel
 venv/bin/pip install ansible-base jmespath
