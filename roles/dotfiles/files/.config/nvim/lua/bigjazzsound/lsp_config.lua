@@ -1,6 +1,11 @@
 local nvim_lsp = require "lspconfig"
 
 local saga = require "lspsaga"
+local luadev = require "lua-dev".setup {
+  lspconfig = {
+    cmd = require "lspcontainers".command "sumneko_lua",
+  },
+}
 
 local on_attach = function(client, bufnr)
   saga.init_lsp_saga()
@@ -164,45 +169,7 @@ nvim_lsp.tsserver.setup {
   capabilities = capabilities,
 }
 
-local function operating_system()
-  if vim.fn.has "mac" == 1 then
-    return "macOS"
-  else
-    return "Linux"
-  end
-end
-
-nvim_lsp.sumneko_lua.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = require "lspcontainers".command "sumneko_lua",
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = vim.split(package.path, ";"),
-      },
-      diagnostics = {
-        globals = {
-          "vim",
-        },
-      },
-      workspace = {
-        library = {
-          [vim.env["VIMRUNTIME"] .. "lua"] = true,
-          [vim.env["VIMRUNTIME"] .. "lua/vim/lsp"] = true,
-        },
-      },
-    },
-  },
-  commands = {
-    Format = {
-      function()
-        require "stylua-nvim".format_file()
-      end,
-    },
-  },
-}
+lspconfig.sumneko_lua.setup(luadev)
 
 nvim_lsp.vimls.setup {
   on_attach = on_attach,
