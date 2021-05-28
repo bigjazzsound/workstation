@@ -1,5 +1,4 @@
-local nvim_lsp = require "lspconfig"
-
+local lspconfig = require "lspconfig"
 local saga = require "lspsaga"
 local luadev = require "lua-dev".setup {
   lspconfig = {
@@ -93,7 +92,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-nvim_lsp.clangd.setup {
+lspconfig.clangd.setup {
   on_attach = on_attach,
   cmd = {
     "clangd",
@@ -111,7 +110,7 @@ nvim_lsp.clangd.setup {
   },
 }
 
-nvim_lsp.bashls.setup {
+lspconfig.bashls.setup {
   on_attach = on_attach,
   filetypes = {
     "sh",
@@ -119,18 +118,18 @@ nvim_lsp.bashls.setup {
   },
 }
 
-nvim_lsp.dockerls.setup {
+lspconfig.dockerls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.gopls.setup {
+lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = require "lspcontainers".command "gopls",
 }
 
-nvim_lsp.jsonls.setup {
+lspconfig.jsonls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   commands = {
@@ -142,46 +141,46 @@ nvim_lsp.jsonls.setup {
   },
 }
 
-nvim_lsp.pyright.setup {
+lspconfig.pyright.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
   cmd = require "lspcontainers".command "pyright",
-  root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.rust_analyzer.setup {
+lspconfig.rust_analyzer.setup {
   cmd = require "lspcontainers".command "rust_analyzer",
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.terraformls.setup {
+lspconfig.terraformls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "hcl" },
 }
 
-nvim_lsp.tsserver.setup {
+lspconfig.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
 lspconfig.sumneko_lua.setup(luadev)
 
-nvim_lsp.vimls.setup {
+lspconfig.vimls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-nvim_lsp.yamlls.setup {
+lspconfig.yamlls.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
   cmd = require "lspcontainers".command "yamlls",
-  root_dir = nvim_lsp.util.root_pattern(".git", vim.fn.getcwd()),
+  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
 }
