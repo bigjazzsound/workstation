@@ -35,3 +35,9 @@ if [[ -f $(command -v zoxide) ]]; then
     eval "$(zoxide init zsh)"
     alias cd="z"
 fi
+
+if [[ -f $(command -v exa) ]]; then
+    alias ls="exa"
+    alias ll="exa -l"
+    alias la="exa -la"
+fi

@@ -1,4 +1,4 @@
-autoload -Uz compinit; compinit -i
+# autoload -Uz compinit; compinit -i
 # AWS completion is not working with plugins, so just manually load with source
 # source $(which aws_zsh_completer.sh)
 

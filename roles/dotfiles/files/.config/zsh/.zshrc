@@ -1,3 +1,6 @@
+ZPLUGINDIR=$HOME/.zsh
+source $ZPLUGINDIR/zsh-snap/znap.zsh
+
 # Iterate over zsh config files
 if [[ -d "${ZDOTDIR:-$HOME}"/zsh.d ]]; then
     for ZSH_FILE in $(ls -A "${ZDOTDIR:-$HOME}"/zsh.d/*.zsh); do
@@ -6,4 +9,4 @@ if [[ -d "${ZDOTDIR:-$HOME}"/zsh.d ]]; then
 fi
 
 # Add any local overrides
-[[ -f "${ZDOTDIR}"/.zshrc.local ]] && source "${ZDOTDIR}"/.zshrc.local
+[[ -f "${ZDOTDIR}/.zshrc.local" ]] && source "${ZDOTDIR}/.zshrc.local"
