@@ -1,64 +1,75 @@
-# aliases
-alias dirs='dirs -l -v'
-alias ip='ip -c'
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
-alias A='sudo apt update && sudo apt upgrade -y'
-alias Y='sudo yum upgrade -y'
-alias pwm='ANSIBLE_CONFIG=$plays/ansible.cfg ansible-playbook $plays/playbooks/main.yml'
-alias sb="source ~/.bashrc"
-alias vs='vim /tmp/(openssl rand -hex 6).md'
-alias vsg='vim -c Goyo -c "set spell" /tmp/(openssl rand -hex 6).md'
-alias vj="vim /tmp/(openssl rand -hex 6).json"
-alias vy="vim /tmp/(openssl rand -hex 6).yml"
-alias vg="vim +Gstatus +only"
-alias news="newsbeuter"
-alias tf="terraform "
-alias tff="terraform fmt "
-alias tfa="terraform apply "
-alias tfp="terraform plan "
-alias colors="curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash"
-alias ccd="cd "
-alias ..="cd .."
+set PATH $HOME/.local/bin $HOME/.cargo/bin $PATH
 
-# exported variables
-set -x GOPATH "$HOME/.local"
-set -x AWS_PROFILE prod
-set -x PAGER less
-set -x LESS '-RIq'
-set -x FZF_DEFAULT_OPTS '--height 40%'
-if test (command -v fd)
-    set -x FZF_DEFAULT_COMMAND 'fd --type f'
+type -q fisher; or curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+
+function fpkgs
+    set -l pkgs \
+        jorgebucaran/fisher \
+        jethrokuan/fzf
+    for pkg in $pkgs
+       fisher install $pkg
+    end
 end
 
-if test (command -v exa)
-    alias ls='exa'
-    alias ll='exa -l'
-    alias tree='exa -T'
+set FZF_COMPLETE 2
+
+command -qv starship; and starship init fish | source
+
+bind \cn accept-autosuggestion
+
+set FZF_DEFAULT_OPTS '--height=40% --layout=reverse --multi --border=sharp --preview-window=:sharp:'
+if command -qv fd
+    set FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow --exclude .git venv'
+    set FZF_CTRL_T_COMMAND 'fd --type f --follow --exclude .git'
+    set FZF_CTRL_T_OPTS '--multi --preview="bat --line-range :50 --color=always --style plain {}"'
+end
+
+set AWS_PROFILE prod
+
+set DOCUMENTS "$HOME/Documents"
+set PLAYS "$HOME/playground/workstation"
+
+alias dirs 'dirs -l -v'
+alias ip 'ip -c'
+alias pwm 'ANSIBLE_CONFIG=$PLAYS/ansible.cfg $PLAYS/venv/bin/ansible-playbook $PLAYS/playbooks/main.yml'
+alias vs 'vim -c "set spell" /tmp/(openssl rand -hex 6).md'
+alias vj "vim /tmp/(openssl rand -hex 6).json"
+alias vy "vim /tmp/(openssl rand -hex 6).yml"
+alias vg "vim +Gstatus +only"
+if command -qv terraform
+    alias tf "terraform "
+    alias tff "terraform fmt "
+    alias tfa "terraform apply "
+    alias tfp "terraform plan "
+end
+alias ccd "cd "
+alias .. "cd .."
+
+if command -qv exa
+    alias ls "exa"
+    alias ll "exa -l"
+    alias la "exa -la"
+end
+
+if command -qv nvim
+    alias v 'nvim'
+    alias vi 'nvim'
+    alias vim 'nvim'
+    alias vimdiff 'nvim -d '
+    set EDITOR nvim
+    set VISUAL nvim
 else
-    alias ls='ls --color'
-    alias ll='ls -alF'
-    alias la='ls -A'
-    alias l='ls -CF'
+    set EDITOR vim
+    set VISUAL vim
 end
 
-if test (command -v nvim)
-    alias v='nvim'
-    alias vi='nvim'
-    alias vim='nvim'
-    alias vimdiff='nvim -d '
-    set -x EDITOR nvim
-    set -x VISUAL nvim
-else
-    set -x EDITOR vim
-    set -x VISUAL vim
-end
+. ~/.asdf/asdf.fish
 
-function fish_prompt
-    $GOPATH/bin/powerline-go -error $status -shell bare -modules 'nix-shell,user,host,ssh,perms,jobs,dotenv,git,aws,terraform-workspace,venv,kube'
-end
+command -qv aws; and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
-set PATH ~/.local/bin ~/.cargo/bin $PATH
+set fish_color_command blue
+set fish_color_param cyan
+set fish_greeting
 
 if test -e ~/.config/fish/local.fish
     source ~/.config/fish/local.fish
