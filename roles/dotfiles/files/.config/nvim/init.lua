@@ -11,45 +11,44 @@ vim.g.loaded_ruby_provider   = 0
 vim.g.loaded_node_provider   = 0
 vim.g.loaded_perl_provider   = 0
 
-vim.wo.relativenumber = true
-vim.wo.number = true
-
 vim.cmd[[ autocmd! VimResized * :wincmd = ]]
 
 if vim.fn.exists('##TextYankPost') then
   vim.cmd[[ autocmd TextYankPost * silent! lua require('vim.highlight').on_yank() ]]
 end
 
-vim.o.syntax = 'on'
-vim.o.smartcase = true
-vim.o.termguicolors = true
-vim.o.inccommand = 'nosplit'
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.cursorline = true
-vim.o.tags = 'tags'
-vim.o.winblend = 5
-vim.o.laststatus = 2
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.syntax = 'on'
+vim.opt.smartcase = true
+vim.opt.termguicolors = true
+vim.opt.inccommand = 'nosplit'
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.cursorline = true
+vim.opt.tags = 'tags'
+vim.opt.winblend = 5
+vim.opt.laststatus = 2
 -- settings for search
-vim.o.hlsearch = true
-vim.o.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
 -- settings for tabs
-vim.o.expandtab = true
-vim.o.autoindent = true
-vim.o.smarttab = true
-vim.o.listchars = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~'
-vim.o.undofile = true
-vim.o.undodir = home .. '/.local/share/vim/undo'
-vim.o.backupdir = home .. '/.local/share/vim/backup'
-vim.o.directory = home .. '/.local/share/swap'
-vim.o.shadafile = home .. '/.local/share/viminfo'
-vim.o.showmatch = true
-vim.o.matchtime = 3
-vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
-vim.o.signcolumn = "yes"
-vim.o.ignorecase = true
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smarttab = true
+vim.opt.listchars = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~'
+vim.opt.undofile = true
+vim.opt.undodir = home .. '/.local/share/vim/undo'
+vim.opt.backupdir = home .. '/.local/share/vim/backup'
+vim.opt.directory = home .. '/.local/share/swap'
+vim.opt.shadafile = home .. '/.local/share/viminfo'
+vim.opt.showmatch = true
+vim.opt.matchtime = 3
+vim.opt.grepprg = 'rg --vimgrep --no-heading --smart-case'
+vim.opt.signcolumn = "yes"
+vim.opt.ignorecase = true
+vim.opt.updatetime = 650
 vim.g.netrw_banner = false
-vim.g.updatetime = 650
 
 -- map ESC to jk
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', DEFAULT_KEYMAP)
