@@ -67,8 +67,6 @@ end
 
 command -qv aws; and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
 
-set fish_color_command blue
-set fish_color_param cyan
 set fish_greeting
 
 if test -e ~/.config/fish/local.fish
