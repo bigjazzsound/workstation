@@ -160,7 +160,7 @@ lspconfig.rust_analyzer.setup {
 lspconfig.terraformls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "hcl" },
+  filetypes = { "hcl", "terraform" },
 }
 
 lspconfig.tsserver.setup {
