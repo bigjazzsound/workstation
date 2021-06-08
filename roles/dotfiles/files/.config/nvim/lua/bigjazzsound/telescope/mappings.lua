@@ -39,5 +39,6 @@ map_tele("<leader>lr", "lsp_references")
 map_tele("<leader>lw", "lsp_workspace_symbols")
 map_tele("<leader>fm", "man_pages")
 map_tele("<leader>fr", "terraform_resources")
+map_tele("<leader>fq", "quickfix")
 
 return map_tele
