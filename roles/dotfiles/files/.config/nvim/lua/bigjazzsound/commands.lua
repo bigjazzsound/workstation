@@ -49,7 +49,7 @@ M.terraform_validate = function()
       })
     end
     vim.fn.setqflist(qflist, "r")
-    print(string.format("%d errors or warnings detected", #qflist))
+    vim.cmd[[lua require "telescope.builtin".quickfix()]]
   else
     print "No errors or warnings detected"
     vim.fn.setqflist({}, "r")
