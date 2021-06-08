@@ -339,10 +339,10 @@ return require "packer".startup {
       end
     }
 
-    -- use 'hkupty/daedalus.nvim'
-    use "~/playground/bigjazzsound/daedalus.nvim"
     use "folke/lua-dev.nvim"
 
+    use 'hkupty/daedalus.nvim'
+    -- use "~/playground/bigjazzsound/daedalus.nvim"
   end,
 
   config = {
