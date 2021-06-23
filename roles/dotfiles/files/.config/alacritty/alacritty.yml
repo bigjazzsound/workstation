@@ -501,3 +501,12 @@ key_bindings:
   - key: D
     mods: Alt
     chars: "\x1bd"
+  - key: T
+    mods: Alt
+    chars: "\x1bt"
+  - key: C
+    mods: Alt
+    chars: "\x1bc"
+  - key: E
+    mods: Alt
+    chars: "\x1be"
