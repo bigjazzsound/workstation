@@ -276,15 +276,6 @@ return require "packer".startup {
     }
 
     use {
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require "colorizer".setup {
-          "!packer",
-        }
-      end,
-    }
-
-    use {
       "numToStr/Navigator.nvim",
       config = function()
         require "Navigator".setup()
