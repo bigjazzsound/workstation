@@ -183,4 +183,12 @@ lspconfig.yamlls.setup {
   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = {"*.yml"},
+        ["https://json.schemastore.org/ansible-playbook.json"] = {"main.yml"},
+      }
+    }
+  }
 }
