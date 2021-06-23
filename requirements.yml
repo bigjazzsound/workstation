@@ -2,3 +2,7 @@
 collections:
   - name: ansible.posix
   - name: community.general
+  - name: geerlingguy.mac
+
+roles:
+  - name: elliotweiser.osx-command-line-tools

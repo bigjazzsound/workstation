@@ -47,6 +47,17 @@
       tags:
         - pkgs
 
+    - block:
+        - import_role:
+            name: elliotweiser.osx-command-line-tools
+
+        - import_role:
+            name: geerlingguy.mac.homebrew
+
+        - import_role:
+            name: geerlingguy.mac.mas
+      when: ansible_system == 'Linux'
+
     - import_role:
         name: dotfiles
       tags:
@@ -73,6 +84,7 @@
           make:
             chdir: "{{ nvim_dir }}"
             target: install
+      when: ansible_system == 'Linux'
       vars:
         nvim_dir: "{{ (ansible_user_dir, 'playground', 'vim', 'neovim') | path_join }}"
       tags:
