@@ -1,0 +1,32 @@
+---
+pkgs:
+  - apt-file
+  - apt-transport-https
+  - autoconf # neovim
+  - automake # neovim
+  - build-essential # neovim
+  - cmake # neovim
+  - curl
+  - figlet
+  - flatpak
+  - g++ # neovim
+  - gettext # neovim
+  - git
+  - htop
+  - libssh2-1-dev # cargo-update
+  - libssl-dev # cargo-update
+  - libtool # neovim
+  - libtool-bin # neovim
+  - ninja-build # neovim
+  - pkg-config # neovim
+  - python3-venv
+  - tmux
+  - unzip # neovim
+
+ppas:
+  - "ppa:lutris-team/lutris"
+
+flatpaks:
+  - "com.discordapp.Discord"
+  - "com.microsoft.Teams"
+  - "im.riot.Riot"

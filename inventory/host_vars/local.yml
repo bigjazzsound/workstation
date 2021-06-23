@@ -1,0 +1,178 @@
+---
+homebrew_installed_packages:
+  - asdf
+  - automake
+  - awscli
+  - azure-cli
+  - bash
+  - bat
+  - boundary
+  - boxes
+  - brew-cask-completion
+  - cask
+  - cmake
+  - consul
+  - coreutils
+  - ctags
+  - curl
+  - dog
+  - dos2unix
+  - dust
+  - exa
+  - fd
+  - ffmpeg
+  - fish
+  - fzf
+  - gh
+  - git
+  - go
+  - grep
+  - htop
+  - hugo
+  - hyperfine
+  - ipcalc
+  - iproute2mac
+  - jq
+  - just
+  - make
+  - mas
+  - mpv
+  - name: neovim
+    state: head
+  - node
+  - nomad
+  - nyancat
+  - opa
+  - openconnect
+  - openfortivpn
+  - packer
+  - pandoc
+  - pipx
+  - procs
+  - putty
+  - ripgrep
+  - rsync
+  - rust-analyzer
+  - rustc-completion
+  - rustup-init
+  - sipcalc
+  - skhd
+  - sponge
+  - spotify-tui
+  - starship
+  - terminal-notifier
+  - terraform-docs
+  - terraform-ls
+  - tfenv
+  - tfsec
+  - tmux
+  - todoist
+  - toilet
+  - tokei
+  - tree-sitter
+  - truncate
+  - vault
+  - vegeta
+  - w3m
+  - watch
+  - wget
+  - wireguard-go
+  - wireguard-tools
+  - xz
+  - yabai
+  - yamllint
+  - ykman
+  - youtube-dl
+  - yuicompressor
+  - zsh
+
+homebrew_cask_apps:
+  - alacritty
+  - alfred
+  - amazon-chime
+  - aws-vault
+  - balenaetcher
+  - bitwarden
+  - brave-browser
+  - cheatsheet
+  - discord
+  - docker
+  - drawio
+  - element
+  - epic-games
+  - fanny
+  - firefox
+  - font-blex-mono-nerd-font
+  - font-caskaydia-cove-nerd-font
+  - font-cousine-nerd-font
+  - font-fira-code-nerd-font
+  - font-fira-mono-nerd-font
+  - font-hack-nerd-font
+  - font-inconsolata-nerd-font
+  - font-iosevka-nerd-font
+  - font-jetbrains-mono-nerd-font
+  - font-proggy-clean-tt-nerd-font
+  - font-sauce-code-pro-nerd-font
+  - font-ubuntu-mono-nerd-font
+  - hammerspoon
+  - iterm2
+  - keybase
+  - keycastr
+  - kindle
+  - microsoft-auto-update
+  - microsoft-edge
+  - mochi
+  - obs
+  - openconnect-gui
+  - powershell
+  - qbittorrent
+  - reaper
+  - session-manager-plugin
+  - signal
+  - tuxguitar
+  - vagrant
+  - visual-studio-code
+
+homebrew_upgrade_all_packages: true
+
+mas_installed_apps:
+  - id: 497799835
+    name: Xcode
+  - id: 585829637
+    name: Todoist
+  - id: 937984704
+    name: Amphetamine
+
+mas_upgrade_all_apps: true
+
+pkgs:
+  - apt-file
+  - apt-transport-https
+  - autoconf # neovim
+  - automake # neovim
+  - build-essential # neovim
+  - cmake # neovim
+  - curl
+  - figlet
+  - flatpak
+  - g++ # neovim
+  - gettext # neovim
+  - git
+  - htop
+  - libssh2-1-dev # cargo-update
+  - libssl-dev # cargo-update
+  - libtool # neovim
+  - libtool-bin # neovim
+  - ninja-build # neovim
+  - pkg-config # neovim
+  - python3-venv
+  - tmux
+  - unzip # neovim
+
+ppas:
+  - "ppa:lutris-team/lutris"
+
+flatpaks:
+  - "com.discordapp.Discord"
+  - "com.microsoft.Teams"
+  - "im.riot.Riot"
