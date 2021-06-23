@@ -56,6 +56,7 @@ return require "packer".startup {
         vim.g.markdown_composer_autostart = 0
         vim.g.markdown_composer_syntax_theme = "Atom One Dark"
       end,
+      ft = {"markdown"},
     }
 
     use {
