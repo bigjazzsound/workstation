@@ -56,7 +56,7 @@
 
         - import_role:
             name: geerlingguy.mac.mas
-      when: ansible_system == 'Linux'
+      when: ansible_system == 'Darwin'
 
     - import_role:
         name: dotfiles
