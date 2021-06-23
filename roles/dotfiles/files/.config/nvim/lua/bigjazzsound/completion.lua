@@ -13,11 +13,12 @@ require "compe".setup {
     path = true,
     buffer = true,
     calc = true,
-    vsnip = true,
+    vsnip = false,
     nvim_lsp = true,
     nvim_lua = true,
-    spell = true,
-    snippets_nvim = true,
+    spell = false,
+    snippets_nvim = false,
+    luasnip = true,
   },
 }
 local opts = { silent = true, expr = true, noremap = true }
