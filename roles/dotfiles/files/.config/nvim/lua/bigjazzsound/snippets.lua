@@ -1,39 +1,39 @@
-require "snippets".use_suggested_mappings()
+local ls = require 'luasnip'
+local s = ls.s
+local sn = ls.sn
+local t = ls.t
+local i = ls.i
+local f = ls.f
+local c = ls.c
+local d = ls.d
 
-local snippets = require "snippets"
-local U = require "snippets.utils"
-
-snippets.snippets = {
-  -- TODO
+ls.snippets = {
+  all = {},
   lua = {
-    req = [[local ${2:${1|S.v:match"([^.()]+)[()]*$"}} = require '$1']],
-    func = [[function${1|vim.trim(S.v):gsub("^%S"," %0")}(${2|vim.trim(S.v)})$0 end]],
-    ["local"] = [[local ${2:${1|S.v:match"([^.()]+)[()]*$"}} = ${1}]],
-    -- Match the indentation of the current line for newlines.
-    ["for"] = U.match_indentation [[
-for ${1:i}, ${2:v} in ipairs(${3:t}) do
-  $0
-end]],
+    s({trig='fun'}, {
+      t({"function()", ""}),
+      i(0),
+      t({"", "end"}),
+    })
   },
-
-  _global = {},
-
-  sls = {
-    ["if"] = [[
-{% if $0 %}
-{% endif %}]],
-    ["for"] = [[
-{% for $0 %}
-{% endif %}]],
-  },
-
-  hcl = {
-    ["res"] = [[resource "$1" "$2" {
-  $0
-}]],
-    mod = [[module "$1" {
-  source = ""
-  $0
-}]],
+  terraform = {
+    s({trig='res'}, {
+      t({'resource "'}), i(1), t({'" "'}), i(2), t({'" {', ""}),
+      t({'  '}), i(0),
+      t({"", "}"}),
+    }),
+    s({trig='mod'}, {
+      t({'module "'}), i(1), t({'" {', ""}),
+      t({'  source = "'}), i(0), t({'"'}),
+      t({"", "}"}),
+    }),
   },
 }
+
+vim.cmd [[
+imap <silent><expr> <c-k> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<c-k>'
+imap <silent><expr> <c-e> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+
+snoremap <silent> <c-j> <cmd>lua ls.jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua ls.jump(-1)<Cr>
+]]

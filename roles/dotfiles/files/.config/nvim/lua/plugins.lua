@@ -142,7 +142,7 @@ return require "packer".startup {
     }
 
     use {
-      "norcalli/snippets.nvim",
+      "L3MON4D3/LuaSnip",
       config = function()
         require "bigjazzsound.snippets"
       end,
