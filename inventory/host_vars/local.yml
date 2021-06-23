@@ -41,6 +41,7 @@ homebrew_installed_packages:
     state: head
   - node
   - nomad
+  - npm
   - nyancat
   - opa
   - openconnect

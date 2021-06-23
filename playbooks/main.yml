@@ -59,6 +59,15 @@
 
         - import_role:
             name: geerlingguy.mac.mas
+
+        - name: Install npm packages
+          community.general.npm:
+            name: "{{ item }}"
+            global: true
+            state: latest
+          loop:
+            - pyright
+          tags: foo
       when: ansible_system == 'Darwin'
 
     - name: Manage dotfiles
