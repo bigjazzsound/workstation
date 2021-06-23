@@ -142,11 +142,6 @@ lspconfig.jsonls.setup {
 }
 
 lspconfig.pyright.setup {
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = require "lspcontainers".command "pyright",
-  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
 }
