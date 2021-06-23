@@ -1,4 +1,13 @@
-local result, output = pcall(vim.fn.system, [[figlet -f 3D-ASCII "Neovim"]])
-if result then
-  vim.g.startify_custom_header = vim.fn["startify#pad"](vim.fn.split(output, "\n"))
-end
+local text = [[
+ ________   _______   ________  ___      ___ ___  _____ ______
+|\   ___  \|\  ___ \ |\   __  \|\  \    /  /|\  \|\   _ \  _   \
+\ \  \\ \  \ \   __/|\ \  \|\  \ \  \  /  / | \  \ \  \\\__\ \  \
+ \ \  \\ \  \ \  \_|/_\ \  \\\  \ \  \/  / / \ \  \ \  \\|__| \  \
+  \ \  \\ \  \ \  \_|\ \ \  \\\  \ \    / /   \ \  \ \  \    \ \  \
+   \ \__\\ \__\ \_______\ \_______\ \__/ /     \ \__\ \__\    \ \__\
+    \|__| \|__|\|_______|\|_______|\|__|/       \|__|\|__|     \|__|
+
+
+]]
+
+vim.g.startify_custom_header = vim.fn["startify#pad"](vim.fn.split(text, "\n"))
