@@ -31,6 +31,7 @@ return require "packer".startup {
       "editorconfig/editorconfig-vim",
       "enricobacis/paste.vim",
       "junegunn/vim-easy-align",
+      "milisims/nvim-luaref",
       "tpope/vim-eunuch",
       "tpope/vim-repeat",
       "tpope/vim-surround",
