@@ -1,7 +1,8 @@
 ---
 - hosts: all
   tasks:
-    - block:
+    - name: Execute Linux system level tasks
+      block:
         - name: Set sysctls
           sysctl:
             name: "{{ item.name }}"
@@ -37,17 +38,19 @@
             state: present
             line: 'Defaults !tty_tickets'
             validate: 'visudo -cf %s'
+
+        - name: Install Linux packages
+          import_role:
+            name: pkgs
+          tags:
+            - pkgs
       when: ansible_system == 'Linux'
       become: true
       tags:
         - system
 
-    - import_role:
-        name: pkgs
-      tags:
-        - pkgs
-
-    - block:
+    - name: Setup MacOS
+      block:
         - import_role:
             name: elliotweiser.osx-command-line-tools
 
@@ -58,12 +61,13 @@
             name: geerlingguy.mac.mas
       when: ansible_system == 'Darwin'
 
-    - import_role:
+    - name: Manage dotfiles
+      import_role:
         name: dotfiles
       tags:
         - dotfiles
 
-    - name: Neovim
+    - name: Setup Neovim
       block:
         - name: Clone neovim
           git:
