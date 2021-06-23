@@ -327,7 +327,8 @@ return require "packer".startup {
             backdrop = 1
           }
         }
-      end
+      end,
+      cmd = {"ZenMode"},
     }
 
     use "folke/lua-dev.nvim"
