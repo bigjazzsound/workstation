@@ -1,13 +1,7 @@
 local lspconfig = require "lspconfig"
-local saga = require "lspsaga"
-local luadev = require "lua-dev".setup {
-  lspconfig = {
-    cmd = require "lspcontainers".command "sumneko_lua",
-  },
-}
 
 local on_attach = function(client, bufnr)
-  saga.init_lsp_saga()
+  require "lspsaga".init_lsp_saga()
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     signs = true,
@@ -62,7 +56,7 @@ local on_attach = function(client, bufnr)
     DEFAULT_KEYMAP
   )
 
-  vim.cmd [[au CursorHold <buffer> lua require('lspsaga.diagnostic').show_line_diagnostics()]]
+  vim.cmd [[au CursorHold <buffer> lua require('lspsaga.diagnostic').show_cursor_diagnostics()]]
 
   if client.resolved_capabilities.document_range_formatting then
     vim.api.nvim_buf_set_keymap(
@@ -161,6 +155,20 @@ lspconfig.terraformls.setup {
 lspconfig.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+local lls_path = function()
+  local Path = require "plenary.path"
+  local path = Path:new(vim.loop.os_homedir(), ".local/share/lua-language-server")
+  local bin = Path:new(path.filename, "bin/macOS/lua-language-server")
+  local main = Path:new(path.filename, "main.lua")
+  return { bin.filename, "-E", main.filename }
+end
+
+local luadev = require "lua-dev".setup {
+  lspconfig = {
+    cmd = lls_path()
+  },
 }
 
 lspconfig.sumneko_lua.setup(luadev)
