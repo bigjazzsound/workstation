@@ -114,7 +114,8 @@ return require "packer".startup {
       as = "hop",
       config = function()
         require "hop".setup { winblend = 80 }
-        vim.api.nvim_set_keymap("n", "s", [[<CMD>lua require('hop').hint_char2()<CR>]], {})
+        vim.api.nvim_set_keymap("n", "s", [[<CMD>lua require'hop'.hint_char2()<CR>]], DEFAULT_KEYMAP)
+        vim.api.nvim_set_keymap("v", "s", [[<CMD>lua require'hop'.hint_char2()<CR>]], DEFAULT_KEYMAP)
       end,
     }
 
