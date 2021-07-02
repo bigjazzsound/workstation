@@ -103,3 +103,30 @@
       tags:
         - neovim
         - vim
+
+    - name: sumneko
+      tags:
+        - lua
+        - lua-language-server
+        - sumneko
+      block:
+        - set_fact:
+            sumneko_path: "{{ (ansible_user_dir, '.local/share/lua-language-server') | path_join }}"
+
+        - name: Setup sumneko lua
+          ansible.builtin.git:
+            repo: "https://github.com/sumneko/lua-language-server.git"
+            dest: "{{ sumneko_path }}"
+            depth: 1
+            track_submodules: true
+            force: true
+
+        - name: Compile sumneko lua
+          ansible.builtin.command: "compile/install.sh"
+          args:
+            chdir: "{{ (sumneko_path, '3rd/luamake') | path_join }}"
+
+        - name: Rebuild sumneko lua
+          ansible.builtin.command: "{{ (sumneko_path, '3rd/luamake/luamake') | path_join + ' rebuild' }}"
+          args:
+            chdir: "{{ sumneko_path }}"
