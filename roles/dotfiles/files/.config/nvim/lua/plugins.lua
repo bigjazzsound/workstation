@@ -233,6 +233,13 @@ return require "packer".startup {
             filetype = "hcl",
             used_by = { "terraform", "hcl" },
           }
+
+          parser_config.markdown = {
+            install_info = {
+              url = "https://github.com/ikatyang/tree-sitter-markdown",
+              files = { "src/parser.c", "src/scanner.cc", "-DTREE_SITTER_MARKDOWN_AVOID_CRASH=1" },
+            },
+          }
         end,
       },
     }
