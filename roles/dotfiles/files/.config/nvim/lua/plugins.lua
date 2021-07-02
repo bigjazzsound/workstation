@@ -35,7 +35,6 @@ return require "packer".startup {
       "tpope/vim-eunuch",
       "tpope/vim-repeat",
       "tpope/vim-surround",
-      "tpope/vim-unimpaired",
     }
 
     -- filetypes
