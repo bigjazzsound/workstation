@@ -91,9 +91,8 @@ require('plugins')
 
 vim.cmd [[ au BufNewFile,BufRead justfile,Justfile setfiletype make ]]
 
-local colorscheme = "tokyonight"
-local ok, _ = pcall(vim.cmd, 'colorscheme '..colorscheme)
-if ok then vim.cmd('colorscheme '..colorscheme) else vim.cmd('colorscheme default') end
+local ok, _ = pcall(vim.cmd, 'colorscheme tokyonight')
+if not ok then vim.cmd('colorscheme default') end
 
 -- TODO - replace with https://github.com/bfredl/nvim-luadev
 vim.api.nvim_set_keymap('n', '<leader>x', '<CMD>lua R("bigjazzsound.exec").exec_line()<CR>', DEFAULT_KEYMAP)
