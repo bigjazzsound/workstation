@@ -34,6 +34,7 @@ homebrew_installed_packages:
   - iproute2mac
   - jq
   - just
+  - libyaml
   - make
   - mas
   - mpv
