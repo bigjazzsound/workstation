@@ -10,17 +10,25 @@ require "compe".setup {
   allow_prefix_unmatch = false,
 
   source = {
-    path = true,
     buffer = true,
-    calc = true,
-    vsnip = false,
+    calc = false,
+    emoji = true,
+    luasnip = true,
     nvim_lsp = true,
     nvim_lua = true,
-    spell = false,
+    nvim_treesitter = false,
+    omni = false,
+    path = true,
     snippets_nvim = false,
-    luasnip = true,
+    spell = false,
+    tags = false,
+    ultisnips = false,
+    vim_lsc = false,
+    vim_lsp = false,
+    vsnip = false,
   },
 }
+
 local opts = { silent = true, expr = true, noremap = true }
 
 vim.api.nvim_set_keymap("i", "<C-n>", "compe#complete()", opts)
