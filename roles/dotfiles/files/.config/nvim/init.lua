@@ -1,4 +1,4 @@
-local home = vim.env.HOME
+local home = vim.loop.os_homedir()
 
 DEFAULT_KEYMAP = {
   noremap = true,
