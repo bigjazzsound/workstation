@@ -23,11 +23,13 @@ require "telescope".setup {
     },
     -- Rounded corners don't look right with my font
     borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-    prompt_position = "top",
     sorting_strategy = "ascending",
-    width = 0.95,
+    layout_config = {
+      width = 0.95,
+      prompt_position = "top",
+      preview_cutoff = 120,
+    },
     winblend = 5,
-    preview_cutoff = 120,
   },
   extensions = {
     fzf = {
