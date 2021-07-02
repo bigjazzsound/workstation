@@ -89,7 +89,8 @@ vim.cmd [[ command Flash :lua require('flash') ]]
 require('bigjazzsound.globals')
 require('plugins')
 
-vim.cmd [[ au BufNewFile,BufRead justfile,Justfile setfiletype make ]]
+vim.cmd "au BufNewFile,BufRead justfile,Justfile set filetype=make"
+vim.cmd "au BufNewFile,BufRead *.fish set filetype=fish"
 
 local ok, _ = pcall(vim.cmd, 'colorscheme tokyonight')
 if not ok then vim.cmd('colorscheme default') end
