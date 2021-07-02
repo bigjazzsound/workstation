@@ -12,7 +12,7 @@ ls.snippets = {
   lua = {
     s({trig='fun'}, {
       t({"function()", ""}),
-      i(0),
+      t({'  '}), i(0),
       t({"", "end"}),
     })
   },
