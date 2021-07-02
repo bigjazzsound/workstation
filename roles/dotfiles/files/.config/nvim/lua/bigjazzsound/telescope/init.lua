@@ -6,6 +6,8 @@ local previewers = require "telescope.previewers"
 
 local my_actions = {
   ["jk"] = actions.close,
+  ["<leader>q"] = actions.close,
+  ["<esc>"] = actions.close,
   ["<C-j>"] = actions.move_selection_next,
   ["<C-k>"] = actions.move_selection_previous,
   ["<C-p>"] = actions.add_selection,
