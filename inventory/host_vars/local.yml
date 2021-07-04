@@ -100,6 +100,7 @@ homebrew_cask_apps:
   - epic-games
   - fanny
   - firefox
+  - google-chrome
   - font-blex-mono-nerd-font
   - font-caskaydia-cove-nerd-font
   - font-cousine-nerd-font
@@ -112,7 +113,6 @@ homebrew_cask_apps:
   - font-proggy-clean-tt-nerd-font
   - font-sauce-code-pro-nerd-font
   - font-ubuntu-mono-nerd-font
-  - google-chrome
   - hammerspoon
   - iterm2
   - keycastr
