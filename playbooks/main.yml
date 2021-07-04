@@ -68,6 +68,8 @@
           loop:
             - pyright
       when: ansible_system == 'Darwin'
+      tags:
+        - pkgs
 
     - name: Manage dotfiles
       import_role:
