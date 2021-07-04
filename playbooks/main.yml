@@ -67,7 +67,6 @@
             state: latest
           loop:
             - pyright
-          tags: foo
       when: ansible_system == 'Darwin'
 
     - name: Manage dotfiles
