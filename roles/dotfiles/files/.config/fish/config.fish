@@ -3,7 +3,7 @@ if test (uname) = Darwin && test (uname -m) = arm64 && test -e /opt/homebrew/bin
     set PATH $PATH /opt/homebrew/bin
 end
 
-type -q fisher; or curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+type -q fisher || curl -sL https://git.io/fisher | source
 
 function fpkgs
     set -l pkgs \
