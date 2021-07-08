@@ -225,14 +225,17 @@ return require "packer".startup {
             },
           }
 
-          parser_config.hcl = {
-            install_info = {
-              url = "~/playground/tree-sitter-hcl",
-              files = { "src/parser.c" },
-            },
-            filetype = "hcl",
-            used_by = { "terraform", "hcl" },
-          }
+          local path = require("plenary.path"):new(vim.loop.os_homedir(), "playground/tree-sitter-hcl")
+          if path:is_dir() then
+            parser_config.hcl = {
+              install_info = {
+                url = "~/playground/tree-sitter-hcl",
+                files = { "src/parser.c" },
+              },
+              filetype = "hcl",
+              used_by = { "terraform", "hcl" },
+            }
+          end
 
           parser_config.markdown = {
             install_info = {
