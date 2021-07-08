@@ -1,17 +1,9 @@
-local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
+local fstring = string.format
 
-if not packer_exists then
-  local directory = string.format("%s/site/pack/packer/opt/", vim.fn.stdpath "data")
-
+if not pcall(vim.cmd, "packadd packer.nvim") then
+  local directory = fstring("%s/site/pack/packer/opt/", vim.fn.stdpath "data")
   vim.fn.mkdir(directory, "p")
-
-  local out = vim.fn.system(
-    string.format("git clone %s %s", "https://github.com/wbthomason/packer.nvim", directory .. "/packer.nvim")
-  )
-
-  print(out)
-  print "Downloading packer.nvim..."
-
+  vim.fn.system(fstring("git clone https://github.com/wbthomason/packer.nvim %s/packer.nvim", directory))
   vim.cmd "qall"
 
   return
