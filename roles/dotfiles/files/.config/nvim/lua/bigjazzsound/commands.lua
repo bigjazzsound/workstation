@@ -5,7 +5,17 @@ local sorters = require "telescope.sorters"
 local previewers = require "telescope.previewers"
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
-local jira_auth = os.getenv "JIRA_USER" .. ":" .. os.getenv "JIRA_PASSWORD" or nil
+
+local jira_auth = function()
+  local user = os.getenv "JIRA_USER" or nil
+  local pass = os.getenv "JIRA_PASSWORD" or nil
+  if user and pass then
+    return user .. ":" .. pass
+  else
+    return
+  end
+end
+
 local jira_url = os.getenv "JIRA_URL" or nil
 
 M.git_po = function()
