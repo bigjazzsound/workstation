@@ -1,7 +1,7 @@
 local lspconfig = require "lspconfig"
 
 local on_attach = function(client, bufnr)
-  require "lspsaga".init_lsp_saga()
+  require("lspsaga").init_lsp_saga()
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
     signs = true,
@@ -120,7 +120,7 @@ lspconfig.dockerls.setup {
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = require "lspcontainers".command "gopls",
+  cmd = require("lspcontainers").command "gopls",
 }
 
 lspconfig.jsonls.setup {
@@ -141,7 +141,7 @@ lspconfig.pyright.setup {
 }
 
 lspconfig.rust_analyzer.setup {
-  cmd = require "lspcontainers".command "rust_analyzer",
+  cmd = require("lspcontainers").command "rust_analyzer",
   on_attach = on_attach,
   capabilities = capabilities,
 }
@@ -175,7 +175,7 @@ local lls_path = function()
   end
 end
 
-local luadev = require "lua-dev".setup {
+local luadev = require("lua-dev").setup {
   lspconfig = {
     cmd = lls_path(),
     on_attach = on_attach,
@@ -194,16 +194,16 @@ lspconfig.yamlls.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require "lspcontainers".command "yamlls",
+  cmd = require("lspcontainers").command "yamlls",
   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
     yaml = {
       schemas = {
-        kubernetes = {"*.yml"},
-        ["https://json.schemastore.org/ansible-playbook.json"] = {"main.yml"},
-      }
-    }
-  }
+        kubernetes = { "*.yml" },
+        ["https://json.schemastore.org/ansible-playbook.json"] = { "main.yml" },
+      },
+    },
+  },
 }
