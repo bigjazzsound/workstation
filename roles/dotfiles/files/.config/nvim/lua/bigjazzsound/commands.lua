@@ -22,7 +22,7 @@ M.git_po = function()
   local job = require "plenary.job"
   local output = {}
   job
-    :new {
+    :new({
       command = "git",
       args = { "po" },
       on_stderr = function(_, line)
@@ -31,7 +31,7 @@ M.git_po = function()
       on_stdout = function(_, line)
         table.insert(output, line)
       end,
-    }
+    })
     :sync()
 
   return output
@@ -39,7 +39,7 @@ end
 
 M.terraform_validate = function()
   local job = require "plenary.job"
-  local output = job:new { "terraform", "validate", "-json" }:sync()
+  local output = job:new({ "terraform", "validate", "-json" }):sync()
 
   local json = vim.fn.json_decode(output)
 
@@ -59,7 +59,7 @@ M.terraform_validate = function()
       })
     end
     vim.fn.setqflist(qflist, "r")
-    vim.cmd[[lua require "telescope.builtin".quickfix()]]
+    vim.cmd [[lua require "telescope.builtin".quickfix()]]
   else
     print "No errors or warnings detected"
     vim.fn.setqflist({}, "r")
@@ -95,8 +95,8 @@ end
 
 M.query_todoist = function()
   local api_key = os.getenv "TODOIST_API_KEY"
-  local job = require "plenary.job"
-    :new {
+  local job = require("plenary.job")
+    :new({
       command = "curl",
       args = {
         "-s",
@@ -106,7 +106,7 @@ M.query_todoist = function()
         "Authorization: Bearer " .. api_key,
         "https://api.todoist.com/rest/v1/tasks?filter=today",
       },
-    }
+    })
     :sync()
 
   local nodate = {}
@@ -145,7 +145,7 @@ M.query_todoist = function()
   end
 
   pickers
-    :new {
+    :new({
       results_title = "Tasks",
       finder = finders.new_table {
         results = tasks,
@@ -158,13 +158,13 @@ M.query_todoist = function()
         end,
       },
       sorter = sorters.get_generic_fuzzy_sorter(),
-    }
+    })
     :find()
 end
 
 M.query_open = function()
-  local output = require "plenary.job"
-    :new {
+  local output = require("plenary.job")
+    :new({
       "curl",
       "-s",
       "-X",
@@ -180,11 +180,11 @@ M.query_open = function()
         fields = { "summary", "status", "creator", "issuetype", "project", "description", "comment" },
       },
       string.format("%s/rest/api/latest/search", jira_url),
-    }
+    })
     :sync()
 
   pickers
-    :new {
+    :new({
       results_title = "Open issues",
       finder = finders.new_table {
         results = vim.fn.json_decode(output).issues,
@@ -234,13 +234,13 @@ M.query_open = function()
           vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, entry.preview)
         end,
       },
-    }
+    })
     :find()
 end
 
 M.query_jira = function()
-  local output = require "plenary.job"
-    :new {
+  local output = require("plenary.job")
+    :new({
       command = "curl",
       args = {
         "-s",
@@ -258,7 +258,7 @@ M.query_jira = function()
         },
         string.format("%s/rest/api/latest/search", jira_url),
       },
-    }
+    })
     :sync()
 
   local json = vim.fn.json_decode(output)
@@ -283,8 +283,8 @@ M.query_jira = function()
   local assign = function(prompt_bufnr)
     actions.close(prompt_bufnr)
     local entry = action_state.get_selected_entry()
-    local output = require "plenary.job"
-      :new {
+    local output = require("plenary.job")
+      :new({
         command = "curl",
         args = {
           "-v",
@@ -308,7 +308,7 @@ M.query_jira = function()
           },
           string.format("%s/rest/api/latest/issue/%s", jira_url, entry.id),
         },
-      }
+      })
       :sync()
     P(output)
   end
@@ -317,8 +317,8 @@ M.query_jira = function()
   transition.todo = function(prompt_bufnr)
     actions.close(prompt_bufnr)
     local entry = action_state.get_selected_entry()
-    local output = require "plenary.job"
-      :new {
+    local output = require("plenary.job")
+      :new({
         command = "curl",
         args = {
           "-s",
@@ -341,7 +341,7 @@ M.query_jira = function()
           },
           string.format("%s/rest/api/latest/issue/%s/transitions", jira_url, entry.id),
         },
-      }
+      })
       :sync()
   end
 
@@ -351,8 +351,8 @@ M.query_jira = function()
     actions.close(prompt_bufnr)
     local current_entry = action_state.get_selected_entry()
     local get_comments = function()
-      local output = require "plenary.job"
-        :new {
+      local output = require("plenary.job")
+        :new({
           "curl",
           "-s",
           "-X",
@@ -362,7 +362,7 @@ M.query_jira = function()
           "-H",
           "Content-Type: application/json",
           string.format("%s/rest/api/latest/issue/%s/comment", jira_url, current_entry.id),
-        }
+        })
         :sync()
 
       return vim.fn.json_decode(output)
@@ -371,7 +371,7 @@ M.query_jira = function()
     local comments = get_comments()
 
     pickers
-      :new {
+      :new({
         results_title = "Comments for " .. current_entry.id,
         finder = finders.new_table {
           results = comments.comments,
@@ -390,12 +390,12 @@ M.query_jira = function()
             vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.fn.split(entry.body, "\n"))
           end,
         },
-      }
+      })
       :find()
   end
 
   pickers
-    :new {
+    :new({
       results_title = "My issues",
       finder = finders.new_table {
         results = vim.fn.json_decode(output).issues,
@@ -442,7 +442,7 @@ M.query_jira = function()
         map("n", "<CR>", jira.open_comments)
         return true
       end,
-    }
+    })
     :find()
 end
 
@@ -456,8 +456,8 @@ vim.cmd [[autocmd User TelescopePreviewerLoaded setlocal wrap]]
 local get_spotify_token = function()
   local client_id = os.getenv "SPOTIFY_CLIENT_ID"
   local client_secret = os.getenv "SPOTIFY_CLIENT_SECRET"
-  local output = require "plenary.job"
-    :new {
+  local output = require("plenary.job")
+    :new({
       command = "curl",
       args = {
         "-s",
@@ -471,7 +471,7 @@ local get_spotify_token = function()
         "grant_type=client_credentials",
         "https://accounts.spotify.com/api/token",
       },
-    }
+    })
     :sync()
 
   local json = vim.fn.json_decode(output)
@@ -483,8 +483,8 @@ M.query_spotify = function()
   -- TODO - error handling
   -- Do a primary request to get what is playing
   local token = os.getenv "SPOTIFY_ACCESS_TOKEN"
-  local current_track = require "plenary.job"
-    :new {
+  local current_track = require("plenary.job")
+    :new({
       command = "curl",
       args = {
         "-s",
@@ -496,14 +496,14 @@ M.query_spotify = function()
         "Authorization: Bearer " .. token,
         "https://api.spotify.com/v1/me/player/currently-playing?market=US",
       },
-    }
+    })
     :sync()
 
   local track_context = vim.fn.json_decode(current_track).context.href
 
   -- Do a secondary request to get the album or playlist of the current track
-  local output = require "plenary.job"
-    :new {
+  local output = require("plenary.job")
+    :new({
       command = "curl",
       args = {
         "-s",
@@ -515,7 +515,7 @@ M.query_spotify = function()
         "Authorization: Bearer " .. token,
         track_context .. "?market=US",
       },
-    }
+    })
     :sync()
 
   local json = vim.fn.json_decode(output)
@@ -566,7 +566,7 @@ M.query_spotify = function()
   -- TODO - this handles albums. I'm not sure how if it will work with a playlist
   -- TODO - split entry by album, track length, etc. Ex. https://github.com/nvim-telescope/telescope.nvim/pull/754/files
   pickers
-    :new {
+    :new({
       results_title = "Tracks",
       finder = finders.new_table {
         results = current,
@@ -587,7 +587,7 @@ M.query_spotify = function()
         map("n", "<CR>", foo)
         return true
       end,
-    }
+    })
     :find()
 end
 
