@@ -5,11 +5,9 @@ if not packer_exists then
 
   vim.fn.mkdir(directory, "p")
 
-  local out = vim.fn.system(string.format(
-    "git clone %s %s",
-    "https://github.com/wbthomason/packer.nvim",
-    directory .. "/packer.nvim"
-  ))
+  local out = vim.fn.system(
+    string.format("git clone %s %s", "https://github.com/wbthomason/packer.nvim", directory .. "/packer.nvim")
+  )
 
   print(out)
   print "Downloading packer.nvim..."
@@ -19,7 +17,7 @@ if not packer_exists then
   return
 end
 
-return require "packer".startup {
+return require("packer").startup {
   function(use)
     use {
       "wbthomason/packer.nvim",
@@ -55,7 +53,7 @@ return require "packer".startup {
         vim.g.markdown_composer_autostart = 0
         vim.g.markdown_composer_syntax_theme = "Atom One Dark"
       end,
-      ft = {"markdown"},
+      ft = { "markdown" },
     }
 
     use {
@@ -69,7 +67,7 @@ return require "packer".startup {
     use {
       "b3nj5m1n/kommentary",
       config = function()
-        require "kommentary.config".configure_language("default", {
+        require("kommentary.config").configure_language("default", {
           prefer_single_line_comments = true,
         })
       end,
@@ -112,7 +110,7 @@ return require "packer".startup {
       "phaazon/hop.nvim",
       as = "hop",
       config = function()
-        require "hop".setup { winblend = 80 }
+        require("hop").setup { winblend = 80 }
         vim.api.nvim_set_keymap("n", "s", [[<CMD>lua require'hop'.hint_char2()<CR>]], DEFAULT_KEYMAP)
         vim.api.nvim_set_keymap("v", "s", [[<CMD>lua require'hop'.hint_char2()<CR>]], DEFAULT_KEYMAP)
       end,
@@ -124,7 +122,7 @@ return require "packer".startup {
         "nvim-lua/plenary.nvim",
       },
       config = function()
-        require "gitsigns".setup {
+        require("gitsigns").setup {
           numhl = true,
           use_internal_diff = false,
         }
@@ -136,9 +134,12 @@ return require "packer".startup {
     use {
       { "neovim/nvim-lspconfig" },
       { "lspcontainers/lspcontainers.nvim" },
-      { "glepnir/lspsaga.nvim", config = function()
-        require "bigjazzsound.lsp_config"
-      end },
+      {
+        "glepnir/lspsaga.nvim",
+        config = function()
+          require "bigjazzsound.lsp_config"
+        end,
+      },
     }
 
     use {
@@ -161,8 +162,8 @@ return require "packer".startup {
         "nvim-treesitter/nvim-treesitter-textobjects",
         run = ":TSUpdate",
         config = function()
-          local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-          require "nvim-treesitter.configs".setup {
+          local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+          require("nvim-treesitter.configs").setup {
             ensure_installed = "maintained",
             highlight = {
               enable = true,
@@ -250,7 +251,7 @@ return require "packer".startup {
     use {
       "nvim-treesitter/playground",
       config = function()
-        require "nvim-treesitter.configs".setup {
+        require("nvim-treesitter.configs").setup {
           playground = {
             enable = true,
             disable = {},
@@ -269,7 +270,7 @@ return require "packer".startup {
     use {
       "onsails/lspkind-nvim",
       config = function()
-        require "lspkind".init()
+        require("lspkind").init()
       end,
     }
 
@@ -288,7 +289,7 @@ return require "packer".startup {
     use {
       "numToStr/Navigator.nvim",
       config = function()
-        require "Navigator".setup()
+        require("Navigator").setup()
         vim.api.nvim_set_keymap("n", "<C-h>", "<CMD>lua require('Navigator').left()<CR>", DEFAULT_KEYMAP)
         vim.api.nvim_set_keymap("n", "<C-k>", "<CMD>lua require('Navigator').up()<CR>", DEFAULT_KEYMAP)
         vim.api.nvim_set_keymap("n", "<C-l>", "<CMD>lua require('Navigator').right()<CR>", DEFAULT_KEYMAP)
@@ -323,7 +324,7 @@ return require "packer".startup {
         vim.api.nvim_set_keymap("n", "g*", [[g*<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
         vim.api.nvim_set_keymap("n", "g#", [[g#<CMD>lua require('hlslens').start()<CR>]], DEFAULT_KEYMAP)
 
-        require "hlslens".setup {
+        require("hlslens").setup {
           calm_down = true,
         }
       end,
@@ -334,16 +335,16 @@ return require "packer".startup {
       config = function()
         require("zen-mode").setup {
           window = {
-            backdrop = 1
-          }
+            backdrop = 1,
+          },
         }
       end,
-      cmd = {"ZenMode"},
+      cmd = { "ZenMode" },
     }
 
     use "folke/lua-dev.nvim"
 
-    use 'hkupty/daedalus.nvim'
+    use "hkupty/daedalus.nvim"
     -- use "~/playground/bigjazzsound/daedalus.nvim"
   end,
 
