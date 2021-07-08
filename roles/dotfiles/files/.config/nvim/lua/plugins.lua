@@ -342,7 +342,7 @@ return require("packer").startup {
 
   config = {
     display = {
-      open_cmd = string.format("%svnew [packer]", math.floor(vim.api.nvim_get_option "columns" / 2)),
+      open_cmd = fstring("%svnew [packer]", math.floor(vim.api.nvim_get_option "columns" / 2)),
       header_sym = "-",
     },
   },
