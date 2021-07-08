@@ -157,12 +157,22 @@ lspconfig.tsserver.setup {
   capabilities = capabilities,
 }
 
+-- sumneko_lua does not support M1 Macs yet
 local lls_path = function()
-  local Path = require "plenary.path"
-  local path = Path:new(vim.loop.os_homedir(), ".local/share/lua-language-server")
-  local bin = Path:new(path.filename, "bin/macOS/lua-language-server")
-  local main = Path:new(path.filename, "main.lua")
-  return { bin.filename, "-E", main.filename }
+  local Job = require "plenary.job"
+
+  local arch = Job:new({ "uname", "-m" }):sync()
+  local system = Job:new({ "uname" }):sync()
+
+  if arch[1] == "arm64" and system[1] == "Darwin" then
+    return require("lspcontainers").command "sumneko_lua"
+  else
+    local Path = require "plenary.path"
+    local path = Path:new(vim.loop.os_homedir(), ".local/share/lua-language-server")
+    local bin = Path:new(path.filename, "bin/macOS/lua-language-server")
+    local main = Path:new(path.filename, "main.lua")
+    return { bin.filename, "-E", main.filename }
+  end
 end
 
 local luadev = require "lua-dev".setup {
