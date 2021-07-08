@@ -167,7 +167,9 @@ end
 
 local luadev = require "lua-dev".setup {
   lspconfig = {
-    cmd = lls_path()
+    cmd = lls_path(),
+    on_attach = on_attach,
+    capabilities = capabilities,
   },
 }
 
