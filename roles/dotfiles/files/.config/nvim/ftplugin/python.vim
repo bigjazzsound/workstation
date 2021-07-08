@@ -1,9 +1,9 @@
-setlocal tabstop=4
-setlocal softtabstop=4
-setlocal shiftwidth=4
-setlocal textwidth=79
-setlocal expandtab
-setlocal autoindent
-setlocal fileformat=unix
-setlocal commentstring=#\ %s
-setlocal foldmethod=indent
+vim.opt_local.tabstop=4
+vim.opt_local.softtabstop=4
+vim.opt_local.shiftwidth=4
+vim.opt_local.textwidth=79
+vim.opt_local.expandtab = true
+vim.opt_local.autoindent = true
+vim.opt_local.fileformat=unix
+vim.opt_local.commentstring= '#\ %s'
+vim.opt_local.foldmethod=indent
