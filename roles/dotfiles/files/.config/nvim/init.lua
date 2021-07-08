@@ -36,7 +36,13 @@ vim.opt.incsearch = true
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smarttab = true
-vim.opt.listchars = 'tab:..,trail:-,extends:>,precedes:<,nbsp:~'
+vim.opt.listchars = {
+  tab = "..",
+  trail = "-",
+  extends = ">",
+  precedes = "<",
+  nbsp = "~",
+}
 vim.opt.undofile = true
 vim.opt.undodir = home .. '/.local/share/vim/undo'
 vim.opt.backupdir = home .. '/.local/share/vim/backup'
