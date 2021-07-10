@@ -3,12 +3,9 @@ fish_add_path $HOME/.local/bin $HOME/.cargo/bin /opt/homebrew/bin /opt/homebrew/
 type -q fisher || curl -sL https://git.io/fisher | source
 
 function fpkgs
-    set -l pkgs \
+    fisher install \
         jorgebucaran/fisher \
         jethrokuan/fzf
-    for pkg in $pkgs
-       fisher install $pkg
-    end
 end
 
 set FZF_COMPLETE 2
