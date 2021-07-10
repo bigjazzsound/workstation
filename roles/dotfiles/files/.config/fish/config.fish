@@ -21,13 +21,9 @@ if command -qv fd
     set FZF_CTRL_T_OPTS '--multi --preview="bat --line-range :50 --color=always --style plain {}"'
 end
 
-set AWS_PROFILE prod
-
 set DOCUMENTS "$HOME/Documents"
 set PLAYS "$HOME/playground/workstation"
 
-alias dirs 'dirs -l -v'
-alias ip 'ip -c'
 alias pwm 'ANSIBLE_CONFIG=$PLAYS/ansible.cfg $PLAYS/venv/bin/ansible-playbook $PLAYS/playbooks/main.yml'
 alias vs 'vim -c "set spell" /tmp/(openssl rand -hex 6).md'
 alias vj "vim /tmp/(openssl rand -hex 6).json"
