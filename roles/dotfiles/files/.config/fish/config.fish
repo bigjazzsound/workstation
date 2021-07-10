@@ -1,7 +1,4 @@
-set PATH $HOME/.local/bin $HOME/.cargo/bin $PATH
-if test (uname) = Darwin && test (uname -m) = arm64 && test -e /opt/homebrew/bin/brew
-    set PATH $PATH /opt/homebrew/bin
-end
+fish_add_path $HOME/.local/bin $HOME/.cargo/bin /opt/homebrew/bin /opt/homebrew/opt/llvm/bin
 
 type -q fisher || curl -sL https://git.io/fisher | source
 
