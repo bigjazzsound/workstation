@@ -46,10 +46,19 @@ vim.opt.listchars = {
   precedes = "<",
   nbsp = "~",
 }
+
+local create_dir = function(dir)
+  local path = require("plenary.path"):new(dir)
+  if not path:exists() then
+    path:mkdir { parents = true, mode = 0755 }
+  end
+  return dir
+end
+
 vim.opt.undofile = true
-vim.opt.undodir = home .. "/.local/share/vim/undo"
-vim.opt.backupdir = home .. "/.local/share/vim/backup"
-vim.opt.directory = home .. "/.local/share/swap"
+vim.opt.undodir = create_dir(home .. "/.local/share/nvim/undo")
+vim.opt.backupdir = create_dir(home .. "/.local/share/nvim/backup")
+vim.opt.directory = create_dir(home .. "/.local/share/nvim/swap")
 vim.opt.shadafile = home .. "/.local/share/viminfo"
 vim.opt.showmatch = true
 vim.opt.matchtime = 3
