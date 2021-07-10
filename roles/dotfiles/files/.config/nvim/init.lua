@@ -11,6 +11,9 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
+require "bigjazzsound.globals"
+require "plugins"
+
 vim.cmd [[autocmd! VimResized * :wincmd =]]
 
 if vim.fn.exists "##TextYankPost" then
@@ -92,8 +95,6 @@ vim.api.nvim_set_keymap("t", "<C-L>", "<C-W><C-L>", DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap("t", "<C-H>", "<C-W><C-H>", DEFAULT_KEYMAP)
 
 vim.cmd [[command Flash <CMD>lua require('flash')<CR>]]
-require "bigjazzsound.globals"
-require "plugins"
 
 vim.cmd "au BufNewFile,BufRead justfile,Justfile set filetype=make"
 vim.cmd "au BufNewFile,BufRead *.fish set filetype=fish"
