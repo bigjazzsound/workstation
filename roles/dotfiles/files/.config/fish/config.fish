@@ -2,10 +2,11 @@ fish_add_path $HOME/.local/bin $HOME/.cargo/bin /opt/homebrew/bin /opt/homebrew/
 
 type -q fisher || curl -sL https://git.io/fisher | source
 
-function fpkgs
+function fi
     fisher install \
-        jorgebucaran/fisher \
-        jethrokuan/fzf
+        franciscolourenco/done \
+        jethrokuan/fzf \
+        jorgebucaran/fisher
 end
 
 set FZF_COMPLETE 2
