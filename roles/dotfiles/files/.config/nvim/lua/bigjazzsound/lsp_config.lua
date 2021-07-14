@@ -159,7 +159,7 @@ lspconfig.tsserver.setup {
 
 -- sumneko_lua does not support M1 Macs yet
 local lls_path = function()
-  if jit.arch == "arm64" and jit.os == "OSX" then
+  if jit.os == "OSX" then
     return require("lspcontainers").command "sumneko_lua"
   else
     local Path = require "plenary.path"
