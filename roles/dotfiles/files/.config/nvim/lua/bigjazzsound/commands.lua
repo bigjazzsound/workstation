@@ -591,4 +591,41 @@ M.query_spotify = function()
     :find()
 end
 
+M.ansible_doc = function()
+  local job = require "plenary.job"
+  local output = job:new({ "ansible-doc", "-l", "-j" }):sync()
+  local json = vim.fn.json_decode(output)
+  local modules = {}
+
+  for k, v in pairs(json) do
+    table.insert(modules, { name = k, description = v })
+  end
+
+  pickers
+    :new({
+      results_title = "Modules",
+      finder = finders.new_table {
+        results = modules,
+        entry_maker = function(entry)
+          return {
+            display = entry.name,
+            value = entry.name,
+            ordinal = entry.name,
+          }
+        end,
+      },
+      sorter = sorters.get_generic_fuzzy_sorter(),
+      -- This shows the examples from the documentation. I'm not sure if this is more useful than listing the parameters for the module. Time will tell.
+      previewer = previewers.new_buffer_previewer {
+        define_preview = function(self, entry, status)
+          local output = job:new({ "ansible-doc", "-j", "-s", entry.value }):sync()
+          local json = vim.fn.json_decode(output)
+          vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, vim.split(json[entry.value].examples, "\n"))
+          require("telescope.previewers.utils").highlighter(self.state.bufnr, "yaml")
+        end,
+      },
+    })
+    :find()
+end
+
 return M

@@ -134,6 +134,7 @@ vim.api.nvim_set_keymap("n", "<leader>jq", '<CMD>lua R("bigjazzsound.commands").
 vim.api.nvim_set_keymap("n", "<leader>jo", '<CMD>lua R("bigjazzsound.commands").query_open()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap("n", "<leader>tdd", '<CMD>lua R("bigjazzsound.commands").query_todoist()<CR>', DEFAULT_KEYMAP)
 vim.api.nvim_set_keymap("n", "<leader>sp", '<CMD>lua R("bigjazzsound.commands").query_spotify()<CR>', DEFAULT_KEYMAP)
+vim.api.nvim_set_keymap("n", "<leader>ad", '<CMD>lua R("bigjazzsound.commands").ansible_doc()<CR>', DEFAULT_KEYMAP)
 
 if not vim.env.TMUX then
   vim.api.nvim_set_keymap("n", "<C-Space>c", "<CMD>:tabnew<CR>", DEFAULT_KEYMAP)
