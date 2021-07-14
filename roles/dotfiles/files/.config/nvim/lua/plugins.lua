@@ -327,11 +327,12 @@ return require("packer").startup {
       config = function()
         require("zen-mode").setup {
           window = {
-            backdrop = 1,
+            backdrop = 0.25,
+            width = 100,
           },
         }
+        vim.api.nvim_set_keymap("n", "<M-f>", "<CMD>ZenMode<CR>", DEFAULT_KEYMAP)
       end,
-      cmd = { "ZenMode" },
     }
 
     use "folke/lua-dev.nvim"
