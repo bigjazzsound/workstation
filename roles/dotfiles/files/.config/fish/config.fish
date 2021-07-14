@@ -1,4 +1,4 @@
-fish_add_path $HOME/.local/bin $HOME/.cargo/bin /opt/homebrew/bin /opt/homebrew/opt/llvm/bin
+fish_add_path $HOME/.local/bin $HOME/.cargo/bin /opt/homebrew/bin /opt/homebrew/opt/llvm/bin /usr/local/opt/uutils-coreutils/libexec/uubin
 
 type -q fisher || curl -sL https://git.io/fisher | source
 
