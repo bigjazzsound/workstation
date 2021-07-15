@@ -114,10 +114,6 @@ if not ok then
   vim.cmd "colorscheme default"
 end
 
--- TODO - replace with https://github.com/bfredl/nvim-luadev
-vim.api.nvim_set_keymap("n", "<leader>x", '<CMD>lua R("bigjazzsound.exec").exec_line()<CR>', DEFAULT_KEYMAP)
-vim.api.nvim_set_keymap("v", "<leader>x", '<CMD>lua R("bigjazzsound.exec").exec_selection()<CR><ESC>', DEFAULT_KEYMAP)
-
 -- TODO - The refresh might need to be schedled to wait for the push
 vim.api.nvim_set_keymap(
   "n",
