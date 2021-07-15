@@ -107,6 +107,7 @@ vim.cmd [[command Flash <CMD>lua require('flash')<CR>]]
 
 vim.cmd "au BufNewFile,BufRead justfile,Justfile set filetype=make"
 vim.cmd "au BufNewFile,BufRead *.fish set filetype=fish"
+vim.cmd "au BufNewFile,BufRead */.aws/config set filetype=dosini"
 
 local ok, _ = pcall(vim.cmd, "colorscheme tokyonight")
 if not ok then
